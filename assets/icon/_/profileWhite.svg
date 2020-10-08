@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="22px" height="22px" viewBox="0 0 22 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>8DCC24A8-2F58-4D00-B3D1-BBBC99A87A2F</title>
+    <g id="Android-" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="UI-KIT" transform="translate(-320.000000, -147.000000)" stroke="#5F5F5F">
+            <g id="icons8-user" transform="translate(321.000000, 148.000000)">
+                <path d="M10,0 C8.21367206,0 6.56303696,0.952994584 5.66987298,2.5 C4.77670901,4.04700537 4.77670901,5.95299463 5.66987298,7.5 C6.56303696,9.04700542 8.21367206,10 10,10 C11.7863279,10 13.436963,9.04700542 14.330127,7.5 C15.223291,5.95299463 15.223291,4.04700537 14.330127,2.5 C13.436963,0.952994584 11.7863279,0 10,0 Z M20,20 L0,20 L0,18.125 C0,15.71 6.05125,13.75 10,13.75 C13.94875,13.75 20,15.71 20,18.125 L20,20 Z" id="Shape"></path>
+            </g>
+        </g>
+    </g>
+</svg>

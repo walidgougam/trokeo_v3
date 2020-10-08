@@ -1,0 +1,281 @@
+import React, { useState, useEffect } from "react";
+import { View, Text, StyleSheet, Platform } from "react-native";
+import { useRoute } from "@react-navigation/native";
+import normalize from "react-native-normalize";
+import colors from "../../constant/colors";
+import css from "../../constant/css";
+import { Formik } from "formik";
+import * as Yup from "yup";
+import {
+  WrongEmailIcon,
+  GoodEmailIcon,
+  HidePasswordIcon,
+} from "../../assets/icon/Icon";
+import fontStyles from "../../constant/fonts";
+
+import BtnBlueAction from "../../component/button/BtnBlueAction";
+import InputAndroid from "../../component/input/InputAndroid";
+import InputIos from "../../component/input/InputIos";
+import BackgroundComponent from "../../component/BackgroundComponent";
+
+const EmailRegisterScreen = ({ navigation }) => {
+  // const [email, setEmail] = useState("");
+  // const [password, setPassword] = useState("");
+  // const [confirmationPassword, setPassword] = useState("");
+  const [hidePassword, setHidePassword] = useState(true);
+  const route = useRoute();
+  const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+
+  useEffect(() => {});
+
+  const initialValues = {
+    email: "",
+    password: "",
+    confirmationPassword: "",
+  };
+
+  const onSubmit = (values) => {
+    console.log(values, "alors");
+  };
+
+  const validationSchema = Yup.object().shape({
+    email: Yup.string()
+      .trim()
+      .required("Required")
+      .email("Invalid email format")
+      .required("Required"),
+    password: Yup.string().trim().min(8, "Too Short!").max(50, "Too Long!"),
+    confirmationPassword: Yup.string()
+      .trim()
+      .min(8, "Too Short!")
+      .max(50, "Too Long!"),
+  });
+
+  const inputValidation = (errors, values) => {
+    if (
+      errors.email ||
+      errors.password ||
+      errors.confirmationPassword ||
+      !values.email ||
+      !values.password ||
+      !values.confirmationPassword
+    ) {
+      return false;
+    } else {
+      return true;
+    }
+  };
+
+  const emailIconValidation = (errors, touched, values) => {
+    if (!touched.email || !values.email) {
+      return null;
+    } else if (errors.email) {
+      return <WrongEmailIcon />;
+    } else {
+      return <GoodEmailIcon />;
+    }
+  };
+
+  const passwordIconValidation = (errors, touched, values) => {
+    if (!touched.password || !values.password) {
+      return null;
+    } else if (errors.password) {
+      return <WrongEmailIcon />;
+    } else {
+      return <GoodEmailIcon />;
+    }
+  };
+
+  const confirmationPasswordIconValidation = (errors, touched, values) => {
+    if (!touched.confirmationPassword || !values.confirmationPassword) {
+      return null;
+    } else if (errors.confirmationPassword) {
+      return <WrongEmailIcon />;
+    } else {
+      return <GoodEmailIcon />;
+    }
+  };
+  const goNextScreen = (values, errors, touched) => {
+    if (
+      errors.email ||
+      errors.password ||
+      (!touched.email && !touched.password) ||
+      values.password !== values.confirmationPassword
+    ) {
+      return null;
+    } else {
+      return navigation.navigate("Name", {
+        email: values.email,
+        password: values.password,
+      });
+    }
+  };
+
+  const {
+    container_white,
+    _title,
+    text_input_question,
+    input_warning,
+  } = styles;
+  return (
+    <Formik
+      initialValues={initialValues}
+      validationSchema={validationSchema}
+      onSubmit={onSubmit}
+    >
+      {({ values, handleChange, setFieldTouched, touched, errors }) => (
+        <BackgroundComponent navigation={navigation} route={route}>
+          <View style={container_white}>
+            <Text style={_title}>Bienvenue !</Text>
+            <Text style={text_input_question}>
+              Tout d’abord, quelle est votre adresse email ?
+            </Text>
+            <View style={{ marginBottom: normalize(24) }}>
+              {Platform.OS === "ios" ? (
+                <InputIos
+                  login
+                  value={values.email}
+                  iconValidation={emailIconValidation(errors, touched, values)}
+                  placeholder="Votre adresse email"
+                  onChangeText={handleChange("email")}
+                  onBlur={() => setFieldTouched("email")}
+                />
+              ) : (
+                <InputAndroid
+                  login
+                  value={values.email}
+                  iconValidation={emailIconValidation(errors, touched, values)}
+                  placeholder="Votre adresse email"
+                  onChangeText={handleChange("email")}
+                  onBlur={() => setFieldTouched("email")}
+                />
+              )}
+              <Text style={input_warning}>
+                Vous recevrez un email de confirmation
+              </Text>
+            </View>
+
+            <Text style={text_input_question}>
+              Ensuite, choisissez un mot de passe
+            </Text>
+            <View>
+              {Platform.OS === "ios" ? (
+                <InputIos
+                  login
+                  password
+                  iconValidation={passwordIconValidation(
+                    errors,
+                    touched,
+                    values
+                  )}
+                  value={values.password}
+                  secureTextEntry={hidePassword}
+                  showPassword={() => setHidePassword(!hidePassword)}
+                  hidePassword={true}
+                  placeholder="Votre mot de passe"
+                  onChangeText={handleChange("password")}
+                  onBlur={() => setFieldTouched("password")}
+                />
+              ) : (
+                <InputAndroid
+                  login
+                  password
+                  iconValidation={passwordIconValidation(
+                    errors,
+                    touched,
+                    values
+                  )}
+                  value={values.password}
+                  secureTextEntry={hidePassword}
+                  showPassword={() => setHidePassword(!hidePassword)}
+                  hidePassword={true}
+                  placeholder="Votre mot de passe"
+                  onChangeText={handleChange("password")}
+                  onBlur={() => setFieldTouched("password")}
+                />
+              )}
+              <Text style={input_warning}>
+                Il doit contenir au moins 8 caractères.
+              </Text>
+            </View>
+            <Text style={[text_input_question, { marginTop: 24 }]}>
+              Confirmez votre mot de passe
+            </Text>
+            <View>
+              {Platform.OS === "ios" ? (
+                <InputIos
+                  login
+                  password
+                  iconValidation={confirmationPasswordIconValidation(
+                    errors,
+                    touched,
+                    values
+                  )}
+                  value={values.confirmationPassword}
+                  secureTextEntry={hidePassword}
+                  showPassword={() => setHidePassword(!hidePassword)}
+                  hidePassword={true}
+                  placeholder="Votre mot de passe"
+                  onChangeText={handleChange("confirmationPassword")}
+                  onBlur={() => setFieldTouched("confirmationPassword")}
+                />
+              ) : (
+                <InputAndroid
+                  login
+                  password
+                  iconValidation={confirmationPasswordIconValidation(
+                    errors,
+                    touched,
+                    values
+                  )}
+                  value={values.confirmationPassword}
+                  secureTextEntry={hidePassword}
+                  showPassword={() => setHidePassword(!hidePassword)}
+                  hidePassword={true}
+                  placeholder="Votre mot de passe"
+                  onChangeText={handleChange("confirmationPassword")}
+                  onBlur={() => setFieldTouched("confirmationPassword")}
+                />
+              )}
+            </View>
+          </View>
+          <View>
+            <View style={{ marginHorizontal: normalize(70) }}>
+              <BtnBlueAction
+                title="Continuer"
+                onPress={() => {
+                  goNextScreen(values, errors, touched);
+                }}
+                backgroundColor={
+                  inputValidation(errors, values)
+                    ? colors.btn_action
+                    : colors.btn_action_37
+                }
+                color={colors.text_white}
+              />
+            </View>
+          </View>
+        </BackgroundComponent>
+      )}
+    </Formik>
+  );
+};
+
+const styles = StyleSheet.create({
+  container_white: {
+    marginHorizontal: normalize(16),
+  },
+  _title: {
+    ...css.title,
+  },
+  text_input_question: {
+    ...css.text_description,
+  },
+  input_warning: {
+    fontSize: normalize(10, "fontSize"),
+    color: colors.text_description_black,
+    ...fontStyles.roman,
+  },
+});
+
+export default EmailRegisterScreen;

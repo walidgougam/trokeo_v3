@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="46px" height="46px" viewBox="0 0 46 46" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>B90962C4-246B-41CF-996E-005FFBCB522F</title>
+    <g id="Android-" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="UI-KIT" transform="translate(-33.000000, -609.000000)">
+            <g id="icons8-student_male" transform="translate(34.000000, 610.000000)">
+                <path d="M35,19 L35,23 C35,23 38,22.674 38,26.222 C38,28.062 36.791,29.816 35,30 C32.444,36.622 28.315,44 22.004,44 M21.996,44 C15.685,44 11.556,36.622 9,30 C7.209,29.816 6,28.062 6,26.222 C6,22.674 9,23 9,23 L9,19" id="Shape" stroke="#FCFFFF" stroke-linecap="round"></path>
+                <path d="M2,16 C2,19.394 2.016,29.614 2.016,29.614" id="Path" stroke="#FCFFFF" stroke-width="1.066" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M4,32.968 C4,34.444 2,37 2,37 C2,37 0,34.397 0,32.968 C0,31.882 0.895,31 2,31 C3.105,31 4,31.882 4,32.968 Z" id="Path" stroke="#FCFFFF" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M2,28 C0.8954305,28 0,28.8954305 0,30 C0,31.1045695 0.8954305,32 2,32 C3.1045695,32 4,31.1045695 4,30 C4,28.8954305 3.1045695,28 2,28 Z" id="Path" fill="#FCFFFF" fill-rule="nonzero"></path>
+                <path d="M36,22 C36,22 44.036,14.279 44.0001206,13.661 C43.964,13.044 22.93,0.251 22.93,0.251 C22.353,-0.084 21.646,-0.084 21.069,0.251 C21.069,0.251 0.036,13.043 -0.000120595467,13.661 C-0.036,14.28 8,22 8,22" id="Path" stroke="#FCFFFF" stroke-width="1.066" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M35,22 C35,22 29.932,20 22,20 C14.068,20 9,22 9,22 L9,16 C9,16 13.914,13 22,13 C30.086,13 35,16 35,16 L35,22 Z" id="Path" stroke="#FCFFFF" stroke-width="1.066" stroke-linecap="round" stroke-linejoin="round"></path>
+            </g>
+        </g>
+    </g>
+</svg>

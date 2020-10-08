@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="18px" viewBox="0 0 20 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>514AAC3F-F69C-43B8-BFAA-3BC88C1B810F</title>
+    <g id="Android-" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="UI-KIT" transform="translate(-1058.000000, -62.000000)" fill="#888787" fill-rule="nonzero">
+            <g id="icons8-sent" transform="translate(1058.000000, 62.000000)">
+                <path d="M15,9 L0.9,7.59 C0.389,7.539 0,7.109 0,6.595 L0,1 L1.431,0.109 L19.339,8.057 L19,9 L15,9 Z" id="Path"></path>
+                <path d="M19,8 C18.4477153,8 18,8.44771525 18,9 C18,9.55228475 18.4477153,10 19,10 C19.5522847,10 20,9.55228475 20,9 C20,8.44771525 19.5522847,8 19,8 Z M1,0 C0.44771525,0 0,0.44771525 0,1 C0,1.55228475 0.44771525,2 1,2 C1.55228475,2 2,1.55228475 2,1 C2,0.44771525 1.55228475,0 1,0 Z" id="Shape"></path>
+                <path d="M19,9 L19.339,9.943 L1.431,17.891 L0,17 L0,11.405 C0,10.891 0.389,10.461 0.9,10.41 L15,9 L19,9 Z" id="Path"></path>
+                <path d="M1,16 C0.44771525,16 0,16.4477153 0,17 C0,17.5522847 0.44771525,18 1,18 C1.55228475,18 2,17.5522847 2,17 C2,16.4477153 1.55228475,16 1,16 Z" id="Path"></path>
+            </g>
+        </g>
+    </g>
+</svg>

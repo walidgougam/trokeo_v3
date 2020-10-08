@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="22px" height="19px" viewBox="0 0 22 19" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>3E949A7B-9A59-43C3-89C2-2A7A5F04C145</title>
+    <g id="Android-" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="UI-KIT" transform="translate(-1011.000000, -61.000000)">
+            <g id="Camera" transform="translate(1011.000000, 61.000000)">
+                <path d="M19.8,2 L2.2,2 C0.99,2 0,2.95625 0,4.125 L0,16.875 C0,18.04375 0.99,19 2.2,19 L19.8,19 C21.01,19 22,18.04375 22,16.875 L22,4.125 C22,2.95625 21.01,2 19.8,2 Z" id="Shape" fill="#888787" fill-rule="nonzero"></path>
+                <path d="M19,3.01213753 L15.9897552,0.648257826 C15.4632749,0.234176858 14.7214794,2.27373675e-13 13.9435666,2.27373675e-13 L8.04948776,0.00301515268 C7.27296406,0.00301515268 6.53116861,0.239202113 6.00468831,0.653283081 L3,3.02017794 L19,3.01213753 Z" id="Path" fill="#888787" fill-rule="nonzero"></path>
+                <circle id="Oval" fill="#FFFFFF" cx="11.5" cy="10.5" r="5.5"></circle>
+                <circle id="Oval" fill="#888787" cx="11.5" cy="10.5" r="4.5"></circle>
+            </g>
+        </g>
+    </g>
+</svg>

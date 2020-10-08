@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="42px" height="42px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>4AA4E5B1-3BE1-401E-B202-06B48C74383C</title>
+    <g id="Android-" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="UI-KIT" transform="translate(-1414.000000, -502.000000)">
+            <g id="Group-2" transform="translate(1415.000000, 503.000000)">
+                <g id="icons8-soccer_ball" stroke="#FFFFFF">
+                    <path d="M20,0 C8.95545455,0 0,8.95454545 0,20 C0,31.0454545 8.95545455,40 20,40 C31.0445455,40 40,31.0454545 40,20 C40,8.95454545 31.0445455,0 20,0 L20,0 Z" id="Path" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <line x1="20.5" y1="4" x2="20.5" y2="11" id="Path" stroke-linecap="round" stroke-linejoin="round"></line>
+                    <polygon id="Path" stroke-linecap="round" stroke-linejoin="round" points="20.5 11 12 17.1111111 15.2462221 27 25.7537779 27 29 17.1111111"></polygon>
+                    <polyline id="Path" stroke-linecap="round" stroke-linejoin="round" points="15 1 20.5 4 26 1"></polyline>
+                    <polyline id="Path" stroke-linecap="round" stroke-linejoin="round" points="0 19 5 15.013099 3.42477721 9"></polyline>
+                    <path d="M10.5398256,32.4233693 L4,32 L10.5398256,32.4233693 Z" id="Path" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <line x1="36" y1="32" x2="29.4601744" y2="32.4233693" id="Path" stroke-linecap="round" stroke-linejoin="round"></line>
+                    <polyline id="Path" stroke-linecap="round" stroke-linejoin="round" points="35.8905109 8 34 14.6150548 40 19"></polyline>
+                    <line x1="29.5400391" y1="32.5" x2="26.7668457" y2="38.7856445" id="Path-9"></line>
+                </g>
+                <line x1="10.4278564" y1="32.5" x2="15.2462221" y2="27" id="Path-4" stroke="#FFFFFF"></line>
+                <line x1="25.8582764" y1="26.7574463" x2="29.5400391" y2="32.5" id="Path-5" stroke="#FFFFFF"></line>
+                <line x1="5" y1="15.013099" x2="11.7808838" y2="17.090332" id="Path-6" stroke="#FFFFFF"></line>
+                <line x1="29" y1="17.090332" x2="34" y2="14.6150548" id="Path-3" stroke="#FFFFFF"></line>
+                <path d="" id="Path-7" stroke="#979797"></path>
+                <line x1="10.5398256" y1="32.4233693" x2="12.8370393" y2="38.7856445" id="Path-8" stroke="#FFFFFF"></line>
+            </g>
+        </g>
+    </g>
+</svg>
