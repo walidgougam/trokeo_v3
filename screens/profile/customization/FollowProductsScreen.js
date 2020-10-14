@@ -47,7 +47,10 @@ export default function FollowProductsScreen({ navigation }) {
   const { container, wrapper_input, _icon, _input } = styles;
   return (
     <View style={container}>
-      <HeaderComponent title="Biens" navigation={navigation} />
+      <HeaderComponent
+        title={from === "good" ? "Biens" : "Services"}
+        navigation={navigation}
+      />
       <ScrollView>
         <>
           <View style={{ marginHorizontal: 18, marginVertical: 9 }}>

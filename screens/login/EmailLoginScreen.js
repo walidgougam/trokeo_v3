@@ -102,7 +102,11 @@ const EmailLoginScreen = ({ navigation }) => {
       onSubmit={onSubmit}
     >
       {({ values, handleChange, setFieldTouched, touched, errors }) => (
-        <BackgroundComponent navigation={navigation} route={route}>
+        <BackgroundComponent
+          noGreenLine={true}
+          navigation={navigation}
+          route={route}
+        >
           <View style={container_white}>
             <Text style={_title}>Connectez-vous</Text>
             <View style={{ marginBottom: normalize(24) }}>

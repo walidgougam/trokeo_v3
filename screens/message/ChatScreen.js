@@ -1,12 +1,23 @@
-import React, { useState } from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import React, { useState, useEffect } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  AsyncStorage,
+  ActivityIndicator,
+} from "react-native";
 import {
   GiftedChat,
   InputToolbar,
   Actions,
   ActionsProps,
+  Bubble,
+  Send,
 } from "react-native-gifted-chat";
-import { useRoute } from "@react-navigation/native";
+import { useRoute, useIsFocused } from "@react-navigation/native";
+import io from "socket.io-client";
+import axios from "axios";
 import { UploadPictureIcon, SendMessageIcon } from "../../assets/icon/Icon";
 
 import HeaderComponent from "../../component/header/HeaderComponent";
@@ -18,28 +29,42 @@ export default function ChatScreen({ navigation }) {
   const { productPicture, titleProduct } = route.params;
 
   // STATE
-  const [messages, setMessages] = useState([
-    {
-      _id: 1,
-      text: "user 1",
-      createdAt: new Date(),
-      user: {
-        _id: 2,
-        name: "React Native",
-        avatar: "https://placeimg.com/140/140/any",
-      },
-    },
-    {
-      _id: 2,
-      text: "user 2",
-      createdAt: new Date(),
-      user: {
-        _id: 1,
-        name: "React Native",
-        avatar: "https://placeimg.com/140/140/any",
-      },
-    },
-  ]);
+  const [messages, setMessages] = useState([]);
+  const [message, setMessage] = useState("");
+  const [user, setUser] = useState();
+  const [loading, setLoading] = useState(true);
+  const [recieverId, setRecieverId] = useState("");
+  const [recieverName, setRecieverName] = useState("");
+
+  // SOCKET
+  const socket = io("http://localhost:5000", {});
+
+  // FOCUS ON SCREEN
+  const isFocuser = useIsFocused();
+
+  // get user info from local storage
+  useEffect(() => {
+    let mounted = true;
+
+    if (mounted) {
+      (async () => {
+        const userid = await AsyncStorage.getItem("userId");
+        const username = await AsyncStorage.getItem("userName");
+        setUser({
+          id: userid,
+          name: username,
+        });
+      })();
+
+      // set params on state
+      setRecieverId(route?.params?.recieverId);
+      setRecieverName(route?.params?.recieverName);
+    }
+
+    return () => {
+      mounted = false;
+    };
+  }, [isFocuser]);
 
   const goToReviewScreen = () => {
     return navigation.navigate("Review", { productPicture });
@@ -77,7 +102,6 @@ export default function ChatScreen({ navigation }) {
     return (
       <TouchableOpacity
         activeOpacity={0.6}
-        onPress={() => goToReviewScreen()}
         style={{
           alignSelf: "center",
           marginRight: 18,
@@ -88,31 +112,86 @@ export default function ChatScreen({ navigation }) {
     );
   };
 
-  const onSend = () => {
-    setMessages((previousMessages) => {
-      GiftedChat.append(previousMessages, {
-        _id: 2,
-        text: "new message",
-        createdAt: new Date(),
-        user: {
-          _id: 1,
-          name: "React Native",
-          avatar: "https://placeimg.com/140/140/any",
-        },
+  const onSend = async (msg) => {
+    setMessages((prevState) => GiftedChat.append(prevState, msg));
+    socket.emit("newMessage", "sent");
+
+    await axios({
+      method: "POST",
+      url: "http://localhost:5000/chat/postchat",
+      data: {
+        sender: user?.id,
+        reciever: recieverId,
+        messages: msg,
+      },
+    })
+      .then((res) => {
+        console.log(res, "res on post chat");
+      })
+      .catch((err) => {
+        console.log(err, "err on post chat");
       });
-    });
+
+    // if (response.status === 200) {
+    //   console.log(response.data);
+    //   this.socket.emit("newMessage", "sent");
+    // }
   };
+
+  const getMessage = async () => {
+    const userId = await AsyncStorage.getItem("userId");
+    console.log(route?.params?.recieverId, "alors reciever id");
+    try {
+      let response = await axios.get(
+        `http://localhost:5000/chat/getChat/${userId}/${route?.params?.recieverId}`
+      );
+      if (response) {
+        setMessages(() => GiftedChat.append([], response.data).reverse());
+        setLoading(false);
+      }
+    } catch (error) {
+      console.log(error, "error on get message");
+    }
+  };
+
+  useEffect(() => {
+    let mounted = true;
+
+    if (mounted) {
+      getMessage();
+    }
+    return () => {
+      mounted = false;
+    };
+  }, [isFocuser]);
 
   // STYLES
   const { container } = styles;
-  return (
+  return loading ? (
+    <ActivityIndicator
+      size="small"
+      color="#0000ff"
+      style={{ marginTop: 100 }}
+    />
+  ) : (
     <View style={container}>
-      <HeaderComponent navigation={navigation} title="Marion_b" message />
-      <CardHeaderChat picture={productPicture} titleProduct={titleProduct} />
+      {console.log(
+        productPicture,
+        "(((((((((((((((((product picture))))))))))))))))"
+      )}
+      <HeaderComponent navigation={navigation} title={recieverName} message />
+      <CardHeaderChat
+        productPicture={productPicture}
+        titleProduct={titleProduct}
+      />
       <GiftedChat
         messages={messages}
-        user={messages._id}
-        // onSend={onSend}
+        user={{
+          _id: user?.id,
+          name: user?.name,
+        }}
+        onSend={(msg) => onSend(msg)}
+        alwaysShowSend={true}
         renderActions={() => renderUploadPictureIcon()}
         renderInputToolbar={(props) => customtInputToolbar(props)}
         renderSend={() => renderSendMessageIcon()}

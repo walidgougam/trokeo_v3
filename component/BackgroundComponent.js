@@ -11,11 +11,12 @@ export default function BackgroundComponent({
   route,
   children,
   title,
+  noGreenLine,
 }) {
   return (
     <View style={styles.container}>
       <HeaderComponent title={title} navigation={navigation} />
-      <GreenLineLoaderLogin focus={route} />
+      {noGreenLine ? null : <GreenLineLoaderLogin focus={route} />}
       <View style={styles.wrapper}>{children}</View>
     </View>
   );

@@ -90,7 +90,7 @@ export default function ProfileScreen({ navigation }) {
             </View>
           )}
           <Text style={[pseudo, { fontSize: normalize(11, "fontSize") }]}>
-            {userData?.firstName && state?.user?.lastName
+            {userData?.firstName && userData?.lastName
               ? `${userData?.firstName}.${userData?.lastName?.substring(0, 1)}`
               : "marion.b"}
           </Text>

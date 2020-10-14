@@ -95,10 +95,13 @@ export default function ProfileUserDetailsScreen({ navigation }) {
         </View>
       </View>
       <View style={break_line}></View>
-      <View style={wrapper_text}>
-        <Text style={text_about}>A propos</Text>
-        <Text style={text_description}>{userData?.about}</Text>
-      </View>
+      {userData?.about && (
+        <View style={wrapper_text}>
+          <Text style={text_about}>A propos</Text>
+          <Text style={text_description}>{userData?.about}</Text>
+        </View>
+      )}
+
       <View style={wrapper_toggle_btn}>
         <BtnHomeToggle
           title="Biens"

@@ -7,6 +7,7 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const userRoute = require("./route/userRoute");
 const productRoute = require("./route/productRoute");
+const chatRoute = require("./route/chatRoute");
 const multer = require("multer");
 
 dotenv.config({
@@ -61,9 +62,10 @@ app.use(cors());
 app.use(bodyParser.json()); // pour les requetes json. req.body
 app.use(express.json());
 
-///////////////////////    ROUTE   ///////////////////////////////////
+///////////////////////    ROUTE    ///////////////////////////////////
 app.use("/user", userRoute);
 app.use("/product", productRoute);
+app.use("/chat", chatRoute);
 
 const PORT = process.env.PORT || 5000;
 server.listen(PORT, () => console.log("server running on port" + PORT));

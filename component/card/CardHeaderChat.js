@@ -17,6 +17,10 @@ export default function CardHeaderChat({ productPicture, titleProduct }) {
   } = styles;
   return (
     <View style={container}>
+      {console.log(
+        productPicture,
+        "-----------product picture------------------"
+      )}
       <Image
         style={_image}
         source={{

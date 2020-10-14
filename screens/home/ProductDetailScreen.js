@@ -38,10 +38,12 @@ export default function ProductDetailScreen({ navigation }) {
   } = route.params;
   navigation.setOptions({ tabBarVisible: () => false });
 
-  const goToChat = () => {
+  const goToChat = (userData) => {
     return navigation.navigate("Chat", {
-      productPicture: imageProduct,
+      productPicture: imageProduct[0].uri,
       titleProduct,
+      recieverId: userData._id,
+      recieverName: userData.firstName,
     });
   };
 
@@ -62,6 +64,7 @@ export default function ProductDetailScreen({ navigation }) {
   } = styles;
   return (
     <View style={container}>
+      {console.log(imageProduct[0].uri, "image product")}
       <HeaderNotification
         navigation={navigation}
         isLogo={false}
@@ -148,9 +151,10 @@ export default function ProductDetailScreen({ navigation }) {
         </View>
       </ScrollView>
       <View style={wrapper_btn}>
+        {console.log(userData, "userData")}
         <BtnBlueAction
           title="Contacter le trokeur"
-          onPress={() => goToChat()}
+          onPress={() => goToChat(userData)}
           backgroundColor={colors.btn_action}
           color={colors.text_white}
         />

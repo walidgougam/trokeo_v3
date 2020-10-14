@@ -124,7 +124,11 @@ const EmailRegisterScreen = ({ navigation }) => {
       onSubmit={onSubmit}
     >
       {({ values, handleChange, setFieldTouched, touched, errors }) => (
-        <BackgroundComponent navigation={navigation} route={route}>
+        <BackgroundComponent
+          noGreenLine={false}
+          navigation={navigation}
+          route={route}
+        >
           <View style={container_white}>
             <Text style={_title}>Bienvenue !</Text>
             <Text style={text_input_question}>
