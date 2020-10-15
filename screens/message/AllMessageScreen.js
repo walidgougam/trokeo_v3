@@ -1,18 +1,44 @@
-import React, { useState } from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import React, { useState, useEffect } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  AsyncStorage,
+} from "react-native";
 import CardMessageComponent from "../../component/card/CardMessageComponent";
 import colors from "../../constant/colors";
 import normalize from "react-native-normalize";
 import { FlatList } from "react-native-gesture-handler";
-import { allMessage } from "../../helpersDataBase";
+// import { allMessage } from "../../helpersDataBase";
 import fontStyles from "../../constant/fonts";
+import axios from "axios";
 
 export default function AllMessageScreen({ navigation }) {
+  const [allMessage, setAllMessage] = useState([]);
   const goToChat = (picture) => {
     return navigation.navigate("Chat", {
       picture,
     });
   };
+
+  const getAllRecieverChat = async () => {
+    const userid = await AsyncStorage.getItem("userId");
+    await axios({
+      method: "GET",
+      url: `http://localhost:5000/chat/allrecieverchat/${userid}`,
+    })
+      .then((res) => {
+        setAllMessage(res.data.chat);
+      })
+      .catch((err) => {
+        console.log(err, "err on getallrecieverchat");
+      });
+  };
+
+  useEffect(() => {
+    getAllRecieverChat();
+  }, []);
 
   // STYLES
   const { container, _header, text_title, wrapper_allmessage } = styles;
@@ -32,11 +58,11 @@ export default function AllMessageScreen({ navigation }) {
               onPress={() => goToChat(item.picture)}
             >
               <CardMessageComponent
-                sender={item?.sender}
-                message={item?.message}
-                picture={item?.picture}
+                sender={item?.reciever?.firstName}
+                message={item?.messages[item.messages.length - 1].text}
+                picture={item?.reciever?.userPicture}
                 createdAt={item?.createdAt}
-                titleProduct="cours de chant"
+                titleProduct={item?.subject}
               />
             </TouchableOpacity>
           )}

@@ -185,7 +185,7 @@ const styles = StyleSheet.create({
     lineHeight: normalize(20),
   },
   _title: {
-    marginTop: normalize(20),
+    paddingTop: normalize(20),
     textAlign: "center",
     fontSize: normalize(20, "fontSize"),
     lineHeight: normalize(20),

@@ -14,5 +14,10 @@ router.post("/login", userController.login);
 router.post("/logingoogle", userController.loginGoogle);
 router.get("/:id", userController.getUser);
 router.post("/edit", userController.editUser);
+router.post("/editcategorygoodfollow", userController.editCategoryGoodFollow);
+router.post(
+  "/editcategoryservicefollow",
+  userController.editCategoryServiceFollow
+);
 
 module.exports = router;

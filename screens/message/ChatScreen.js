@@ -122,6 +122,7 @@ export default function ChatScreen({ navigation }) {
       data: {
         sender: user?.id,
         reciever: recieverId,
+        subject: titleProduct,
         messages: msg,
       },
     })
@@ -140,7 +141,6 @@ export default function ChatScreen({ navigation }) {
 
   const getMessage = async () => {
     const userId = await AsyncStorage.getItem("userId");
-    console.log(route?.params?.recieverId, "alors reciever id");
     try {
       let response = await axios.get(
         `http://localhost:5000/chat/getChat/${userId}/${route?.params?.recieverId}`
@@ -175,10 +175,6 @@ export default function ChatScreen({ navigation }) {
     />
   ) : (
     <View style={container}>
-      {console.log(
-        productPicture,
-        "(((((((((((((((((product picture))))))))))))))))"
-      )}
       <HeaderComponent navigation={navigation} title={recieverName} message />
       <CardHeaderChat
         productPicture={productPicture}
@@ -194,7 +190,7 @@ export default function ChatScreen({ navigation }) {
         alwaysShowSend={true}
         renderActions={() => renderUploadPictureIcon()}
         renderInputToolbar={(props) => customtInputToolbar(props)}
-        renderSend={() => renderSendMessageIcon()}
+        // renderSend={() => renderSendMessageIcon()}
         placeholderStyle={{ borderColor: "red" }}
       />
     </View>

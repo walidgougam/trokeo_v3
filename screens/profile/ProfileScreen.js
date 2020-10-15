@@ -47,7 +47,6 @@ export default function ProfileScreen({ navigation }) {
     })
       .then((res) => {
         setUserData(res.data.user);
-        console.log(res, "get user api from profile screen");
       })
       .catch((err) => {
         console.log(err, "error on get user api");

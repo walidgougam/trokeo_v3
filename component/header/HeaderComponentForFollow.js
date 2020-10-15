@@ -7,7 +7,43 @@ import { WhiteDotIcon } from "../../assets/icon/Icon";
 import fontStyles from "../../constant/fonts";
 import axios from "axios";
 
-export default function HeaderComponent({ navigation, title, message, data }) {
+export default function HeaderComponentForFollow({
+  navigation,
+  title,
+  message,
+  data,
+  allFollowRules,
+  from,
+  userId,
+}) {
+  const goBackFunction = async () => {
+    navigation.goBack();
+    if (from === "good") {
+      await axios({
+        method: "POST",
+        url: "http://localhost:5000/user/editcategorygoodfollow",
+        data: { userId, categoryGoodsFollow: allFollowRules },
+      })
+        .then((res) => {
+          console.log("result on follow good ");
+        })
+        .catch((err) => {
+          console.log(err, "error on follow good");
+        });
+    } else {
+      await axios({
+        method: "POST",
+        url: "http://localhost:5000/user/editcategoryservicefollow",
+        data: { userId, categoryServicesFollow: allFollowRules },
+      })
+        .then((res) => {
+          console.log("result follow service ");
+        })
+        .catch((err) => {
+          console.log(err, "error on follow service");
+        });
+    }
+  };
   const {
     _header,
     wrapper_header_title,
@@ -20,7 +56,7 @@ export default function HeaderComponent({ navigation, title, message, data }) {
         <View style={{ flexDirection: "row" }}>
           <TouchableOpacity
             activeOpacity={0.6}
-            onPress={() => navigation.goBack()}
+            onPress={() => goBackFunction()}
             hitSlop={expand_clickable_area}
           >
             <ArrowLeftIcon />

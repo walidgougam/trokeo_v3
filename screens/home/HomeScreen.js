@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, ScrollView } from "react-native";
 import {
   useNavigation,
   useRoute,
@@ -72,11 +72,13 @@ export default function HomeScreen({ navigation }) {
           }
         />
       </View>
-      {localisation ? (
-        <NoGeolocationComponent />
-      ) : (
-        renderForHome(goodTab, allProduct, navigation)
-      )}
+      <ScrollView>
+        {localisation ? (
+          <NoGeolocationComponent />
+        ) : (
+          renderForHome(goodTab, allProduct, navigation)
+        )}
+      </ScrollView>
     </View>
   );
 }

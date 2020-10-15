@@ -17,6 +17,8 @@ const UserSchema = new mongoose.Schema(
     userProduct: [{ type: ObjectId, ref: "Product" }],
     productLikes: [],
     productBooked: [],
+    categoryGoodsFollow: [],
+    categoryServicesFollow: [],
   },
   {
     timestamps: true,

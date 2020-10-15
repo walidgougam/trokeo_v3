@@ -10,6 +10,7 @@ export default function TextCardComponent({
   color,
   backgroundColor,
   followByUser,
+  onPress,
 }) {
   const { wrapper_text, _text, _btn, _title } = styles;
   return (
@@ -17,6 +18,7 @@ export default function TextCardComponent({
       <Text style={_text}>{title}</Text>
       {btn ? (
         <TouchableOpacity
+          onPress={onPress}
           activeOpacity={0.6}
           style={[
             _btn,

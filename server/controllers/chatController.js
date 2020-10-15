@@ -25,7 +25,7 @@ exports.getChat = async (req, res) => {
 };
 
 exports.postChat = (req, res) => {
-  const { reciever, sender, messages } = req.body;
+  const { reciever, sender, subject, messages } = req.body;
 
   const query = Chat.findOne({
     $or: [
@@ -40,6 +40,7 @@ exports.postChat = (req, res) => {
         const chat = new Chat({
           sender,
           reciever,
+          subject,
           messages,
         });
 
@@ -97,4 +98,16 @@ exports.getSpecificChat = (req, res) => {
       res.json(data.messages);
     }
   });
+};
+
+exports.getAllRecieverChat = async (req, res) => {
+  const { id } = req.params;
+  const chat = await Chat.find({
+    sender: id,
+  }).populate("reciever");
+  if (chat) {
+    res.status(200).json({
+      chat,
+    });
+  }
 };

@@ -4,12 +4,12 @@ import { Provider as AuthProvider } from "./context/AuthContext";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import normalize from "react-native-normalize";
 import {
-  HomeWhiteIcon,
-  HomeGreenIcon,
-  DealWhiteIcon,
-  DealGreenIcon,
   AddWhiteIcon,
   AddGreenIcon,
+  DealWhiteIcon,
+  DealGreenIcon,
+  HomeWhiteIcon,
+  HomeGreenIcon,
   MessageWhiteIcon,
   MessageGreenIcon,
   ProfileWhiteIcon,
@@ -43,16 +43,19 @@ import ChatScreen from "./screens/message/ChatScreen";
 import LeaveReviewScreen from "./screens/message/LeaveReviewScreen";
 
 // PROFILE
+import EcoCitizenScreen from "./screens/profile/EcoCitizenScreen";
+import EditProfileScreen from "./screens/profile/EditProfileScreen";
+import FavoritesScreen from "./screens/profile/FavoritesScreen";
+import FollowProductsScreen from "./screens/profile/customization/FollowProductsScreen";
+import GainVisibilityScreen from "./screens/profile/settings/GainVisibilityScreen";
+import GoodOrServiceScreen from "./screens/profile/customization/GoodOrServiceScreen";
+import HelpCenterScreen from "./screens/profile/HelpCenterScreen";
+import NotificationScreen from "./screens/profile/settings/NotificationScreen";
+import OrganizationModeScreen from "./screens/profile/OrganizationModeScreen";
 import ProfileScreen from "./screens/profile/ProfileScreen";
 import ProfileUserDetailsScreen from "./screens/profile/ProfileUserDetailsScreen";
 import ProfileUserAllReviewScreen from "./screens/profile/ProfileUserAllReviewScreen";
-import EditProfileScreen from "./screens/profile/EditProfileScreen";
 import SettingDetailScreen from "./screens/profile/settings/SettingDetailScreen";
-import NotificationScreen from "./screens/profile/settings/NotificationScreen";
-import FollowProductsScreen from "./screens/profile/customization/FollowProductsScreen";
-import GainVisibilityScreen from "./screens/profile/settings/GainVisibilityScreen";
-import EcoCitizenScreen from "./screens/profile/EcoCitizenScreen";
-import GoodOrServiceScreen from "./screens/profile/customization/GoodOrServiceScreen";
 
 // SEARCH
 import SearchOptionScreen from "./screens/search/SearchOptionScreen";
@@ -295,6 +298,21 @@ function NavigationContainerComponent() {
         <Stack.Screen
           name="GoodOrService"
           component={GoodOrServiceScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="OrganizationMode"
+          component={OrganizationModeScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="HelpCenter"
+          component={HelpCenterScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Favorite"
+          component={FavoritesScreen}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

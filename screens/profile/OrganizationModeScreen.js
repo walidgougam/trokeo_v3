@@ -1,10 +1,11 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, SafeAreaView, Button } from "react-native";
 
-export default function OrganizationModeScreen() {
+export default function OrganizationModeScreen({ navigation }) {
   return (
-    <View>
-      <Text></Text>
-    </View>
+    <SafeAreaView>
+      <Button title="goBack" onPress={() => navigation.goBack()} />
+      <Text>organization mode screen</Text>
+    </SafeAreaView>
   );
 }

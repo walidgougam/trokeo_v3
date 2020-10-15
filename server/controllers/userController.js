@@ -198,3 +198,39 @@ exports.editUser = async (req, res) => {
     }
   );
 };
+
+exports.editCategoryGoodFollow = async (req, res) => {
+  const { userId, categoryGoodsFollow } = req.body;
+
+  User.updateOne(
+    {
+      _id: userId,
+    },
+    {
+      $set: {
+        categoryGoodsFollow,
+      },
+    },
+    (err, user) => {
+      console.log(user, "resultat user after after edit good follow");
+    }
+  );
+};
+
+exports.editCategoryServiceFollow = async (req, res) => {
+  const { userId, categoryServicesFollow } = req.body;
+
+  User.updateOne(
+    {
+      _id: userId,
+    },
+    {
+      $set: {
+        categoryServicesFollow,
+      },
+    },
+    (err, user) => {
+      console.log(user, "resultat user after edit service follow");
+    }
+  );
+};

@@ -5,6 +5,7 @@ import {
   TextInput,
   ScrollView,
   FlatList,
+  AsyncStorage,
 } from "react-native";
 import normalize from "react-native-normalize";
 import colors from "../../../constant/colors";
@@ -12,44 +13,75 @@ import fontStyles from "../../../constant/fonts";
 import { goodCategories, serviceCategories } from "../../../helpers";
 import { SearchSmallIcon } from "../../../assets/icon/Icon";
 import InputSearch from "../../../component/input/InputSearch";
-import { useRoute } from "@react-navigation/native";
+import { useRoute, useIsFocused } from "@react-navigation/native";
+import axios from "axios";
 
-import HeaderComponent from "../../../component/header/HeaderComponent";
+import HeaderComponentForFollow from "../../../component/header/HeaderComponentForFollow";
 import BtnBlueAction from "../../../component/button/BtnBlueAction";
 import TextCardComponent from "../../../component/card/TextCardComponent";
 
 export default function FollowProductsScreen({ navigation }) {
   //ROUTE
   const route = useRoute();
-  const { from } = route?.params;
+  const {
+    from,
+    userId,
+    goodCategoryFromDb,
+    serviceCategoryFromDb,
+  } = route?.params;
 
   // STATE
   const [goodCategoryState, setGoodCategoryState] = useState(goodCategories);
   const [serviceCategoryState, setServiceCategoryState] = useState(
     serviceCategories
   );
+  const [loading, setLoading] = useState(true);
 
-  const handleFollowProduct = (title, followByUser) => {
+  // FOCUS ON SCREEN
+  const isFocuser = useIsFocused();
+
+  const handleFollowProduct = (titleCategory, followByUser) => {
     if (from === "good") {
       const changeFollowState = goodCategoryState.map((el) =>
-        el.title === title ? Object.assign({}, el, { followByUser }) : el
+        el.titleCategory === titleCategory
+          ? Object.assign({}, el, { followByUser })
+          : el
       );
       setGoodCategoryState(changeFollowState);
     } else {
       const changeFollowState = serviceCategoryState.map((el) =>
-        el.title === title ? Object.assign({}, el, { followByUser }) : el
+        el.titleCategory === titleCategory
+          ? Object.assign({}, el, { followByUser })
+          : el
       );
       setServiceCategoryState(changeFollowState);
     }
   };
 
+  useEffect(() => {
+    if (goodCategoryFromDb || serviceCategoryFromDb) {
+      setGoodCategoryState(goodCategoryFromDb);
+      setServiceCategoryState(serviceCategoryFromDb);
+      setLoading(false);
+    } else {
+      setLoading(false);
+    }
+  }, []);
+
   //STYLES
   const { container, wrapper_input, _icon, _input } = styles;
-  return (
+  return loading ? (
+    <View></View>
+  ) : (
     <View style={container}>
-      <HeaderComponent
+      <HeaderComponentForFollow
         title={from === "good" ? "Biens" : "Services"}
         navigation={navigation}
+        allFollowRules={
+          from === "good" ? goodCategoryState : serviceCategoryState
+        }
+        from={from}
+        userId={userId}
       />
       <ScrollView>
         <>
@@ -60,19 +92,24 @@ export default function FollowProductsScreen({ navigation }) {
             <FlatList
               data={from === "good" ? goodCategoryState : serviceCategoryState}
               renderItem={({ item }) => (
-                <TextCardComponent
-                  onPress={() =>
-                    handleFollowProduct(item?.title, !item.followByUser)
-                  }
-                  btn
-                  title={item?.title}
-                  btnTitle="Suivre"
-                  color={colors.text_white}
-                  backgroundColor={colors.btn_action}
-                  followByUser={item?.followByUser}
-                />
+                <>
+                  <TextCardComponent
+                    onPress={() =>
+                      handleFollowProduct(
+                        item?.titleCategory,
+                        !item.followByUser
+                      )
+                    }
+                    btn
+                    title={item?.titleCategory}
+                    btnTitle="Suivre"
+                    color={colors.text_white}
+                    backgroundColor={colors.btn_action}
+                    followByUser={item?.followByUser}
+                  />
+                </>
               )}
-              keyExtractor={(item) => item.id}
+              keyExtractor={(item) => item.titleCategory}
             />
           </View>
         </>

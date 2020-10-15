@@ -24,9 +24,9 @@ export default function SearchByCategoryScreen({ navigation }) {
         // contentContainerStyle={styles.wrapper_list}
         data={goods ? goodCategories : serviceCategories}
         renderItem={({ item }) => {
-          return <CardSelectCategory title={item?.title} />;
+          return <CardSelectCategory title={item?.titleCategory} />;
         }}
-        keyExtractor={(item) => item?.title}
+        keyExtractor={(item) => item?.titleCategory}
       />
     </View>
   );

@@ -1,11 +1,11 @@
 import React from "react";
 import { View, Text, SafeAreaView, Button } from "react-native";
 
-export default function FavoritesScreen({ navigation }) {
+export default function HelpCenterScreen({ navigation }) {
   return (
     <SafeAreaView>
       <Button title="goBack" onPress={() => navigation.goBack()} />
-      <Text>FavoritesScreen</Text>
+      <Text>help center screen</Text>
     </SafeAreaView>
   );
 }

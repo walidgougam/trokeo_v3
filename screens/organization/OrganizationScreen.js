@@ -10,6 +10,7 @@ import HeaderOrganization from "../../component/header/HeaderOrganization";
 import BtnHomeToggle from "../../component/button/BtnHomeToggle";
 
 import { renderForOrganization } from "../../helpers";
+import { ScrollView } from "react-native-gesture-handler";
 
 export default function OrganizationScreen({ navigation }) {
   // STATE
@@ -50,7 +51,9 @@ export default function OrganizationScreen({ navigation }) {
           changeFocus={() => setGoodTab(false)}
         />
       </View>
-      {renderForOrganization(goodTab, productFromApi, navigation)}
+      <ScrollView showsVerticalScrollIndicator={false}>
+        {renderForOrganization(goodTab, productFromApi, navigation)}
+      </ScrollView>
     </View>
   );
 }
