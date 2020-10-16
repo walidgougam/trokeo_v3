@@ -20,6 +20,8 @@ const authReducer = (state, action) => {
       return { ...state, product: action.payload };
     case "CATEGORY_PRODUCT":
       return { ...state, category: action.payload };
+    case "CHANGE_PICTURE":
+      return { ...state, picture: action.payload };
     case "GET_ALL_PRODUCT":
       return { ...state, allProduct: action.payload };
     case "GET_USER":
@@ -112,6 +114,15 @@ const categoryProductContext = (dispatch) => {
   };
 };
 
+const changePictureContext = (dispatch) => {
+  return async (picture) => {
+    dispatch({
+      type: "CHANGE_PICTURE",
+      payload: picture,
+    });
+  };
+};
+
 const getAllProductContext = (dispatch) => {
   return async (product) => {
     dispatch({
@@ -170,6 +181,7 @@ export const { Context, Provider } = createDataContext(
     tryLocalSignIn,
     createProductContext,
     categoryProductContext,
+    changePictureContext,
     getAllProductContext,
     getUserContext,
     editProfileContext,

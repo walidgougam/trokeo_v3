@@ -13,6 +13,7 @@ export default function CardMessageComponent({
   titleProduct,
 }) {
   const displayHour = () => {
+    console.log(createdAt, "createdAt message");
     const hour = createdAt.slice(11, 16);
     return hour;
   };

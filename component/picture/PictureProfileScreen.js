@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 import { ProfilePictureIcon } from "../../assets/icon/Icon";
 import normalize from "react-native-normalize";
 import colors from "../../constant/colors";
 import fontStyles from "../../constant/fonts";
 // import ImagePicker from "react-native-image-picker";
+import * as ImagePicker from "expo-image-picker";
+import { Context as AuthContext } from "../../context/AuthContext";
 
 export default function PictureProfileScreen({
   firstName,
@@ -17,42 +19,26 @@ export default function PictureProfileScreen({
   avatar,
 }) {
   //STATE
-  const [avatarSource, setAvatarSource] = useState({ uri: userPicture });
+  const [avatarSource, setAvatarSource] = useState(userPicture);
   const [picture, setPicture] = useState();
 
-  // const handleChoosePicture = async () => {
-  //   try {
-  //     const options = {
-  //       title: "my pic app",
-  //       takePhotoButtonTitle: "Take photo with your camera",
-  //       chooseFromLibraryButtonTitle: "Choose photo from library",
-  //     };
+  // CONTEXT
+  const { state, changePictureContext } = useContext(AuthContext);
 
-  //     ImagePicker.showImagePicker(options, (response) => {
-  //       let fileName =
-  //         response.fileName ||
-  //         response.uri.substr(response.uri.lastIndexOf("/") + 1);
+  const handleChoosePicture = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
 
-  //       if (response.didCancel) {
-  //         console.log("User cancelled image picker");
-  //       } else if (response.error) {
-  //         console.log("Image Picker Error: ", response.error);
-  //       } else {
-  //         let source = { uri: response.uri };
-  //         // addImageApi(response.data, fileName);
+    console.log(result, "result");
 
-  //         setAvatarSource(source);
-  //         avatar(source.uri);
-  //         //   setPicture(response.data);
-  //       }
-  //     });
-  //   } catch (err) {
-  //     console.log(err, "error on handle choose photo");
-  //   }
-  // };
-
-  const handleChoosePicture = () => {
-    console.log("handle choose");
+    if (!result.cancelled) {
+      setAvatarSource(result.uri);
+      changePictureContext(result.uri);
+    }
   };
 
   // STYLES
@@ -61,7 +47,7 @@ export default function PictureProfileScreen({
     <View>
       {userPicture || avatarSource ? (
         <Image
-          source={avatarSource}
+          source={{ uri: avatarSource }}
           style={{
             width: normalize(86),
             height: normalize(86),

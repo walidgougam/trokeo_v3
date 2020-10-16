@@ -25,7 +25,7 @@ exports.getChat = async (req, res) => {
 };
 
 exports.postChat = (req, res) => {
-  const { reciever, sender, subject, messages } = req.body;
+  const { reciever, sender, titleProduct, pictureProduct, messages } = req.body;
 
   const query = Chat.findOne({
     $or: [
@@ -40,7 +40,8 @@ exports.postChat = (req, res) => {
         const chat = new Chat({
           sender,
           reciever,
-          subject,
+          titleProduct,
+          pictureProduct,
           messages,
         });
 

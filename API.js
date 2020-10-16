@@ -41,6 +41,7 @@ export const registerGoogleApi = async (
     .then((res) => {
       console.log(res, "result register api google ");
       AsyncStorage.setItem("userId", res.data.userData._id);
+      AsyncStorage.setItem("userName", res.data.userData.firstName);
       callback();
     })
     .catch((err) => {

@@ -23,7 +23,12 @@ export default function EditProfileScreen({ navigation }) {
   const { data, userData } = route.params;
 
   // CONTEXT
-  const { state, editProfileContext, getUserContext } = useContext(AuthContext);
+  const {
+    state,
+    editProfileContext,
+    getUserContext,
+    changePictureContext,
+  } = useContext(AuthContext);
 
   // STATE
   const [picture, setPicture] = useState();
@@ -33,7 +38,7 @@ export default function EditProfileScreen({ navigation }) {
   const [email, setEmail] = useState(userData?.email);
   const [phoneNumber, setPhoneNumber] = useState(userData?.phoneNumber);
   const [female, setFemale] = useState(userData?.female);
-  const [userPicture, setUserPicture] = useState("");
+  const [userPicture, setUserPicture] = useState(userData?.userPicture);
 
   const [isSwitchOn, setIsSwitchOn] = useState(true);
 
@@ -50,7 +55,7 @@ export default function EditProfileScreen({ navigation }) {
       email,
       phoneNumber,
       female,
-      userPicture,
+      state?.picture,
       () => navigation.goBack()
     );
   };
@@ -63,12 +68,12 @@ export default function EditProfileScreen({ navigation }) {
     geoloc_text,
   } = styles;
 
-  const getPicture = (avatarSource) => setPicture(avatarSource.uri);
   return (
     <View style={container}>
       <HeaderComponent navigation={navigation} title="Mise à jour du profil" />
       <ScrollView>
         <View style={wrapper_profile_info}>
+          {console.log(state, "----------state-----------")}
           <PictureProfileScreen
             editProfile
             avatar={(e) => setUserPicture(e)}
@@ -76,7 +81,6 @@ export default function EditProfileScreen({ navigation }) {
             height={normalize(86, "height")}
             fontSize={normalize(11, "fontSize")}
             userPicture={userData?.userPicture}
-            // onChange={getPicture}    // processus devant se declencher en cas d'edition du profile
           />
         </View>
         <InputEditProfileComponent

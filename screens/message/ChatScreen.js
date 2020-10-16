@@ -59,6 +59,7 @@ export default function ChatScreen({ navigation }) {
       // set params on state
       setRecieverId(route?.params?.recieverId);
       setRecieverName(route?.params?.recieverName);
+      setLoading(false);
     }
 
     return () => {
@@ -113,6 +114,7 @@ export default function ChatScreen({ navigation }) {
   };
 
   const onSend = async (msg) => {
+    const userId = await AsyncStorage.getItem("userId");
     setMessages((prevState) => GiftedChat.append(prevState, msg));
     socket.emit("newMessage", "sent");
 
@@ -120,9 +122,10 @@ export default function ChatScreen({ navigation }) {
       method: "POST",
       url: "http://localhost:5000/chat/postchat",
       data: {
-        sender: user?.id,
+        sender: userId,
         reciever: recieverId,
-        subject: titleProduct,
+        titleProduct,
+        pictureProduct: productPicture,
         messages: msg,
       },
     })
@@ -163,7 +166,7 @@ export default function ChatScreen({ navigation }) {
     return () => {
       mounted = false;
     };
-  }, [isFocuser]);
+  }, []);
 
   // STYLES
   const { container } = styles;
@@ -175,6 +178,7 @@ export default function ChatScreen({ navigation }) {
     />
   ) : (
     <View style={container}>
+      {console.log(messages, "messages chat screen")}
       <HeaderComponent navigation={navigation} title={recieverName} message />
       <CardHeaderChat
         productPicture={productPicture}

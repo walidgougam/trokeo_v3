@@ -13,14 +13,26 @@ import { FlatList } from "react-native-gesture-handler";
 // import { allMessage } from "../../helpersDataBase";
 import fontStyles from "../../constant/fonts";
 import axios from "axios";
+import { useRoute, useIsFocused } from "@react-navigation/native";
 
 export default function AllMessageScreen({ navigation }) {
+  //STATE
   const [allMessage, setAllMessage] = useState([]);
-  const goToChat = (picture) => {
+
+  // FOCUS ON SCREEN
+  const isFocuser = useIsFocused();
+
+  const goToChat = (productPicture, recieverId, titleProduct) => {
     return navigation.navigate("Chat", {
-      picture,
+      productPicture,
+      recieverId,
+      titleProduct,
     });
   };
+  // productPicture: imageProduct[0].uri,
+  // titleProduct,
+  // recieverId: userData._id,
+  // recieverName: userData.firstName,
 
   const getAllRecieverChat = async () => {
     const userid = await AsyncStorage.getItem("userId");
@@ -37,8 +49,16 @@ export default function AllMessageScreen({ navigation }) {
   };
 
   useEffect(() => {
-    getAllRecieverChat();
-  }, []);
+    let mounted = true;
+
+    if (mounted) {
+      getAllRecieverChat();
+    }
+
+    return () => {
+      mounted = false;
+    };
+  }, [isFocuser]);
 
   // STYLES
   const { container, _header, text_title, wrapper_allmessage } = styles;
@@ -55,14 +75,20 @@ export default function AllMessageScreen({ navigation }) {
           renderItem={({ item }) => (
             <TouchableOpacity
               activeOpacity={0.6}
-              onPress={() => goToChat(item.picture)}
+              onPress={() =>
+                goToChat(
+                  item?.pictureProduct,
+                  item?.reciever?._id,
+                  item?.titleProduct
+                )
+              }
             >
               <CardMessageComponent
                 sender={item?.reciever?.firstName}
-                message={item?.messages[item.messages.length - 1].text}
+                message={item?.messages[item.messages.length - 1]?.text}
                 picture={item?.reciever?.userPicture}
-                createdAt={item?.createdAt}
-                titleProduct={item?.subject}
+                createdAt={item?.messages[item.messages.length - 1]?.createdAt}
+                titleProduct={item?.titleProduct}
               />
             </TouchableOpacity>
           )}
