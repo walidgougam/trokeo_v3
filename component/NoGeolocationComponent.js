@@ -8,7 +8,7 @@ import fontStyles from "../constant/fonts";
 import BtnBlueAction from "./button/BtnBlueAction";
 import css from "../constant/css";
 
-export default function NoGeolocationComponent() {
+export default function NoGeolocationComponent({ getLocation }) {
   const {
     container,
     _text,
@@ -25,6 +25,7 @@ export default function NoGeolocationComponent() {
       </View>
       <View style={wrapper_btn}>
         <BtnBlueAction
+          onPress={getLocation}
           backgroundColor={colors.btn_action}
           color={colors.text_white}
           title="Activer la géolocalisation"
@@ -39,15 +40,15 @@ export default function NoGeolocationComponent() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    height: normalize(480),
     alignItems: "center",
+    justifyContent: "center",
   },
-  text: {
+  _text: {
     ...css.text_title,
-    marginTop: normalize(111),
     marginBottom: normalize(32),
   },
-  map: {
+  _map: {
     marginBottom: normalize(31),
   },
   wrapper_btn: {

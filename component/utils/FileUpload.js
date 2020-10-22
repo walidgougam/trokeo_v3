@@ -17,7 +17,7 @@
 //       },
 //     };
 //     axios
-//       .post("http://localhost:5000/signup", formData, config)
+//       .post("http://10.1.20.66:5000/signup", formData, config)
 //       .then((response) => {
 //         alert("The file is successfully uploaded");
 //       })

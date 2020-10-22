@@ -7,6 +7,7 @@ import {
   AsyncStorage,
   Text,
   Image,
+  Platform,
 } from "react-native";
 import {
   useNavigation,
@@ -43,7 +44,10 @@ export default function ProfileScreen({ navigation }) {
     let id = await AsyncStorage.getItem("userId");
     axios({
       method: "GET",
-      url: `http://localhost:5000/user/${id}`,
+      url:
+        Platform.OS === "ios"
+          ? `http://localhost:5000/user/${id}`
+          : `http://10.1.20.66:5000/user/${id}`,
     })
       .then((res) => {
         setUserData(res.data.user);

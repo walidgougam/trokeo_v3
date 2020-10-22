@@ -4,7 +4,8 @@ import { Form, Item, Input, Label } from "native-base";
 import colors from "../../constant/colors";
 import normalize from "react-native-normalize";
 import fontStyles from "../../constant/fonts";
-import RNPickerSelect from "react-native-picker-select";
+// import RNPickerSelect from "react-native-picker-select";
+import PickerSelect from "../../component/PickerSelect";
 import { Context as AuthContext } from "../../context/AuthContext";
 
 export default function InputEditProfileComponent({
@@ -22,6 +23,7 @@ export default function InputEditProfileComponent({
   // USECONTEXT
   const { state, editProfileContext } = useContext(AuthContext);
   const [female, setFemale] = useState();
+  const [selectedLabel, setSelectedLabel] = useState("");
 
   const selectGender = (value) => {
     if (value === "male") {
@@ -86,10 +88,17 @@ export default function InputEditProfileComponent({
           }}
         />
       </Item>
-      {/* <Item style={{ borderColor: colors.placeholder_grey }} floatingLabel last>
-        <Label style={styles.label_input}>Genre</Label> */}
+      {/* <Item style={{ borderColor: colors.placeholder_grey }} floatingLabel last> */}
+      <Label style={styles.label_input}>Genre</Label>
       <View style={[_input, { borderColor: colors.placeholder_grey }]}>
-        <RNPickerSelect
+        <PickerSelect
+          data={["homme", "femme"]}
+          handleSelect={(e) => handleSelect(e)}
+          selectedLabel={selectedLabel}
+        />
+      </View>
+      {/* </Item> */}
+      {/* <RNPickerSelect
           style={{
             placeholder: {
               marginLeft: 14,
@@ -104,8 +113,7 @@ export default function InputEditProfileComponent({
             { label: "Male", value: "male" },
             { label: "Female", value: "female" },
           ]}
-        />
-      </View>
+        /> */}
     </Form>
   );
 }

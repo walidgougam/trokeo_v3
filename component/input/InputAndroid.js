@@ -20,6 +20,7 @@ export default function InputAndroid({
   password,
   value,
   onBlur,
+  iconValidation,
 }) {
   return (
     <View style={styles.container_android}>
@@ -45,6 +46,7 @@ export default function InputAndroid({
             <HidePasswordIcon />
           </TouchableOpacity>
         )}
+        {iconValidation}
       </View>
     </View>
   );
@@ -53,8 +55,11 @@ export default function InputAndroid({
 const styles = StyleSheet.create({
   container_android: {
     borderColor: colors.icon_profile_grey,
-    borderWidth: normalize(1),
+    borderWidth: 1,
     flexDirection: "row",
+    borderColor: "#BFBDBD",
+    paddingHorizontal: 12,
+    paddingVertical: 10,
   },
   input_android: {
     flex: 2,

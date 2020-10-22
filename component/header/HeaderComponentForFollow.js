@@ -1,5 +1,11 @@
 import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Platform,
+} from "react-native";
 import { ArrowLeftIcon } from "../../assets/icon/Icon";
 import normalize from "react-native-normalize";
 import colors from "../../constant/colors";
@@ -21,7 +27,10 @@ export default function HeaderComponentForFollow({
     if (from === "good") {
       await axios({
         method: "POST",
-        url: "http://localhost:5000/user/editcategorygoodfollow",
+        url:
+          Platform.OS === "ios"
+            ? "http://localhost:5000/user/editcategorygoodfollow"
+            : "http://10.1.20.66:5000/user/editcategorygoodfollow",
         data: { userId, categoryGoodsFollow: allFollowRules },
       })
         .then((res) => {
@@ -33,7 +42,10 @@ export default function HeaderComponentForFollow({
     } else {
       await axios({
         method: "POST",
-        url: "http://localhost:5000/user/editcategoryservicefollow",
+        url:
+          Platform.OS === "ios"
+            ? "http://localhost:5000/user/editcategoryservicefollow"
+            : "http://10.1.20.66:5000/user/editcategoryservicefollow",
         data: { userId, categoryServicesFollow: allFollowRules },
       })
         .then((res) => {

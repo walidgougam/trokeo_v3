@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Text, View, StyleSheet, Image } from "react-native";
+import { Text, View, StyleSheet, Image, Platform } from "react-native";
 import Swiper from "react-native-swiper";
 import normalize from "react-native-normalize";
 import {
@@ -169,7 +169,7 @@ var styles = StyleSheet.create({
   },
   border_picture: {
     borderColor: "rgba(183,183,183,0.5)",
-    borderWidth: normalize(1),
+    borderWidth: 1,
   },
   slide: {
     justifyContent: "center",

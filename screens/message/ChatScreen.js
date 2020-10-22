@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   AsyncStorage,
   ActivityIndicator,
+  Platform,
 } from "react-native";
 import {
   GiftedChat,
@@ -37,7 +38,7 @@ export default function ChatScreen({ navigation }) {
   const [recieverName, setRecieverName] = useState("");
 
   // SOCKET
-  const socket = io("http://localhost:5000", {});
+  const socket = io("http://10.1.20.66:5000", {});
 
   // FOCUS ON SCREEN
   const isFocuser = useIsFocused();
@@ -120,7 +121,10 @@ export default function ChatScreen({ navigation }) {
 
     await axios({
       method: "POST",
-      url: "http://localhost:5000/chat/postchat",
+      url:
+        Platform.OS === "ios"
+          ? "http://localhost:5000/chat/postchat"
+          : "http://10.1.20.66:5000/chat/postchat",
       data: {
         sender: userId,
         reciever: recieverId,
@@ -146,7 +150,9 @@ export default function ChatScreen({ navigation }) {
     const userId = await AsyncStorage.getItem("userId");
     try {
       let response = await axios.get(
-        `http://localhost:5000/chat/getChat/${userId}/${route?.params?.recieverId}`
+        Platform.OS === "ios"
+          ? `http://localhost:5000/chat/getChat/${userId}/${route?.params?.recieverId}`
+          : `http://10.1.20.66:5000/chat/getChat/${userId}/${route?.params?.recieverId}`
       );
       if (response) {
         setMessages(() => GiftedChat.append([], response.data).reverse());

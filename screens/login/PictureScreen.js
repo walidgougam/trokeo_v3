@@ -1,11 +1,18 @@
 import React, { useState, useEffect, useLayoutEffect } from "react";
-import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  Alert,
+  Platform,
+} from "react-native";
 import normalize from "react-native-normalize";
 import { useRoute } from "@react-navigation/native";
 import colors from "../../constant/colors";
 import fontStyles from "../../constant/fonts";
 import css from "../../constant/css";
-// import ImagePicker from "react-native-image-picker";
 import * as ImagePicker from "expo-image-picker";
 import axios from "axios";
 import { addImageApi } from "../../API";
@@ -25,7 +32,7 @@ export default function PictureScreen({ navigation }) {
   // STATE
   // const [picture, setPicture] = useState("");
   // const [avatarSource, setAvatarSource] = useState("");
-  const [image, setImage] = useState(null);
+  const [profilePicture, setProfilePicture] = useState(null);
 
   useEffect(() => {
     (async () => {
@@ -40,36 +47,6 @@ export default function PictureScreen({ navigation }) {
     })();
   }, []);
 
-  // const handleChoosePicture = async () => {
-  //   try {
-  //     const options = {
-  //       title: "my pic app",
-  //       takePhotoButtonTitle: "Take photo with your camera",
-  //       chooseFromLibraryButtonTitle: "Choose photo from library",
-  //     };
-
-  //     ImagePicker.showImagePicker(options, (response) => {
-  //       let fileName =
-  //         response.fileName ||
-  //         response?.uri?.substr(response.uri.lastIndexOf("/") + 1);
-
-  //       if (response.didCancel) {
-  //         console.log("User cancelled image picker");
-  //       } else if (response.error) {
-  //         console.log("Image Picker Error: ", response.error);
-  //       } else {
-  //         let source = { uri: response.uri };
-  //         addImageApi(response.data, fileName);
-
-  //         setAvatarSource(source);
-  //         setPicture(response.data);
-  //       }
-  //     });
-  //   } catch (err) {
-  //     console.log(err, "error on handle choose photo");
-  //   }
-  // };
-
   const handleChoosePicture = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -78,21 +55,26 @@ export default function PictureScreen({ navigation }) {
       quality: 1,
     });
 
-    console.log(result);
+    console.log(result, "result picture screen");
 
     if (!result.cancelled) {
-      setImage(result.uri);
+      setProfilePicture(result.uri);
     }
   };
 
   const goNextScreen = () => {
-    return navigation.navigate("Gender", {
-      email,
-      password,
-      firstName,
-      lastName,
-      userPicture: avatarSource.uri,
-    });
+    console.log(profilePicture, "userPicture");
+    if (profilePicture) {
+      return navigation.navigate("Gender", {
+        email,
+        password,
+        firstName,
+        lastName,
+        userPicture: profilePicture,
+      });
+    } else {
+      Alert.alert("vous devez avoir une photo de profil");
+    }
   };
 
   // STYLES
@@ -109,10 +91,10 @@ export default function PictureScreen({ navigation }) {
         <Text style={text_description}>
           Vous aurez plus de chance d’échanger avec votre photo !
         </Text>
-        {image ? ( // ancienement avatarSource
+        {profilePicture ? ( // ancienement avatarSource
           <Image
             // source={avatarSource}
-            source={{ uri: image }}
+            source={{ uri: profilePicture }}
             style={{
               width: 133,
               height: 133,
@@ -146,7 +128,7 @@ export default function PictureScreen({ navigation }) {
 
         <BtnBlueAction
           // title={picture ? "Suivant" : "Passer"}
-          title={image ? "Suivant" : "Passer"}
+          title={profilePicture ? "Suivant" : "Passer"}
           backgroundColor={colors.background_white}
           color={colors.btn_action}
           onPress={() => goNextScreen()}

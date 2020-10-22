@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { View, StyleSheet, ScrollView } from "react-native";
+import { View, StyleSheet, ScrollView, Platform } from "react-native";
 import {
   useNavigation,
   useRoute,
@@ -11,6 +11,7 @@ import normalize from "react-native-normalize";
 import { getAllProductApi, getUserApi } from "../../API";
 import { Context as AuthContext } from "../../context/AuthContext";
 import axios from "axios";
+import * as Location from "expo-location";
 
 import HeaderNotification from "../../component/header/HeaderNotification";
 import BtnHomeToggle from "../../component/button/BtnHomeToggle";
@@ -19,7 +20,7 @@ import NoGeolocationComponent from "../../component/NoGeolocationComponent";
 export default function HomeScreen({ navigation }) {
   //STATE
   const [goodTab, setGoodTab] = useState(true);
-  const [localisation, setLocalisation] = useState(false);
+  const [location, setLocation] = useState(false);
   const [allProduct, setAllProduct] = useState();
 
   // CONTEXT
@@ -30,10 +31,24 @@ export default function HomeScreen({ navigation }) {
   // FOCUS ON SCREEN
   const isFocuser = useIsFocused();
 
+  const getCurrentLocation = async () => {
+    let { status } = await Location.requestPermissionsAsync();
+    if (status !== "granted") {
+      setErrorMsg("Permission to access location was denied");
+    }
+    let location = await Location.getCurrentPositionAsync({});
+    if (location) {
+      setLocation(true);
+    }
+  };
+
   const getAllProduct = async () => {
     await axios({
       method: "GET",
-      url: "http://localhost:5000/product/getproduct",
+      url:
+        Platform.OS === "ios"
+          ? "http://localhost:5000/product/getproduct"
+          : "http://10.1.20.66:5000/product/getproduct",
     })
       .then((res) => {
         setAllProduct(res?.data?.product);
@@ -73,8 +88,8 @@ export default function HomeScreen({ navigation }) {
         />
       </View>
       <ScrollView>
-        {localisation ? (
-          <NoGeolocationComponent />
+        {!location ? (
+          <NoGeolocationComponent getLocation={() => getCurrentLocation()} />
         ) : (
           renderForHome(goodTab, allProduct, navigation)
         )}

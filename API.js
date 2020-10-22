@@ -1,5 +1,5 @@
 import axios from "axios";
-import { AsyncStorage, Alert } from "react-native";
+import { AsyncStorage, Alert, Platform } from "react-native";
 // import RNFetchBlob from "rn-fetch-blob";
 
 export const registerApi = async (
@@ -13,7 +13,10 @@ export const registerApi = async (
 ) => {
   await axios({
     method: "POST",
-    url: "http://localhost:5000/user/register",
+    url:
+      Platform.OS === "ios"
+        ? "http://localhost:5000/user/register"
+        : "http://10.1.20.66:5000/user/register",
     data: { email, password, firstName, lastName, userPicture, female },
   })
     .then((res) => {
@@ -22,7 +25,7 @@ export const registerApi = async (
       callback();
     })
     .catch((err) => {
-      console.log(err, "error on register");
+      console.log(err, "error on register api");
     });
 };
 
@@ -35,7 +38,10 @@ export const registerGoogleApi = async (
 ) => {
   await axios({
     method: "POST",
-    url: "http://localhost:5000/user/registergoogle",
+    url:
+      Platform.OS === "ios"
+        ? "http://localhost:5000/user/login"
+        : "http://10.1.20.66:5000/user/login",
     data: { email, firstName, lastName, userPicture },
   })
     .then((res) => {
@@ -52,12 +58,16 @@ export const registerGoogleApi = async (
 export const loginApi = (email, password, callback) => {
   axios({
     method: "POST",
-    url: "http://localhost:5000/user/login",
+    url:
+      Platform.OS === "ios"
+        ? "http://localhost:5000/user/login"
+        : "http://10.1.20.66:5000/user/login",
     data: { email, password },
   })
     .then((res) => {
-      AsyncStorage.setItem("token", res.data.token);
-      AsyncStorage.setItem("userId", res.data._id);
+      console.log(res, "res login");
+      AsyncStorage.setItem("token", res.data.data.token);
+      AsyncStorage.setItem("userId", res.data.data._id);
       callback();
     })
     .catch((err) => {
@@ -70,7 +80,7 @@ export const loginGoogleApi = () => {};
 export const addImageApi = (picture, fileName) => {
   // RNFetchBlob.fetch(
   //   "POST",
-  //   "http://localhost:5000/register/uploadPicture",
+  //   "http://10.1.20.66:5000/register/uploadPicture",
   //   {
   //     Authorization: "Bearer access-token",
   //     otherHeader: "foo",
@@ -100,7 +110,10 @@ export const createProductApi = async (
   let userId = await AsyncStorage.getItem("userId");
   axios({
     method: "POST",
-    url: "http://localhost:5000/product/createproduct",
+    url:
+      Platform.OS === "ios"
+        ? "http://localhost:5000/product/createproduct"
+        : "http://10.1.20.66:5000/product/createproduct",
     data: {
       title,
       description,
@@ -128,7 +141,10 @@ export const getUserApi = async (dispatch) => {
   let id = await AsyncStorage.getItem("userId");
   axios({
     method: "GET",
-    url: `http://localhost:5000/user/${id}`,
+    url:
+      Platform.OS === "ios"
+        ? `http://localhost:5000/user/${id}`
+        : `http://10.1.20.66:5000/user/${id}`,
   })
     .then((res) => {
       dispatch({ type: "GET_USER", payload: res.data.user });
@@ -152,7 +168,10 @@ export const editProfileUserApi = async (
   let userId = await AsyncStorage.getItem("userId");
   axios({
     method: "POST",
-    url: "http://localhost:5000/user/edit",
+    url:
+      Platform.OS === "ios"
+        ? "http://localhost:5000/user/edit"
+        : "http://10.1.20.66:5000/user/edit",
     data: {
       userId,
       firstName,

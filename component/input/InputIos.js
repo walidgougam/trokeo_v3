@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
     ...css.row_space_between,
     alignItems: "center",
     borderColor: colors.icon_profile_grey,
-    borderWidth: normalize(1),
+    borderWidth: 1,
     borderRadius: normalize(1),
     paddingHorizontal: normalize(14),
   },

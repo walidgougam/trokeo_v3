@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, AsyncStorage } from "react-native";
+import { View, Text, StyleSheet, AsyncStorage, Platform } from "react-native";
 import CardWithRightIcon from "../../../component/card/CardWithRightIcon";
 import HeaderComponent from "../../../component/header/HeaderComponent";
 import axios from "axios";
@@ -18,7 +18,10 @@ export default function GoodOrServiceScreen({ navigation, route }) {
     const userid = await AsyncStorage.getItem("userId");
     axios({
       method: "GET",
-      url: `http://localhost:5000/user/${userid}`,
+      url:
+        Platform.OS === "ios"
+          ? `http://localhost:5000/user/${userid}`
+          : `http://10.1.20.66:5000/user/${userid}`,
     })
       .then((res) => {
         setGoodCategoryState(res?.data?.user?.categoryGoodsFollow);

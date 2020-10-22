@@ -5,6 +5,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   AsyncStorage,
+  Platform,
 } from "react-native";
 import CardMessageComponent from "../../component/card/CardMessageComponent";
 import colors from "../../constant/colors";
@@ -38,7 +39,10 @@ export default function AllMessageScreen({ navigation }) {
     const userid = await AsyncStorage.getItem("userId");
     await axios({
       method: "GET",
-      url: `http://localhost:5000/chat/allrecieverchat/${userid}`,
+      url:
+        Platform.OS === "ios"
+          ? `http://localhost:5000/chat/allrecieverchat/${userid}`
+          : `http://10.1.20.66:5000/chat/allrecieverchat/${userid}`,
     })
       .then((res) => {
         setAllMessage(res.data.chat);

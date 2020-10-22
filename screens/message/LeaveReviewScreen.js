@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
   },
   text_area: {
     borderColor: colors.icon_profile_grey,
-    borderWidth: normalize(1),
+    borderWidth: 1,
     height: normalize(142, "height"),
     marginTop: normalize(20),
   },

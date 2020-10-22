@@ -25,7 +25,7 @@ export default function BtnRightIcon({ navigation, title, target, userData }) {
 const styles = StyleSheet.create({
   wrapper_product_inline: {
     flexDirection: "row",
-    borderWidth: normalize(1),
+    borderWidth: 1,
     borderColor: "black",
     borderRadius: normalize(50, "borderRadius"),
     width: normalize(128, "width"),

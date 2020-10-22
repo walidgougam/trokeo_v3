@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 23,
 
     borderRadius: normalize(5),
-    borderWidth: normalize(1),
+    borderWidth: 1,
     borderColor: colors.btn_action,
     justifyContent: "center",
   },

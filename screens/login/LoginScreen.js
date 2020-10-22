@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   AsyncStorage,
   ActivityIndicator,
+  Platform,
 } from "react-native";
 import {
   useNavigation,
@@ -20,6 +21,7 @@ import colors from "../../constant/colors";
 import { IconGoogle, IconFacebook } from "../../assets/icon/Icon";
 import normalize from "react-native-normalize";
 import * as Google from "expo-google-app-auth";
+import * as AppleAuthentication from "expo-apple-authentication";
 import { registerGoogleApi } from "../../API";
 
 import BtnLogin from "../../component/button/BtnLogin";
@@ -31,11 +33,16 @@ const LoginScreen = ({ navigation }) => {
   // FOCUS ON SCREEN
   const isFocuser = useIsFocused();
 
-  const config = {
+  const configAndroid = {
+    iosClientId: `365734703180-rafl6rvpv6e194e14c75tk734cfh0vos.apps.googleusercontent.com`,
+    androidClientId: `365734703180-o5m1hbcnssrlrfi8ui79efkkacp0nuvp.apps.googleusercontent.com`,
+    androidStandaloneAppClientId: `<YOUR_ANDROID_CLIENT_ID>`,
+  };
+
+  const configIos = {
     iosClientId: `365734703180-rafl6rvpv6e194e14c75tk734cfh0vos.apps.googleusercontent.com`,
     androidClientId: `365734703180-o5m1hbcnssrlrfi8ui79efkkacp0nuvp.apps.googleusercontent.com`,
     iosStandaloneAppClientId: `<YOUR_IOS_CLIENT_ID>`,
-    androidStandaloneAppClientId: `<YOUR_ANDROID_CLIENT_ID>`,
   };
 
   const userAlreadyConnected = async () => {
@@ -59,7 +66,9 @@ const LoginScreen = ({ navigation }) => {
 
   const auth = async () => {
     try {
-      const { user, type } = await Google.logInAsync(config);
+      const { user, type } = await Google.logInAsync(
+        Platform.OS === "android" ? configAndroid : configIos
+      );
 
       //STOCKER L'UTILISATEUR DANS LA BASE DE DONNEE
       if (type === "success") {
@@ -118,6 +127,52 @@ const LoginScreen = ({ navigation }) => {
       </View>
       <View style={container_green}>
         <View style={wrapper_btn}>
+          {Platform.OS === "ios" ? (
+            <View>
+              <AppleAuthentication.AppleAuthenticationButton
+                buttonType={
+                  AppleAuthentication.AppleAuthenticationButtonType.SIGN_IN
+                }
+                buttonStyle={
+                  AppleAuthentication.AppleAuthenticationButtonStyle.BLACK
+                }
+                cornerRadius={25}
+                style={{
+                  height: normalize(52, "height"),
+                  flexDirection: "row",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  marginHorizontal: normalize(68),
+                  marginBottom: normalize(25),
+                }}
+                onPress={async () => {
+                  try {
+                    const credential = await AppleAuthentication.signInAsync({
+                      requestedScopes: [
+                        AppleAuthentication.AppleAuthenticationScope.FULL_NAME,
+                        AppleAuthentication.AppleAuthenticationScope.EMAIL,
+                      ],
+                    });
+                    console.log(credential, "credential");
+                  } catch (e) {
+                    if (e.code === "ERR_CANCELED") {
+                      console.log(1, e);
+                    } else {
+                      console.log(2, e);
+                    }
+                  }
+                }}
+              />
+            </View>
+          ) : (
+            <BtnLogin
+              title="Login avec Google"
+              backgroundColor={colors.background_white}
+              color={colors.text_google_grey}
+              press={() => handleLoginGoogle()}
+              icon={<IconGoogle />}
+            />
+          )}
           <BtnLogin
             title="Login avec Google"
             backgroundColor={colors.background_white}
@@ -169,7 +224,7 @@ const styles = StyleSheet.create({
   container_image: {
     height: "48.7%",
   },
-  image: {
+  _image: {
     width: "100%",
     height: "100%",
   },

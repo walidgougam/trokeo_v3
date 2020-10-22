@@ -7,6 +7,7 @@ import {
   TextInput,
   AsyncStorage,
   Alert,
+  Platform,
 } from "react-native";
 import colors from "../../constant/colors";
 import normalize from "react-native-normalize";
@@ -16,14 +17,15 @@ import { goodsCondition } from "../../helpers";
 import { Context as AuthContext } from "../../context/AuthContext";
 import css from "../../constant/css";
 import { createProductApi } from "../../API";
-// import ImagePicker from "react-native-image-picker";
-import RNPickerSelect from "react-native-picker-select";
+// import RNPickerSelect from "react-native-picker-select";
+import * as ImagePicker from "expo-image-picker";
 import { Button, Snackbar } from "react-native-paper";
 
 import BtnHomeToggle from "../../component/button/BtnHomeToggle";
 import CardPictureIcon from "../../component/picture/CardPictureIcon";
 import CardAddPictureIcon from "../../component/picture/CardAddPictureIcon";
 import BtnBlueAction from "../../component/button/BtnBlueAction";
+import PickerSelect from "../../component/PickerSelect";
 
 export default function CreateProduct({ navigation }) {
   // STATE
@@ -36,6 +38,7 @@ export default function CreateProduct({ navigation }) {
   const [avatarSource, setAvatarSource] = useState([]);
   // const [pictureSource, setPictureSource] = useState("");
   const [visible, setVisible] = useState(false);
+  const [selectedLabel, setSelectedLabel] = useState("");
 
   // CONTEXT
   const { state, createProductContext } = useContext(AuthContext);
@@ -48,35 +51,28 @@ export default function CreateProduct({ navigation }) {
     return navigation.navigate("SelectCategory", { goods });
   };
 
-  // const handleChoosePicture = async () => {
-  //   try {
-  //     const options = {
-  //       title: "my pic app",
-  //       takePhotoButtonTitle: "Take photo with your camera",
-  //       chooseFromLibraryButtonTitle: "Choose photo from library",
-  //     };
+  const handleChoosePicture = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
 
-  //     ImagePicker.showImagePicker(options, (response) => {
-  //       let fileName =
-  //         response.fileName ||
-  //         response?.uri?.substr(response.uri.lastIndexOf("/") + 1);
+    console.log(result, "result picture screen");
 
-  //       if (response.didCancel) {
-  //         console.log("User cancelled image picker");
-  //       } else if (response.error) {
-  //         console.log("Image Picker Error: ", response.error);
-  //       } else {
-  //         let source = { uri: response.uri };
-  //         setAvatarSource((prevState) => {
-  //           return [...prevState, { uri: source.uri }];
-  //         });
-  //         // setPictureSource(response.data);
-  //       }
-  //     });
-  //   } catch (err) {
-  //     console.log(err, "error on handle choose photo");
-  //   }
-  // };
+    if (!result.cancelled) {
+      let source = { uri: result.uri };
+      setAvatarSource((prevState) => {
+        return [...prevState, { uri: source.uri }];
+      });
+    }
+  };
+
+  const handleSelect = (e) => {
+    setSelectedLabel(e);
+    console.log(e, "handle select from create");
+  };
 
   const createProduct = async () => {
     const userId = await AsyncStorage.getItem("userId");
@@ -169,16 +165,21 @@ export default function CreateProduct({ navigation }) {
       </View>
       <View style={wrapper_select_goods_condition}>
         <Text style={_label}>Etat du bien</Text>
-        <RNPickerSelect
-          style={{ borderBottomColor: "black", borderBottomWidth: 1 }}
-          onValueChange={(value) => setConditionProduct(value)}
-          placeholder={{
-            label: "Sélectionner",
-          }}
-          items={goodsCondition.map((item, index) => {
-            return { label: item, value: item };
-          })}
+        <PickerSelect
+          data={goodsCondition}
+          handleSelect={(e) => handleSelect(e)}
+          selectedLabel={selectedLabel}
         />
+        {/* <RNPickerSelect
+            style={{ borderBottomColor: "black", borderBottomWidth: 1 }}
+            onValueChange={(value) => setConditionProduct(value)}
+            placeholder={{
+              label: "Sélectionner",
+            }}
+            items={goodsCondition.map((item, index) => {
+              return { label: item, value: item };
+            })}
+          /> */}
         {/* <TextInput placeholder="Selectionner" style={_input} /> */}
       </View>
       <TouchableOpacity
@@ -262,10 +263,12 @@ const styles = StyleSheet.create({
     fontSize: normalize(12, "fontSize"),
     color: "black",
     ...fontStyles.regular,
-    lineHeight: normalize(20),
+    // lineHeight: normalize(20),
     borderColor: colors.icon_profile_grey,
-    borderWidth: normalize(1),
+    borderWidth: 1,
     padding: normalize(11),
+    // display: "flex",
+    // justifyContent: "center",
     marginBottom: normalize(13),
     borderRadius: normalize(1),
   },

@@ -20,7 +20,7 @@ export default function SelectCategoryScreen({ navigation }) {
 
   const handleCategory = (item) => {
     setChecked(item.isValue);
-    categoryProductContext(item.title);
+    categoryProductContext(item.titleCategory);
   };
 
   return (
@@ -33,7 +33,7 @@ export default function SelectCategoryScreen({ navigation }) {
         renderItem={({ item }) => {
           return (
             <CardSelectCategory
-              title={item?.title}
+              title={item?.titleCategory}
               value={checked === item?.isValue}
               onPress={() => handleCategory(item)}
             />
