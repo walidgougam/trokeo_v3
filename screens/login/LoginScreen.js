@@ -174,13 +174,6 @@ const LoginScreen = ({ navigation }) => {
             />
           )}
           <BtnLogin
-            title="Login avec Google"
-            backgroundColor={colors.background_white}
-            color={colors.text_google_grey}
-            press={() => handleLoginGoogle()}
-            icon={<IconGoogle />}
-          />
-          <BtnLogin
             title="Login avec Facebook"
             backgroundColor={colors.background_facebook_blue}
             color={colors.text_white}
