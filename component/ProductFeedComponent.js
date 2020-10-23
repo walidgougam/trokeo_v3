@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, FlatList, StyleSheet, Dimensions } from "react-native";
 import CardProductComponent from "./card/CardProductComponent";
 import normalize from "react-native-normalize";
+import axios from "axios";
 
-export default function ProductFeedComponent({ data, navigation }) {
+export default function ProductFeedComponent({
+  data,
+  navigation,
+  clickFromChild,
+}) {
   const numColumns = 2;
   const WIDTH = Dimensions.get("window").width;
   const formatData = (dataList, numColumns) => {
@@ -24,7 +29,9 @@ export default function ProductFeedComponent({ data, navigation }) {
     return (
       <>
         <CardProductComponent
+          clickFromChild={clickFromChild}
           userData={item.user}
+          productId={item._id}
           imageProduct={item.productPicture}
           titleProduct={item.title}
           descriptionProduct={item.description}
@@ -38,6 +45,7 @@ export default function ProductFeedComponent({ data, navigation }) {
       </>
     );
   };
+
   return (
     <View style={styles.container}>
       <FlatList

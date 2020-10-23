@@ -11,8 +11,6 @@ const ProductSchema = new mongoose.Schema(
     booked: { type: Array },
     distance: { type: String },
     review: { type: String },
-    likes: { type: Array },
-    booked: { type: Boolean },
     category: { type: String },
     condition: { type: String },
     isServices: { type: Boolean },

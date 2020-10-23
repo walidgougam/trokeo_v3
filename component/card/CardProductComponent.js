@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -10,15 +10,19 @@ import {
 import {
   HeartMiniIcon,
   HeartFullIcon,
+  HeartIcon,
   PositionIcon,
 } from "../../assets/icon/Icon";
 import normalize from "react-native-normalize";
 import colors from "../../constant/colors";
 import css from "../../constant/css";
 import fontStyles from "../../constant/fonts";
+import { handleLikeApi } from "../../API";
+import axios from "axios";
 
 export default function CardProductComponent({
   userData,
+  productId,
   imageProduct,
   titleProduct,
   descriptionProduct,
@@ -28,9 +32,21 @@ export default function CardProductComponent({
   bookedProduct,
   categoriesProduct,
   conditionProduct,
+  clickFromChild,
 }) {
   //STATE
-  const [heartFull, setHurtFull] = useState(false); // changer ici par data du productLikes
+  const [heartFull, setHeartFull] = useState(false);
+  const [product, setProduct] = useState();
+
+  useEffect(() => {
+    for (let i = 0; i < likesProduct.length; i++) {
+      if (likesProduct[i] === userData._id) {
+        setHeartFull(true);
+      } else {
+        setHeartFull(false);
+      }
+    }
+  }, [heartFull]);
 
   const goProductDetailScreen = () => {
     navigation.navigate("ProductDetail", {
@@ -44,6 +60,11 @@ export default function CardProductComponent({
       categoriesProduct,
       conditionProduct,
     });
+  };
+
+  const handleHeart = async () => {
+    await handleLikeApi(userData?._id, productId);
+    clickFromChild();
   };
 
   // STYLES
@@ -99,10 +120,14 @@ export default function CardProductComponent({
             <Text style={text_icon}>{distanceOwner} km</Text>
           </View>
           <View style={wrapper_icon}>
-            <TouchableOpacity activeOpacity={0.6}>
-              {heartFull ? <HeartMiniIcon /> : <HeartFullIcon />}
+            <TouchableOpacity activeOpacity={0.6} onPress={() => handleHeart()}>
+              {likesProduct?.some((el) => userData?._id.includes(el)) ? (
+                <HeartFullIcon />
+              ) : (
+                <HeartMiniIcon />
+              )}
             </TouchableOpacity>
-            <Text style={text_icon}>{likesProduct}</Text>
+            <Text style={text_icon}>{likesProduct?.length}</Text>
           </View>
         </View>
       </View>

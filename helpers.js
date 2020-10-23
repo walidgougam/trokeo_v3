@@ -111,30 +111,3 @@ export const renderForOrganization = (goodTabs, productFromApi, navigation) => {
     return <ProductFeedComponent navigation={navigation} data={goodProduct} />;
   }
 };
-
-export const renderForHome = (goodTabs, productFromApi, navigation) => {
-  const serviceProduct = productFromApi?.filter(
-    (e) => e.isServices === true && e.isFromOrganization === false
-  );
-  const goodProduct = productFromApi?.filter(
-    (e) => e.isGoods === true && e.isFromOrganization === false
-  );
-  //pas de services dans longlet service
-  if (!goodTabs && serviceProduct?.length === 0) {
-    return <NoProductComponent />;
-  }
-  //pas de bien dans longlet bien
-  else if (goodTabs && goodProduct?.length === 0) {
-    return <NoProductComponent />;
-  }
-  // service dans l'onglet service
-  else if (!goodTabs && serviceProduct?.length > 0) {
-    return (
-      <ProductFeedComponent navigation={navigation} data={serviceProduct} />
-    );
-  }
-  // bien dans l'onglet bien
-  else if (goodTabs && goodProduct?.length > 0) {
-    return <ProductFeedComponent navigation={navigation} data={goodProduct} />;
-  }
-};

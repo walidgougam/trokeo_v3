@@ -191,3 +191,20 @@ export const editProfileUserApi = async (
       console.log(err, "error on loginAPi");
     });
 };
+
+export const handleLikeApi = async (userId, productId) => {
+  await axios({
+    method: "POST",
+    url:
+      Platform.OS === "ios"
+        ? "http://localhost:5000/product/handlelike"
+        : "http://10.1.20.66:5000/product/handlelike",
+    data: { userId, productId },
+  })
+    .then((res) => {
+      console.log(res.data, "res handlelike api");
+    })
+    .catch((err) => {
+      console.log(err, "error on handle like api");
+    });
+};

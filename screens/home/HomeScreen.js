@@ -6,7 +6,6 @@ import {
   useIsFocused,
 } from "@react-navigation/native";
 import colors from "../../constant/colors";
-import { renderForHome } from "../../helpers";
 import normalize from "react-native-normalize";
 import { getAllProductApi, getUserApi } from "../../API";
 import { Context as AuthContext } from "../../context/AuthContext";
@@ -16,6 +15,8 @@ import * as Location from "expo-location";
 import HeaderNotification from "../../component/header/HeaderNotification";
 import BtnHomeToggle from "../../component/button/BtnHomeToggle";
 import NoGeolocationComponent from "../../component/NoGeolocationComponent";
+import ProductFeedComponent from "../../component/ProductFeedComponent";
+import NoProductComponent from "../../component/NoProductComponent";
 
 export default function HomeScreen({ navigation }) {
   //STATE
@@ -59,6 +60,46 @@ export default function HomeScreen({ navigation }) {
       });
   };
 
+  const clickFromChildLike = () => {
+    getAllProduct();
+  };
+
+  const renderScreen = () => {
+    const serviceProduct = allProduct?.filter(
+      (e) => e.isServices === true && e.isFromOrganization === false
+    );
+    const goodProduct = allProduct?.filter(
+      (e) => e.isGoods === true && e.isFromOrganization === false
+    );
+    if (!goodTab && serviceProduct?.length === 0) {
+      return <NoProductComponent />;
+    }
+    //pas de bien dans longlet bien
+    else if (goodTab && goodProduct?.length === 0) {
+      return <NoProductComponent />;
+    }
+    // service dans l'onglet service
+    else if (!goodTab && serviceProduct?.length > 0) {
+      return (
+        <ProductFeedComponent
+          navigation={navigation}
+          data={serviceProduct}
+          clickFromChild={() => clickFromChildLike()}
+        />
+      );
+    }
+    // bien dans l'onglet bien
+    else if (goodTab && goodProduct?.length > 0) {
+      return (
+        <ProductFeedComponent
+          navigation={navigation}
+          data={goodProduct}
+          clickFromChild={() => clickFromChildLike()}
+        />
+      );
+    }
+  };
+
   useEffect(() => {
     getAllProduct();
     // getUserContext();
@@ -91,7 +132,7 @@ export default function HomeScreen({ navigation }) {
         {!location ? (
           <NoGeolocationComponent getLocation={() => getCurrentLocation()} />
         ) : (
-          renderForHome(goodTab, allProduct, navigation)
+          renderScreen()
         )}
       </ScrollView>
     </View>

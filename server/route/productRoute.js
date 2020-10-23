@@ -10,5 +10,6 @@ dotenv.config({
 
 router.post("/createproduct", productController.createProduct);
 router.get("/getproduct", productController.getProduct);
+router.post("/handlelike", productController.handleLike);
 
 module.exports = router;

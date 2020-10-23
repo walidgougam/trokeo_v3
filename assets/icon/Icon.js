@@ -207,22 +207,20 @@ export function HeartIcon() {
 }
 
 export function HeartFullIcon() {
-  const smile = `<svg width=${normalize("14")} height=${normalize(
-    "13"
-  )} viewBox="0 0 14 13" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <title>E6581171-37CC-4AC4-B836-70E833D5C5D3</title>
-    <defs>
-        <filter id="filter-1">
-            <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 1.000000 0 0 0 0 0.000000 0 0 0 0 0.000000 0 0 0 1.000000 0"></feColorMatrix>
-        </filter>
-    </defs>
-    <g id="Android-" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="icons8-heart" transform="translate(-459.000000, -74.000000)" filter="url(#filter-1)">
-            <g transform="translate(459.000000, 74.000000)">
-                <path d="M13.457,3.57 C13.243,1.842 11.786,0.5 10,0.5 C8.719,0.5 7.61,1.196 7,2.223 C6.39,1.196 5.281,0.5 4,0.5 C2.216,0.5 0.76,1.84 0.544,3.565 C0.516,3.692 0.5,3.835 0.5,4 C0.5,8.036 7,12 7,12 C7,12 13.5,8.036 13.5,4 C13.5,3.837 13.484,3.696 13.457,3.57 Z" id="Path" stroke="#B5B5B5" stroke-width="0.5" fill="#D8D8D8"></path>
-            </g>
-        </g>
-    </g>
+  const smile = `<svg width="14px" height="13px" viewBox="0 0 14 13" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <title>E6581171-37CC-4AC4-B836-70E833D5C5D3</title>
+  <defs>
+      <filter id="filter-1">
+          <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 1.000000 0 0 0 0 0.000000 0 0 0 0 0.000000 0 0 0 1.000000 0"></feColorMatrix>
+      </filter>
+  </defs>
+  <g id="Android-" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+      <g id="icons8-heart" transform="translate(-459.000000, -74.000000)" filter="url(#filter-1)">
+          <g transform="translate(459.000000, 74.000000)">
+              <path d="M13.457,3.57 C13.243,1.842 11.786,0.5 10,0.5 C8.719,0.5 7.61,1.196 7,2.223 C6.39,1.196 5.281,0.5 4,0.5 C2.216,0.5 0.76,1.84 0.544,3.565 C0.516,3.692 0.5,3.835 0.5,4 C0.5,8.036 7,12 7,12 C7,12 13.5,8.036 13.5,4 C13.5,3.837 13.484,3.696 13.457,3.57 Z" id="Path" stroke="#B5B5B5" stroke-width="0.5" fill="#D8D8D8"></path>
+          </g>
+      </g>
+  </g>
 </svg>`;
   const SmileSvg = () => <SvgXml xml={smile} />;
   return <SmileSvg />;

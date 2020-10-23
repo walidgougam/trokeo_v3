@@ -62,3 +62,62 @@ exports.getProduct = async (req, res) => {
       });
     });
 };
+
+exports.handleLike = (req, res) => {
+  const { userId, productId } = req.body;
+  console.log(userId, "userid server");
+  console.log(productId, "productid server");
+  Product.findOne(
+    {
+      _id: productId,
+    },
+    (err, product) => {
+      if (product) {
+        var isLiked = false;
+
+        for (var a = 0; a < product.likes.length; a++) {
+          var liker = product.likes[a];
+          if (liker === userId) {
+            isLiked = true;
+          }
+        }
+
+        if (isLiked) {
+          Product.updateOne(
+            {
+              _id: productId,
+            },
+            {
+              $pull: {
+                likes: userId,
+              },
+            },
+            (err, result) => {
+              res.status(200).json({
+                result,
+              });
+              console.log(result, "result of pull product likes");
+            }
+          );
+        } else {
+          Product.updateOne(
+            {
+              _id: productId,
+            },
+            {
+              $push: {
+                likes: userId,
+              },
+            },
+            (err, result) => {
+              res.status(200).json({
+                result,
+              });
+              console.log(result, "result of push product likes");
+            }
+          );
+        }
+      }
+    }
+  );
+};

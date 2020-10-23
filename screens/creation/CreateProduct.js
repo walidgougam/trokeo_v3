@@ -38,7 +38,6 @@ export default function CreateProduct({ navigation }) {
   const [avatarSource, setAvatarSource] = useState([]);
   // const [pictureSource, setPictureSource] = useState("");
   const [visible, setVisible] = useState(false);
-  const [selectedLabel, setSelectedLabel] = useState("");
 
   // CONTEXT
   const { state, createProductContext } = useContext(AuthContext);
@@ -70,7 +69,7 @@ export default function CreateProduct({ navigation }) {
   };
 
   const handleSelect = (e) => {
-    setSelectedLabel(e);
+    setConditionProduct(e);
     console.log(e, "handle select from create");
   };
 
@@ -78,6 +77,13 @@ export default function CreateProduct({ navigation }) {
     const userId = await AsyncStorage.getItem("userId");
 
     if (!title || !description || !conditionProduct || !state.category) {
+      console.log(
+        title,
+        description,
+        conditionProduct,
+        state.category,
+        "remplissez les champs"
+      );
       console.log("remplissez les champs");
     } else {
       createProductApi(
@@ -168,7 +174,7 @@ export default function CreateProduct({ navigation }) {
         <PickerSelect
           data={goodsCondition}
           handleSelect={(e) => handleSelect(e)}
-          selectedLabel={selectedLabel}
+          selectedLabel={conditionProduct}
         />
         {/* <RNPickerSelect
             style={{ borderBottomColor: "black", borderBottomWidth: 1 }}
