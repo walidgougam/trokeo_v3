@@ -16,7 +16,7 @@ export const registerApi = async (
     url:
       Platform.OS === "ios"
         ? "http://localhost:5000/user/register"
-        : "http://10.1.20.66:5000/user/register",
+        : "http://192.168.1.9:5000/user/register",
     data: { email, password, firstName, lastName, userPicture, female },
   })
     .then((res) => {
@@ -41,7 +41,7 @@ export const registerGoogleApi = async (
     url:
       Platform.OS === "ios"
         ? "http://localhost:5000/user/login"
-        : "http://10.1.20.66:5000/user/login",
+        : "http://192.168.1.9:5000/user/login",
     data: { email, firstName, lastName, userPicture },
   })
     .then((res) => {
@@ -61,7 +61,7 @@ export const loginApi = (email, password, callback) => {
     url:
       Platform.OS === "ios"
         ? "http://localhost:5000/user/login"
-        : "http://10.1.20.66:5000/user/login",
+        : "http://192.168.1.9:5000/user/login",
     data: { email, password },
   })
     .then((res) => {
@@ -80,7 +80,7 @@ export const loginGoogleApi = () => {};
 export const addImageApi = (picture, fileName) => {
   // RNFetchBlob.fetch(
   //   "POST",
-  //   "http://10.1.20.66:5000/register/uploadPicture",
+  //   "http://192.168.1.95000/register/uploadPicture",
   //   {
   //     Authorization: "Bearer access-token",
   //     otherHeader: "foo",
@@ -113,7 +113,7 @@ export const createProductApi = async (
     url:
       Platform.OS === "ios"
         ? "http://localhost:5000/product/createproduct"
-        : "http://10.1.20.66:5000/product/createproduct",
+        : "http://192.168.1.95000/product/createproduct",
     data: {
       title,
       description,
@@ -144,7 +144,7 @@ export const getUserApi = async (dispatch) => {
     url:
       Platform.OS === "ios"
         ? `http://localhost:5000/user/${id}`
-        : `http://10.1.20.66:5000/user/${id}`,
+        : `http://192.168.1.9:5000/user/${id}`,
   })
     .then((res) => {
       dispatch({ type: "GET_USER", payload: res.data.user });
@@ -171,7 +171,7 @@ export const editProfileUserApi = async (
     url:
       Platform.OS === "ios"
         ? "http://localhost:5000/user/edit"
-        : "http://10.1.20.66:5000/user/edit",
+        : "http://192.168.1.9:5000/user/edit",
     data: {
       userId,
       firstName,
@@ -198,7 +198,7 @@ export const handleLikeApi = async (userId, productId) => {
     url:
       Platform.OS === "ios"
         ? "http://localhost:5000/product/handlelike"
-        : "http://10.1.20.66:5000/product/handlelike",
+        : "http://192.168.1.9:5000/product/handlelike",
     data: { userId, productId },
   })
     .then((res) => {
@@ -206,5 +206,29 @@ export const handleLikeApi = async (userId, productId) => {
     })
     .catch((err) => {
       console.log(err, "error on handle like api");
+    });
+};
+
+export const createReviewApi = async (
+  userId,
+  recieverId,
+  stars,
+  review,
+  callback
+) => {
+  await axios({
+    method: "POST",
+    url:
+      Platform.OS === "ios"
+        ? "http://localhost:5000/user/createreview"
+        : "http://192.168.1.9:5000/user/createreview",
+    data: { userId, recieverId, stars, review },
+  })
+    .then((res) => {
+      console.log(res.data, "res create review api");
+      callback();
+    })
+    .catch((err) => {
+      console.log(err, "error on create review api");
     });
 };

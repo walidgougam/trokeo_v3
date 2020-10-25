@@ -7,6 +7,7 @@ import {
   AsyncStorage,
   ActivityIndicator,
   Platform,
+  Modal,
 } from "react-native";
 import {
   GiftedChat,
@@ -176,6 +177,7 @@ export default function ChatScreen({ navigation }) {
 
   // STYLES
   const { container } = styles;
+
   return loading ? (
     <ActivityIndicator
       size="small"
@@ -184,11 +186,13 @@ export default function ChatScreen({ navigation }) {
     />
   ) : (
     <View style={container}>
-      {console.log(messages, "messages chat screen")}
       <HeaderComponent navigation={navigation} title={recieverName} message />
       <CardHeaderChat
+        navigation={navigation}
         productPicture={productPicture}
         titleProduct={titleProduct}
+        userId={user?.id}
+        recieverId={recieverId}
       />
       <GiftedChat
         messages={messages}

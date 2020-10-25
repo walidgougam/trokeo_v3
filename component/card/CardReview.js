@@ -6,7 +6,12 @@ import colors from "../../constant/colors";
 import fontStyles from "../../constant/fonts";
 import normalize from "react-native-normalize";
 
-export default function CardReview() {
+export default function CardReview({
+  review,
+  profileName,
+  stars,
+  profilePicture,
+}) {
   const { container, wrapper_comment, _date, text_name, text_review } = styles;
   return (
     <View style={container}>
@@ -15,9 +20,9 @@ export default function CardReview() {
           <PictureProfileComponent width={51} height={54} isProductDetail />
         </View>
         <View style={wrapper_comment}>
-          <Text style={text_name}>name</Text>
-          <StarsComponent width={21} height={18} />
-          <Text style={text_review}>Review</Text>
+          <Text style={text_name}>{profileName}</Text>
+          <StarsComponent width={21} height={18} starsNumber={stars} />
+          <Text style={text_review}>{review}</Text>
         </View>
       </View>
       <Text style={_date}>`il y a createdAt`</Text>

@@ -1,16 +1,23 @@
 import React from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
-import { PictureIcon } from "../../assets/icon/Icon";
+import { PictureIcon, WrongEmailIcon } from "../../assets/icon/Icon";
 import colors from "../../constant/colors";
 
 export default function CardPictureIcon({ image }) {
   return (
     <View style={styles.container}>
       {image ? (
-        <Image
-          source={image}
-          style={{ width: 56, height: 56, borderRadius: 4 }}
-        />
+        <>
+          {console.log(image, "image card")}
+          <View style={{ position: "absolute", left: 52, bottom: 50 }}>
+            <WrongEmailIcon />
+          </View>
+
+          <Image
+            source={image}
+            style={{ width: 56, height: 56, borderRadius: 4 }}
+          />
+        </>
       ) : (
         <PictureIcon />
       )}

@@ -19,5 +19,7 @@ router.post(
   "/editcategoryservicefollow",
   userController.editCategoryServiceFollow
 );
+router.post("/createreview", userController.createReview);
+router.get("/getreview/:userId", userController.getReview);
 
 module.exports = router;

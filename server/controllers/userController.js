@@ -249,3 +249,49 @@ exports.editCategoryServiceFollow = async (req, res) => {
     }
   );
 };
+
+exports.createReview = async (req, res) => {
+  const { userId, recieverId, stars, review } = req.body;
+  User.updateOne(
+    {
+      _id: recieverId,
+    },
+    {
+      $push: {
+        review: { stars, review, userId },
+      },
+    },
+    (err, result) => {
+      res.status(200).json({
+        result,
+      });
+      console.log(result, "result of push product likes");
+    }
+  );
+};
+
+exports.getReview = async (req, res) => {
+  console.log(0);
+  const { userId } = req.params;
+  await User.findOne({ _id: userId })
+    .populate("review.userId")
+    .then((result) => {
+      if (result) {
+        const { review } = result;
+        console.log(review, "review server");
+        res.status(200).json({
+          review,
+        });
+      } else {
+        res.status(404).json({
+          message: "no review for this user",
+        });
+      }
+    })
+    .catch((err) => {
+      console.log(4);
+      res.status(404).json({
+        message: "erreur",
+      });
+    });
+};

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { StarEmptyIcon, StarFullIcon } from "../assets/icon/Icon";
 
-export default function StarRatingComponent({ filled }) {
+export default function StarRatingComponent({ filled, starsFromChild }) {
   const [defaultRating, setDefaultRating] = useState(0);
   const [maxRating, setMaxRating] = useState(4);
   const updateRating = (key) => {
@@ -14,7 +14,10 @@ export default function StarRatingComponent({ filled }) {
       <TouchableOpacity
         activeOpacity={0.5}
         key={x}
-        onPress={() => updateRating(x)}
+        onPress={() => {
+          updateRating(x);
+          starsFromChild(x);
+        }}
       >
         {x <= defaultRating ? (
           <StarFullIcon width={29} height={27} />

@@ -113,6 +113,21 @@ export function CrossWhiteIcon() {
   return <SmileSvg />;
 }
 
+export function CrossGreyIcon() {
+  const smile = `<svg width="14px" height="14px" viewBox="0 0 14 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <title>77FB1732-7EF3-47E4-80B0-B0FE395494D8</title>
+  <g id="Android-contre-messagerie" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+      <g id="07.4-Messagerie_avis_trokeur" transform="translate(-311.000000, -201.000000)" stroke="#D8D8D8" stroke-width="2">
+          <g id="icons8-delete" transform="translate(312.000000, 202.000000)">
+              <path d="M0.0424858237,0 L12,11.9920326 M11.9651133,0.000346410323 L0,12" id="Shape"></path>
+          </g>
+      </g>
+  </g>
+</svg>`;
+  const SmileSvg = () => <SvgXml xml={smile} />;
+  return <SmileSvg />;
+}
+
 export function DealWhiteIcon() {
   const smile = `<svg width=${normalize("28")} height=${normalize(
     "24"

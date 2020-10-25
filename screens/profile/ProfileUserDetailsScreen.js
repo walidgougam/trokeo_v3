@@ -5,13 +5,12 @@ import normalize from "react-native-normalize";
 import { ProfilePictureIcon } from "../../assets/icon/Icon";
 import fontStyles from "../../constant/fonts";
 import colors from "../../constant/colors";
-import { renderForHome } from "../../helpers";
-import { products } from "../../helpersDataBase";
 import moment from "moment";
 import { Context as AuthContext } from "../../context/AuthContext";
 
 import HeaderComponent from "../../component/header/HeaderComponent";
-import PictureProfileComponent from "../../component/picture/PictureProfileComponent";
+import ProductFeedComponent from "../../component/ProductFeedComponent";
+import NoProductComponent from "../../component/NoProductComponent";
 import StarsComponent from "../../component/StarsComponent";
 import BtnRightIcon from "../../component/button/BtnRightIcon";
 import BtnHomeToggle from "../../component/button/BtnHomeToggle";
@@ -38,6 +37,42 @@ export default function ProfileUserDetailsScreen({ navigation }) {
     })();
   }, [isFocuser]);
 
+  const renderScreen = () => {
+    const serviceProduct = state?.allProduct?.filter(
+      (e) => e.isServices === true && e.isFromOrganization === false
+    );
+    const goodProduct = state?.allProduct?.filter(
+      (e) => e.isGoods === true && e.isFromOrganization === false
+    );
+    if (!goodTab && serviceProduct?.length === 0) {
+      return <NoProductComponent />;
+    }
+    //pas de bien dans longlet bien
+    else if (goodTab && goodProduct?.length === 0) {
+      return <NoProductComponent />;
+    }
+    // service dans l'onglet service
+    else if (!goodTab && serviceProduct?.length > 0) {
+      return (
+        <ProductFeedComponent
+          navigation={navigation}
+          data={serviceProduct}
+          clickFromChild={() => clickFromChildLike()}
+        />
+      );
+    }
+    // bien dans l'onglet bien
+    else if (goodTab && goodProduct?.length > 0) {
+      return (
+        <ProductFeedComponent
+          navigation={navigation}
+          data={goodProduct}
+          clickFromChild={() => clickFromChildLike()}
+        />
+      );
+    }
+  };
+
   // STYLES
   const {
     container,
@@ -53,11 +88,6 @@ export default function ProfileUserDetailsScreen({ navigation }) {
   } = styles;
   return (
     <View style={container}>
-      {console.log(
-        state?.allProduct?.filter((e) => e?.user?._id === userId),
-        "que signifie que ceci"
-      )}
-      {console.log(userId, "alors stat user id")}
       <HeaderComponent navigation={navigation} title={userData?.firstName} />
       <View style={wrapper_profile_info}>
         {userData?.userPicture ? (
@@ -87,6 +117,7 @@ export default function ProfileUserDetailsScreen({ navigation }) {
               />
             </View>
             <BtnRightIcon
+              profileId={userData?._id}
               navigation={navigation}
               title="Voir les avis"
               target="ProfileUserReview"
@@ -114,11 +145,7 @@ export default function ProfileUserDetailsScreen({ navigation }) {
           changeFocus={() => setGoodTab(false)}
         />
       </View>
-      {renderForHome(
-        goodTab,
-        state?.allProduct?.filter((e) => e?.user?._id === userData._id),
-        navigation
-      )}
+      {renderScreen()}
     </View>
   );
 }

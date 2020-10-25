@@ -15,6 +15,8 @@ import { FlatList } from "react-native-gesture-handler";
 import fontStyles from "../../constant/fonts";
 import axios from "axios";
 import { useRoute, useIsFocused } from "@react-navigation/native";
+// import ModalDeleteMessage from "../../component/modal/ModalDeleteMessage";
+// import { MenuProvider } from "react-native-popup-menu";
 
 export default function AllMessageScreen({ navigation }) {
   //STATE
@@ -99,6 +101,9 @@ export default function AllMessageScreen({ navigation }) {
           keyExtractor={(item) => item.id}
         />
       </View>
+      {/* <MenuProvider>
+        <ModalDeleteMessage />
+      </MenuProvider> */}
     </View>
   );
 }

@@ -3,9 +3,15 @@ import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import normalize from "react-native-normalize";
 import { RightIcon } from "../../assets/icon/Icon";
 
-export default function BtnRightIcon({ navigation, title, target, userData }) {
+export default function BtnRightIcon({
+  navigation,
+  title,
+  target,
+  userData,
+  profileId,
+}) {
   const goProfileDetails = (target, data) => {
-    return navigation.navigate(target, { userData: data });
+    return navigation.navigate(target, { userData: data, profileId });
   };
   const { wrapper_product_inline, text_product_inline } = styles;
   return (

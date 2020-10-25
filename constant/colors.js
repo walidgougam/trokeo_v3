@@ -1,4 +1,6 @@
 export default {
+  main_green: "#40CE6A",
+  green_btn: "#00D65B",
   text_white: "#FFFFFF",
   background_white: "#FFFFFF",
   text_version: "#D8D8D8",
@@ -11,7 +13,6 @@ export default {
   icon_profile_grey: "#BFBDBD",
   background_reservation_grey: "#5F5F5F",
   border_color: "#D9D9D9",
-  main_green: "#40CE6A",
   background_facebook_blue: "#4B74FF",
   switch_btn_blue: "#008EFF",
   btn_action_37: "rgba(0, 145, 255, 0.37)",
@@ -19,6 +20,7 @@ export default {
   text_description_black: "#3A3A3A",
   text_category_black: "#000000",
   black: "black",
+  black_modal_59: "#00000096",
   likes_grey: "#B5B5B5",
   title_eco_citizen: "#515151",
   title_green: "#2FD266",

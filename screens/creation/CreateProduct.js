@@ -7,11 +7,12 @@ import {
   TextInput,
   AsyncStorage,
   Alert,
+  ActionSheetIOS,
   Platform,
 } from "react-native";
 import colors from "../../constant/colors";
 import normalize from "react-native-normalize";
-import { RightIcon } from "../../assets/icon/Icon";
+import { RightIcon, WrongEmailIcon } from "../../assets/icon/Icon";
 import fontStyles from "../../constant/fonts";
 import { goodsCondition } from "../../helpers";
 import { Context as AuthContext } from "../../context/AuthContext";
@@ -20,6 +21,7 @@ import { createProductApi } from "../../API";
 // import RNPickerSelect from "react-native-picker-select";
 import * as ImagePicker from "expo-image-picker";
 import { Button, Snackbar } from "react-native-paper";
+import { BottomSheet, ListItem } from "react-native-elements";
 
 import BtnHomeToggle from "../../component/button/BtnHomeToggle";
 import CardPictureIcon from "../../component/picture/CardPictureIcon";
@@ -38,9 +40,30 @@ export default function CreateProduct({ navigation }) {
   const [avatarSource, setAvatarSource] = useState([]);
   // const [pictureSource, setPictureSource] = useState("");
   const [visible, setVisible] = useState(false);
+  const [result, setResult] = useState("");
+  const [isBottomSheetVisible, setIsBottomSheetVisible] = useState(true);
 
   // CONTEXT
   const { state, createProductContext } = useContext(AuthContext);
+
+  useEffect(() => {
+    console.log("avatar source");
+  }, [avatarSource]);
+
+  const list = [
+    {
+      title: "Supprimer",
+      containerStyle: { borderTopLeftRadius: 20, borderTopRightRadius: 20 },
+      titleStyle: { display: "flex", alignSelf: "center", color: "red" },
+      onPress: () => setIsBottomSheetVisible(false),
+    },
+    {
+      title: "Annuler",
+      containerStyle: {},
+      titleStyle: { color: "blue", display: "flex", alignSelf: "center" },
+      onPress: () => setIsBottomSheetVisible(false),
+    },
+  ];
 
   const onToggleSnackBar = () => setVisible(!visible);
 
@@ -107,6 +130,39 @@ export default function CreateProduct({ navigation }) {
     }
   };
 
+  const deleteProductPictureIos = (img) => {
+    ActionSheetIOS.showActionSheetWithOptions(
+      {
+        options: ["Annuler", "Supprimer"],
+        destructiveButtonIndex: 1,
+        cancelButtonIndex: 0,
+        title:
+          "Voulez-vous supprimer cette image ? Attention vous ne pourrez plus la récupérer",
+      },
+      (buttonIndex) => {
+        if (buttonIndex === 0) {
+        } else if (buttonIndex === 1) {
+          const newAvatarSource = avatarSource;
+          const index = newAvatarSource.indexOf(img);
+          if (index > -1) {
+            newAvatarSource.splice(index, 1);
+            return setAvatarSource((prevState) => {
+              return [...newAvatarSource];
+            });
+          }
+        }
+      }
+    );
+  };
+
+  const handleDeleteProductPicture = (img) => {
+    if (img) {
+      Platform.OS === "ios"
+        ? deleteProductPictureIos(img)
+        : setIsBottomSheetVisible(true);
+    }
+  };
+
   //STYLES
   const {
     container,
@@ -124,6 +180,7 @@ export default function CreateProduct({ navigation }) {
 
   return (
     <View style={container}>
+      {console.log(avatarSource, "avatarsource render")}
       <View style={_header}>
         <Text style={text_title}>Créer une annonce</Text>
       </View>
@@ -140,9 +197,24 @@ export default function CreateProduct({ navigation }) {
         />
       </View>
       <View style={wrapper_camera_picture}>
-        <CardPictureIcon image={avatarSource[0]} />
-        <CardPictureIcon image={avatarSource[1]} />
-        <CardPictureIcon image={avatarSource[2]} />
+        <TouchableOpacity
+          activeOpacity={0.6}
+          onPress={() => handleDeleteProductPicture(avatarSource[0])}
+        >
+          <CardPictureIcon image={avatarSource[0]} />
+        </TouchableOpacity>
+        <TouchableOpacity
+          activeOpacity={0.6}
+          onPress={() => handleDeleteProductPicture(avatarSource[1])}
+        >
+          <CardPictureIcon image={avatarSource[1]} />
+        </TouchableOpacity>
+        <TouchableOpacity
+          activeOpacity={0.6}
+          onPress={() => handleDeleteProductPicture(avatarSource[2])}
+        >
+          <CardPictureIcon image={avatarSource[2]} />
+        </TouchableOpacity>
         <TouchableOpacity
           activeOpacity={0.6}
           onPress={() => handleChoosePicture()}
@@ -220,6 +292,21 @@ export default function CreateProduct({ navigation }) {
           Produit crée
         </Snackbar>
       </>
+      {Platform.OS === "android" && (
+        <BottomSheet isVisible={isBottomSheetVisible}>
+          {list.map((l, i) => (
+            <ListItem
+              key={i}
+              containerStyle={l.containerStyle}
+              onPress={l.onPress}
+            >
+              <ListItem.Content>
+                <ListItem.Title style={l.titleStyle}>{l.title}</ListItem.Title>
+              </ListItem.Content>
+            </ListItem>
+          ))}
+        </BottomSheet>
+      )}
     </View>
   );
 }

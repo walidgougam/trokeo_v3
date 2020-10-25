@@ -4,6 +4,7 @@ import { useRoute } from "@react-navigation/native";
 import colors from "../../constant/colors";
 import css from "../../constant/css";
 import normalize from "react-native-normalize";
+import { createReviewApi } from "../../API";
 
 import StarRatingComponent from "../../component/StarRatingComponent";
 import CardHeaderChat from "../../component/card/CardHeaderChat";
@@ -11,9 +12,23 @@ import HeaderComponent from "../../component/header/HeaderComponent";
 import BtnBlueAction from "../../component/button/BtnBlueAction";
 
 export default function LeaveReviewScreen({ navigation }) {
+  //ROUTE
   const route = useRoute();
-  const { productPicture } = route.params;
+  const { productPicture, titleProduct, userId, recieverId } = route.params; // add userId, receiverID,
 
+  //STATE
+  const [stars, setStars] = useState();
+  const [textReview, setTextReview] = useState();
+
+  const starsFromChild = (e) => {
+    setStars(e);
+  };
+
+  const handleLeaveReview = () => {
+    createReviewApi(userId, recieverId, stars, textReview, () => {
+      navigation.navigate("HomeBottomTab");
+    });
+  };
   const {
     container,
     text_evaluation,
@@ -26,22 +41,32 @@ export default function LeaveReviewScreen({ navigation }) {
   return (
     <View style={container}>
       <HeaderComponent navigation={navigation} title="Laisser un avis" />
-      <CardHeaderChat productPicture={productPicture} />
+      <CardHeaderChat
+        noFinalize
+        productPicture={productPicture}
+        titleProduct={titleProduct}
+      />
       <View style={container_review}>
         <View>
           <View>
             <Text style={text_evaluation}>Evaluation</Text>
             <View style={star_component}>
-              <StarRatingComponent />
+              <StarRatingComponent starsFromChild={(e) => starsFromChild(e)} />
             </View>
           </View>
           <View>
             <Text style={text_experience}>Décrivez votre expérience</Text>
-            <TextInput style={text_area} numberOfLines={7} multiline={true} />
+            <TextInput
+              style={text_area}
+              numberOfLines={7}
+              multiline={true}
+              onChangeText={(e) => setTextReview(e)}
+            />
           </View>
         </View>
         <View style={wrapper_btn}>
           <BtnBlueAction
+            onPress={() => handleLeaveReview()}
             color={colors.text_white}
             backgroundColor={colors.btn_action}
             title="Continuer"

@@ -14,6 +14,13 @@ const UserSchema = new mongoose.Schema(
     about: { type: String, trim: true },
     localisation: { type: String },
     stars: { type: String },
+    review: [
+      {
+        review: { type: String },
+        stars: { type: Number },
+        userId: { type: ObjectId, ref: "User" },
+      },
+    ],
     userProduct: [{ type: ObjectId, ref: "Product" }],
     productLikes: [],
     productBooked: [],
