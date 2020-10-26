@@ -2,6 +2,9 @@ import axios from "axios";
 import { AsyncStorage, Alert, Platform } from "react-native";
 // import RNFetchBlob from "rn-fetch-blob";
 
+export const IOS_URL = "http://localhost:5000";
+export const ANDROID_URL = "http://192.168.1.9:5000";
+
 export const registerApi = async (
   email,
   password,
@@ -15,8 +18,8 @@ export const registerApi = async (
     method: "POST",
     url:
       Platform.OS === "ios"
-        ? "http://localhost:5000/user/register"
-        : "http://192.168.1.9:5000/user/register",
+        ? `${IOS_URL}/user/register`
+        : `${ANDROID_URL}/user/register`,
     data: { email, password, firstName, lastName, userPicture, female },
   })
     .then((res) => {
@@ -40,8 +43,8 @@ export const registerGoogleApi = async (
     method: "POST",
     url:
       Platform.OS === "ios"
-        ? "http://localhost:5000/user/login"
-        : "http://192.168.1.9:5000/user/login",
+        ? `${IOS_URL}/user/login`
+        : `${ANDROID_URL}/user/login`,
     data: { email, firstName, lastName, userPicture },
   })
     .then((res) => {
@@ -60,8 +63,8 @@ export const loginApi = (email, password, callback) => {
     method: "POST",
     url:
       Platform.OS === "ios"
-        ? "http://localhost:5000/user/login"
-        : "http://192.168.1.9:5000/user/login",
+        ? `${IOS_URL}/user/login`
+        : `${ANDROID_URL}/user/login`,
     data: { email, password },
   })
     .then((res) => {
@@ -112,8 +115,8 @@ export const createProductApi = async (
     method: "POST",
     url:
       Platform.OS === "ios"
-        ? "http://localhost:5000/product/createproduct"
-        : "http://192.168.1.95000/product/createproduct",
+        ? `${IOS_URL}/product/createproduct`
+        : `${ANDROID_URL}/product/createproduct`,
     data: {
       title,
       description,
@@ -143,8 +146,8 @@ export const getUserApi = async (dispatch) => {
     method: "GET",
     url:
       Platform.OS === "ios"
-        ? `http://localhost:5000/user/${id}`
-        : `http://192.168.1.9:5000/user/${id}`,
+        ? `${IOS_URL}/user/${id}`
+        : `${ANDROID_URL}/user/${id}`,
   })
     .then((res) => {
       dispatch({ type: "GET_USER", payload: res.data.user });
@@ -170,8 +173,8 @@ export const editProfileUserApi = async (
     method: "POST",
     url:
       Platform.OS === "ios"
-        ? "http://localhost:5000/user/edit"
-        : "http://192.168.1.9:5000/user/edit",
+        ? `${IOS_URL}/user/edit`
+        : `${ANDROID_URL}/user/edit`,
     data: {
       userId,
       firstName,
@@ -197,8 +200,8 @@ export const handleLikeApi = async (userId, productId) => {
     method: "POST",
     url:
       Platform.OS === "ios"
-        ? "http://localhost:5000/product/handlelike"
-        : "http://192.168.1.9:5000/product/handlelike",
+        ? `${IOS_URL}/product/handlelike`
+        : `${ANDROID_URL}/product/handlelike`,
     data: { userId, productId },
   })
     .then((res) => {
@@ -220,8 +223,8 @@ export const createReviewApi = async (
     method: "POST",
     url:
       Platform.OS === "ios"
-        ? "http://localhost:5000/user/createreview"
-        : "http://192.168.1.9:5000/user/createreview",
+        ? `${IOS_URL}/user/createreview`
+        : `${ANDROID_URL}/user/createreview`,
     data: { userId, recieverId, stars, review },
   })
     .then((res) => {

@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, FlatList, AsyncStorage } from "react-native";
 import colors from "../../constant/colors";
 import axios from "axios";
 import { useRoute } from "@react-navigation/native";
+import { IOS_URL, ANDROID_URL } from "../../API";
 
 import HeaderComponent from "../../component/header/HeaderComponent";
 import CardReview from "../../component/card/CardReview";
@@ -19,8 +20,8 @@ export default function ProfileUserAllReviewScreen({ navigation }) {
     try {
       let response = await axios.get(
         Platform.OS === "ios"
-          ? `http://localhost:5000/user/getreview/${profileId}`
-          : `http://10.1.20.66:5000/user/getreview`
+          ? `${IOS_URL}/user/getreview/${profileId}`
+          : `${ANDROID_URL}/user/getreview`
       );
       if (response) {
         setReview(response.data.review);
@@ -50,7 +51,7 @@ export default function ProfileUserAllReviewScreen({ navigation }) {
             <CardReview
               review={item?.review}
               stars={item?.stars}
-              profilePicture={item?.userId?.picture}
+              profilePicture={item?.userId?.userPicture}
               profileName={item?.userId?.firstName}
             />
           );

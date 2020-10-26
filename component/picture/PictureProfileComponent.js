@@ -31,6 +31,7 @@ export default function PictureProfileComponent({
   const renderPictureCircle = () => {
     console.log(userPicture, "alors user picture");
     if (userPicture) {
+      console.log(userPicture, "------blablabla mais oui------");
       return (
         <Image
           source={{ uri: userPicture }}
@@ -39,6 +40,16 @@ export default function PictureProfileComponent({
       );
     } else {
       return <ProfilePictureIcon width={width} height={height} />;
+    }
+  };
+
+  const renderName = () => {
+    if (firstName && lastName) {
+      return `${firstName}.${lastName.substring(0, 1)}`;
+    } else if (!firstName && !lastName) {
+      return "firstname.lastname";
+    } else if (firstName && !lastName) {
+      return firstName;
     }
   };
 
@@ -54,13 +65,7 @@ export default function PictureProfileComponent({
         </TouchableOpacity>
       );
     } else {
-      return (
-        <Text style={[pseudo, { fontSize }]}>
-          {firstName && lastName
-            ? `${firstName}.${lastName.substring(0, 1)}`
-            : "marion.b"}
-        </Text>
-      );
+      return <Text style={[pseudo, { fontSize }]}>{renderName()}</Text>;
     }
   };
 

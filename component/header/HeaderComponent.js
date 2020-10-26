@@ -1,13 +1,16 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import { ArrowLeftIcon } from "../../assets/icon/Icon";
+import { ArrowLeftIcon, WhiteDotIcon } from "../../assets/icon/Icon";
 import normalize from "react-native-normalize";
 import colors from "../../constant/colors";
-import { WhiteDotIcon } from "../../assets/icon/Icon";
 import fontStyles from "../../constant/fonts";
-import axios from "axios";
 
-export default function HeaderComponent({ navigation, title, message, data }) {
+export default function HeaderComponent({
+  navigation,
+  title,
+  message,
+  editNotification,
+}) {
   const {
     _header,
     wrapper_header_title,
@@ -20,7 +23,10 @@ export default function HeaderComponent({ navigation, title, message, data }) {
         <View style={{ flexDirection: "row" }}>
           <TouchableOpacity
             activeOpacity={0.6}
-            onPress={() => navigation.goBack()}
+            onPress={() => {
+              navigation.goBack();
+              editNotification && editNotification();
+            }}
             hitSlop={expand_clickable_area}
           >
             <ArrowLeftIcon />

@@ -21,6 +21,7 @@ import { useRoute, useIsFocused } from "@react-navigation/native";
 import io from "socket.io-client";
 import axios from "axios";
 import { UploadPictureIcon, SendMessageIcon } from "../../assets/icon/Icon";
+import { IOS_URL, ANDROID_URL } from "../../API";
 
 import HeaderComponent from "../../component/header/HeaderComponent";
 import CardHeaderChat from "../../component/card/CardHeaderChat";
@@ -39,7 +40,7 @@ export default function ChatScreen({ navigation }) {
   const [recieverName, setRecieverName] = useState("");
 
   // SOCKET
-  const socket = io("http://10.1.20.66:5000", {});
+  const socket = io(`${ANDROID_URL}`, {});
 
   // FOCUS ON SCREEN
   const isFocuser = useIsFocused();
@@ -124,8 +125,8 @@ export default function ChatScreen({ navigation }) {
       method: "POST",
       url:
         Platform.OS === "ios"
-          ? "http://localhost:5000/chat/postchat"
-          : "http://10.1.20.66:5000/chat/postchat",
+          ? `${IOS_URL}/chat/postchat`
+          : `${ANDROID_URL}/chat/postchat`,
       data: {
         sender: userId,
         reciever: recieverId,
@@ -152,8 +153,8 @@ export default function ChatScreen({ navigation }) {
     try {
       let response = await axios.get(
         Platform.OS === "ios"
-          ? `http://localhost:5000/chat/getChat/${userId}/${route?.params?.recieverId}`
-          : `http://10.1.20.66:5000/chat/getChat/${userId}/${route?.params?.recieverId}`
+          ? `${IOS_URL}/chat/getChat/${userId}/${route?.params?.recieverId}`
+          : `${ANDROID_URL}/chat/getChat/${userId}/${route?.params?.recieverId}`
       );
       if (response) {
         setMessages(() => GiftedChat.append([], response.data).reverse());

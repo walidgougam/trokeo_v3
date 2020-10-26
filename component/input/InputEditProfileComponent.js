@@ -4,9 +4,9 @@ import { Form, Item, Input, Label } from "native-base";
 import colors from "../../constant/colors";
 import normalize from "react-native-normalize";
 import fontStyles from "../../constant/fonts";
-// import RNPickerSelect from "react-native-picker-select";
-import PickerSelect from "../../component/PickerSelect";
 import { Context as AuthContext } from "../../context/AuthContext";
+
+import PickerSelect from "../../component/PickerSelect";
 
 export default function InputEditProfileComponent({
   phoneNumber,
@@ -20,10 +20,12 @@ export default function InputEditProfileComponent({
   about,
   email,
 }) {
-  // USECONTEXT
-  const { state, editProfileContext } = useContext(AuthContext);
+  //STATE
   const [female, setFemale] = useState();
   const [selectedLabel, setSelectedLabel] = useState("");
+
+  // USECONTEXT
+  const { state, editProfileContext } = useContext(AuthContext);
 
   const selectGender = (value) => {
     if (value === "male") {
@@ -33,8 +35,8 @@ export default function InputEditProfileComponent({
     }
   };
 
+  //STYLES
   const { label_input, _input, wrapper_input } = styles;
-
   return (
     <Form>
       <Item style={wrapper_input} floatingLabel last>

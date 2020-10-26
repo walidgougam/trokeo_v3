@@ -1,11 +1,21 @@
-import React, { useState } from "react";
-import { View, Text, FlatList, Switch, StyleSheet } from "react-native";
+import React, { useState, useEffect } from "react";
+import {
+  View,
+  Text,
+  FlatList,
+  Switch,
+  StyleSheet,
+  AsyncStorage,
+} from "react-native";
 import colors from "../../../constant/colors";
 import normalize from "react-native-normalize";
 import fontStyles from "../../../constant/fonts";
 import css from "../../../constant/css";
+import axios from "axios";
+import { IOS_URL, ANDROID_URL } from "../../../API";
 
 import HeaderComponent from "../../../component/header/HeaderComponent";
+import { ActivityIndicator } from "react-native-paper";
 
 export default function NotificationScreen({ navigation }) {
   const [updatePush, setUpdatePush] = useState(false);
@@ -16,6 +26,11 @@ export default function NotificationScreen({ navigation }) {
   const [expiredEmail, setExpiredEmail] = useState(false);
   const [bookedEmail, setBookedEmail] = useState(false);
   const [newMessageEmail, setNewMessageEmail] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    getNotificationFromDb();
+  }, []);
 
   const onToggleSwitch = (index, type) => {
     if (index === 0 && type === "push") {
@@ -60,6 +75,59 @@ export default function NotificationScreen({ navigation }) {
     },
   ];
 
+  const getNotificationFromDb = async () => {
+    const userId = await AsyncStorage.getItem("userId");
+    await axios({
+      method: "GET",
+      url:
+        Platform.OS === "ios"
+          ? `${IOS_URL}/user/getnotification/${userId}`
+          : `${ANDROID_URL}/user/getnotification/${userId}`,
+    })
+      .then((res) => {
+        setUpdatePush(res?.data?.notification[0]?.updatePush);
+        setExpiredPush(res?.data?.notification[0]?.expiredPush);
+        setBookedPush(res?.data?.notification[0]?.bookedPush);
+        setNewMessagePush(res?.data?.notification[0]?.newMessagePush);
+        setUpdateEmail(res?.data?.notification[0]?.updateEmail);
+        setExpiredEmail(res?.data?.notification[0]?.expiredEmail);
+        setBookedEmail(res?.data?.notification[0]?.bookedEmail);
+        setNewMessageEmail(res?.data?.notification[0]?.newMessageEmail);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        console.log(err, "error on getNotificationFromDB");
+      });
+  };
+
+  const editNotification = async () => {
+    const userId = await AsyncStorage.getItem("userId");
+    await axios({
+      method: "POST",
+      url:
+        Platform.OS === "ios"
+          ? `${IOS_URL}/user/editnotification`
+          : `${ANDROID_URL}/user/editnotification`,
+      data: {
+        userId,
+        updatePush,
+        expiredPush,
+        bookedPush,
+        newMessagePush,
+        updateEmail,
+        expiredEmail,
+        bookedEmail,
+        newMessageEmail,
+      },
+    })
+      .then((res) => {
+        console.log("result on follow good ");
+      })
+      .catch((err) => {
+        console.log(err, "error on follow good");
+      });
+  };
+
   const {
     container,
     wrapper_title,
@@ -68,9 +136,14 @@ export default function NotificationScreen({ navigation }) {
     wrapper_switch_by_line,
     _label,
   } = styles;
-  return (
+  return isLoading ? (
+    <ActivityIndicator size="large" style={{ flex: 1 }} />
+  ) : (
     <View style={{ flex: 1 }}>
-      <HeaderComponent navigation={navigation} />
+      <HeaderComponent
+        navigation={navigation}
+        editNotification={editNotification}
+      />
       <View style={container}>
         <View>
           <View style={[wrapper_title, { marginTop: 13 }]}>
@@ -94,10 +167,9 @@ export default function NotificationScreen({ navigation }) {
                   <View style={wrapper_switch_by_line}>
                     <Text style={_label}>{item?.title}</Text>
                     <Switch
-                      trackColor={{ false: "#0091FF", true: "#C4E5FF" }}
-                      thumbColor={item?.statePush ? "#D8D8D8" : "#9E9E9E"}
+                      trackColor={{ false: "pink", true: "#C4E5FF" }}
+                      thumbColor={item?.statePush ? "#0091FF" : "#9E9E9E"}
                       ios_backgroundColor="#D8D8D8"
-                      // color={colors.switch_btn_blue}
                       onValueChange={() => onToggleSwitch(index, "push")}
                       value={item?.statePush}
                     />
@@ -110,13 +182,13 @@ export default function NotificationScreen({ navigation }) {
         </View>
         <View
           style={{
-            borderBottomColor: "black",
+            borderBottomColor: "#979797",
             borderBottomWidth: normalize(1),
             marginHorizontal: normalize(-18),
           }}
         ></View>
         <View>
-          <View style={[wrapper_title, { marginTop: 24 }]}>
+          <View style={[wrapper_title, { marginTop: normalize(24) }]}>
             <Text style={_title}>Notifications par e-mail</Text>
             <Text style={_description}>
               Sélectionnez les notifications à afficher dans votre boite mail.
@@ -133,12 +205,11 @@ export default function NotificationScreen({ navigation }) {
                   <View style={wrapper_switch_by_line}>
                     <Text style={_label}>{item.title}</Text>
                     <Switch
-                      trackColor={{ false: "#0091FF", true: "#C4E5FF" }}
-                      thumbColor={item.stateEmail ? "#D8D8D8" : "#9E9E9E"}
+                      trackColor={{ false: "purple", true: "#C4E5FF" }}
+                      thumbColor={item?.stateEmail ? "#0091FF" : "#9E9E9E"}
                       ios_backgroundColor="#D8D8D8"
-                      // color={colors.switch_btn_blue}
                       onValueChange={() => onToggleSwitch(index, "email")}
-                      value={item.stateEmail}
+                      value={item?.stateEmail}
                     />
                   </View>
                 );

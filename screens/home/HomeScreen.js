@@ -1,16 +1,12 @@
 import React, { useState, useEffect, useContext } from "react";
 import { View, StyleSheet, ScrollView, Platform } from "react-native";
-import {
-  useNavigation,
-  useRoute,
-  useIsFocused,
-} from "@react-navigation/native";
+import { useIsFocused } from "@react-navigation/native";
 import colors from "../../constant/colors";
 import normalize from "react-native-normalize";
-import { getAllProductApi, getUserApi } from "../../API";
 import { Context as AuthContext } from "../../context/AuthContext";
 import axios from "axios";
 import * as Location from "expo-location";
+import { IOS_URL, ANDROID_URL } from "../../API";
 
 import HeaderNotification from "../../component/header/HeaderNotification";
 import BtnHomeToggle from "../../component/button/BtnHomeToggle";
@@ -48,8 +44,8 @@ export default function HomeScreen({ navigation }) {
       method: "GET",
       url:
         Platform.OS === "ios"
-          ? "http://localhost:5000/product/getproduct"
-          : "http://10.1.20.66:5000/product/getproduct",
+          ? `${IOS_URL}/product/getproduct`
+          : `${ANDROID_URL}/product/getproduct`,
     })
       .then((res) => {
         setAllProduct(res?.data?.product);

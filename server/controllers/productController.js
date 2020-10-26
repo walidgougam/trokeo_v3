@@ -65,8 +65,6 @@ exports.getProduct = async (req, res) => {
 
 exports.handleLike = (req, res) => {
   const { userId, productId } = req.body;
-  console.log(userId, "userid server");
-  console.log(productId, "productid server");
   Product.findOne(
     {
       _id: productId,

@@ -77,6 +77,16 @@ export default function PictureScreen({ navigation }) {
     }
   };
 
+  const renderName = () => {
+    if (firstName && lastName) {
+      return `${firstName}.${lastName.substring(0, 1)}`;
+    } else if (!firstName && !lastName) {
+      return "firstname.lastname";
+    } else if (firstName && !lastName) {
+      return firstName;
+    }
+  };
+
   // STYLES
   const { container_white, _title, text_description, pseudo } = styles;
 
@@ -111,9 +121,7 @@ export default function PictureScreen({ navigation }) {
           </View>
         )}
         <Text style={[pseudo, { fontSize: normalize(14) }]}>
-          {firstName && lastName
-            ? `${firstName}.${lastName.substring(0, 1)}`
-            : "marion.b"}
+          {renderName()}
         </Text>
       </View>
       <View style={{ marginHorizontal: normalize(70) }}>

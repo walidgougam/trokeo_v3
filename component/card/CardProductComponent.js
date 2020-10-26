@@ -10,7 +10,6 @@ import {
 import {
   HeartMiniIcon,
   HeartFullIcon,
-  HeartIcon,
   PositionIcon,
 } from "../../assets/icon/Icon";
 import normalize from "react-native-normalize";
@@ -18,7 +17,6 @@ import colors from "../../constant/colors";
 import css from "../../constant/css";
 import fontStyles from "../../constant/fonts";
 import { handleLikeApi } from "../../API";
-import axios from "axios";
 
 export default function CardProductComponent({
   userData,
@@ -36,7 +34,6 @@ export default function CardProductComponent({
 }) {
   //STATE
   const [heartFull, setHeartFull] = useState(false);
-  const [product, setProduct] = useState();
 
   useEffect(() => {
     for (let i = 0; i < likesProduct.length; i++) {

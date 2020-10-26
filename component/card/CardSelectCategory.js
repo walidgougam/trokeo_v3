@@ -1,11 +1,10 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { RadioButton } from "react-native-paper";
 import colors from "../../constant/colors";
 import css from "../../constant/css";
 import fontStyles from "../../constant/fonts";
 import normalize from "react-native-normalize";
-import { TouchableOpacity } from "react-native-gesture-handler";
 
 export default function CardSelectCategory({ title, value, onPress }) {
   return (

@@ -41,6 +41,16 @@ export default function PictureProfileScreen({
     }
   };
 
+  const renderName = () => {
+    if (firstName && lastName) {
+      return `${firstName}.${lastName.substring(0, 1)}`;
+    } else if (!firstName && !lastName) {
+      return "firstname.lastname";
+    } else if (firstName && !lastName) {
+      return firstName;
+    }
+  };
+
   // STYLES
   const { pseudo, text_change_profile_picture } = styles;
   return (
@@ -67,11 +77,7 @@ export default function PictureProfileScreen({
           </Text>
         </TouchableOpacity>
       ) : (
-        <Text style={[pseudo, { fontSize }]}>
-          {firstName && lastName
-            ? `${firstName}.${lastName.substring(0, 1)}`
-            : "marion.b"}
-        </Text>
+        <Text style={[pseudo, { fontSize }]}>{renderName()}</Text>
       )}
     </View>
   );

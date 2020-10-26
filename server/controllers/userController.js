@@ -28,19 +28,8 @@ exports.register = async (req, res) => {
       throw "Email is not supported from your domain.";
     if (password.length < 6)
       throw "Password must be atleast 6 characters long.";
-
-    console.log(
-      email,
-      password,
-      firstName,
-      lastName,
-      userPicture,
-      female,
-      "bla"
-    );
     User.findOne({ email: email }, (error, user) => {
       if (user == null) {
-        console.log("11111");
         bcrypt.hash(password, 10, (error, hash) => {
           User.create(
             {
@@ -61,14 +50,12 @@ exports.register = async (req, res) => {
           );
         });
       } else {
-        console.log("22222222");
         res.status(400).json({
           error: "email or username already exist",
         });
       }
     });
   } catch (err) {
-    console.log("333333");
     console.log(err, "error on register on user controller");
   }
 };
@@ -119,7 +106,6 @@ exports.login = async (req, res, next) => {
     //.select("-password") // on supprime le password des resultat pour que personne le voit.
     .then((savedUser) => {
       if (savedUser) {
-        console.log(0);
         const token = jwt.sign({ _id: savedUser._id }, JWT_SECRET_KEY);
         let { firstName, email, _id } = savedUser;
         bcrypt.compare(password, savedUser.password).then((goodPassword) => {
@@ -129,21 +115,18 @@ exports.login = async (req, res, next) => {
               data: { firstName, email, _id, token },
             });
           } else {
-            console.log(2);
             res.status(404).json({
               message: " wrong name or password",
             });
           }
         });
       } else {
-        console.log(3);
         res.status(404).json({
           message: "login erreur",
         });
       }
     })
     .catch((err) => {
-      console.log(4);
       res.status(404).json({
         message: "erreur",
       });
@@ -164,7 +147,7 @@ exports.getUser = async (req, res, next) => {
       })
       .catch((err) => res.status(404).json({ err }));
   } catch (err) {
-    console.log("on rentre pas dans le get user");
+    console.log("error on get user");
   }
 };
 
@@ -180,17 +163,6 @@ exports.editUser = async (req, res) => {
     userPicture,
   } = req.body;
 
-  console.log(
-    userId,
-    firstName,
-    lastName,
-    about,
-    email,
-    phoneNumber,
-    female,
-    userPicture,
-    "res user controller"
-  );
   await User.findOneAndUpdate(
     {
       _id: userId,
@@ -227,7 +199,7 @@ exports.editCategoryGoodFollow = async (req, res) => {
       },
     },
     (err, user) => {
-      console.log(user, "resultat user after after edit good follow");
+      console.log(user, "resultat user after edit good follow");
     }
   );
 };
@@ -271,14 +243,12 @@ exports.createReview = async (req, res) => {
 };
 
 exports.getReview = async (req, res) => {
-  console.log(0);
   const { userId } = req.params;
   await User.findOne({ _id: userId })
     .populate("review.userId")
     .then((result) => {
       if (result) {
         const { review } = result;
-        console.log(review, "review server");
         res.status(200).json({
           review,
         });
@@ -289,7 +259,65 @@ exports.getReview = async (req, res) => {
       }
     })
     .catch((err) => {
-      console.log(4);
+      res.status(404).json({
+        message: "erreur",
+      });
+    });
+};
+
+exports.editNotification = async (req, res) => {
+  const {
+    userId,
+    updatePush,
+    expiredPush,
+    bookedPush,
+    newMessagePush,
+    updateEmail,
+    expiredEmail,
+    bookedEmail,
+    newMessageEmail,
+  } = req.body;
+
+  User.updateOne(
+    {
+      _id: userId,
+    },
+    {
+      $set: {
+        notification: {
+          updatePush,
+          expiredPush,
+          bookedPush,
+          newMessagePush,
+          updateEmail,
+          expiredEmail,
+          bookedEmail,
+          newMessageEmail,
+        },
+      },
+    },
+    (err, user) => {
+      console.log(user, "resultat user after edit notification");
+    }
+  );
+};
+
+exports.getNotification = async (req, res) => {
+  const { userId } = req.params;
+  await User.findOne({ _id: userId })
+    .then((result) => {
+      if (result) {
+        const { notification } = result;
+        res.status(200).json({
+          notification,
+        });
+      } else {
+        res.status(404).json({
+          message: "no review for this user",
+        });
+      }
+    })
+    .catch((err) => {
       res.status(404).json({
         message: "erreur",
       });

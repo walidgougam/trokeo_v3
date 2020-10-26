@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
-import { GreyDotIcon, WhiteDotIcon } from "../../assets/icon/Icon.js";
+import { GreyDotIcon } from "../../assets/icon/Icon.js";
 import normalize from "react-native-normalize";
 import colors from "../../constant/colors";
 import fontStyles from "../../constant/fonts";

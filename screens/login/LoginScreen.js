@@ -73,18 +73,9 @@ const LoginScreen = ({ navigation }) => {
       //STOCKER L'UTILISATEUR DANS LA BASE DE DONNEE
       if (type === "success") {
         const { email, familyName, givenName, id, photoUrl } = user;
-        // await AsyncStorage.setItem(
-        //   "user",
-        //   JSON.stringify({
-        //     photoUrl,
-        //     name,
-        //     email,
-        //   })
-        // );
         registerGoogleApi(email, givenName, familyName, photoUrl, () => {
           navigation.navigate("HomeBottomTab");
         });
-        console.log("naviguer vers home", user, type);
       }
     } catch (e) {
       console.error("error", e);

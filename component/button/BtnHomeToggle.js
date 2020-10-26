@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { Text, StyleSheet, TouchableOpacity } from "react-native";
 import colors from "../../constant/colors";
 import normalize from "react-native-normalize";
 import fontStyles from "../../constant/fonts";
@@ -8,7 +8,6 @@ export default function BtnHomeToggle({
   changeFocus,
   focus,
   title,
-  product,
   lengthGoods,
   lengthServices,
   fromScreenWithProduct,

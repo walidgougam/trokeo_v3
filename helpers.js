@@ -72,7 +72,7 @@ export const profileOptions = [
   { title: "Mode association", onClick: "OrganizationMode" },
   { title: "Paramètres", onClick: "SettingDetail" },
   { title: "A propos de Trokéo", onClick: "About" },
-  { title: "Conditions d'utilisation", onClick: "SettingDetail" },
+  { title: "Conditions d'utilisation", onClick: "Terms" },
   { title: "Evaluer l'application", onClick: "SettingDetail" },
   { title: "Centre d'aide", onClick: "HelpCenter" },
 ];

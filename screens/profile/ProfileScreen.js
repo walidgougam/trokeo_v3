@@ -9,11 +9,7 @@ import {
   Image,
   Platform,
 } from "react-native";
-import {
-  useNavigation,
-  useRoute,
-  useIsFocused,
-} from "@react-navigation/native";
+import { useIsFocused } from "@react-navigation/native";
 import colors from "../../constant/colors";
 import normalize from "react-native-normalize";
 import { profileOptions } from "../../helpers";
@@ -22,6 +18,7 @@ import axios from "axios";
 import { Context as AuthContext } from "../../context/AuthContext";
 import { ProfilePictureIcon } from "../../assets/icon/Icon";
 import fontStyles from "../../constant/fonts";
+import { IOS_URL, ANDROID_URL } from "../../API";
 
 import HeaderNotification from "../../component/header/HeaderNotification";
 import PictureProfileComponent from "../../component/picture/PictureProfileComponent";
@@ -46,8 +43,8 @@ export default function ProfileScreen({ navigation }) {
       method: "GET",
       url:
         Platform.OS === "ios"
-          ? `http://localhost:5000/user/${id}`
-          : `http://10.1.20.66:5000/user/${id}`,
+          ? `${IOS_URL}/user/${id}`
+          : `${ANDROID_URL}/user/${id}`,
     })
       .then((res) => {
         setUserData(res.data.user);
@@ -60,6 +57,16 @@ export default function ProfileScreen({ navigation }) {
   useEffect(() => {
     getUserOnDB();
   }, [isFocuser]);
+
+  const renderName = () => {
+    if (userData?.firstName && userData?.lastName) {
+      return `${userData?.firstName}.${userData?.lastName.substring(0, 1)}`;
+    } else if (!userData?.firstName && !userData?.lastName) {
+      return "firstname.lastname";
+    } else if (userData?.firstName && !userData?.lastName) {
+      return userData?.firstName;
+    }
+  };
 
   // STYLES
   const {
@@ -93,9 +100,7 @@ export default function ProfileScreen({ navigation }) {
             </View>
           )}
           <Text style={[pseudo, { fontSize: normalize(11, "fontSize") }]}>
-            {userData?.firstName && userData?.lastName
-              ? `${userData?.firstName}.${userData?.lastName?.substring(0, 1)}`
-              : "marion.b"}
+            {renderName()}
           </Text>
           <View style={wrapper_star}>
             <StarsComponent width={21} height={18} />

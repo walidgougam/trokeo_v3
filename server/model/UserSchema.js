@@ -26,6 +26,18 @@ const UserSchema = new mongoose.Schema(
     productBooked: [],
     categoryGoodsFollow: [],
     categoryServicesFollow: [],
+    notification: [
+      {
+        updatePush: { type: Boolean },
+        expiredPush: { type: Boolean },
+        bookedPush: { type: Boolean },
+        newMessagePush: { type: Boolean },
+        updateEmail: { type: Boolean },
+        expiredEmail: { type: Boolean },
+        bookedEmail: { type: Boolean },
+        newMessageEmail: { type: Boolean },
+      },
+    ],
   },
   {
     timestamps: true,

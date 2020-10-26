@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, AsyncStorage, Platform } from "react-native";
-import CardWithRightIcon from "../../../component/card/CardWithRightIcon";
-import HeaderComponent from "../../../component/header/HeaderComponent";
 import axios from "axios";
 import { useRoute, useIsFocused } from "@react-navigation/native";
+import { IOS_URL, ANDROID_URL } from "../../../API";
+
+import CardWithRightIcon from "../../../component/card/CardWithRightIcon";
+import HeaderComponent from "../../../component/header/HeaderComponent";
 
 export default function GoodOrServiceScreen({ navigation, route }) {
   const [userId, setUserId] = useState("");
@@ -20,8 +22,8 @@ export default function GoodOrServiceScreen({ navigation, route }) {
       method: "GET",
       url:
         Platform.OS === "ios"
-          ? `http://localhost:5000/user/${userid}`
-          : `http://10.1.20.66:5000/user/${userid}`,
+          ? `${IOS_URL}/user/${userid}`
+          : `${ANDROID_URL}/user/${userid}`,
     })
       .then((res) => {
         setGoodCategoryState(res?.data?.user?.categoryGoodsFollow);

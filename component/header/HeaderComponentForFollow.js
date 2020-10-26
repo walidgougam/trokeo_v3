@@ -6,12 +6,12 @@ import {
   TouchableOpacity,
   Platform,
 } from "react-native";
-import { ArrowLeftIcon } from "../../assets/icon/Icon";
 import normalize from "react-native-normalize";
 import colors from "../../constant/colors";
-import { WhiteDotIcon } from "../../assets/icon/Icon";
+import { WhiteDotIcon, ArrowLeftIcon } from "../../assets/icon/Icon";
 import fontStyles from "../../constant/fonts";
 import axios from "axios";
+import { IOS_URL, ANDROID_URL } from "../../API";
 
 export default function HeaderComponentForFollow({
   navigation,
@@ -29,8 +29,8 @@ export default function HeaderComponentForFollow({
         method: "POST",
         url:
           Platform.OS === "ios"
-            ? "http://localhost:5000/user/editcategorygoodfollow"
-            : "http://10.1.20.66:5000/user/editcategorygoodfollow",
+            ? `${IOS_URL}/user/editcategorygoodfollow`
+            : `${ANDROID_URL}/user/editcategorygoodfollow`,
         data: { userId, categoryGoodsFollow: allFollowRules },
       })
         .then((res) => {
@@ -44,8 +44,8 @@ export default function HeaderComponentForFollow({
         method: "POST",
         url:
           Platform.OS === "ios"
-            ? "http://localhost:5000/user/editcategoryservicefollow"
-            : "http://10.1.20.66:5000/user/editcategoryservicefollow",
+            ? `${IOS_URL}/user/editcategoryservicefollow`
+            : `${ANDROID_URL}/user/editcategoryservicefollow`,
         data: { userId, categoryServicesFollow: allFollowRules },
       })
         .then((res) => {
@@ -56,6 +56,8 @@ export default function HeaderComponentForFollow({
         });
     }
   };
+
+  //STYLES
   const {
     _header,
     wrapper_header_title,

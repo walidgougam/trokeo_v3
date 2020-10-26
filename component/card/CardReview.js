@@ -1,10 +1,11 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
-import StarsComponent from "../StarsComponent";
-import PictureProfileComponent from "../../component/picture/PictureProfileComponent";
 import colors from "../../constant/colors";
 import fontStyles from "../../constant/fonts";
 import normalize from "react-native-normalize";
+
+import StarsComponent from "../StarsComponent";
+import PictureProfileComponent from "../../component/picture/PictureProfileComponent";
 
 export default function CardReview({
   review,
@@ -12,12 +13,18 @@ export default function CardReview({
   stars,
   profilePicture,
 }) {
+  //STYLES
   const { container, wrapper_comment, _date, text_name, text_review } = styles;
   return (
     <View style={container}>
       <View style={{ flexDirection: "row" }}>
         <View>
-          <PictureProfileComponent width={51} height={54} isProductDetail />
+          <PictureProfileComponent
+            width={51}
+            height={54}
+            isProductDetail
+            userPicture={profilePicture}
+          />
         </View>
         <View style={wrapper_comment}>
           <Text style={text_name}>{profileName}</Text>

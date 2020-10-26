@@ -56,6 +56,7 @@ import ProfileScreen from "./screens/profile/ProfileScreen";
 import ProfileUserDetailsScreen from "./screens/profile/ProfileUserDetailsScreen";
 import ProfileUserAllReviewScreen from "./screens/profile/ProfileUserAllReviewScreen";
 import SettingDetailScreen from "./screens/profile/settings/SettingDetailScreen";
+import TermsOfService from "./screens/profile/TermsOfService";
 
 // SEARCH
 import SearchOptionScreen from "./screens/search/SearchOptionScreen";
@@ -313,6 +314,11 @@ function NavigationContainerComponent() {
         <Stack.Screen
           name="Favorite"
           component={FavoritesScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Terms"
+          component={TermsOfService}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

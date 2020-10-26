@@ -21,5 +21,7 @@ router.post(
 );
 router.post("/createreview", userController.createReview);
 router.get("/getreview/:userId", userController.getReview);
+router.post("/editnotification", userController.editNotification);
+router.get("/getnotification/:userId", userController.getNotification);
 
 module.exports = router;

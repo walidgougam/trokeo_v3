@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { Text, StyleSheet, TouchableOpacity } from "react-native";
 import { RightIcon, PenEditProfileIcon } from "../../assets/icon/Icon";
 import normalize from "react-native-normalize";
 import css from "../../constant/css";

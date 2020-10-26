@@ -157,7 +157,7 @@ export const products = [
     isServices: true,
     isGoods: false,
     isFromOrganization: false,
-    userOwner: "marion.b",
+    userOwner: "firstname.lastname",
   },
   {
     _id: "",
@@ -173,7 +173,7 @@ export const products = [
     isServices: true,
     isGoods: false,
     isFromOrganization: false,
-    userOwner: "marion.b",
+    userOwner: "firstname.lastname",
   },
   {
     _id: "",
@@ -189,7 +189,7 @@ export const products = [
     isServices: true,
     isGoods: false,
     isFromOrganization: false,
-    userOwner: "marion.b",
+    userOwner: "firstname.lastname",
   },
   {
     _id: "",
@@ -205,6 +205,6 @@ export const products = [
     isServices: true,
     isGoods: false,
     isFromOrganization: false,
-    userOwner: "marion.b",
+    userOwner: "firstname.lastname",
   },
 ];

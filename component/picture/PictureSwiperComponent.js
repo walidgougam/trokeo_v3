@@ -13,13 +13,34 @@ const SwiperPictureComponent = ({ imageProduct }) => {
         activeDotColor="white"
       >
         <View style={styles.slide}>
-          <Image source={imageProduct[0]} style={styles.image} />
+          <Image
+            source={
+              imageProduct[0]
+                ? imageProduct[0]
+                : require("../../assets/image/noImage.png")
+            }
+            style={styles.image}
+          />
         </View>
         <View style={styles.slide}>
-          <Image source={imageProduct[1]} style={styles.image} />
+          <Image
+            source={
+              imageProduct[1]
+                ? imageProduct[1]
+                : require("../../assets/image/noImage.png")
+            }
+            style={styles.image}
+          />
         </View>
         <View style={styles.slide}>
-          <Image source={imageProduct[2]} style={styles.image} />
+          <Image
+            source={
+              imageProduct[2]
+                ? imageProduct[2]
+                : require("../../assets/image/noImage.png")
+            }
+            style={styles.image}
+          />
         </View>
       </Swiper>
     </View>
@@ -43,6 +64,9 @@ var styles = StyleSheet.create({
   image: {
     width: "100%",
     height: "100%",
+    transform: [{ scale: 1 }],
+    aspectRatio: 1,
+    resizeMode: "cover",
   },
 });
 export default SwiperPictureComponent;

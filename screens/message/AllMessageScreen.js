@@ -6,17 +6,19 @@ import {
   TouchableOpacity,
   AsyncStorage,
   Platform,
+  FlatList,
 } from "react-native";
-import CardMessageComponent from "../../component/card/CardMessageComponent";
 import colors from "../../constant/colors";
 import normalize from "react-native-normalize";
-import { FlatList } from "react-native-gesture-handler";
 // import { allMessage } from "../../helpersDataBase";
 import fontStyles from "../../constant/fonts";
 import axios from "axios";
-import { useRoute, useIsFocused } from "@react-navigation/native";
+import { useIsFocused } from "@react-navigation/native";
+import { IOS_URL, ANDROID_URL } from "../../API";
 // import ModalDeleteMessage from "../../component/modal/ModalDeleteMessage";
 // import { MenuProvider } from "react-native-popup-menu";
+
+import CardMessageComponent from "../../component/card/CardMessageComponent";
 
 export default function AllMessageScreen({ navigation }) {
   //STATE
@@ -43,11 +45,12 @@ export default function AllMessageScreen({ navigation }) {
       method: "GET",
       url:
         Platform.OS === "ios"
-          ? `http://localhost:5000/chat/allrecieverchat/${userid}`
-          : `http://10.1.20.66:5000/chat/allrecieverchat/${userid}`,
+          ? `${IOS_URL}/chat/allrecieverchat/${userid}`
+          : `${ANDROID_URL}/chat/allrecieverchat/${userid}`,
     })
       .then((res) => {
-        setAllMessage(res.data.chat);
+        console.log(res, "-----res mon gars----");
+        setAllMessage(res?.data?.chat);
       })
       .catch((err) => {
         console.log(err, "err on getallrecieverchat");

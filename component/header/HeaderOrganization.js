@@ -15,6 +15,7 @@ export default function HeaderOrganization({ navigation, isLogo }) {
       fromOrganizationScreen: true,
     });
   };
+  //STYLES
   const {
     _header,
     wrapper_header_title,

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { View, Text, Image, StyleSheet, Modal, Button } from "react-native";
+import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 import normalize from "react-native-normalize";
 import colors from "../../constant/colors";
-import { PositionIcon, CrossGreyIcon } from "../../assets/icon/Icon";
+import { PositionIcon } from "../../assets/icon/Icon";
 import fontStyles from "../../constant/fonts";
-import { TouchableOpacity } from "react-native-gesture-handler";
+
 import ModalChat from "../modal/ModalChat";
 
 export default function CardHeaderChat({

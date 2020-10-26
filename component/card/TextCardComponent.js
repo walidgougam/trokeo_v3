@@ -7,8 +7,6 @@ import fontStyles from "../../constant/fonts";
 export default function TextCardComponent({
   title,
   btn,
-  color,
-  backgroundColor,
   followByUser,
   onPress,
 }) {
