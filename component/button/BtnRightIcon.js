@@ -9,15 +9,23 @@ export default function BtnRightIcon({
   target,
   userData,
   profileId,
+  disabled,
 }) {
   const goProfileDetails = (target, data) => {
     return navigation.navigate(target, { userData: data, profileId });
   };
   const { wrapper_product_inline, text_product_inline } = styles;
-  return (
+  return disabled ? (
+    <View opacity={0.3} style={[wrapper_product_inline]}>
+      <Text style={text_product_inline}>{title}</Text>
+      <View style={{ marginRight: 10 }}>
+        <RightIcon />
+      </View>
+    </View>
+  ) : (
     <TouchableOpacity
       activeOpacity={0.6}
-      style={wrapper_product_inline}
+      style={[wrapper_product_inline]}
       onPress={() => goProfileDetails(target, userData)}
     >
       <Text style={text_product_inline}>{title}</Text>
@@ -40,7 +48,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   text_product_inline: {
-    fontSize: normalize(8, "fontSize"),
+    fontSize: normalize(10, "fontSize"),
     textAlign: "center",
     width: "100%",
     // en attente de plus d'elements sur le css de marion

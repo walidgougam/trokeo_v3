@@ -117,10 +117,11 @@ export default function ProfileUserDetailsScreen({ navigation }) {
               />
             </View>
             <BtnRightIcon
+              title="Voir les avis"
+              disabled={!userData?.review?.length > 0}
               profileId={userData?._id}
               navigation={navigation}
-              title="Voir les avis"
-              target="ProfileUserReview"
+              target={"ProfileUserReview"}
             />
           </View>
         </View>

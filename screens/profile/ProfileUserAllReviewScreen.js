@@ -25,7 +25,6 @@ export default function ProfileUserAllReviewScreen({ navigation }) {
       );
       if (response) {
         setReview(response.data.review);
-        console.log(response, "response review client");
       }
     } catch (error) {
       console.log(error, "error on get message client");
@@ -48,16 +47,19 @@ export default function ProfileUserAllReviewScreen({ navigation }) {
         data={review}
         renderItem={({ item, index }) => {
           return (
-            <CardReview
-              review={item?.review}
-              stars={item?.stars}
-              profilePicture={item?.userId?.userPicture}
-              profileName={item?.userId?.firstName}
-            />
+            <>
+              <CardReview
+                review={item?.review}
+                stars={item?.stars}
+                profilePicture={item?.userId?.userPicture}
+                profileName={item?.userId?.firstName}
+              />
+            </>
           );
         }}
         keyExtractor={(item) => item}
       />
+      )
     </View>
   );
 }

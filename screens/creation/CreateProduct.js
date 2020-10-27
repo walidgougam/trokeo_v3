@@ -171,7 +171,6 @@ export default function CreateProduct({ navigation }) {
 
   return (
     <View style={_container}>
-      {console.log(avatarSource, "avatarsource render")}
       <View style={_header}>
         <Text style={text_title}>Créer une annonce</Text>
       </View>
@@ -234,11 +233,11 @@ export default function CreateProduct({ navigation }) {
       </View>
       <View style={wrapper_select_goods_condition}>
         <Text style={_label}>Etat du bien</Text>
-        <PickerSelect
+        {/* <PickerSelect
           data={goodsCondition}
           handleSelect={(e) => handleSelect(e)}
           selectedLabel={conditionProduct}
-        />
+        /> */}
         {/* <RNPickerSelect
             style={{ borderBottomColor: "black", borderBottomWidth: 1 }}
             onValueChange={(value) => setConditionProduct(value)}
@@ -353,6 +352,7 @@ const styles = StyleSheet.create({
   wrapper_camera_picture: {
     flexDirection: "row",
     justifyContent: "space-between",
+    alignItems: "center",
     paddingHorizontal: normalize(50),
     ...css.border_bottom,
     paddingVertical: normalize(17),

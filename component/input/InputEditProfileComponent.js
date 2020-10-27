@@ -35,6 +35,10 @@ export default function InputEditProfileComponent({
     }
   };
 
+  const handleSelect = (e) => {
+    console.log(e, "select");
+  };
+
   //STYLES
   const { label_input, _input, wrapper_input } = styles;
   return (

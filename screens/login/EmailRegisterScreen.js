@@ -274,7 +274,7 @@ const styles = StyleSheet.create({
   input_warning: {
     fontSize: normalize(10, "fontSize"),
     color: colors.text_description_black,
-    ...fontStyles.roman,
+    // ...fontStyles.roman,
   },
 });
 

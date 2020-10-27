@@ -44,6 +44,14 @@ export default function ProductDetailScreen({ navigation }) {
     });
   };
 
+  const renderName = () => {
+    if (!userData?.lastName) {
+      return userData?.firstName;
+    } else {
+      return `${userData?.firstName}_${userData?.lastName?.charAt(0)}`;
+    }
+  };
+
   // STYLES
   const {
     _container,
@@ -61,7 +69,6 @@ export default function ProductDetailScreen({ navigation }) {
   } = styles;
   return (
     <View style={_container}>
-      {console.log(imageProduct[0].uri, "image product")}
       <HeaderNotification
         navigation={navigation}
         isLogo={false}
@@ -131,9 +138,7 @@ export default function ProductDetailScreen({ navigation }) {
               )}
             </TouchableOpacity>
             <View style={wrapper_stars}>
-              <Text>{`${userData?.firstName}_${userData?.lastName?.charAt(
-                0
-              )}`}</Text>
+              <Text>{renderName()}</Text>
               <StarsComponent width={16} height={15} />
             </View>
           </View>
@@ -148,7 +153,6 @@ export default function ProductDetailScreen({ navigation }) {
         </View>
       </ScrollView>
       <View style={wrapper_btn}>
-        {console.log(userData, "userData")}
         <BtnBlueAction
           title="Contacter le trokeur"
           onPress={() => goToChat(userData)}
