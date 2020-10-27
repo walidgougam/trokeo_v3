@@ -59,6 +59,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: normalize(16, "fontSize"),
     lineHeight: normalize(20),
-    ...fontStyles.bold,
+    // ...fontStyles.bold,
   },
 });

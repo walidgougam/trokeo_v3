@@ -2,8 +2,6 @@ import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import GreenLineLoaderLogin from "./GreenLineLoaderLogin";
 import HeaderComponent from "./header/HeaderComponent";
-import colors from "../constant/colors";
-import css from "../constant/css";
 import normalize from "react-native-normalize";
 
 export default function BackgroundComponent({

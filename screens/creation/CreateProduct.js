@@ -6,22 +6,21 @@ import {
   TouchableOpacity,
   TextInput,
   AsyncStorage,
-  Alert,
   ActionSheetIOS,
   Platform,
 } from "react-native";
 import colors from "../../constant/colors";
-import normalize from "react-native-normalize";
-import { RightIcon, WrongEmailIcon } from "../../assets/icon/Icon";
 import fontStyles from "../../constant/fonts";
+import { RightIcon } from "../../assets/icon/Icon";
 import { goodsCondition } from "../../helpers";
+import { createProductApi } from "../../API";
 import { Context as AuthContext } from "../../context/AuthContext";
 import css from "../../constant/css";
-import { createProductApi } from "../../API";
 // import RNPickerSelect from "react-native-picker-select";
 import * as ImagePicker from "expo-image-picker";
-import { Button, Snackbar } from "react-native-paper";
+import normalize from "react-native-normalize";
 import { BottomSheet, ListItem } from "react-native-elements";
+import { Button, Snackbar } from "react-native-paper";
 
 import BtnHomeToggle from "../../component/button/BtnHomeToggle";
 import CardPictureIcon from "../../component/picture/CardPictureIcon";
@@ -39,8 +38,7 @@ export default function CreateProduct({ navigation }) {
   const [categoryProduct, setCategoryProduct] = useState();
   const [avatarSource, setAvatarSource] = useState([]);
   // const [pictureSource, setPictureSource] = useState("");
-  const [visible, setVisible] = useState(false);
-  const [result, setResult] = useState("");
+  const [errorOnCreateProduct, setErrorOnCreateProduct] = useState();
   const [isBottomSheetVisible, setIsBottomSheetVisible] = useState(true);
 
   // CONTEXT
@@ -65,9 +63,9 @@ export default function CreateProduct({ navigation }) {
     },
   ];
 
-  const onToggleSnackBar = () => setVisible(!visible);
+  // const onToggleSnackBar = () => setVisible(!visible);
 
-  const onDismissSnackBar = () => setVisible(false);
+  const onDismissSnackBar = () => setErrorOnCreateProduct("");
 
   const goToCategoryList = () => {
     return navigation.navigate("SelectCategory", { goods });
@@ -100,14 +98,7 @@ export default function CreateProduct({ navigation }) {
     const userId = await AsyncStorage.getItem("userId");
 
     if (!title || !description || !conditionProduct || !state.category) {
-      console.log(
-        title,
-        description,
-        conditionProduct,
-        state.category,
-        "remplissez les champs"
-      );
-      console.log("remplissez les champs");
+      setErrorOnCreateProduct("true");
     } else {
       createProductApi(
         title,
@@ -125,7 +116,7 @@ export default function CreateProduct({ navigation }) {
       setPicture("");
       setConditionProduct("");
       setAvatarSource([]);
-      setVisible(true);
+      setErrorOnCreateProduct("false");
       // setCategoryProduct("");
     }
   };
@@ -165,7 +156,7 @@ export default function CreateProduct({ navigation }) {
 
   //STYLES
   const {
-    container,
+    _container,
     _header,
     text_title,
     wrapper_toggle_btn,
@@ -179,7 +170,7 @@ export default function CreateProduct({ navigation }) {
   } = styles;
 
   return (
-    <View style={container}>
+    <View style={_container}>
       {console.log(avatarSource, "avatarsource render")}
       <View style={_header}>
         <Text style={text_title}>Créer une annonce</Text>
@@ -280,7 +271,12 @@ export default function CreateProduct({ navigation }) {
       </View>
       <>
         <Snackbar
-          visible={visible}
+          style={{
+            backgroundColor: colors.main_green,
+            color: colors.text_white,
+          }}
+          theme={{ colors: { accent: colors.text_white } }}
+          visible={errorOnCreateProduct === "false"}
           onDismiss={onDismissSnackBar}
           action={{
             label: "Ok",
@@ -292,16 +288,37 @@ export default function CreateProduct({ navigation }) {
           Produit crée
         </Snackbar>
       </>
+      <>
+        <Snackbar
+          style={{
+            backgroundColor: "red",
+            color: colors.text_white,
+          }}
+          theme={{ colors: { accent: colors.text_white } }}
+          visible={errorOnCreateProduct === "true"}
+          onDismiss={onDismissSnackBar}
+          action={{
+            label: "Ok",
+            onPress: () => {
+              // Do something
+            },
+          }}
+        >
+          Remplissez tous les champs
+        </Snackbar>
+      </>
       {Platform.OS === "android" && (
         <BottomSheet isVisible={isBottomSheetVisible}>
           {list.map((l, i) => (
             <ListItem
               key={i}
-              containerStyle={l.containerStyle}
-              onPress={l.onPress}
+              containerStyle={l?.containerStyle}
+              onPress={l?.onPress}
             >
               <ListItem.Content>
-                <ListItem.Title style={l.titleStyle}>{l.title}</ListItem.Title>
+                <ListItem.Title style={l?.titleStyle}>
+                  {l?.title}
+                </ListItem.Title>
               </ListItem.Content>
             </ListItem>
           ))}
@@ -312,7 +329,7 @@ export default function CreateProduct({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  _container: {
     backgroundColor: colors.background_white,
     flex: 1,
   },
@@ -324,7 +341,7 @@ const styles = StyleSheet.create({
   text_title: {
     marginBottom: normalize(13),
     fontSize: normalize(18, "fontSize"),
-    ...fontStyles.bold,
+    // ...fontStyles.bold,
     lineHeight: 20,
     color: colors.text_white,
     marginLeft: normalize(62),
@@ -350,12 +367,12 @@ const styles = StyleSheet.create({
     fontSize: normalize(12, " fontSize"),
     lineHeight: normalize(20),
     marginBottom: normalize(13),
-    ...fontStyles.regular,
+    // ...fontStyles.regular,
   },
   _input: {
     fontSize: normalize(12, "fontSize"),
     color: "black",
-    ...fontStyles.regular,
+    // ...fontStyles.regular,
     // lineHeight: normalize(20),
     borderColor: colors.icon_profile_grey,
     borderWidth: 1,
@@ -369,7 +386,7 @@ const styles = StyleSheet.create({
     color: colors.text_description_black,
     fontSize: normalize(10, " fontSize"),
     lineHeight: normalize(20),
-    ...fontStyles.regular,
+    // ...fontStyles.regular,
   },
   wrapper_select_goods_condition: {
     paddingHorizontal: normalize(20),

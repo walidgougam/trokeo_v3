@@ -3,12 +3,9 @@ import { View, Text, StyleSheet } from "react-native";
 import normalize from "react-native-normalize";
 import { useRoute } from "@react-navigation/native";
 import colors from "../../constant/colors";
-import { ProfileWhiteIcon } from "../../assets/icon/Icon";
 import css from "../../constant/css";
-import { signup, registerApi } from "../../API";
+import { registerApi } from "../../API";
 
-import GreenLineLoaderLogin from "../../component/GreenLineLoaderLogin";
-import HeaderComponent from "../../component/header/HeaderComponent";
 import BtnBlueAction from "../../component/button/BtnBlueAction";
 import RadioButton from "../../component/input/RadioBtnComponent";
 import BackgroundComponent from "../../component/BackgroundComponent";

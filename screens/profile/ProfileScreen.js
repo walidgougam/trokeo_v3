@@ -13,7 +13,6 @@ import { useIsFocused } from "@react-navigation/native";
 import colors from "../../constant/colors";
 import normalize from "react-native-normalize";
 import { profileOptions } from "../../helpers";
-import { user } from "../../helpersDataBase"; // remplacer par la vraier data base
 import axios from "axios";
 import { Context as AuthContext } from "../../context/AuthContext";
 import { ProfilePictureIcon } from "../../assets/icon/Icon";
@@ -21,8 +20,6 @@ import fontStyles from "../../constant/fonts";
 import { IOS_URL, ANDROID_URL } from "../../API";
 
 import HeaderNotification from "../../component/header/HeaderNotification";
-import PictureProfileComponent from "../../component/picture/PictureProfileComponent";
-import PictureProfileScreen from "../../component/picture/PictureProfileScreen";
 import StarsComponent from "../../component/StarsComponent";
 import CardWithRightIcon from "../../component/card/CardWithRightIcon";
 
@@ -153,6 +150,6 @@ const styles = StyleSheet.create({
     fontSize: normalize(14, "fontSize"),
     lineHeight: normalize(20),
     textAlign: "center",
-    ...fontStyles.medium,
+    // ...fontStyles.medium,
   },
 });

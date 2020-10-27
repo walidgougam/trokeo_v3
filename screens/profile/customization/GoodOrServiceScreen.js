@@ -1,13 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, AsyncStorage, Platform } from "react-native";
+import {
+  View,
+  StyleSheet,
+  AsyncStorage,
+  Platform,
+  ActivityIndicator,
+} from "react-native";
 import axios from "axios";
-import { useRoute, useIsFocused } from "@react-navigation/native";
+import { useIsFocused } from "@react-navigation/native";
 import { IOS_URL, ANDROID_URL } from "../../../API";
 
 import CardWithRightIcon from "../../../component/card/CardWithRightIcon";
 import HeaderComponent from "../../../component/header/HeaderComponent";
 
-export default function GoodOrServiceScreen({ navigation, route }) {
+export default function GoodOrServiceScreen({ navigation }) {
   const [userId, setUserId] = useState("");
   const [goodCategoryState, setGoodCategoryState] = useState();
   const [serviceCategoryState, setServiceCategoryState] = useState();
@@ -26,6 +32,7 @@ export default function GoodOrServiceScreen({ navigation, route }) {
           : `${ANDROID_URL}/user/${userid}`,
     })
       .then((res) => {
+        console.log(res, "---res---");
         setGoodCategoryState(res?.data?.user?.categoryGoodsFollow);
         setServiceCategoryState(res?.data?.user?.categoryServicesFollow);
 
@@ -60,10 +67,12 @@ export default function GoodOrServiceScreen({ navigation, route }) {
       mounted = false;
     };
   });
+  //STYLES
+  const { _container } = styles;
   return loading ? (
-    <View></View>
+    <ActivityIndicator size="large" style={{ flex: 1 }} />
   ) : (
-    <View style={styles.container}>
+    <View style={_container}>
       <HeaderComponent navigation={navigation} />
       <CardWithRightIcon
         title="Biens"
@@ -89,7 +98,7 @@ export default function GoodOrServiceScreen({ navigation, route }) {
   );
 }
 var styles = StyleSheet.create({
-  container: {
+  _container: {
     flex: 1,
   },
 });

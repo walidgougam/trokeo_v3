@@ -1,5 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
-import { View, StyleSheet, ScrollView, Platform } from "react-native";
+import {
+  View,
+  StyleSheet,
+  ScrollView,
+  Platform,
+  AsyncStorage,
+} from "react-native";
 import { useIsFocused } from "@react-navigation/native";
 import colors from "../../constant/colors";
 import normalize from "react-native-normalize";
@@ -17,7 +23,7 @@ import NoProductComponent from "../../component/NoProductComponent";
 export default function HomeScreen({ navigation }) {
   //STATE
   const [goodTab, setGoodTab] = useState(true);
-  const [location, setLocation] = useState(false);
+  const [locationState, setLocationState] = useState();
   const [allProduct, setAllProduct] = useState();
 
   // CONTEXT
@@ -35,7 +41,8 @@ export default function HomeScreen({ navigation }) {
     }
     let location = await Location.getCurrentPositionAsync({});
     if (location) {
-      setLocation(true);
+      AsyncStorage.setItem("location", JSON.stringify(location));
+      setLocationState(location);
     }
   };
 
@@ -102,9 +109,9 @@ export default function HomeScreen({ navigation }) {
   }, [isFocuser]);
 
   //STYLE
-  const { container, wrapper_toggle_btn } = styles;
+  const { _container, wrapper_toggle_btn } = styles;
   return (
-    <View style={container}>
+    <View style={_container}>
       <HeaderNotification isLogo navigation={navigation} />
       <View style={wrapper_toggle_btn}>
         <BtnHomeToggle
@@ -125,7 +132,7 @@ export default function HomeScreen({ navigation }) {
         />
       </View>
       <ScrollView>
-        {!location ? (
+        {!locationState ? (
           <NoGeolocationComponent getLocation={() => getCurrentLocation()} />
         ) : (
           renderScreen()
@@ -136,7 +143,7 @@ export default function HomeScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  _container: {
     flex: 1,
     backgroundColor: colors.background_white,
   },

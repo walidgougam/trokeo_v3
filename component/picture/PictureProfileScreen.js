@@ -4,7 +4,6 @@ import { ProfilePictureIcon } from "../../assets/icon/Icon";
 import normalize from "react-native-normalize";
 import colors from "../../constant/colors";
 import fontStyles from "../../constant/fonts";
-// import ImagePicker from "react-native-image-picker";
 import * as ImagePicker from "expo-image-picker";
 import { Context as AuthContext } from "../../context/AuthContext";
 
@@ -20,7 +19,6 @@ export default function PictureProfileScreen({
 }) {
   //STATE
   const [avatarSource, setAvatarSource] = useState(userPicture);
-  const [picture, setPicture] = useState();
 
   // CONTEXT
   const { state, changePictureContext } = useContext(AuthContext);
@@ -90,7 +88,7 @@ const styles = StyleSheet.create({
     fontSize: normalize(14, "fontSize"),
     lineHeight: normalize(20),
     textAlign: "center",
-    ...fontStyles.medium,
+    // ...fontStyles.medium,
   },
   text_change_profile_picture: {
     textDecorationLine: "underline",

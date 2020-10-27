@@ -6,11 +6,7 @@ import colors from "../../constant/colors";
 import css from "../../constant/css";
 import { Formik } from "formik";
 import * as Yup from "yup";
-import {
-  WrongEmailIcon,
-  GoodEmailIcon,
-  HidePasswordIcon,
-} from "../../assets/icon/Icon";
+import { WrongEmailIcon, GoodEmailIcon } from "../../assets/icon/Icon";
 import fontStyles from "../../constant/fonts";
 
 import BtnBlueAction from "../../component/button/BtnBlueAction";

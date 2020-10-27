@@ -29,6 +29,6 @@ const styles = StyleSheet.create({
   },
   _title: {
     fontSize: normalize(14, "fontSize"),
-    ...fontStyles.semiBold,
+    // ...fontStyles.semiBold,
   },
 });

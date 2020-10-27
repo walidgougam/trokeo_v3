@@ -166,7 +166,7 @@ const styles = StyleSheet.create({
   },
   text_profile: {
     fontSize: 11,
-    ...fontStyles.regular,
+    // ...fontStyles.regular,
     lineHeight: 20,
     color: colors.text_description_black,
   },
@@ -189,7 +189,7 @@ const styles = StyleSheet.create({
     marginTop: 19,
   },
   text_about: {
-    ...fontStyles.bold,
+    // ...fontStyles.bold,
     fontSize: 16,
     lineHeight: 20,
     color: colors.text_description_black,
@@ -197,7 +197,7 @@ const styles = StyleSheet.create({
   },
   text_description: {
     fontSize: 14,
-    ...fontStyles.regular,
+    // ...fontStyles.regular,
     lineHeight: 20,
     color: colors.text_description_black,
   },

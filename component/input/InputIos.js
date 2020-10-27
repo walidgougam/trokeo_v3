@@ -1,12 +1,9 @@
 import React from "react";
 import {
   View,
-  Text,
   StyleSheet,
   TextInput,
-  Image,
   TouchableOpacity,
-  Platform,
   Keyboard,
 } from "react-native";
 import colors from "../../constant/colors";
@@ -25,14 +22,16 @@ export default function InputIos({
   onBlur,
   iconValidation,
 }) {
+  //STYLES
+  const { container_input, wrapper_input, _input } = styles;
   return (
-    <View style={[styles.container_input, { marginBottom: marginBottom }]}>
-      <View style={styles.wrapper_input}>
+    <View style={[container_input, { marginBottom: marginBottom }]}>
+      <View style={wrapper_input}>
         <TextInput
           blurOnSubmit={false}
           onSubmitEditing={() => Keyboard.dismiss()}
           maxLength={30}
-          style={styles.input}
+          style={_input}
           placeholderTextColor={colors.text_input}
           placeholder={placeholder}
           underlineColorAndroid="transparent"
@@ -72,7 +71,7 @@ const styles = StyleSheet.create({
     borderColor: "transparent",
     justifyContent: "center",
   },
-  input: {
+  _input: {
     ...css.text_input,
     width: normalize(250),
     height: "100%",

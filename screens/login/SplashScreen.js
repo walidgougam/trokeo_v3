@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { View, Text, StyleSheet, Image } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import colors from "../../constant/colors";
 import { LogoTrokeo } from "../../assets/image/images";
 import normalize from "react-native-normalize";

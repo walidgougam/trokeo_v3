@@ -12,19 +12,21 @@ export default function SelectCategoryScreen({ navigation }) {
   //ROUTE
   const route = useRoute();
   const { goods } = route.params;
-  // USESTATE
+  // STATE
   const [checked, setChecked] = useState();
-  const [categorySelected, setCategorySelected] = useState();
-  // USECONTEXT
+  // CONTEXT
   const { state, categoryProductContext } = useContext(AuthContext);
 
   const handleCategory = (item) => {
+    console.log(item, "item is value");
     setChecked(item.isValue);
     categoryProductContext(item.titleCategory);
   };
 
+  //STYLES
+  const { _container } = styles;
   return (
-    <View style={styles.container}>
+    <View style={_container}>
       <HeaderComponent title="Catégorie" navigation={navigation} />
       <FlatList
         showsVerticalScrollIndicator={false}
@@ -46,7 +48,7 @@ export default function SelectCategoryScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  _container: {
     backgroundColor: colors.text_white,
     flex: 1,
   },

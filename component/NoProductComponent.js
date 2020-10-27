@@ -1,17 +1,18 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { NoProductImage } from "../assets/image/images";
-import fontStyles from "../constant/fonts";
-
 import colors from "../constant/colors";
 import normalize from "react-native-normalize";
 import css from "../constant/css";
+
 import BtnBlueAction from "./button/BtnBlueAction";
 import HeaderFilterComponent from "../component/header/HeaderFilterComponent";
 
 export default function NoProductComponent() {
+  //STYLES
+  const { _container } = styles;
   return (
-    <View style={styles.container}>
+    <View style={_container}>
       <HeaderFilterComponent />
       <View style={{ marginTop: 77 }}>
         <NoProductImage />
@@ -35,7 +36,7 @@ export default function NoProductComponent() {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  _container: {
     flex: 1,
     alignItems: "center",
     // paddingTop: normalize(61),

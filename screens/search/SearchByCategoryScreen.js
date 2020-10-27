@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { View, FlatList, StyleSheet } from "react-native";
 import { goodCategories, serviceCategories } from "../../helpers";
 import { useRoute } from "@react-navigation/native";
@@ -12,6 +12,23 @@ export default function SearchByCategoryScreen({ navigation }) {
   // Route
   const route = useRoute();
   const { goods } = route.params;
+
+  // STATE
+  const [categorySelected, setCategorySelected] = useState();
+
+  useEffect(() => {
+    setCategorySelected(goodCategories);
+  }, []);
+
+  const handleCategory = (isValue, followByUser) => {
+    const changeCategory = categorySelected.map((el) => {
+      return el?.isValue === isValue
+        ? Object.assign({}, el, { followByUser })
+        : el;
+    });
+    setCategorySelected(changeCategory);
+  };
+
   return (
     <View style={styles.container}>
       <HeaderComponent title="Catégorie" navigation={navigation} />
@@ -22,9 +39,16 @@ export default function SearchByCategoryScreen({ navigation }) {
       <FlatList
         showsVerticalScrollIndicator={false}
         // contentContainerStyle={styles.wrapper_list}
-        data={goods ? goodCategories : serviceCategories}
+        // data={goods ? categorySelected : serviceCategories}
+        data={categorySelected}
         renderItem={({ item }) => {
-          return <CardSelectCategory title={item?.titleCategory} />;
+          return (
+            <CardSelectCategory
+              title={item?.titleCategory}
+              value={item?.followByUser}
+              onPress={() => handleCategory(item?.isValue, !item?.followByUser)}
+            />
+          );
         }}
         keyExtractor={(item) => item?.titleCategory}
       />

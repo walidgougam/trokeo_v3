@@ -29,8 +29,10 @@ export default function LeaveReviewScreen({ navigation }) {
       navigation.navigate("HomeBottomTab");
     });
   };
+
+  //STYLES
   const {
-    container,
+    _container,
     text_evaluation,
     star_component,
     text_experience,
@@ -39,7 +41,7 @@ export default function LeaveReviewScreen({ navigation }) {
     container_review,
   } = styles;
   return (
-    <View style={container}>
+    <View style={_container}>
       <HeaderComponent navigation={navigation} title="Laisser un avis" />
       <CardHeaderChat
         noFinalize
@@ -78,7 +80,7 @@ export default function LeaveReviewScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  _container: {
     flex: 1,
     backgroundColor: colors.background_white,
   },

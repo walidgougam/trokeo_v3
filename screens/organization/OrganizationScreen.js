@@ -23,13 +23,13 @@ export default function OrganizationScreen({ navigation }) {
 
   // STYLES
   const {
-    container,
+    _container,
     wrapper_organisation_flag,
     title_organization,
     wrapper_toggle_btn,
   } = styles;
   return (
-    <View style={container}>
+    <View style={_container}>
       <HeaderOrganization isLogo navigation={navigation} />
       <View style={wrapper_organisation_flag}>
         <Text style={title_organization}>
@@ -59,7 +59,7 @@ export default function OrganizationScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  _container: {
     flex: 1,
     backgroundColor: colors.background_white,
   },

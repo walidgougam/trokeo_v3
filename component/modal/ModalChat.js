@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { View, Text, Modal, StyleSheet, TouchableOpacity } from "react-native";
-import BtnBlueAction from "../button/BtnBlueAction";
 import { CrossGreyIcon } from "../../assets/icon/Icon";
 import normalize from "react-native-normalize";
 import colors from "../../constant/colors";
+
+import BtnBlueAction from "../button/BtnBlueAction";
 
 export default function ModalChat({
   show,

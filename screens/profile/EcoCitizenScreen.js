@@ -106,13 +106,13 @@ const styles = StyleSheet.create({
     lineHeight: normalize(20),
     marginBottom: normalize(18),
     color: colors.title_eco_citizen,
-    ...fontStyles.semiBold,
+    // ...fontStyles.semiBold,
   },
   _description: {
     fontSize: normalize(15, "fontSize"),
     color: colors.title_eco_citizen,
     lineHeight: normalize(20),
     marginBottom: normalize(20),
-    ...fontStyles.regular,
+    // ...fontStyles.regular,
   },
 });

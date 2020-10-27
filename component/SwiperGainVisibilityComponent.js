@@ -185,7 +185,7 @@ var styles = StyleSheet.create({
   text: {
     fontSize: normalize(14, "fontSize"),
     color: colors.text_description_black,
-    ...fontStyles.regular,
+    // ...fontStyles.regular,
   },
   image: {
     width: "100%",

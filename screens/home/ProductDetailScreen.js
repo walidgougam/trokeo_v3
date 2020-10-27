@@ -9,14 +9,13 @@ import {
 } from "react-native";
 import normalize from "react-native-normalize";
 import colors from "../../constant/colors";
-import { PositionIcon, RightIcon } from "../../assets/icon/Icon";
+import { PositionIcon } from "../../assets/icon/Icon";
 import { useRoute } from "@react-navigation/native";
 import fontStyles from "../../constant/fonts";
 import { ProfilePictureIcon } from "../../assets/icon/Icon";
 
 import HeaderNotification from "../../component/header/HeaderNotification";
 import MapComponent from "../../component/MapComponent";
-import PictureProfileComponent from "../../component/picture/PictureProfileComponent";
 import StarsComponent from "../../component/StarsComponent";
 import PictureSwiperComponent from "../../component/picture/PictureSwiperComponent";
 import BtnBlueAction from "../../component/button/BtnBlueAction";
@@ -30,9 +29,7 @@ export default function ProductDetailScreen({ navigation }) {
     imageProduct,
     titleProduct,
     descriptionProduct,
-    likesProduct,
     distanceOwner,
-    bookedProduct,
     categoriesProduct,
     conditionProduct,
   } = route.params;
@@ -49,7 +46,7 @@ export default function ProductDetailScreen({ navigation }) {
 
   // STYLES
   const {
-    container,
+    _container,
     wrapper_booked,
     text_booked,
     _title,
@@ -63,7 +60,7 @@ export default function ProductDetailScreen({ navigation }) {
     expand_clickable_area,
   } = styles;
   return (
-    <View style={container}>
+    <View style={_container}>
       {console.log(imageProduct[0].uri, "image product")}
       <HeaderNotification
         navigation={navigation}
@@ -164,7 +161,7 @@ export default function ProductDetailScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  _container: {
     flex: 1,
     backgroundColor: colors.background_white,
   },
@@ -181,7 +178,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: colors.text_white,
     fontSize: normalize(14, "fontSize"),
-    ...fontStyles.medium,
+    // ...fontStyles.medium,
     lineHeight: normalize(20),
   },
   _title: {
@@ -190,7 +187,7 @@ const styles = StyleSheet.create({
     fontSize: normalize(20, "fontSize"),
     lineHeight: normalize(20),
     color: colors.text_description_black,
-    ...fontStyles.heavy,
+    // ...fontStyles.heavy,
   },
   wrapper_characteristic: {
     marginBottom: normalize(27),
@@ -200,14 +197,14 @@ const styles = StyleSheet.create({
     lineHeight: normalize(20),
     color: colors.text_description_black,
     marginBottom: normalize(11),
-    ...fontStyles.heavy,
+    // ...fontStyles.heavy,
   },
   text_description: {
     fontSize: normalize(14, "fontSize"),
     lineHeight: normalize(20),
     color: colors.text_description_black,
     marginBottom: normalize(11),
-    ...fontStyles.medium,
+    // ...fontStyles.medium,
   },
   container_product_owner: {
     flexDirection: "row",

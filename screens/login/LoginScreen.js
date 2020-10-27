@@ -10,11 +10,7 @@ import {
   ActivityIndicator,
   Platform,
 } from "react-native";
-import {
-  useNavigation,
-  useRoute,
-  useIsFocused,
-} from "@react-navigation/native";
+import { useIsFocused } from "@react-navigation/native";
 import images from "../../assets/image/images";
 import fontStyles from "../../constant/fonts";
 import colors from "../../constant/colors";
@@ -222,12 +218,12 @@ const styles = StyleSheet.create({
     color: colors.text_white,
     fontSize: normalize(20, "fontSize"),
     marginBottom: normalize(17),
-    ...fontStyles.heavy,
+    // ...fontStyles.heavy,
   },
   text_image: {
     color: colors.text_white,
     fontSize: normalize(15, "fontSize"),
-    ...fontStyles.medium,
+    // ...fontStyles.medium,
   },
   container_green: {
     backgroundColor: colors.main_green,
@@ -247,7 +243,7 @@ const styles = StyleSheet.create({
   text_btn: {
     fontSize: normalize(16, "fontSize"),
     marginLeft: normalize(13),
-    ...fontStyles.book,
+    // ...fontStyles.book,
   },
   icon_google: {
     width: normalize(10, "width"),

@@ -1,27 +1,14 @@
-import React, { useState, useEffect, useLayoutEffect } from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  Image,
-  TouchableOpacity,
-  Alert,
-  Platform,
-} from "react-native";
+import React, { useState, useEffect } from "react";
+import { View, Text, StyleSheet, Image, Alert, Platform } from "react-native";
 import normalize from "react-native-normalize";
 import { useRoute } from "@react-navigation/native";
 import colors from "../../constant/colors";
 import fontStyles from "../../constant/fonts";
 import css from "../../constant/css";
 import * as ImagePicker from "expo-image-picker";
-import axios from "axios";
-import { addImageApi } from "../../API";
 import { ProfilePictureIcon } from "../../assets/icon/Icon";
 
-import GreenLineLoaderLogin from "../../component/GreenLineLoaderLogin";
-import HeaderComponent from "../../component/header/HeaderComponent";
 import BtnBlueAction from "../../component/button/BtnBlueAction";
-import PictureProfileComponent from "../../component/picture/PictureProfileComponent";
 import BackgroundComponent from "../../component/BackgroundComponent";
 
 export default function PictureScreen({ navigation }) {
@@ -30,8 +17,6 @@ export default function PictureScreen({ navigation }) {
   const { email, password, firstName, lastName } = route.params;
 
   // STATE
-  // const [picture, setPicture] = useState("");
-  // const [avatarSource, setAvatarSource] = useState("");
   const [profilePicture, setProfilePicture] = useState(null);
 
   useEffect(() => {
@@ -91,11 +76,7 @@ export default function PictureScreen({ navigation }) {
   const { container_white, _title, text_description, pseudo } = styles;
 
   return (
-    <BackgroundComponent
-      navigation={navigation}
-      route={route}
-      // title="Créer mon compte"
-    >
+    <BackgroundComponent navigation={navigation} route={route}>
       <View style={container_white}>
         <Text style={_title}>Choisir ma photo</Text>
         <Text style={text_description}>
@@ -103,7 +84,6 @@ export default function PictureScreen({ navigation }) {
         </Text>
         {profilePicture ? ( // ancienement avatarSource
           <Image
-            // source={avatarSource}
             source={{ uri: profilePicture }}
             style={{
               width: 133,
@@ -135,7 +115,6 @@ export default function PictureScreen({ navigation }) {
         </View>
 
         <BtnBlueAction
-          // title={picture ? "Suivant" : "Passer"}
           title={profilePicture ? "Suivant" : "Passer"}
           backgroundColor={colors.background_white}
           color={colors.btn_action}
@@ -147,7 +126,7 @@ export default function PictureScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  _container: {
     flex: 1,
     backgroundColor: colors.background_white,
   },
@@ -167,6 +146,6 @@ const styles = StyleSheet.create({
     fontSize: normalize(14, "fontSize"),
     lineHeight: normalize(20),
     textAlign: "center",
-    ...fontStyles.medium,
+    // ...fontStyles.medium,
   },
 });

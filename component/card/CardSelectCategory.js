@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
   },
   text_category: {
     fontSize: normalize(14, "fontSize"),
-    ...fontStyles.semiBold,
+    // ...fontStyles.semiBold,
     lineHeight: normalize(20),
     color: colors.text_description_black,
   },

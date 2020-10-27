@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
   },
   title_product: {
     fontSize: normalize(11, "fontSize"),
-    ...fontStyles.regular,
+    // ...fontStyles.regular,
     lineHeight: normalize(20),
     color: colors.background_reservation_grey,
   },
@@ -135,7 +135,7 @@ const styles = StyleSheet.create({
   },
   _localisation: {
     fontSize: normalize(9, "fontSize"),
-    ...fontStyles.regular,
+    // ...fontStyles.regular,
     lineHeight: normalize(20),
     color: colors.likes_grey,
     marginLeft: normalize(4),

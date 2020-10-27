@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  FlatList,
-  Alert,
-  AsyncStorage,
-} from "react-native";
+import { View, StyleSheet, FlatList, Alert, AsyncStorage } from "react-native";
 import normalize from "react-native-normalize";
 import { settingOptions } from "../../../helpers";
 import colors from "../../../constant/colors";
@@ -41,9 +34,9 @@ export default function SettingDetailScreen({ navigation }) {
     }
   };
 
-  const { container } = styles;
+  const { _container } = styles;
   return (
-    <View style={container}>
+    <View style={_container}>
       <HeaderComponent navigation={navigation} />
       <FlatList
         data={settingOptions}
@@ -60,7 +53,7 @@ export default function SettingDetailScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  _container: {
     flex: 1,
     backgroundColor: colors.background_white,
   },

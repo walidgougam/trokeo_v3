@@ -61,20 +61,20 @@ const styles = StyleSheet.create({
   },
   name_sender: {
     fontSize: normalize(12, "fontSize"),
-    ...fontStyles.bold,
+    // ...fontStyles.bold,
     lineHeight: normalize(20),
     color: colors.text_description_black,
   },
   title_product: {
     fontSize: normalize(11, "fontSize"),
-    ...fontStyles.regular,
+    // ...fontStyles.regular,
     lineHeight: normalize(20),
     color: colors.text_description_black,
   },
   _message: {
     fontSize: 11,
     lineHeight: 20,
-    ...fontStyles.regular,
+    // ...fontStyles.regular,
     width: normalize(216, "width"),
     marginTop: normalize(6),
   },

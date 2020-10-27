@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import colors from "../../constant/colors";
 import normalize from "react-native-normalize";
@@ -11,7 +11,6 @@ export default function PictureProfileComponent({
   width,
   height,
   fontSize,
-  image,
   firstName,
   lastName,
   isProductDetail,
@@ -22,16 +21,8 @@ export default function PictureProfileComponent({
   //CONTEXT
   const { state, editProfileContext } = useContext(AuthContext);
 
-  // useEffect(() => {     // processus devant se declencher en cas d'edition du profile
-  //   if (onChange) {
-  //     onChange(avatarSource);
-  //   }
-  // }, [avatarSource]);
-
   const renderPictureCircle = () => {
-    console.log(userPicture, "alors user picture");
     if (userPicture) {
-      console.log(userPicture, "------blablabla mais oui------");
       return (
         <Image
           source={{ uri: userPicture }}
@@ -90,7 +81,7 @@ const styles = StyleSheet.create({
     fontSize: normalize(14, "fontSize"),
     lineHeight: normalize(20),
     textAlign: "center",
-    ...fontStyles.medium,
+    // ...fontStyles.medium,
   },
   text_change_profile_picture: {
     textDecorationLine: "underline",

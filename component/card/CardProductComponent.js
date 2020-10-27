@@ -164,7 +164,7 @@ const styles = StyleSheet.create({
     fontSize: normalize(11, "fontSize"),
     color: colors.background_reservation_grey,
     lineHeight: normalize(20),
-    ...fontStyles.regular,
+    // ...fontStyles.regular,
   },
   container_icon: {
     ...css.row_space_between,
@@ -179,6 +179,6 @@ const styles = StyleSheet.create({
     lineHeight: normalize(20),
     alignSelf: "center",
     marginLeft: normalize(4),
-    ...fontStyles.regular,
+    // ...fontStyles.regular,
   },
 });

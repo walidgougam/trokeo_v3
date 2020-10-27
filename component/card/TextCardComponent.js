@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
   _text: {
     color: colors.text_description_black,
     fontSize: normalize(14, "fontSize"),
-    ...fontStyles.heavy,
+    // ...fontStyles.heavy,
     lineHeight: normalize(20),
   },
   _btn: {
@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
   },
   _title: {
     fontSize: normalize(11, "fontSize"),
-    ...fontStyles.book,
+    // ...fontStyles.book,
     lineHeight: normalize(20),
     textAlign: "center",
   },

@@ -5,15 +5,17 @@ import colors from "../../constant/colors";
 import normalize from "react-native-normalize";
 
 export default function InputSearch({ placeholder }) {
+  //STYLES
+  const { _container, _logo, _placeholder } = styles;
   return (
-    <View style={styles.container}>
-      <View style={styles.logo}>
+    <View style={_container}>
+      <View style={_logo}>
         <SearchSmallIcon />
       </View>
       <View style={{ marginLeft: normalize(25) }}>
         <TextInput
           placeholder={placeholder}
-          style={styles.placeholder}
+          style={_placeholder}
           autoCapitalize="none"
         />
       </View>
@@ -21,7 +23,7 @@ export default function InputSearch({ placeholder }) {
   );
 }
 const styles = StyleSheet.create({
-  container: {
+  _container: {
     backgroundColor: colors.background_input_grey,
     width: "100%",
     flexDirection: "row",
@@ -29,10 +31,10 @@ const styles = StyleSheet.create({
     borderRadius: 2,
     alignItems: "center",
   },
-  logo: {
+  _logo: {
     marginLeft: normalize(13),
   },
-  placeholder: {
+  _placeholder: {
     fontSize: normalize(14, "fontSize"),
   },
 });

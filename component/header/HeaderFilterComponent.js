@@ -20,7 +20,7 @@ export default function HeaderFilterComponent() {
       {tab.map((e, index) => {
         return (
           <View style={wrapper_text_filter}>
-            <Text style={text_filter}>{e.title}</Text>
+            <Text style={text_filter}>{e?.title}</Text>
             <TouchableOpacity
               hitSlop={expand_clickable_area}
               style={{ marginLeft: 7 }}
@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
   },
   text_filter: {
     fontSize: normalize(14, "fontSize"),
-    ...fontStyles.semiBold,
+    // ...fontStyles.semiBold,
     lineHeight: 20,
     color: colors.text_description_black,
   },

@@ -1,10 +1,6 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import HeaderComponent from "../../../component/header/HeaderComponent";
-// import {
-//   PhoneNotificationImage,
-//   AddPictureImage,
-// } from "../../assets/image/images";
 import normalize from "react-native-normalize";
 import SwiperGainVisibilityComponent from "../../../component/SwiperGainVisibilityComponent";
 import colors from "../../../constant/colors";
@@ -12,6 +8,7 @@ import BtnBluAction from "../../../component/button/BtnBlueAction";
 import fontStyles from "../../../constant/fonts";
 
 export default function GainVisibilityScreen({ navigation }) {
+  //STYLES
   const { container, wrapper_white_background, _title } = styles;
   return (
     <View style={container}>
@@ -58,8 +55,6 @@ var styles = StyleSheet.create({
     marginTop: normalize(13),
     color: colors.title_green,
     fontSize: normalize(16, "fontSize"),
-    // lineHeight: normalize(20),
-    // marginBottom: normalize(37)
-    ...fontStyles.bold,
+    // ...fontStyles.bold,
   },
 });

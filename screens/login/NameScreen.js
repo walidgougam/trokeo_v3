@@ -9,16 +9,10 @@ import * as Yup from "yup";
 
 import InputIos from "../../component/input/InputIos";
 import InputAndroid from "../../component/input/InputAndroid";
-import GreenLineLoaderLogin from "../../component/GreenLineLoaderLogin";
-import HeaderComponent from "../../component/header/HeaderComponent";
 import BtnBlueAction from "../../component/button/BtnBlueAction";
 import BackgroundComponent from "../../component/BackgroundComponent";
 
 const NameScreen = ({ navigation }) => {
-  // STATE
-  // const [firstName, setFirstName] = useState("");
-  // const [lastName, setLastName] = useState("");
-
   // ROUTE
   const route = useRoute();
   const { email, password } = route.params;

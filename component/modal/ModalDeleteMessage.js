@@ -1,6 +1,5 @@
 import React from "react";
-import { View, Text } from "react-native";
-import { MenuProvider } from "react-native-popup-menu";
+import { Text } from "react-native";
 import {
   Menu,
   MenuOptions,

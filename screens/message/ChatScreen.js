@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import {
   View,
-  Text,
   StyleSheet,
   TouchableOpacity,
   AsyncStorage,
@@ -33,7 +32,6 @@ export default function ChatScreen({ navigation }) {
 
   // STATE
   const [messages, setMessages] = useState([]);
-  const [message, setMessage] = useState("");
   const [user, setUser] = useState();
   const [loading, setLoading] = useState(true);
   const [recieverId, setRecieverId] = useState("");

@@ -3,12 +3,12 @@ import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { MapGeolocation } from "../assets/image/images";
 import colors from "../constant/colors";
 import normalize from "react-native-normalize";
-import fontStyles from "../constant/fonts";
-
-import BtnBlueAction from "./button/BtnBlueAction";
 import css from "../constant/css";
 
+import BtnBlueAction from "./button/BtnBlueAction";
+
 export default function NoGeolocationComponent({ getLocation }) {
+  //STYLES
   const {
     container,
     _text,

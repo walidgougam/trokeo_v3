@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
   },
   text_title: {
     fontSize: normalize(18, "fontSize"),
-    ...fontStyles.bold,
+    // ...fontStyles.bold,
     color: colors.text_white,
     marginLeft: normalize(27),
   },

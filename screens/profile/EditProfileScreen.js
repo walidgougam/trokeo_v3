@@ -1,15 +1,11 @@
-import React, { useState, useContext, useEffect, useRef } from "react";
+import React, { useState, useContext } from "react";
 import { View, Text, StyleSheet, ScrollView } from "react-native";
-import {
-  useNavigation,
-  useRoute,
-  useIsFocused,
-} from "@react-navigation/native";
+import { useRoute } from "@react-navigation/native";
 import colors from "../../constant/colors";
 import normalize from "react-native-normalize";
 import css from "../../constant/css";
 import { Switch } from "react-native-paper";
-import { editProfileUserApi, getUserApi } from "../../API";
+import { editProfileUserApi } from "../../API";
 import { Context as AuthContext } from "../../context/AuthContext";
 
 import HeaderComponent from "../../component/header/HeaderComponent";
@@ -20,15 +16,10 @@ import BtnBlueAction from "../../component/button/BtnBlueAction";
 export default function EditProfileScreen({ navigation }) {
   // ROUTE
   const route = useRoute();
-  const { data, userData } = route.params;
+  const { userData } = route.params;
 
   // CONTEXT
-  const {
-    state,
-    editProfileContext,
-    getUserContext,
-    changePictureContext,
-  } = useContext(AuthContext);
+  const { state, editProfileContext } = useContext(AuthContext);
 
   // STATE
   const [picture, setPicture] = useState();
@@ -62,14 +53,14 @@ export default function EditProfileScreen({ navigation }) {
 
   // STYLES
   const {
-    container,
+    _container,
     wrapper_profile_info,
     wrapper_geoloc,
     geoloc_text,
   } = styles;
 
   return (
-    <View style={container}>
+    <View style={_container}>
       <HeaderComponent navigation={navigation} title="Mise à jour du profil" />
       <ScrollView>
         <View style={wrapper_profile_info}>
@@ -120,7 +111,7 @@ export default function EditProfileScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  _container: {
     flex: 1,
     backgroundColor: colors.background_white,
   },

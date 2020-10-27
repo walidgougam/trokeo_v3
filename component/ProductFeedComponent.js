@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { View, Text, FlatList, StyleSheet, Dimensions } from "react-native";
-import CardProductComponent from "./card/CardProductComponent";
 import normalize from "react-native-normalize";
-import axios from "axios";
+
+import CardProductComponent from "./card/CardProductComponent";
 
 export default function ProductFeedComponent({
   data,
@@ -30,27 +30,28 @@ export default function ProductFeedComponent({
       <>
         <CardProductComponent
           clickFromChild={clickFromChild}
-          userData={item.user}
-          productId={item._id}
-          imageProduct={item.productPicture}
-          titleProduct={item.title}
-          descriptionProduct={item.description}
-          likesProduct={item.likes}
-          distanceOwner={item.distance}
+          userData={item?.user}
+          productId={item?._id}
+          imageProduct={item?.productPicture}
+          titleProduct={item?.title}
+          descriptionProduct={item?.description}
+          likesProduct={item?.likes}
+          distanceOwner={item?.distance}
           navigation={navigation}
-          bookedProduct={item.booked}
-          categoriesProduct={item.category}
-          conditionProduct={item.condition}
+          bookedProduct={item?.booked}
+          categoriesProduct={item?.category}
+          conditionProduct={item?.condition}
         />
       </>
     );
   };
-
+  //STYLES
+  const { _container, wrapper_list } = styles;
   return (
-    <View style={styles.container}>
+    <View style={_container}>
       <FlatList
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={styles.wrapper_list}
+        contentContainerStyle={wrapper_list}
         data={formatData(data, numColumns)}
         renderItem={renderItem}
         keyExtractor={(item) => item}
@@ -61,7 +62,7 @@ export default function ProductFeedComponent({
 }
 
 const styles = StyleSheet.create({
-  container: {
+  _container: {
     flex: 1,
     marginHorizontal: normalize(21),
     justifyContent: "space-between",

@@ -1,11 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
   StyleSheet,
   Platform,
-  AsyncStorage,
-  Button,
   TouchableHighlight,
 } from "react-native";
 import { useRoute } from "@react-navigation/native";
@@ -24,8 +22,6 @@ import InputIos from "../../component/input/InputIos";
 import BackgroundComponent from "../../component/BackgroundComponent";
 
 const EmailLoginScreen = ({ navigation }) => {
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
   const [hidePassword, setHidePassword] = useState(true);
   const route = useRoute();
   const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;

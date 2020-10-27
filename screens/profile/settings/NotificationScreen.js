@@ -13,9 +13,9 @@ import fontStyles from "../../../constant/fonts";
 import css from "../../../constant/css";
 import axios from "axios";
 import { IOS_URL, ANDROID_URL } from "../../../API";
+import { ActivityIndicator } from "react-native-paper";
 
 import HeaderComponent from "../../../component/header/HeaderComponent";
-import { ActivityIndicator } from "react-native-paper";
 
 export default function NotificationScreen({ navigation }) {
   const [updatePush, setUpdatePush] = useState(false);
@@ -129,7 +129,7 @@ export default function NotificationScreen({ navigation }) {
   };
 
   const {
-    container,
+    _container,
     wrapper_title,
     _title,
     _description,
@@ -144,7 +144,7 @@ export default function NotificationScreen({ navigation }) {
         navigation={navigation}
         editNotification={editNotification}
       />
-      <View style={container}>
+      <View style={_container}>
         <View>
           <View style={[wrapper_title, { marginTop: 13 }]}>
             <Text style={_title}>Notifications push</Text>
@@ -224,7 +224,7 @@ export default function NotificationScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  _container: {
     flex: 1,
     marginHorizontal: normalize(18),
   },
@@ -233,14 +233,14 @@ const styles = StyleSheet.create({
   },
   _title: {
     fontSize: normalize(14, "fontSize"),
-    ...fontStyles.semiBold,
+    // ...fontStyles.semiBold,
     lineHeight: normalize(20),
     color: colors.text_description_black,
   },
   _description: {
     color: colors.text_description_black,
     fontSize: normalize(11, "fontSize"),
-    ...fontStyles.regular,
+    // ...fontStyles.regular,
     lineHeight: normalize(20),
   },
   wrapper_switch_by_line: {
@@ -250,7 +250,7 @@ const styles = StyleSheet.create({
   },
   _label: {
     fontSize: normalize(13, "fontSize"),
-    ...fontStyles.regular,
+    // ...fontStyles.regular,
     lineHeight: normalize(20),
     color: colors.text_description_black,
   },

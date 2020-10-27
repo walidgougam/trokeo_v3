@@ -3,15 +3,22 @@ import NoProductComponent from "./component/NoProductComponent";
 import ProductFeedComponent from "./component/ProductFeedComponent";
 
 export const goodsCondition = [
-  "Neuf avec étiquette",
-  "Neuf",
-  "Très bon état",
-  "Bon état",
-  "Passable",
+  { titleCondition: "Neuf avec étiquette", isSelected: true },
+  { titleCondition: "Neuf", isSelected: false },
+  { titleCondition: "Très bon état", isSelected: false },
+  { titleCondition: "Bon état", isSelected: false },
+  { titleCondition: "Passable", isSelected: false },
+];
+export const distance = [
+  { km: "5km", isSelected: false },
+  { km: "10km", isSelected: true },
+  { km: "15km", isSelected: false },
+  { km: "20km", isSelected: false },
+  { km: "25km", isSelected: false },
 ];
 
 export const goodCategories = [
-  { titleCategory: "Animaux", isValue: 0, followByUser: false },
+  { titleCategory: "Animaux", isValue: 0, followByUser: true },
   { titleCategory: "Beauté & bien être", isValue: 1, followByUser: false },
   { titleCategory: "Décoration", isValue: 2, followByUser: false },
   { titleCategory: "Entretien", isValue: 3, followByUser: false },

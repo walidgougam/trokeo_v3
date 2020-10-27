@@ -49,7 +49,6 @@ export default function AllMessageScreen({ navigation }) {
           : `${ANDROID_URL}/chat/allrecieverchat/${userid}`,
     })
       .then((res) => {
-        console.log(res, "-----res mon gars----");
         setAllMessage(res?.data?.chat);
       })
       .catch((err) => {
@@ -124,7 +123,7 @@ const styles = StyleSheet.create({
   text_title: {
     marginBottom: normalize(13),
     fontSize: normalize(18, "fontSize"),
-    ...fontStyles.bold,
+    // ...fontStyles.bold,
     lineHeight: 20,
     color: colors.text_white,
     marginLeft: normalize(11),

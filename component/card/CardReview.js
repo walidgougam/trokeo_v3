@@ -54,19 +54,19 @@ const styles = StyleSheet.create({
   },
   _date: {
     fontSize: normalize(9, "fontSize"),
-    ...fontStyles.regular,
+    // ...fontStyles.regular,
     lineHeight: normalize(20),
     color: colors.icon_profile_grey,
   },
   text_name: {
     fontSize: normalize(11, "fontSize"),
-    ...fontStyles.semiBold,
+    // ...fontStyles.semiBold,
     lineHeight: normalize(20),
     color: colors.text_description_black,
   },
   text_review: {
     fontSize: normalize(11, "fontSize"),
-    ...fontStyles.regular,
+    // ...fontStyles.regular,
     lineHeight: normalize(20),
     color: colors.placeholder_grey,
   },
