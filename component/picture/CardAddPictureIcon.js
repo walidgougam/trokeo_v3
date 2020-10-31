@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
   container: {
     borderColor: colors.btn_action,
     borderStyle: "solid",
-    borderWidth: normalize(1),
+    borderWidth: 1,
     width: normalize(56),
     height: normalize(56),
     justifyContent: "center",

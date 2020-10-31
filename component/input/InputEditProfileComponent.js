@@ -4,9 +4,10 @@ import { Form, Item, Input, Label } from "native-base";
 import colors from "../../constant/colors";
 import normalize from "react-native-normalize";
 import fontStyles from "../../constant/fonts";
+import { ArrowBottomIcon } from "../../assets/icon/Icon";
 import { Context as AuthContext } from "../../context/AuthContext";
 
-import PickerSelect from "../../component/PickerSelect";
+import SelectPicker from "react-native-form-select-picker";
 
 export default function InputEditProfileComponent({
   phoneNumber,
@@ -23,6 +24,7 @@ export default function InputEditProfileComponent({
   //STATE
   const [female, setFemale] = useState();
   const [selectedLabel, setSelectedLabel] = useState("");
+  const [gender, setGender] = useState();
 
   // USECONTEXT
   const { state, editProfileContext } = useContext(AuthContext);
@@ -36,7 +38,7 @@ export default function InputEditProfileComponent({
   };
 
   const handleSelect = (e) => {
-    console.log(e, "select");
+    setGender(e);
   };
 
   //STYLES
@@ -94,32 +96,22 @@ export default function InputEditProfileComponent({
           }}
         />
       </Item>
-      {/* <Item style={{ borderColor: colors.placeholder_grey }} floatingLabel last> */}
-      <Label style={styles.label_input}>Genre</Label>
-      <View style={[_input, { borderColor: colors.placeholder_grey }]}>
-        <PickerSelect
-          data={["homme", "femme"]}
-          handleSelect={(e) => handleSelect(e)}
-          selectedLabel={selectedLabel}
-        />
-      </View>
-      {/* </Item> */}
-      {/* <RNPickerSelect
-          style={{
-            placeholder: {
-              marginLeft: 14,
-            },
-            placeholderTextColor: { color: "green" },
-          }}
-          onValueChange={(value) => selectGender(value)}
-          placeholder={{
-            label: "Genre",
-          }}
-          items={[
-            { label: "Male", value: "male" },
-            { label: "Female", value: "female" },
-          ]}
-        /> */}
+      <Label style={[styles.label_input, { marginLeft: 14, marginTop: 10 }]}>
+        Genre
+      </Label>
+
+      <SelectPicker
+        style={{ marginLeft: 10 }}
+        placeholder="select"
+        onValueChange={(value) => {
+          setGender(value);
+        }}
+        selected={gender}
+      >
+        {Object.values(["homme", "femme"]).map((val, index) => (
+          <SelectPicker.Item label={val} value={val} key={index} />
+        ))}
+      </SelectPicker>
     </Form>
   );
 }

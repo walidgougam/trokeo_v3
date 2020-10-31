@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, FlatList, StyleSheet } from "react-native";
-import { goodsCondition } from "../../helpers";
+import { goodsCondition2 } from "../../helpers";
 import { useRoute } from "@react-navigation/native";
 import colors from "../../constant/colors";
 
@@ -16,7 +16,7 @@ export default function SearchByConditionScreen({ navigation }) {
   const [conditionSelected, setConditionSelected] = useState();
 
   useEffect(() => {
-    setConditionSelected(goodsCondition);
+    setConditionSelected(goodsCondition2);
   }, []);
 
   const handleCondition = (titleCondition, isSelected) => {
@@ -30,7 +30,6 @@ export default function SearchByConditionScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      {console.log(goodsCondition, "goodcondition")}
       <HeaderComponent title="Etat" navigation={navigation} />
       <FlatList
         showsVerticalScrollIndicator={false}

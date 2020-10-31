@@ -46,7 +46,7 @@ export default function TextCardComponent({
 const styles = StyleSheet.create({
   wrapper_text: {
     borderBottomColor: colors.placeholder_grey,
-    borderBottomWidth: normalize(1),
+    borderBottomWidth: 1,
     height: normalize(50),
     justifyContent: "space-between",
     alignItems: "center",

@@ -43,7 +43,8 @@ export default function PictureScreen({ navigation }) {
     console.log(result, "result picture screen");
 
     if (!result.cancelled) {
-      setProfilePicture(result.uri);
+      console.log(result, "-------result-------");
+      setProfilePicture(result);
     }
   };
 
@@ -84,7 +85,7 @@ export default function PictureScreen({ navigation }) {
         </Text>
         {profilePicture ? ( // ancienement avatarSource
           <Image
-            source={{ uri: profilePicture }}
+            source={profilePicture}
             style={{
               width: 133,
               height: 133,

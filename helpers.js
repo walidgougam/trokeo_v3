@@ -3,6 +3,14 @@ import NoProductComponent from "./component/NoProductComponent";
 import ProductFeedComponent from "./component/ProductFeedComponent";
 
 export const goodsCondition = [
+  "Neuf avec étiquette",
+  "Neuf",
+  "Très bon état",
+  "Bon état",
+  "Passable",
+];
+
+export const goodsCondition2 = [
   { titleCondition: "Neuf avec étiquette", isSelected: false },
   { titleCondition: "Neuf", isSelected: false },
   { titleCondition: "Très bon état", isSelected: false },

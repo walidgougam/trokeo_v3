@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="10px" viewBox="0 0 16 10" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>45A9024E-E487-4669-8948-F4BD2306E967</title>
+    <defs>
+        <filter id="filter-1">
+            <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0.227451 0 0 0 0 0.227451 0 0 0 0 0.227451 0 0 0 1.000000 0"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Android-" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="icons8-more_than" transform="translate(-326.000000, -516.000000)" filter="url(#filter-1)">
+            <g transform="translate(334.000000, 521.000000) rotate(89.000000) translate(-334.000000, -521.000000) translate(331.000000, 515.000000)">
+                <polyline id="Path" stroke="#BFBDBD" points="0 0 6 6 0 12"></polyline>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -20,11 +20,18 @@ export const registerApi = async (
       Platform.OS === "ios"
         ? `${IOS_URL}/user/register`
         : `${ANDROID_URL}/user/register`,
-    data: { email, password, firstName, lastName, userPicture, female },
+    data: {
+      email,
+      password,
+      firstName,
+      lastName,
+      userPicture: { uri: userPicture.uri },
+      female,
+    },
   })
     .then((res) => {
       console.log(res, "result register api ");
-      AsyncStorage.setItem("userId", res.data.userData._id);
+      AsyncStorage.setItem("userId", res?.data?.userData?._id);
       callback();
     })
     .catch((err) => {

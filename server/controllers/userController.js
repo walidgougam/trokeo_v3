@@ -18,9 +18,13 @@ exports.register = async (req, res) => {
     userPicture,
     female,
   } = req.body;
+  console.log(userPicture, "user picutre on server");
   try {
     if (!email || !password || !firstName || !lastName || !female) {
-      console.log("you have to fill all input");
+      console.log(
+        { email, password, firstName, lastName, female },
+        "you have to fill all input"
+      );
     }
     const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 

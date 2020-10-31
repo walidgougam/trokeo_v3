@@ -11,12 +11,12 @@ import {
 } from "react-native";
 import colors from "../../constant/colors";
 import fontStyles from "../../constant/fonts";
-import { RightIcon } from "../../assets/icon/Icon";
+import { RightIcon, ArrowBottomIcon } from "../../assets/icon/Icon";
 import { goodsCondition } from "../../helpers";
 import { createProductApi } from "../../API";
 import { Context as AuthContext } from "../../context/AuthContext";
 import css from "../../constant/css";
-// import RNPickerSelect from "react-native-picker-select";
+import SelectPicker from "react-native-form-select-picker";
 import * as ImagePicker from "expo-image-picker";
 import normalize from "react-native-normalize";
 import { BottomSheet, ListItem } from "react-native-elements";
@@ -26,7 +26,7 @@ import BtnHomeToggle from "../../component/button/BtnHomeToggle";
 import CardPictureIcon from "../../component/picture/CardPictureIcon";
 import CardAddPictureIcon from "../../component/picture/CardAddPictureIcon";
 import BtnBlueAction from "../../component/button/BtnBlueAction";
-import PickerSelect from "../../component/PickerSelect";
+import { ScrollView } from "react-native-gesture-handler";
 
 export default function CreateProduct({ navigation }) {
   // STATE
@@ -186,88 +186,102 @@ export default function CreateProduct({ navigation }) {
           changeFocus={() => setGoods(false)}
         />
       </View>
-      <View style={wrapper_camera_picture}>
-        <TouchableOpacity
-          activeOpacity={0.6}
-          onPress={() => handleDeleteProductPicture(avatarSource[0])}
-        >
-          <CardPictureIcon image={avatarSource[0]} />
-        </TouchableOpacity>
-        <TouchableOpacity
-          activeOpacity={0.6}
-          onPress={() => handleDeleteProductPicture(avatarSource[1])}
-        >
-          <CardPictureIcon image={avatarSource[1]} />
-        </TouchableOpacity>
-        <TouchableOpacity
-          activeOpacity={0.6}
-          onPress={() => handleDeleteProductPicture(avatarSource[2])}
-        >
-          <CardPictureIcon image={avatarSource[2]} />
-        </TouchableOpacity>
-        <TouchableOpacity
-          activeOpacity={0.6}
-          onPress={() => handleChoosePicture()}
-        >
-          <CardAddPictureIcon />
-        </TouchableOpacity>
-      </View>
-      <View style={wrapper_input}>
-        <Text style={_label}>Titre</Text>
-        <TextInput
-          placeholder="Titre: lampe, échelle, cadre…"
-          style={_input}
-          onChangeText={(e) => setTitle(e)}
-          value={title}
-        />
-        <Text style={_label}>Description</Text>
-        <TextInput
-          onChangeText={(e) => setDescription(e)}
-          multiline
-          placeholder="Donner les caractéristiques du bien proposé (taille, couleur, dimensions …)"
-          style={_input}
-          maxLength={200}
-          value={description}
-        />
-        <Text style={styles.text_max_length}>200 caractères maximum.</Text>
-      </View>
-      <View style={wrapper_select_goods_condition}>
-        <Text style={_label}>Etat du bien</Text>
-        {/* <PickerSelect
-          data={goodsCondition}
-          handleSelect={(e) => handleSelect(e)}
-          selectedLabel={conditionProduct}
-        /> */}
-        {/* <RNPickerSelect
-            style={{ borderBottomColor: "black", borderBottomWidth: 1 }}
-            onValueChange={(value) => setConditionProduct(value)}
-            placeholder={{
-              label: "Sélectionner",
+      <ScrollView>
+        <View style={wrapper_camera_picture}>
+          <TouchableOpacity
+            activeOpacity={0.6}
+            onPress={() => handleDeleteProductPicture(avatarSource[0])}
+          >
+            <CardPictureIcon image={avatarSource[0]} />
+          </TouchableOpacity>
+          <TouchableOpacity
+            activeOpacity={0.6}
+            onPress={() => handleDeleteProductPicture(avatarSource[1])}
+          >
+            <CardPictureIcon image={avatarSource[1]} />
+          </TouchableOpacity>
+          <TouchableOpacity
+            activeOpacity={0.6}
+            onPress={() => handleDeleteProductPicture(avatarSource[2])}
+          >
+            <CardPictureIcon image={avatarSource[2]} />
+          </TouchableOpacity>
+          <TouchableOpacity
+            activeOpacity={0.6}
+            onPress={() => handleChoosePicture()}
+          >
+            <CardAddPictureIcon />
+          </TouchableOpacity>
+        </View>
+        <View style={wrapper_input}>
+          <Text style={_label}>Titre</Text>
+          <TextInput
+            placeholder="Titre: lampe, échelle, cadre…"
+            style={_input}
+            onChangeText={(e) => setTitle(e)}
+            value={title}
+          />
+          <Text style={_label}>Description</Text>
+          <TextInput
+            onChangeText={(e) => setDescription(e)}
+            multiline
+            placeholder="Donner les caractéristiques du bien proposé (taille, couleur, dimensions …)"
+            style={_input}
+            maxLength={200}
+            value={description}
+          />
+          <Text style={styles.text_max_length}>200 caractères maximum.</Text>
+        </View>
+        <View style={wrapper_select_goods_condition}>
+          <Text style={_label}>Etat du bien</Text>
+          <View
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              borderWidth: 1,
+              borderColor: "#BFBDBD",
+              justifyContent: "space-between",
+              alignContent: "center",
+              paddingLeft: 10,
+              paddingRight: 17,
             }}
-            items={goodsCondition.map((item, index) => {
-              return { label: item, value: item };
-            })}
-          /> */}
-        {/* <TextInput placeholder="Selectionner" style={_input} /> */}
-      </View>
-      <TouchableOpacity
-        activeOpacity={0.6}
-        style={wrapper_category}
-        onPress={() => goToCategoryList()}
-      >
-        <Text style={text_category}>
-          {state?.category ? state?.category : "Catégorie"}
-        </Text>
-        <RightIcon />
-      </TouchableOpacity>
-      <View style={{ marginHorizontal: 70, marginTop: 50 }}>
-        <BtnBlueAction
-          backgroundColor={colors.btn_action}
-          color="white"
-          title="Publier"
-          onPress={() => createProduct()}
-        />
-      </View>
+          >
+            <SelectPicker
+              placeholder="Sélectionner"
+              onValueChange={(value) => {
+                // Do anything you want with the value.
+                // For example, save in state.
+                setConditionProduct(value);
+              }}
+              selected={conditionProduct}
+            >
+              {Object.values(goodsCondition).map((val, index) => (
+                <SelectPicker.Item label={val} value={val} key={index} />
+              ))}
+            </SelectPicker>
+            <ArrowBottomIcon />
+          </View>
+        </View>
+        <TouchableOpacity
+          activeOpacity={0.6}
+          style={wrapper_category}
+          onPress={() => goToCategoryList()}
+        >
+          <Text style={text_category}>
+            {state?.category ? state?.category : "Catégorie"}
+          </Text>
+          <RightIcon />
+        </TouchableOpacity>
+        <View style={{ marginHorizontal: 70, marginTop: 50 }}>
+          <BtnBlueAction
+            backgroundColor={colors.btn_action}
+            color="white"
+            title="Publier"
+            onPress={() => createProduct()}
+          />
+        </View>
+      </ScrollView>
       <>
         <Snackbar
           style={{

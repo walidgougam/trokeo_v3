@@ -189,7 +189,7 @@ const LoginScreen = ({ navigation }) => {
           style={btn_connect}
           onPress={() => navigation.navigate("EmailRegister")}
         >
-          <Text style={text_connect}>Se connecter</Text>
+          <Text style={text_connect}>S'inscrire</Text>
         </TouchableHighlight>
       </View>
     </View>

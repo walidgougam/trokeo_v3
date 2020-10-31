@@ -35,7 +35,7 @@ export default {
   },
   border_bottom: {
     borderBottomColor: colors.placeholder_grey,
-    borderBottomWidth: normalize(1),
+    borderBottomWidth: 1,
   },
   row_space_between: {
     flexDirection: "row",

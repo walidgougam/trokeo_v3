@@ -78,9 +78,10 @@ export default function ProfileScreen({ navigation }) {
       <HeaderNotification navigation={navigation} nothingOnHeader />
       <ScrollView>
         <View style={wrapper_profile_info}>
+          {console.log(userData, "useruseruser")}
           {userData?.userPicture ? (
             <Image
-              source={{ uri: userData?.userPicture }}
+              source={userData?.userPicture}
               style={{
                 width: normalize(86),
                 height: normalize(86),

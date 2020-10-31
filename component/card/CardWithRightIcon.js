@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, StyleSheet, TouchableOpacity } from "react-native";
+import { Text, StyleSheet, TouchableOpacity, Platform } from "react-native";
 import { RightIcon, PenEditProfileIcon } from "../../assets/icon/Icon";
 import normalize from "react-native-normalize";
 import css from "../../constant/css";
@@ -12,7 +12,17 @@ export default function CardWithRightIcon({
 }) {
   const { container, _title } = styles;
   return (
-    <TouchableOpacity activeOpacity={0.6} style={container} onPress={onPress}>
+    <TouchableOpacity
+      activeOpacity={0.6}
+      style={[
+        container,
+        Platform.OS === "android" && {
+          borderBottomColor: "#979797",
+          borderBottomWidth: 1,
+        },
+      ]}
+      onPress={onPress}
+    >
       <Text style={_title}>{title}</Text>
       {fromSeeProfileCard ? <PenEditProfileIcon /> : <RightIcon />}
     </TouchableOpacity>

@@ -55,7 +55,7 @@ export default function PictureProfileScreen({
     <View>
       {userPicture || avatarSource ? (
         <Image
-          source={{ uri: avatarSource }}
+          source={avatarSource}
           style={{
             width: normalize(86),
             height: normalize(86),

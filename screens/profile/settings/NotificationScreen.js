@@ -183,7 +183,7 @@ export default function NotificationScreen({ navigation }) {
         <View
           style={{
             borderBottomColor: "#979797",
-            borderBottomWidth: normalize(1),
+            borderBottomWidth: 1,
             marginHorizontal: normalize(-18),
           }}
         ></View>

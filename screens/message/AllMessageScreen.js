@@ -91,6 +91,7 @@ export default function AllMessageScreen({ navigation }) {
                 )
               }
             >
+              {console.log(item._id, "-------wwwwidwwww------")}
               <CardMessageComponent
                 sender={item?.reciever?.firstName}
                 message={item?.messages[item.messages.length - 1]?.text}
@@ -100,7 +101,7 @@ export default function AllMessageScreen({ navigation }) {
               />
             </TouchableOpacity>
           )}
-          keyExtractor={(item) => item.id}
+          keyExtractor={(item) => item?._id}
         />
       </View>
       {/* <MenuProvider>
