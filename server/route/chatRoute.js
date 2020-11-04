@@ -11,5 +11,6 @@ router.post("/getchat", chatController.getChat);
 router.get("/getchat/:sender/:reciever", chatController.getSpecificChat);
 router.post("/postchat", chatController.postChat);
 router.get("/allrecieverchat/:id", chatController.getAllRecieverChat);
+router.delete("/deletechat/:sender/:reciever", chatController.deleteChat);
 
 module.exports = router;

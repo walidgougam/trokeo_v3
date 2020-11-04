@@ -64,6 +64,7 @@ export default function EditProfileScreen({ navigation }) {
       <HeaderComponent navigation={navigation} title="Mise à jour du profil" />
       <ScrollView>
         <View style={wrapper_profile_info}>
+          {console.log(userData?.userPicture, "----user picture profile----")}
           <PictureProfileScreen
             editProfile
             avatar={(e) => setUserPicture(e)}

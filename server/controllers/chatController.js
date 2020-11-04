@@ -112,3 +112,20 @@ exports.getAllRecieverChat = async (req, res) => {
     });
   }
 };
+
+exports.deleteChat = async (req, res) => {
+  const { sender, reciever } = req.params;
+  console.log(sender, reciever, "---id server ----");
+  Chat.findOneAndDelete({ sender, reciever }).exec((err, result) => {
+    if (err) {
+      res.status(400).json({
+        status: "success",
+      });
+    } else {
+      res.status(200).json({
+        status: "success",
+        result,
+      });
+    }
+  });
+};

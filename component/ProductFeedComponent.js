@@ -23,12 +23,13 @@ export default function ProductFeedComponent({
   };
 
   const renderItem = ({ item, index }) => {
-    if (item.empty) {
-      return <View style={{ flex: 1 }}></View>;
+    if (item?.empty) {
+      return <View key={index} style={{ flex: 1 }}></View>;
     }
     return (
       <>
         <CardProductComponent
+          key={index}
           clickFromChild={clickFromChild}
           userData={item?.user}
           productId={item?._id}

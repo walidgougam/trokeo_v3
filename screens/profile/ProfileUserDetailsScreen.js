@@ -92,7 +92,8 @@ export default function ProfileUserDetailsScreen({ navigation }) {
       <View style={wrapper_profile_info}>
         {userData?.userPicture ? (
           <Image
-            source={{ uri: userData?.userPicture }}
+            // source={{ uri: userData?.userPicture }}
+            source={userData?.userPicture}
             style={{
               width: normalize(89),
               height: normalize(86),

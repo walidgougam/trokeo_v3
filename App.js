@@ -144,7 +144,7 @@ const createBottomTabs = () => {
 };
 
 function NavigationContainerComponent() {
-  console.disableYellowBox = true;
+  // console.disableYellowBox = true;
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Splash">

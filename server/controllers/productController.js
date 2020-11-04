@@ -119,3 +119,5 @@ exports.handleLike = (req, res) => {
     }
   );
 };
+
+const bookedProduct = () => {};

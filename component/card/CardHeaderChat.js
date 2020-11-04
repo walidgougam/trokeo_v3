@@ -43,12 +43,7 @@ export default function CardHeaderChat({
       ]}
     >
       <View style={wrapper_picture}>
-        <Image
-          style={_image}
-          source={{
-            uri: productPicture,
-          }}
-        />
+        <Image style={_image} source={{ uri: productPicture }} />
         <View style={wrapper_title}>
           <Text style={title_product}>{titleProduct}</Text>
           <View style={wrapper_localisation}>

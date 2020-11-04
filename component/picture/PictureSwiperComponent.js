@@ -13,7 +13,6 @@ const SwiperPictureComponent = ({ imageProduct }) => {
         activeDotColor="white"
       >
         <View style={styles.slide}>
-          {console.log(imageProduct, "------nadia----")}
           <Image
             source={
               imageProduct[0]

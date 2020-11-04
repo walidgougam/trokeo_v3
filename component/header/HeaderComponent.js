@@ -1,16 +1,71 @@
-import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  AsyncStorage,
+  Platform,
+} from "react-native";
 import { ArrowLeftIcon, WhiteDotIcon } from "../../assets/icon/Icon";
 import normalize from "react-native-normalize";
 import colors from "../../constant/colors";
-import fontStyles from "../../constant/fonts";
+import ModalDeleteMessage from "../modal/ModalDeleteMessage";
+import axios from "axios";
+import { IOS_URL, ANDROID_URL } from "../../API";
 
 export default function HeaderComponent({
   navigation,
   title,
   message,
   editNotification,
+  deleteMessage,
+  recieverId,
+  fromChatScreen,
 }) {
+  //STATE
+  const [showModalDelete, setShowModalDelete] = useState(false);
+
+  const handleModalMessage = async (reciever, type) => {
+    const sender = await AsyncStorage.getItem("userId");
+    console.log(sender, "sendeer");
+    console.log(reciever, "reciever");
+    //DELETE
+    if (type === "delete") {
+      await axios({
+        method: "DELETE",
+        url:
+          Platform.OS === "ios"
+            ? `${IOS_URL}/chat/deletechat/${sender}/${reciever}`
+            : `${ANDROID_URL}/chat/deletechat/${sender}/${reciever}`,
+      })
+        .then((res) => {
+          deleteMessage();
+          navigation.goBack();
+        })
+        .catch((err) => {
+          console.log(err, "-----error delete message-----");
+        });
+    }
+    //BOOKED
+    else if (type === "booked") {
+      await axios({
+        method: "POST",
+        url:
+          Platform.OS === "ios"
+            ? `${IOS_URL}/product/bookedproduct`
+            : `${ANDROID_URL}/product/bookedproduct`,
+      })
+        .then((res) => {
+          deleteMessage();
+          navigation.goBack();
+        })
+        .catch((err) => {
+          console.log(err, "-----error delete message-----");
+        });
+    }
+  };
+
   const {
     _header,
     wrapper_header_title,
@@ -33,14 +88,28 @@ export default function HeaderComponent({
           </TouchableOpacity>
           <Text style={text_title}>{title}</Text>
         </View>
-        {message && (
-          <TouchableOpacity activeOpacity={0.6}>
+        {(message || fromChatScreen) && (
+          <TouchableOpacity
+            activeOpacity={0.6}
+            onPress={() => {
+              setShowModalDelete(!showModalDelete);
+            }}
+            hitSlop={expand_clickable_area}
+          >
             <WhiteDotIcon />
             <WhiteDotIcon />
             <WhiteDotIcon />
           </TouchableOpacity>
         )}
       </View>
+      <ModalDeleteMessage
+        recieverId={recieverId}
+        show={showModalDelete}
+        handleShow={() => setShowModalDelete(!showModalDelete)}
+        handleModal={(recieverId, type) => {
+          handleModalMessage(recieverId, type);
+        }}
+      />
     </View>
   );
 }

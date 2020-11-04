@@ -1,9 +1,19 @@
-import React from "react";
-import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  StyleSheet,
+  AsyncStorage,
+  Platform,
+} from "react-native";
 import { GreyDotIcon } from "../../assets/icon/Icon.js";
 import normalize from "react-native-normalize";
 import colors from "../../constant/colors";
-import fontStyles from "../../constant/fonts";
+import ModalDeleteMessage from "../modal/ModalDeleteMessage";
+import axios from "axios";
+import { IOS_URL, ANDROID_URL } from "../../API";
 
 export default function CardMessageComponent({
   picture,
@@ -11,11 +21,35 @@ export default function CardMessageComponent({
   message,
   sender,
   titleProduct,
+  recieverId,
+  deleteMessage,
 }) {
+  //STATE
+  const [showModalDelete, setShowModalDelete] = useState(false);
+
   const displayHour = () => {
-    console.log(createdAt, "createdAt message");
     const hour = createdAt.slice(11, 16);
     return hour;
+  };
+
+  const handleModalMessage = async (reciever, type) => {
+    const sender = await AsyncStorage.getItem("userId");
+    //deleteMessage
+    if (type === "delete") {
+      await axios({
+        method: "DELETE",
+        url:
+          Platform.OS === "ios"
+            ? `${IOS_URL}/chat/deletechat/${sender}/${reciever}`
+            : `${ANDROID_URL}/chat/deletechat/${sender}/${reciever}`,
+      })
+        .then((res) => {
+          deleteMessage();
+        })
+        .catch((err) => {
+          console.log(err, "-----error delete message-----");
+        });
+    }
   };
 
   // STYLES
@@ -39,11 +73,24 @@ export default function CardMessageComponent({
           </Text>
         </View>
       </View>
-      <TouchableOpacity activeOpacity={0.6} hitSlop={expand_clickable_area}>
+      <TouchableOpacity
+        activeOpacity={0.6}
+        hitSlop={expand_clickable_area}
+        onPress={() => setShowModalDelete(!showModalDelete)}
+      >
         <GreyDotIcon />
         <GreyDotIcon />
         <GreyDotIcon />
       </TouchableOpacity>
+      <ModalDeleteMessage
+        recieverId={recieverId}
+        show={showModalDelete}
+        handleShow={() => setShowModalDelete(!showModalDelete)}
+        handleModal={(recieverId, type) => {
+          console.log(recieverId, "morray");
+          handleModalMessage(recieverId, type);
+        }}
+      />
     </View>
   );
 }
@@ -56,7 +103,7 @@ const styles = StyleSheet.create({
   },
   image: {
     width: normalize(84, "width"),
-    height: normalize(68, "height"),
+    height: 68, // rendre responsive avec autre que normalize
     borderRadius: normalize(4),
   },
   name_sender: {

@@ -37,7 +37,7 @@ export default function ProductDetailScreen({ navigation }) {
 
   const goToChat = (userData) => {
     return navigation.navigate("Chat", {
-      productPicture: imageProduct[0].uri,
+      productPicture: imageProduct[0]?.uri,
       titleProduct,
       recieverId: userData._id,
       recieverName: userData.firstName,
@@ -126,7 +126,8 @@ export default function ProductDetailScreen({ navigation }) {
             >
               {userData?.userPicture ? (
                 <Image
-                  source={{ uri: userData?.userPicture }}
+                  // source={{ uri: userData?.userPicture }}
+                  source={userData?.userPicture}
                   style={{
                     width: normalize(49),
                     height: normalize(49),

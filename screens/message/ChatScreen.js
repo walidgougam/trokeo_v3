@@ -21,6 +21,8 @@ import io from "socket.io-client";
 import axios from "axios";
 import { UploadPictureIcon, SendMessageIcon } from "../../assets/icon/Icon";
 import { IOS_URL, ANDROID_URL } from "../../API";
+import { Button, Snackbar } from "react-native-paper";
+import colors from "../../constant/colors";
 
 import HeaderComponent from "../../component/header/HeaderComponent";
 import CardHeaderChat from "../../component/card/CardHeaderChat";
@@ -29,6 +31,7 @@ export default function ChatScreen({ navigation }) {
   // ROUTE
   const route = useRoute();
   const { productPicture, titleProduct } = route.params;
+  const [deletedMessage, setDeletedMessage] = useState(false);
 
   // STATE
   const [messages, setMessages] = useState([]);
@@ -163,6 +166,8 @@ export default function ChatScreen({ navigation }) {
     }
   };
 
+  const onDismissSnackBar = () => setDeletedMessage(false);
+
   useEffect(() => {
     let mounted = true;
 
@@ -185,7 +190,17 @@ export default function ChatScreen({ navigation }) {
     />
   ) : (
     <View style={container}>
-      <HeaderComponent navigation={navigation} title={recieverName} message />
+      <HeaderComponent
+        navigation={navigation}
+        title={recieverName}
+        message
+        recieverId={recieverId}
+        fromChatScreen={true}
+        deleteMessage={() => {
+          getMessage();
+          setDeletedMessage(true);
+        }}
+      />
       <CardHeaderChat
         navigation={navigation}
         productPicture={productPicture}
@@ -206,6 +221,25 @@ export default function ChatScreen({ navigation }) {
         // renderSend={() => renderSendMessageIcon()}
         placeholderStyle={{ borderColor: "red" }}
       />
+      <>
+        <Snackbar
+          style={{
+            backgroundColor: colors.main_green,
+            color: colors.text_white,
+          }}
+          theme={{ colors: { accent: colors.text_white } }}
+          visible={deletedMessage}
+          onDismiss={onDismissSnackBar}
+          action={{
+            label: "Ok",
+            onPress: () => {
+              // Do something
+            },
+          }}
+        >
+          Message supprimé
+        </Snackbar>
+      </>
     </View>
   );
 }

@@ -7,22 +7,22 @@ import {
   AsyncStorage,
   Platform,
   FlatList,
+  ActivityIndicator,
 } from "react-native";
 import colors from "../../constant/colors";
 import normalize from "react-native-normalize";
-// import { allMessage } from "../../helpersDataBase";
-import fontStyles from "../../constant/fonts";
+import { Button, Snackbar } from "react-native-paper";
 import axios from "axios";
 import { useIsFocused } from "@react-navigation/native";
 import { IOS_URL, ANDROID_URL } from "../../API";
-// import ModalDeleteMessage from "../../component/modal/ModalDeleteMessage";
-// import { MenuProvider } from "react-native-popup-menu";
 
 import CardMessageComponent from "../../component/card/CardMessageComponent";
 
 export default function AllMessageScreen({ navigation }) {
   //STATE
+  const [isLoading, setIsLoading] = useState(true);
   const [allMessage, setAllMessage] = useState([]);
+  const [deletedMessage, setDeletedMessage] = useState(false);
 
   // FOCUS ON SCREEN
   const isFocuser = useIsFocused();
@@ -34,10 +34,7 @@ export default function AllMessageScreen({ navigation }) {
       titleProduct,
     });
   };
-  // productPicture: imageProduct[0].uri,
-  // titleProduct,
-  // recieverId: userData._id,
-  // recieverName: userData.firstName,
+  const onDismissSnackBar = () => setDeletedMessage(false);
 
   const getAllRecieverChat = async () => {
     const userid = await AsyncStorage.getItem("userId");
@@ -61,6 +58,7 @@ export default function AllMessageScreen({ navigation }) {
 
     if (mounted) {
       getAllRecieverChat();
+      setIsLoading(false);
     }
 
     return () => {
@@ -70,7 +68,10 @@ export default function AllMessageScreen({ navigation }) {
 
   // STYLES
   const { container, _header, text_title, wrapper_allmessage } = styles;
-  return (
+
+  return isLoading ? (
+    <ActivityIndicator size="large" style={{ flex: 1 }} />
+  ) : (
     <View style={container}>
       <View style={_header}>
         <Text style={text_title}>Messages</Text>
@@ -91,22 +92,42 @@ export default function AllMessageScreen({ navigation }) {
                 )
               }
             >
-              {console.log(item._id, "-------wwwwidwwww------")}
               <CardMessageComponent
+                deleteMessage={() => {
+                  getAllRecieverChat();
+                  setDeletedMessage(true);
+                }}
                 sender={item?.reciever?.firstName}
                 message={item?.messages[item.messages.length - 1]?.text}
-                picture={item?.reciever?.userPicture}
+                picture={item?.reciever?.userPicture?.uri}
                 createdAt={item?.messages[item.messages.length - 1]?.createdAt}
                 titleProduct={item?.titleProduct}
+                recieverId={item?.reciever?._id}
               />
             </TouchableOpacity>
           )}
           keyExtractor={(item) => item?._id}
         />
       </View>
-      {/* <MenuProvider>
-        <ModalDeleteMessage />
-      </MenuProvider> */}
+      <>
+        <Snackbar
+          style={{
+            backgroundColor: colors.main_green,
+            color: colors.text_white,
+          }}
+          theme={{ colors: { accent: colors.text_white } }}
+          visible={deletedMessage}
+          onDismiss={onDismissSnackBar}
+          action={{
+            label: "Ok",
+            onPress: () => {
+              // Do something
+            },
+          }}
+        >
+          Message supprimé
+        </Snackbar>
+      </>
     </View>
   );
 }

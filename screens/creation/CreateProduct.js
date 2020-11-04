@@ -37,9 +37,8 @@ export default function CreateProduct({ navigation }) {
   const [conditionProduct, setConditionProduct] = useState("");
   const [categoryProduct, setCategoryProduct] = useState();
   const [avatarSource, setAvatarSource] = useState([]);
-  // const [pictureSource, setPictureSource] = useState("");
   const [errorOnCreateProduct, setErrorOnCreateProduct] = useState();
-  const [isBottomSheetVisible, setIsBottomSheetVisible] = useState(true);
+  const [isBottomSheetVisible, setIsBottomSheetVisible] = useState(false);
 
   // CONTEXT
   const { state, createProductContext } = useContext(AuthContext);

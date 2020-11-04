@@ -1,5 +1,12 @@
 import React, { useState, useContext } from "react";
-import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+  Platform,
+} from "react-native";
 import { ProfilePictureIcon } from "../../assets/icon/Icon";
 import normalize from "react-native-normalize";
 import colors from "../../constant/colors";
@@ -55,7 +62,7 @@ export default function PictureProfileScreen({
     <View>
       {userPicture || avatarSource ? (
         <Image
-          source={avatarSource}
+          source={Platform.OS === "ios" ? { uri: avatarSource } : avatarSource}
           style={{
             width: normalize(86),
             height: normalize(86),

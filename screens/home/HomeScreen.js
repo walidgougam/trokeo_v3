@@ -119,7 +119,7 @@ export default function HomeScreen({ navigation }) {
           title="Biens"
           focus={goodTab}
           changeFocus={() => setGoodTab(true)}
-          lengthGoods={allProduct?.filter((e) => e.isGoods === true).length}
+          lengthGoods={allProduct?.filter((e) => e?.isGoods === true).length}
         />
         <BtnHomeToggle
           fromScreenWithProduct

@@ -25,7 +25,8 @@ export default function PictureProfileComponent({
     if (userPicture) {
       return (
         <Image
-          source={{ uri: userPicture }}
+          // source={{ uri: userPicture }}
+          source={userPicture}
           style={{ width: 49, height: 49, borderRadius: normalize(100) }}
         />
       );
