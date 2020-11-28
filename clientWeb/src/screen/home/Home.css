@@ -1,0 +1,25 @@
+.wrapper_image_home {
+  background: url("../../asset/allSvg/femme.png") no-repeat;
+  background-size: 100% 406px;
+  width: 100%;
+  height: 406px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.text1_home {
+  width: 355px;
+  font-size: 42px;
+  /* font-family: "Open Sans Bold"; */
+  line-height: 41px;
+  margin: 0px 0px;
+}
+
+.text2_home {
+  width: 410px;
+  font-size: 14px;
+  /* font-family: "Open Sans Bold"; */
+  line-height: 20px;
+  margin-top: 24px;
+}

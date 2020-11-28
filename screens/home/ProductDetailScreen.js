@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   View,
   Text,
@@ -7,13 +7,16 @@ import {
   TouchableOpacity,
   Image,
 } from "react-native";
+import { useRoute } from "@react-navigation/native";
+//STYLES
 import normalize from "react-native-normalize";
 import colors from "../../constant/colors";
-import { PositionIcon } from "../../assets/icon/Icon";
-import { useRoute } from "@react-navigation/native";
 import fontStyles from "../../constant/fonts";
+import { loadFont } from "../../assets/Autre";
+//PICTURE
+import { PositionIcon } from "../../assets/icon/Icon";
 import { ProfilePictureIcon } from "../../assets/icon/Icon";
-
+//COMPONENT
 import HeaderNotification from "../../component/header/HeaderNotification";
 import MapComponent from "../../component/MapComponent";
 import StarsComponent from "../../component/StarsComponent";
@@ -24,23 +27,31 @@ import BtnRightIcon from "../../component/button/BtnRightIcon";
 export default function ProductDetailScreen({ navigation }) {
   // ROUTE
   const route = useRoute();
-  const {
-    userData,
-    imageProduct,
-    titleProduct,
-    descriptionProduct,
-    distanceOwner,
-    categoriesProduct,
-    conditionProduct,
-  } = route.params;
+  const { fromCardProduct } = route.params;
+  const userData = fromCardProduct.userData;
+  const imageProduct = fromCardProduct.imageProduct;
+  const titleProduct = fromCardProduct.titleProduct;
+  const descriptionProduct = fromCardProduct.descriptionProduct;
+  const distanceOwner = fromCardProduct.distanceOwner;
+  const categoriesProduct = fromCardProduct.categoriesProduct;
+  const conditionProduct = fromCardProduct.conditionProduct;
+  const productId = fromCardProduct.productId;
+
   navigation.setOptions({ tabBarVisible: () => false });
+
+  useEffect(() => {
+    loadFont();
+  });
 
   const goToChat = (userData) => {
     return navigation.navigate("Chat", {
-      productPicture: imageProduct[0]?.uri,
-      titleProduct,
-      recieverId: userData._id,
-      recieverName: userData.firstName,
+      fromProductDetail: {
+        productPicture: imageProduct[0],
+        titleProduct,
+        recieverId: userData?._id,
+        recieverName: userData?.firstName,
+        productId,
+      },
     });
   };
 
@@ -118,7 +129,7 @@ export default function ProductDetailScreen({ navigation }) {
         <View style={container_product_owner}>
           <View style={wrapper_product_owner}>
             <TouchableOpacity
-              activeOpacity={0.6}
+              activeOpacity={fontStyles.activeOpacity}
               hitSlop={expand_clickable_area}
               onPress={() =>
                 navigation.navigate("ProfileUserDetails", { userData })
@@ -183,7 +194,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: colors.text_white,
     fontSize: normalize(14, "fontSize"),
-    // ...fontStyles.medium,
+    fontFamily: "medium",
     lineHeight: normalize(20),
   },
   _title: {
@@ -192,7 +203,7 @@ const styles = StyleSheet.create({
     fontSize: normalize(20, "fontSize"),
     lineHeight: normalize(20),
     color: colors.text_description_black,
-    // ...fontStyles.heavy,
+    fontFamily: "heavy",
   },
   wrapper_characteristic: {
     marginBottom: normalize(27),
@@ -202,14 +213,14 @@ const styles = StyleSheet.create({
     lineHeight: normalize(20),
     color: colors.text_description_black,
     marginBottom: normalize(11),
-    // ...fontStyles.heavy,
+    fontFamily: "heavy",
   },
   text_description: {
     fontSize: normalize(14, "fontSize"),
     lineHeight: normalize(20),
     color: colors.text_description_black,
     marginBottom: normalize(11),
-    // ...fontStyles.medium,
+    fontFamily: "medium",
   },
   container_product_owner: {
     flexDirection: "row",

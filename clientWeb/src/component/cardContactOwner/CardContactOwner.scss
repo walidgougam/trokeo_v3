@@ -1,0 +1,45 @@
+.container_cardcontactowner {
+  width: 251px;
+  height: 223px;
+  box-shadow: 3px 3px 10px rgba(194, 194, 194, 0.3);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.wrapper_picture_owner_cardcontactowner {
+  display: flex;
+}
+
+.wrapper_name_owner_cardcontactowner {
+  p {
+    margin: 0px;
+    font-size: 13px;
+    /* font-family: Avenir Medium; */
+    color: #3a3a3a;
+  }
+}
+
+.wrapper_star_cardcontactowner {
+}
+
+.container_btn_cardcontactowner {
+  margin-bottom: 49px;
+  div {
+    margin-top: 21px;
+  }
+}
+
+.btn_product_inline_cardcontactowner {
+  border: solid 1px #3a3a3a;
+  border-radius: 19px;
+  width: 219px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  span {
+    font-size: 13px;
+    //  font-family: Avenir Medium;
+    color: #3a3a3a;
+  }
+}

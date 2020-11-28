@@ -65,6 +65,7 @@ exports.getProduct = async (req, res) => {
 
 exports.handleLike = (req, res) => {
   const { userId, productId } = req.body;
+  console.log(userId, productId, "------un jour mon --------");
   Product.findOne(
     {
       _id: productId,
@@ -120,4 +121,22 @@ exports.handleLike = (req, res) => {
   );
 };
 
-const bookedProduct = () => {};
+exports.bookedProduct = (req, res) => {
+  const { productId, bookedProduct } = req.body;
+  Product.updateOne(
+    {
+      _id: productId,
+    },
+    {
+      $set: {
+        booked: bookedProduct,
+      },
+    },
+    (err, result) => {
+      res.status(200).json({
+        result,
+      });
+      console.log(result, "result of push product likes");
+    }
+  );
+};

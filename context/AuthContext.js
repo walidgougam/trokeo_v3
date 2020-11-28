@@ -1,5 +1,5 @@
 import createDataContext from "./CreateDataContext";
-import { signup, signin, getAllProductApi, getUserApi } from "../API";
+import { signup, signin, getAllProductApi, getUserApi } from "../API/API";
 import { AsyncStorage } from "react-native";
 
 const authReducer = (state, action) => {
@@ -23,11 +23,22 @@ const authReducer = (state, action) => {
     case "CHANGE_PICTURE":
       return { ...state, picture: action.payload };
     case "GET_ALL_PRODUCT":
-      return { ...state, allProduct: action.payload };
+      return { ...state, getAllProduct: action.payload };
     case "GET_USER":
       return { ...state, user: action.payload };
+    case "GET_SPECIFIC_USER":
+      return { ...state, specificUser: action.payload };
     case "EDIT_PROFILE":
       return { ...state, editProfile: action.payload };
+    case "SEARCH_FILTER_PRODUCT":
+      return {
+        ...state,
+        search: {
+          condition: action.payload.condition,
+          category: action.payload.category,
+          distance: action.payload.distance,
+        },
+      };
     default:
       return state;
   }
@@ -60,7 +71,7 @@ const signUp = (dispatch) => {
     try {
       await signup(email, password, dispatch, callback);
     } catch (err) {
-      console.log("cets la merde");
+      console.log("erreur sign up");
     }
 
     // callback();
@@ -72,7 +83,7 @@ const signIn = (dispatch) => {
     try {
       await signin(email, password, dispatch, callback);
     } catch (err) {
-      console.log("cets la merde");
+      console.log("erreur sign in");
     }
 
     // callback();
@@ -143,6 +154,15 @@ const getUserContext = (dispatch) => {
   };
 };
 
+const getSpecificUserContext = (dispatch) => {
+  return async (user) => {
+    dispatch({
+      type: "GET_SPECIFIC_USER",
+      payload: user,
+    });
+  };
+};
+
 const editProfileContext = (dispatch) => {
   return async (
     picture,
@@ -171,6 +191,15 @@ const editProfileContext = (dispatch) => {
   };
 };
 
+const searchFilterProductContext = (dispatch) => {
+  return async (search) => {
+    dispatch({
+      type: "SEARCH_FILTER_PRODUCT",
+      payload: search,
+    });
+  };
+};
+
 export const { Context, Provider } = createDataContext(
   authReducer,
   {
@@ -184,7 +213,9 @@ export const { Context, Provider } = createDataContext(
     changePictureContext,
     getAllProductContext,
     getUserContext,
+    getSpecificUserContext,
     editProfileContext,
+    searchFilterProductContext,
   },
   { token: null, errorMessage: "" }
 );

@@ -1,0 +1,11 @@
+.container_input {
+  width: 344px;
+  height: 44px;
+  padding-left: 12px;
+  border: solid 1px #bfbdbd;
+  border-radius: 1px;
+}
+.container_input::placeholder {
+  color: #9a9999;
+  /* font-family: Open Sans Regular; */
+}

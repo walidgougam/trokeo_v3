@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, TextInput, StyleSheet } from "react-native";
 import { useRoute } from "@react-navigation/native";
+//STYLE
+import { loadFont } from "../../assets/Autre";
 import colors from "../../constant/colors";
 import css from "../../constant/css";
 import normalize from "react-native-normalize";
-import { createReviewApi } from "../../API";
-
+//API
+import { createReviewApi } from "../../API/API";
+//COMPONENT
 import StarRatingComponent from "../../component/StarRatingComponent";
 import CardHeaderChat from "../../component/card/CardHeaderChat";
 import HeaderComponent from "../../component/header/HeaderComponent";
@@ -14,11 +17,18 @@ import BtnBlueAction from "../../component/button/BtnBlueAction";
 export default function LeaveReviewScreen({ navigation }) {
   //ROUTE
   const route = useRoute();
-  const { productPicture, titleProduct, userId, recieverId } = route.params; // add userId, receiverID,
+  const { fromModalChat } = route?.params;
+  const product = fromModalChat.product;
+  const userId = fromModalChat.userId;
+  const recieverId = fromModalChat.recieverId;
 
   //STATE
   const [stars, setStars] = useState();
   const [textReview, setTextReview] = useState();
+
+  useEffect(() => {
+    loadFont();
+  });
 
   const starsFromChild = (e) => {
     setStars(e);
@@ -43,11 +53,7 @@ export default function LeaveReviewScreen({ navigation }) {
   return (
     <View style={_container}>
       <HeaderComponent navigation={navigation} title="Laisser un avis" />
-      <CardHeaderChat
-        noFinalize
-        productPicture={productPicture}
-        titleProduct={titleProduct}
-      />
+      <CardHeaderChat noFinalize product={product} />
       <View style={container_review}>
         <View>
           <View>
@@ -98,6 +104,7 @@ const styles = StyleSheet.create({
   },
   text_experience: {
     ...css.text_input,
+    fontFamily: "regular",
     marginTop: normalize(42),
   },
   text_area: {

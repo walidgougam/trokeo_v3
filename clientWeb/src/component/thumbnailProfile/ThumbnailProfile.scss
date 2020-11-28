@@ -1,0 +1,91 @@
+.container_thumbnailprofile {
+  box-sizing: border-box;
+  padding: 11px 20px 16px 20px;
+  width: 73%;
+  align-self: center;
+  background-color: white;
+  position: relative;
+  bottom: 58px;
+}
+
+.wrapper_top_thumbnail_thumbnailprofile {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border-bottom: solid 1px black;
+  padding-bottom: 11px;
+  .wrapper_left_thumbnailprofile {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+
+    .wrapper_name_star_thumbnailProfile {
+      margin-left: 13px;
+      .name_thumbnailprofile {
+        font-size: 13px;
+        //   font-family:avenir-medium ;
+        line-height: 20px;
+        margin: 0px;
+        color: #3a3a3a;
+      }
+
+      .member_since_thumbnailprofile {
+        color: #3a3a3a;
+        font-size: 11px;
+        //   font-family:open sans regular ;
+        margin: 4px 0px 0px 0px;
+        line-height: 20px;
+      }
+    }
+  }
+  .wrapper_right_thumbnailprofile {
+    align-self: center;
+    .text_city_thumbnailprofile {
+      text-align: center;
+      font-size: 11px;
+      //   font-family: "open-sans-regular";
+      line-height: 20px;
+      margin: 0;
+      color: #3a3a3a;
+      margin-bottom: 11px;
+    }
+    .wrapper_review_thumbnailprofile {
+      cursor: pointer;
+      margin: 0;
+      width: 128px;
+      border: solid 1px black;
+      border-radius: 19px;
+      align-items: center;
+      justify-content: flex-end;
+      display: flex;
+      flex-direction: row;
+      p {
+        color: #3a3a3a;
+        font-size: 9px;
+        color: #3a3a3a;
+        text-align: center;
+        // font-family: open-sans-regular;
+      }
+      div {
+        margin-right: 7.5px;
+        margin-left: 23.5px;
+      }
+    }
+  }
+}
+
+.wrapper_bottom_thumbnail_thumbnailprofile {
+  .text_about_thumbnailprofile {
+    // font-family: "open sans bold";
+    font-size: 16px;
+    color: #3a3a3a;
+    line-height: 20px;
+  }
+
+  .text_description_thumbnailprofile {
+    // font-family: "open sans regular";
+    font-size: 14px;
+    color: #3a3a3a;
+    line-height: 20px;
+  }
+}

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { StarEmptyIcon, StarFullIcon } from "../assets/icon/Icon";
+import fontStyles from "../constant/fonts";
 
 export default function StarRatingComponent({ filled, starsFromChild }) {
   const [defaultRating, setDefaultRating] = useState(0);
@@ -12,7 +13,7 @@ export default function StarRatingComponent({ filled, starsFromChild }) {
   for (let x = 1; x <= maxRating; x++) {
     stars.push(
       <TouchableOpacity
-        activeOpacity={0.5}
+        activeOpacity={fontStyles.activeOpacity}
         key={x}
         onPress={() => {
           updateRating(x);

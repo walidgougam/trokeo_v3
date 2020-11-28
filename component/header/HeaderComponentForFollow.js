@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import {
   View,
   Text,
@@ -6,12 +6,22 @@ import {
   TouchableOpacity,
   Platform,
 } from "react-native";
+import { Context as AuthContext } from "../../context/AuthContext";
+import { useIsFocused } from "@react-navigation/native";
+//API
+import axios from "axios";
+import { IOS_URL, ANDROID_URL } from "../../API/API";
+import {
+  followGoodsCategoryApi,
+  followServicesCategoryApi,
+} from "../../API/ProductApi";
+//STYLE
 import normalize from "react-native-normalize";
 import colors from "../../constant/colors";
-import { WhiteDotIcon, ArrowLeftIcon } from "../../assets/icon/Icon";
 import fontStyles from "../../constant/fonts";
-import axios from "axios";
-import { IOS_URL, ANDROID_URL } from "../../API";
+import { loadFont } from "../../assets/Autre";
+//PICTURE
+import { WhiteDotIcon, ArrowLeftIcon } from "../../assets/icon/Icon";
 
 export default function HeaderComponentForFollow({
   navigation,
@@ -22,38 +32,36 @@ export default function HeaderComponentForFollow({
   from,
   userId,
 }) {
+  // CONTEXT
+  const { state, getSpecificUserContext } = useContext(AuthContext);
+  // FOCUS ON SCREEN
+  const isFocuser = useIsFocused();
+
+  useEffect(() => {
+    loadFont();
+  });
+
+  useEffect(() => {
+    (async () => {
+      let followGoodsCategory = await followGoodsCategoryApi();
+      if (followGoodsCategory) {
+        console.log(followGoodsCategory, "bien sur que je follow");
+      }
+    })();
+  }, []);
+
   const goBackFunction = async () => {
     navigation.goBack();
     if (from === "good") {
-      await axios({
-        method: "POST",
-        url:
-          Platform.OS === "ios"
-            ? `${IOS_URL}/user/editcategorygoodfollow`
-            : `${ANDROID_URL}/user/editcategorygoodfollow`,
-        data: { userId, categoryGoodsFollow: allFollowRules },
-      })
-        .then((res) => {
-          console.log("result on follow good ");
-        })
-        .catch((err) => {
-          console.log(err, "error on follow good");
-        });
+      return followGoodsCategoryApi(
+        userId,
+        (categoryGoodsFollow = allFollowRules)
+      );
     } else {
-      await axios({
-        method: "POST",
-        url:
-          Platform.OS === "ios"
-            ? `${IOS_URL}/user/editcategoryservicefollow`
-            : `${ANDROID_URL}/user/editcategoryservicefollow`,
-        data: { userId, categoryServicesFollow: allFollowRules },
-      })
-        .then((res) => {
-          console.log("result follow service ");
-        })
-        .catch((err) => {
-          console.log(err, "error on follow service");
-        });
+      return followServicesCategoryApi(
+        userId,
+        (categoryServicesFollow = allFollowRules)
+      );
     }
   };
 
@@ -69,7 +77,7 @@ export default function HeaderComponentForFollow({
       <View style={wrapper_header_title}>
         <View style={{ flexDirection: "row" }}>
           <TouchableOpacity
-            activeOpacity={0.6}
+            activeOpacity={fontStyles.activeOpacity}
             onPress={() => goBackFunction()}
             hitSlop={expand_clickable_area}
           >
@@ -78,7 +86,7 @@ export default function HeaderComponentForFollow({
           <Text style={text_title}>{title}</Text>
         </View>
         {message && (
-          <TouchableOpacity activeOpacity={0.6}>
+          <TouchableOpacity activeOpacity={fontStyles.activeOpacity}>
             <WhiteDotIcon />
             <WhiteDotIcon />
             <WhiteDotIcon />
@@ -104,7 +112,7 @@ const styles = StyleSheet.create({
   },
   text_title: {
     fontSize: normalize(18, "fontSize"),
-    // ...fontStyles.bold,
+    fontFamily: "bold",
     color: colors.text_white,
     marginLeft: normalize(27),
   },

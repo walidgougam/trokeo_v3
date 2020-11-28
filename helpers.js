@@ -18,11 +18,11 @@ export const goodsCondition2 = [
   { titleCondition: "Passable", isSelected: false },
 ];
 export const distance = [
-  { km: "5km", isSelected: false },
-  { km: "10km", isSelected: false },
-  { km: "15km", isSelected: false },
-  { km: "20km", isSelected: false },
-  { km: "25km", isSelected: false },
+  { km: "< 5 km", isSelected: false },
+  { km: "< 10 km", isSelected: false },
+  { km: "< 15 km", isSelected: false },
+  { km: "< 20 km", isSelected: false },
+  { km: "< 25 km", isSelected: false },
 ];
 
 export const goodCategories = [

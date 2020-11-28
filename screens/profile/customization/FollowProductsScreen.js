@@ -1,28 +1,27 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import {
   View,
   StyleSheet,
   ScrollView,
   FlatList,
   ActivityIndicator,
+  Text,
 } from "react-native";
-import colors from "../../../constant/colors";
-import { goodCategories, serviceCategories } from "../../../helpers";
-import InputSearch from "../../../component/input/InputSearch";
 import { useRoute } from "@react-navigation/native";
-
+import { Context as AuthContext } from "../../../context/AuthContext";
+//API
+import { goodCategories, serviceCategories } from "../../../helpers";
+//STYLE
+import colors from "../../../constant/colors";
+//COMPONENT
+import InputSearch from "../../../component/input/InputSearch";
 import HeaderComponentForFollow from "../../../component/header/HeaderComponentForFollow";
 import TextCardComponent from "../../../component/card/TextCardComponent";
 
 export default function FollowProductsScreen({ navigation }) {
   //ROUTE
   const route = useRoute();
-  const {
-    from,
-    userId,
-    goodCategoryFromDb,
-    serviceCategoryFromDb,
-  } = route?.params;
+  const { from, userId } = route?.params;
 
   // STATE
   const [goodCategoryState, setGoodCategoryState] = useState(goodCategories);
@@ -30,6 +29,9 @@ export default function FollowProductsScreen({ navigation }) {
     serviceCategories
   );
   const [loading, setLoading] = useState(true);
+
+  // CONTEXT
+  const { state } = useContext(AuthContext);
 
   const handleFollowProduct = (titleCategory, followByUser) => {
     if (from === "good") {
@@ -50,13 +52,14 @@ export default function FollowProductsScreen({ navigation }) {
   };
 
   useEffect(() => {
-    if (goodCategoryFromDb || serviceCategoryFromDb) {
-      setGoodCategoryState(goodCategoryFromDb);
-      setServiceCategoryState(serviceCategoryFromDb);
-      setLoading(false);
-    } else {
+    const category = state?.specificUser?.categoryGoodsFollow;
+    const service = state?.specificUser?.categoryServicesFollow;
+    if (category?.length > 0 || service?.length > 0) {
+      setGoodCategoryState(category);
+      setServiceCategoryState(service);
       setLoading(false);
     }
+    setLoading(false);
   }, []);
 
   //STYLES
@@ -78,22 +81,21 @@ export default function FollowProductsScreen({ navigation }) {
         <InputSearch placeholder="Rechercher des catégories" />
       </View>
       <View>
+        {console.log(from, "frooooom")}
         <FlatList
           data={from === "good" ? goodCategoryState : serviceCategoryState}
           renderItem={({ item }) => (
-            <>
-              <TextCardComponent
-                onPress={() =>
-                  handleFollowProduct(item?.titleCategory, !item?.followByUser)
-                }
-                btn
-                title={item?.titleCategory}
-                btnTitle="Suivre"
-                color={colors.text_white}
-                backgroundColor={colors.btn_action}
-                followByUser={item?.followByUser}
-              />
-            </>
+            <TextCardComponent
+              onPress={() =>
+                handleFollowProduct(item?.titleCategory, !item?.followByUser)
+              }
+              btn
+              title={item?.titleCategory}
+              btnTitle="Suivre"
+              color={colors.text_white}
+              backgroundColor={colors.btn_action}
+              followByUser={item?.followByUser}
+            />
           )}
           keyExtractor={(item) => item?.titleCategory}
         />

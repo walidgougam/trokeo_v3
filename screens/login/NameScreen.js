@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, Platform } from "react-native";
-import normalize from "react-native-normalize";
 import { useRoute } from "@react-navigation/native";
+import * as Yup from "yup";
+import { Formik } from "formik";
+//STYLES
+import normalize from "react-native-normalize";
 import css from "../../constant/css";
 import colors from "../../constant/colors";
-import { Formik } from "formik";
-import * as Yup from "yup";
-
+import { loadFont } from "../../assets/Autre";
+//COMPONENT
 import InputIos from "../../component/input/InputIos";
 import InputAndroid from "../../component/input/InputAndroid";
 import BtnBlueAction from "../../component/button/BtnBlueAction";
@@ -16,6 +18,10 @@ const NameScreen = ({ navigation }) => {
   // ROUTE
   const route = useRoute();
   const { email, password } = route.params;
+
+  useEffect(() => {
+    loadFont();
+  });
 
   const initialValues = {
     firstName: "",
@@ -40,12 +46,6 @@ const NameScreen = ({ navigation }) => {
   });
 
   const goNextScreen = (values, errors, touched) => {
-    return navigation.navigate("Picture", {
-      email,
-      password,
-      firstName: values.firstName,
-      lastName: values.lastName,
-    });
     if (
       errors.firstName ||
       errors.lastName ||
@@ -54,10 +54,12 @@ const NameScreen = ({ navigation }) => {
       return null;
     } else {
       return navigation.navigate("Picture", {
-        email,
-        password,
-        firstName: values.firstName,
-        lastName: values.lastName,
+        fromRegisterName: {
+          email,
+          password,
+          firstName: values.firstName,
+          lastName: values.lastName,
+        },
       });
     }
   };
@@ -150,9 +152,11 @@ const styles = StyleSheet.create({
   },
   text_question: {
     ...css.title,
+    fontFamily: "heavy",
   },
   text_description: {
     ...css.text_description,
+    fontFamily: "roman",
   },
 });
 

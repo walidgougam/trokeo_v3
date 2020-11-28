@@ -1,11 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { View, FlatList, StyleSheet } from "react-native";
-import { goodCategories, serviceCategories } from "../../helpers";
 import { useRoute } from "@react-navigation/native";
-
+import { Context as AuthContext } from "../../context/AuthContext";
+//API
+import { goodCategories, serviceCategories } from "../../helpers";
+//COMPONENT
 import HeaderComponent from "../../component/header/HeaderComponent";
 import CardSelectCategory from "../../component/card/CardSelectCategory";
 import InputSearch from "../../component/input/InputSearch";
+//STYLE
 import colors from "../../constant/colors";
 
 export default function SearchByCategoryScreen({ navigation }) {
@@ -16,8 +19,17 @@ export default function SearchByCategoryScreen({ navigation }) {
   // STATE
   const [categorySelected, setCategorySelected] = useState();
 
+  // CONTEXT
+  const { state, searchFilterProductContext } = useContext(AuthContext);
+
   useEffect(() => {
-    setCategorySelected(goodCategories);
+    let mounted = true;
+    if (mounted) {
+      setCategorySelected(goodCategories);
+    }
+    return () => {
+      mounted = false;
+    };
   }, []);
 
   const handleCategory = (isValue, followByUser) => {
@@ -27,11 +39,32 @@ export default function SearchByCategoryScreen({ navigation }) {
         : el;
     });
     setCategorySelected(changeCategory);
+    registerCategoryOnContext(changeCategory);
+  };
+
+  const registerCategoryOnContext = (changeCategory) => {
+    let categoryFilter = [];
+    for (let i = 0; i < changeCategory?.length; i++) {
+      if (changeCategory[i]?.followByUser === true) {
+        categoryFilter.push(changeCategory[i]?.titleCategory);
+      }
+      console.log("catgeory filter", categoryFilter);
+      searchFilterProductContext({
+        category: categoryFilter,
+        condition: state?.search?.condition,
+        distance: state?.search?.distance,
+      });
+    }
   };
 
   return (
     <View style={styles.container}>
-      <HeaderComponent title="Catégorie" navigation={navigation} />
+      <HeaderComponent
+        title="Catégorie"
+        navigation={navigation}
+        search
+        action={() => registerCategorySelectedOnContext()}
+      />
       <View style={{ marginHorizontal: 18, marginVertical: 9 }}>
         <InputSearch placeholder="Rechercher des catégories" />
       </View>

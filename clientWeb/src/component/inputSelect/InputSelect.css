@@ -1,0 +1,14 @@
+.input_inputselect {
+  width: 360px;
+  height: 48px;
+  padding-left: 12px;
+  border: solid 1px #bfbdbd;
+  border-radius: 1px;
+}
+select option:first-of-type {
+  color: green;
+}
+
+select > option {
+  color: "green";
+}

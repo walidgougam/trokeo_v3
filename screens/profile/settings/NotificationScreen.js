@@ -7,15 +7,18 @@ import {
   StyleSheet,
   AsyncStorage,
 } from "react-native";
+import { ActivityIndicator } from "react-native-paper";
+//API
+import axios from "axios";
+import { IOS_URL, ANDROID_URL } from "../../../API/API";
+//COMPONENT
+import HeaderComponent from "../../../component/header/HeaderComponent";
+//STYLE
 import colors from "../../../constant/colors";
 import normalize from "react-native-normalize";
 import fontStyles from "../../../constant/fonts";
 import css from "../../../constant/css";
-import axios from "axios";
-import { IOS_URL, ANDROID_URL } from "../../../API";
-import { ActivityIndicator } from "react-native-paper";
-
-import HeaderComponent from "../../../component/header/HeaderComponent";
+import { loadFont } from "../../../assets/Autre";
 
 export default function NotificationScreen({ navigation }) {
   const [updatePush, setUpdatePush] = useState(false);
@@ -31,6 +34,10 @@ export default function NotificationScreen({ navigation }) {
   useEffect(() => {
     getNotificationFromDb();
   }, []);
+
+  useEffect(() => {
+    loadFont();
+  });
 
   const onToggleSwitch = (index, type) => {
     if (index === 0 && type === "push") {
@@ -233,14 +240,14 @@ const styles = StyleSheet.create({
   },
   _title: {
     fontSize: normalize(14, "fontSize"),
-    // ...fontStyles.semiBold,
+    fontFamily: "semiBold",
     lineHeight: normalize(20),
     color: colors.text_description_black,
   },
   _description: {
     color: colors.text_description_black,
     fontSize: normalize(11, "fontSize"),
-    // ...fontStyles.regular,
+    fontFamily: "regular",
     lineHeight: normalize(20),
   },
   wrapper_switch_by_line: {
@@ -250,7 +257,7 @@ const styles = StyleSheet.create({
   },
   _label: {
     fontSize: normalize(13, "fontSize"),
-    // ...fontStyles.regular,
+    fontFamily: "regular",
     lineHeight: normalize(20),
     color: colors.text_description_black,
   },

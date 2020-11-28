@@ -8,8 +8,11 @@ import {
   TouchableOpacity,
   Platform,
 } from "react-native";
+//styles
 import colors from "../../constant/colors";
 import normalize from "react-native-normalize";
+import fontStyles from "../../constant/fonts";
+//PICTURE
 import { HidePasswordIcon } from "../../assets/icon/Icon";
 
 export default function InputAndroid({
@@ -39,7 +42,7 @@ export default function InputAndroid({
       <View style={styles.wrapper_icon_android}>
         {password && (
           <TouchableOpacity
-            activeOpacity={0.6}
+            activeOpacity={fontStyles.activeOpacity}
             style={{ marginRight: normalize(13) }}
             onPress={showPassword}
           >

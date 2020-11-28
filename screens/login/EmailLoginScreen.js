@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -7,23 +7,35 @@ import {
   TouchableHighlight,
 } from "react-native";
 import { useRoute } from "@react-navigation/native";
+import { Formik } from "formik";
+import * as Yup from "yup";
+import { loginApi } from "../../API/API";
+import { Button, Snackbar } from "react-native-paper";
+//STYLES
 import normalize from "react-native-normalize";
 import colors from "../../constant/colors";
 import css from "../../constant/css";
-import { Formik } from "formik";
-import * as Yup from "yup";
-import { WrongEmailIcon, GoodEmailIcon } from "../../assets/icon/Icon";
-import { loginApi } from "../../API";
 import fontStyles from "../../constant/fonts";
-
+import { loadFont } from "../../assets/Autre";
+//COMPONENT
 import BtnBlueAction from "../../component/button/BtnBlueAction";
 import InputAndroid from "../../component/input/InputAndroid";
 import InputIos from "../../component/input/InputIos";
 import BackgroundComponent from "../../component/BackgroundComponent";
+//PICTURE
+import { WrongEmailIcon, GoodEmailIcon } from "../../assets/icon/Icon";
 
 const EmailLoginScreen = ({ navigation }) => {
-  const [hidePassword, setHidePassword] = useState(true);
+  //ROUTE
   const route = useRoute();
+  //STATE
+  const [hidePassword, setHidePassword] = useState(true);
+  const [errorOnLogin, setErrorOnLogin] = useState(false);
+
+  useEffect(() => {
+    loadFont();
+  });
+
   const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
 
   const initialValues = {
@@ -77,7 +89,7 @@ const EmailLoginScreen = ({ navigation }) => {
       errors.password ||
       (!touched.email && !touched.password)
     ) {
-      return null;
+      setErrorOnLogin(true);
     }
 
     loginApi(values.email, values.password, () => {
@@ -85,6 +97,7 @@ const EmailLoginScreen = ({ navigation }) => {
     });
   };
 
+  //STYLES
   const {
     container_white,
     _title,
@@ -92,100 +105,128 @@ const EmailLoginScreen = ({ navigation }) => {
     forget_password,
   } = styles;
   return (
-    <Formik
-      initialValues={initialValues}
-      validationSchema={validationSchema}
-      onSubmit={onSubmit}
-    >
-      {({ values, handleChange, setFieldTouched, touched, errors }) => (
-        <BackgroundComponent
-          noGreenLine={true}
-          navigation={navigation}
-          route={route}
-        >
-          <View style={container_white}>
-            <Text style={_title}>Connectez-vous</Text>
-            <View style={{ marginBottom: normalize(24) }}>
-              {Platform.OS === "ios" ? (
-                <InputIos
-                  login
-                  value={values.email}
-                  iconValidation={emailIconValidation(errors, touched, values)}
-                  placeholder="Votre adresse email"
-                  onChangeText={handleChange("email")}
-                  onBlur={() => setFieldTouched("email")}
-                />
-              ) : (
-                <InputAndroid
-                  login
-                  value={values.email}
-                  iconValidation={emailIconValidation(errors, touched, values)}
-                  placeholder="Votre adresse email"
-                  onChangeText={handleChange("email")}
-                  onBlur={() => setFieldTouched("email")}
-                />
-              )}
+    <>
+      <Formik
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        onSubmit={onSubmit}
+      >
+        {({ values, handleChange, setFieldTouched, touched, errors }) => (
+          <BackgroundComponent
+            noGreenLine={true}
+            navigation={navigation}
+            route={route}
+          >
+            <View style={container_white}>
+              <Text style={_title}>Connectez-vous</Text>
+              <View style={{ marginBottom: normalize(24) }}>
+                {Platform.OS === "ios" ? (
+                  <InputIos
+                    login
+                    value={values.email}
+                    iconValidation={emailIconValidation(
+                      errors,
+                      touched,
+                      values
+                    )}
+                    placeholder="Votre adresse email"
+                    onChangeText={handleChange("email")}
+                    onBlur={() => setFieldTouched("email")}
+                  />
+                ) : (
+                  <InputAndroid
+                    login
+                    value={values.email}
+                    iconValidation={emailIconValidation(
+                      errors,
+                      touched,
+                      values
+                    )}
+                    placeholder="Votre adresse email"
+                    onChangeText={handleChange("email")}
+                    onBlur={() => setFieldTouched("email")}
+                  />
+                )}
+              </View>
+              <View>
+                {Platform.OS === "ios" ? (
+                  <InputIos
+                    login
+                    password
+                    iconValidation={passwordIconValidation(
+                      errors,
+                      touched,
+                      values
+                    )}
+                    value={values.password}
+                    secureTextEntry={hidePassword}
+                    showPassword={() => setHidePassword(!hidePassword)}
+                    hidePassword={true}
+                    placeholder="Votre mot de passe"
+                    onChangeText={handleChange("password")}
+                    onBlur={() => setFieldTouched("password")}
+                  />
+                ) : (
+                  <InputAndroid
+                    login
+                    password
+                    iconValidation={passwordIconValidation(
+                      errors,
+                      touched,
+                      values
+                    )}
+                    value={values.password}
+                    secureTextEntry={hidePassword}
+                    showPassword={() => setHidePassword(!hidePassword)}
+                    hidePassword={true}
+                    placeholder="Votre mot de passe"
+                    onChangeText={handleChange("password")}
+                    onBlur={() => setFieldTouched("password")}
+                  />
+                )}
+              </View>
+              <TouchableHighlight style={wrapper_forget_password}>
+                <Text style={forget_password}>Mot de passe oublié</Text>
+              </TouchableHighlight>
             </View>
             <View>
-              {Platform.OS === "ios" ? (
-                <InputIos
-                  login
-                  password
-                  iconValidation={passwordIconValidation(
-                    errors,
-                    touched,
-                    values
-                  )}
-                  value={values.password}
-                  secureTextEntry={hidePassword}
-                  showPassword={() => setHidePassword(!hidePassword)}
-                  hidePassword={true}
-                  placeholder="Votre mot de passe"
-                  onChangeText={handleChange("password")}
-                  onBlur={() => setFieldTouched("password")}
+              <View style={{ marginHorizontal: normalize(70) }}>
+                <BtnBlueAction
+                  title="Continuer"
+                  onPress={() => {
+                    console.log("click");
+                    goNextScreen(values, errors, touched);
+                  }}
+                  backgroundColor={
+                    inputValidation(errors, values)
+                      ? colors.btn_action
+                      : colors.btn_action_37
+                  }
+                  color={colors.text_white}
                 />
-              ) : (
-                <InputAndroid
-                  login
-                  password
-                  iconValidation={passwordIconValidation(
-                    errors,
-                    touched,
-                    values
-                  )}
-                  value={values.password}
-                  secureTextEntry={hidePassword}
-                  showPassword={() => setHidePassword(!hidePassword)}
-                  hidePassword={true}
-                  placeholder="Votre mot de passe"
-                  onChangeText={handleChange("password")}
-                  onBlur={() => setFieldTouched("password")}
-                />
-              )}
+              </View>
             </View>
-            <TouchableHighlight style={wrapper_forget_password}>
-              <Text style={forget_password}>Mot de passe oublié</Text>
-            </TouchableHighlight>
-          </View>
-          <View>
-            <View style={{ marginHorizontal: normalize(70) }}>
-              <BtnBlueAction
-                title="Continuer"
-                onPress={() => {
-                  goNextScreen(values, errors, touched);
-                }}
-                backgroundColor={
-                  inputValidation(errors, values)
-                    ? colors.btn_action
-                    : colors.btn_action_37
-                }
-                color={colors.text_white}
-              />
-            </View>
-          </View>
-        </BackgroundComponent>
-      )}
-    </Formik>
+          </BackgroundComponent>
+        )}
+      </Formik>
+      <Snackbar
+        style={{
+          backgroundColor: "red",
+          color: "white",
+        }}
+        theme={{ colors: { accent: "white" } }}
+        visible={errorOnLogin}
+        // onDismiss={onDismissSnackBar}
+        action={{
+          label: "Ok",
+          onPress: () => {
+            // Do something
+          },
+        }}
+      >
+        Remplissez tous les champs
+      </Snackbar>
+    </>
   );
 };
 
@@ -195,14 +236,16 @@ const styles = StyleSheet.create({
   },
   _title: {
     ...css.title,
+    fontFamily: "heavy",
   },
   text_input_question: {
     ...css.text_description,
+    fontFamily: "roman",
   },
   input_warning: {
     fontSize: normalize(10, "fontSize"),
     color: colors.text_description_black,
-    // ...fontStyles.roman,
+    fontFamily: "roman",
   },
   wrapper_forget_password: {
     marginTop: normalize(36),
@@ -210,6 +253,7 @@ const styles = StyleSheet.create({
   },
   forget_password: {
     ...css.text_title,
+    fontFamily: "regular",
     color: colors.forget_password_grey,
     textDecorationLine: "underline",
     textDecorationStyle: "solid",

@@ -2,8 +2,9 @@ import React from "react";
 import { View, Text } from "react-native";
 import { SvgXml } from "react-native-svg";
 
-export function BricolageTravauxIcon() {
-  const smile = `<svg width="38px" height="37px" viewBox="0 0 38 37" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+export function BricolageTravauxIcon({ width, height }) {
+  //w38 h37
+  const smile = `<svg width=${width} height=${height} viewBox="0 0 38 37" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
   <title>394F1AE8-0840-4A81-8C2B-54FE4C06B796</title>
   <g id="Android-" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
       <g id="UI-KIT" transform="translate(-37.000000, -707.000000)" stroke="#FFFFFF">
@@ -15,8 +16,9 @@ export function BricolageTravauxIcon() {
   return <SmileSvg />;
 }
 
-export function CoursFormationIcon() {
-  const smile = `<svg width="46px" height="46px" viewBox="0 0 46 46" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+export function CoursFormationIcon({ width, height }) {
+  //w46 h46
+  const smile = `<svg width=${width} height=${height} viewBox="0 0 46 46" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
   <title>B90962C4-246B-41CF-996E-005FFBCB522F</title>
   <g id="Android-" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
       <g id="UI-KIT" transform="translate(-33.000000, -609.000000)">
@@ -35,8 +37,9 @@ export function CoursFormationIcon() {
   return <SmileSvg />;
 }
 
-export function DemenagementManutentionIcon() {
-  const smile = `<svg width="41px" height="48px" viewBox="0 0 41 48" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+export function DemenagementManutentionIcon({ width, height }) {
+  //w41 h48
+  const smile = `<svg width=${width} height=${height} viewBox="0 0 41 48" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
   <title>6C817E23-8FB1-46F0-AC65-E6254B7E4D01</title>
   <g id="Android-" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
       <g id="UI-KIT" transform="translate(-36.000000, -802.000000)" stroke="#FFFFFF">
@@ -54,8 +57,9 @@ export function DemenagementManutentionIcon() {
   return <SmileSvg />;
 }
 
-export function DepannageReparationIcon() {
-  const smile = `<svg width="46px" height="46px" viewBox="0 0 46 46" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+export function DepannageReparationIcon({ width, height }) {
+  //w 46 h 46
+  const smile = `<svg width=${width} height=${height} viewBox="0 0 46 46" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
   <title>174A7FA9-519C-4CD7-B50A-3157CC00A361</title>
   <g id="Android-" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
       <g id="UI-KIT" transform="translate(-216.000000, -527.000000)" stroke="#FFFFFF">
@@ -73,8 +77,9 @@ export function DepannageReparationIcon() {
   return <SmileSvg />;
 }
 
-export function GardePromenadeIcon() {
-  const smile = `<svg width="43px" height="41px" viewBox="0 0 43 41" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+export function GardePromenadeIcon({ width, height }) {
+  // w43 h41
+  const smile = `<svg width=${width} height=${height} viewBox="0 0 43 41" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
   <title>3F2B5E7B-23AD-4F04-947F-695B72F2496C</title>
   <g id="Android-" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
       <g id="UI-KIT" transform="translate(-218.000000, -787.000000)">
@@ -92,8 +97,9 @@ export function GardePromenadeIcon() {
   return <SmileSvg />;
 }
 
-export function JardinagePiscineIcon() {
-  const smile = `<svg width="41px" height="41px" viewBox="0 0 41 41" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+export function JardinagePiscineIcon({ width, height }) {
+  //w 41 h 41
+  const smile = `<svg width=${width} height=${height} viewBox="0 0 41 41" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
   <title>1EE67C40-18E0-4A61-966F-4651087679C2</title>
   <g id="Android-" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
       <g id="UI-KIT" transform="translate(-510.000000, -528.000000)" stroke="#FFFFFF">
@@ -110,8 +116,9 @@ export function JardinagePiscineIcon() {
   return <SmileSvg />;
 }
 
-export function MenageIcon() {
-  const smile = `<svg width="43px" height="42px" viewBox="0 0 43 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+export function MenageIcon({ width, height }) {
+  // w 43 h 42
+  const smile = `<svg width=${width} height=${height} viewBox="0 0 43 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
   <title>D59177DA-F898-4A5A-83DC-0F7BEF6D1F43</title>
   <g id="Android-" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
       <g id="UI-KIT" transform="translate(-509.000000, -612.000000)">
@@ -133,8 +140,9 @@ export function MenageIcon() {
   return <SmileSvg />;
 }
 
-export function ModeBeauteIcon() {
-  const smile = `<svg width="37px" height="45px" viewBox="0 0 37 45" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+export function ModeBeauteIcon({ width, height }) {
+  // w 37 h 45
+  const smile = `<svg width=${width} height=${height} viewBox="0 0 37 45" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
   <title>8EB019E9-621D-4BF7-983E-2DABDDF91673</title>
   <g id="Android-" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
       <g id="UI-KIT" transform="translate(-37.000000, -526.000000)">
@@ -152,8 +160,9 @@ export function ModeBeauteIcon() {
   return <SmileSvg />;
 }
 
-export function RestaurationReceptionIcon() {
-  const smile = `<svg width="42px" height="42px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+export function RestaurationReceptionIcon({ width, height }) {
+  //w 42 h 42
+  const smile = `<svg width=${width} height=${height} viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
   <title>7E10FCF7-68FB-476A-A15B-553715296126</title>
   <g id="Android-" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
       <g id="UI-KIT" transform="translate(-509.000000, -704.000000)" stroke="#FFFFFF">
@@ -167,8 +176,9 @@ export function RestaurationReceptionIcon() {
   return <SmileSvg />;
 }
 
-export function SanteIcon() {
-  const smile = `<svg width="39px" height="42px" viewBox="0 0 39 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+export function SanteIcon({ width, height }) {
+  //w 39 h 42
+  const smile = `<svg width=${width} height=${height} viewBox="0 0 39 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
   <title>96B37DF1-789D-45F1-B1B1-C95A3DF15F23</title>
   <g id="Android-" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
       <g id="UI-KIT" transform="translate(-727.000000, -522.000000)" fill-rule="nonzero" stroke="#FFFFFF">
@@ -185,8 +195,9 @@ export function SanteIcon() {
   return <SmileSvg />;
 }
 
-export function ServicePersonneIcon() {
-  const smile = `<svg width="50px" height="50px" viewBox="0 0 50 50" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+export function ServicePersonneIcon({ width, height }) {
+  //w 50 h 50
+  const smile = `<svg width=${width} height=${height} viewBox="0 0 50 50" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
   <title>8DA9242D-BE43-49ED-8680-B615A1E98464</title>
   <g id="Android-" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
       <g id="UI-KIT" transform="translate(-505.000000, -782.000000)" stroke="#FFFFFF">

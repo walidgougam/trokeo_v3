@@ -1,0 +1,58 @@
+.good_or_service_organization {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 0px;
+  margin-top: 18px;
+}
+
+.good_or_service_organization p {
+  font-size: 16px;
+  /* font-family:Open Sans Bold ; */
+  color: #bfbdbd;
+  cursor: pointer;
+  padding: 11px 30px;
+}
+
+.wrapper_card {
+  margin-left: 13.5%;
+  margin-right: 13.5%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-column-gap: 25px;
+  grid-row-gap: 80px;
+}
+/*======== IPHONE X ========*/
+
+@media only screen and (max-width: 375px) {
+  .wrapper_card {
+    /* margin-left: 13.5%;
+    margin-right: 13.5%; */
+    justify-items: center;
+    display: grid;
+    grid-template-columns: 50% 50%;
+  }
+}
+
+/*======== IPAD ========*/
+@media only screen and (min-width: 375px) and (max-width: 768px) {
+  .wrapper_card {
+    /* margin-left: 13.5%;
+    margin-right: 13.5%; */
+    justify-items: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+/*==============GRID===============*/
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr; /*espacement des collonne sur le width de la page*/
+  grid-template-rows: 80% 60% 20%; /* espacement des rangés sur le height de la page*/
+}
+
+.child {
+  grid-column-start: 1; /*lenfant commence a la column 1*/
+  grid-column-end: 3; /*lenfant sarrete a la column 3*/
+  grid-row-start: 1; /*il commence a la rangéé 1 */
+}

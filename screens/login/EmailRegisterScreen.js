@@ -1,28 +1,36 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, Platform } from "react-native";
 import { useRoute } from "@react-navigation/native";
-import normalize from "react-native-normalize";
-import colors from "../../constant/colors";
-import css from "../../constant/css";
 import { Formik } from "formik";
 import * as Yup from "yup";
+import { Button, Snackbar } from "react-native-paper";
+//PICTURE
 import { WrongEmailIcon, GoodEmailIcon } from "../../assets/icon/Icon";
+//STYLES
 import fontStyles from "../../constant/fonts";
-
+import colors from "../../constant/colors";
+import css from "../../constant/css";
+import normalize from "react-native-normalize";
+import { loadFont } from "../../assets/Autre";
+//COMPONENT
 import BtnBlueAction from "../../component/button/BtnBlueAction";
 import InputAndroid from "../../component/input/InputAndroid";
 import InputIos from "../../component/input/InputIos";
 import BackgroundComponent from "../../component/BackgroundComponent";
 
 const EmailRegisterScreen = ({ navigation }) => {
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
-  // const [confirmationPassword, setPassword] = useState("");
-  const [hidePassword, setHidePassword] = useState(true);
+  //ROUTE
   const route = useRoute();
+  //STATE
+  const [hidePassword, setHidePassword] = useState(true);
+  const [errorOnLogin, setErrorOnLogin] = useState(false);
+  const [messageErrorRegister, setMessageErrorRegister] = useState("");
+
   const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
 
-  useEffect(() => {});
+  useEffect(() => {
+    loadFont();
+  });
 
   const initialValues = {
     email: "",
@@ -95,16 +103,23 @@ const EmailRegisterScreen = ({ navigation }) => {
     if (
       errors.email ||
       errors.password ||
-      (!touched.email && !touched.password) ||
-      values.password !== values.confirmationPassword
+      (!touched.email && !touched.password)
     ) {
-      return null;
+      setMessageErrorRegister("Erreur dans l'email et/ou le password");
+      setErrorOnLogin(true);
+    } else if (values.password !== values.confirmationPassword) {
+      setMessageErrorRegister("Password are not matching");
+      setErrorOnLogin(true);
     } else {
       return navigation.navigate("Name", {
         email: values.email,
         password: values.password,
       });
     }
+  };
+
+  const onDismissSnackBar = () => {
+    setErrorOnLogin(false);
   };
 
   const {
@@ -255,6 +270,23 @@ const EmailRegisterScreen = ({ navigation }) => {
               />
             </View>
           </View>
+          <>
+            <Snackbar
+              style={{
+                backgroundColor: "red",
+                color: "white",
+              }}
+              theme={{ colors: { accent: "white" } }}
+              visible={errorOnLogin}
+              onDismiss={onDismissSnackBar}
+              action={{
+                label: "Ok",
+                onPress: () => {},
+              }}
+            >
+              {messageErrorRegister}
+            </Snackbar>
+          </>
         </BackgroundComponent>
       )}
     </Formik>
@@ -267,14 +299,16 @@ const styles = StyleSheet.create({
   },
   _title: {
     ...css.title,
+    fontFamily: "heavy",
   },
   text_input_question: {
     ...css.text_description,
+    fontFamily: "roman",
   },
   input_warning: {
     fontSize: normalize(10, "fontSize"),
     color: colors.text_description_black,
-    // ...fontStyles.roman,
+    fontFamily: "roman",
   },
 });
 

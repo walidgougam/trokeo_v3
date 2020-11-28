@@ -1,0 +1,28 @@
+.wrapper_card_paymentsetting {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.text_payment_paymentsetting {
+  font-size: 14px;
+  /* font-family: open sans semi bold; */
+  color: black;
+  line-height: 20px;
+  margin-top: 28px;
+}
+.text_visibility_paymentsetting {
+  font-size: 16px;
+  /* font-family: open sans bold; */
+  color: #2fd266;
+  line-height: 20px;
+  margin-bottom: 23px;
+  margin-top: -20px;
+}
+
+.wrapper_btn_price_paymentsetting {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-top: 23px;
+  margin-bottom: 40px;
+}

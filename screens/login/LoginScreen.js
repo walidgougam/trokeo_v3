@@ -11,16 +11,20 @@ import {
   Platform,
 } from "react-native";
 import { useIsFocused } from "@react-navigation/native";
-import images from "../../assets/image/images";
-import fontStyles from "../../constant/fonts";
-import colors from "../../constant/colors";
-import { IconGoogle, IconFacebook } from "../../assets/icon/Icon";
-import normalize from "react-native-normalize";
 import * as Google from "expo-google-app-auth";
 import * as AppleAuthentication from "expo-apple-authentication";
-import { registerGoogleApi } from "../../API";
-
+//API
+import { registerGoogleApi } from "../../API/API";
+//PICTURE
+import images from "../../assets/image/images";
+import { IconGoogle, IconFacebook } from "../../assets/icon/Icon";
+//STYLES
+import fontStyles from "../../constant/fonts";
+import colors from "../../constant/colors";
+import normalize from "react-native-normalize";
+//COMPONENT
 import BtnLogin from "../../component/button/BtnLogin";
+import { loadFont } from "../../assets/Autre";
 
 const LoginScreen = ({ navigation }) => {
   //STATE
@@ -28,6 +32,10 @@ const LoginScreen = ({ navigation }) => {
 
   // FOCUS ON SCREEN
   const isFocuser = useIsFocused();
+
+  useEffect(() => {
+    loadFont();
+  });
 
   const configAndroid = {
     iosClientId: `365734703180-rafl6rvpv6e194e14c75tk734cfh0vos.apps.googleusercontent.com`,
@@ -168,7 +176,7 @@ const LoginScreen = ({ navigation }) => {
           />
           <View>
             <TouchableOpacity
-              activeOpacity={0.6}
+              activeOpacity={fontStyles.activeOpacity}
               style={[
                 btn,
                 {
@@ -218,12 +226,12 @@ const styles = StyleSheet.create({
     color: colors.text_white,
     fontSize: normalize(20, "fontSize"),
     marginBottom: normalize(17),
-    // ...fontStyles.heavy,
+    fontFamily: "heavy",
   },
   text_image: {
     color: colors.text_white,
     fontSize: normalize(15, "fontSize"),
-    // ...fontStyles.medium,
+    fontFamily: "medium",
   },
   container_green: {
     backgroundColor: colors.main_green,

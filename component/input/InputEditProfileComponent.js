@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
   },
   input: {
     fontSize: normalize(14, "fontSize"),
-    ...fontStyles.semiBold,
+    fontFamily: "semiBold",
     color: colors.black,
     paddingBottom: normalize(25),
   },

@@ -7,12 +7,16 @@ import {
   AsyncStorage,
   Platform,
 } from "react-native";
-import { ArrowLeftIcon, WhiteDotIcon } from "../../assets/icon/Icon";
+import axios from "axios";
+import { IOS_URL, ANDROID_URL } from "../../API/API";
+//STYLES
 import normalize from "react-native-normalize";
 import colors from "../../constant/colors";
+import fontStyles from "../../constant/fonts";
+//COMPONENENT
 import ModalDeleteMessage from "../modal/ModalDeleteMessage";
-import axios from "axios";
-import { IOS_URL, ANDROID_URL } from "../../API";
+//PICTURE
+import { ArrowLeftIcon, WhiteDotIcon } from "../../assets/icon/Icon";
 
 export default function HeaderComponent({
   navigation,
@@ -22,14 +26,13 @@ export default function HeaderComponent({
   deleteMessage,
   recieverId,
   fromChatScreen,
+  productId,
 }) {
   //STATE
   const [showModalDelete, setShowModalDelete] = useState(false);
 
   const handleModalMessage = async (reciever, type) => {
     const sender = await AsyncStorage.getItem("userId");
-    console.log(sender, "sendeer");
-    console.log(reciever, "reciever");
     //DELETE
     if (type === "delete") {
       await axios({
@@ -55,13 +58,13 @@ export default function HeaderComponent({
           Platform.OS === "ios"
             ? `${IOS_URL}/product/bookedproduct`
             : `${ANDROID_URL}/product/bookedproduct`,
+        data: { productId, bookedProduct: true },
       })
         .then((res) => {
-          deleteMessage();
-          navigation.goBack();
+          console.log(res, " -----error booked product-----");
         })
         .catch((err) => {
-          console.log(err, "-----error delete message-----");
+          console.log(err, "-----error booked product-----");
         });
     }
   };
@@ -77,7 +80,7 @@ export default function HeaderComponent({
       <View style={wrapper_header_title}>
         <View style={{ flexDirection: "row" }}>
           <TouchableOpacity
-            activeOpacity={0.6}
+            activeOpacity={fontStyles.activeOpacity}
             onPress={() => {
               navigation.goBack();
               editNotification && editNotification();
@@ -90,7 +93,7 @@ export default function HeaderComponent({
         </View>
         {(message || fromChatScreen) && (
           <TouchableOpacity
-            activeOpacity={0.6}
+            activeOpacity={fontStyles.activeOpacity}
             onPress={() => {
               setShowModalDelete(!showModalDelete);
             }}
@@ -129,7 +132,7 @@ const styles = StyleSheet.create({
   },
   text_title: {
     fontSize: normalize(18, "fontSize"),
-    // ...fontStyles.bold,
+    fontFamily: "bold",
     color: colors.text_white,
     marginLeft: normalize(27),
   },

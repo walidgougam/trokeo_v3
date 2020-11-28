@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="11px" height="18px" viewBox="0 0 11 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>67C04163-B2FE-4805-820A-CF7BD94F591F</title>
+    <defs>
+        <filter id="filter-1">
+            <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0.227451 0 0 0 0 0.227451 0 0 0 0 0.227451 0 0 0 1.000000 0"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="PC-(responsive-format)" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linejoin="round">
+        <g id="01.homepage" transform="translate(-808.000000, -1025.000000)">
+            <g id="icons8-facebook_f" transform="translate(0.000000, 977.000000)" filter="url(#filter-1)">
+                <g transform="translate(809.000000, 49.000000)">
+                    <path d="M6.75,2.90909091 L9,2.90909091 L9,0.125818182 C8.7315,0.0912727273 7.499625,0 6.427875,0 C4.125,0 2.625,1.33818182 2.625,3.77018182 L2.625,5.81818182 L0,5.81818182 L0,8.72727273 L2.625,8.72727273 L2.625,16 L5.625,16 L5.625,8.72727273 L8.625,8.72727273 L9,5.81818182 L5.625,5.81818182 L5.625,4 C5.625,3.39745455 6.128625,2.90909091 6.75,2.90909091 Z" id="Path" stroke="#00D65B"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

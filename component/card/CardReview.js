@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { View, Text, StyleSheet } from "react-native";
+//STYLES
 import colors from "../../constant/colors";
 import fontStyles from "../../constant/fonts";
 import normalize from "react-native-normalize";
-
+import { loadFont } from "../../assets/Autre";
+//COMPONENT
 import StarsComponent from "../StarsComponent";
 import PictureProfileComponent from "../../component/picture/PictureProfileComponent";
 
@@ -13,6 +15,9 @@ export default function CardReview({
   stars,
   profilePicture,
 }) {
+  useEffect(() => {
+    loadFont();
+  });
   //STYLES
   const { container, wrapper_comment, _date, text_name, text_review } = styles;
   return (
@@ -54,19 +59,19 @@ const styles = StyleSheet.create({
   },
   _date: {
     fontSize: normalize(9, "fontSize"),
-    // ...fontStyles.regular,
+    fontFamily: "regular",
     lineHeight: normalize(20),
     color: colors.icon_profile_grey,
   },
   text_name: {
     fontSize: normalize(11, "fontSize"),
-    // ...fontStyles.semiBold,
+    fontFamily: "semiBold",
     lineHeight: normalize(20),
     color: colors.text_description_black,
   },
   text_review: {
     fontSize: normalize(11, "fontSize"),
-    // ...fontStyles.regular,
+    fontFamily: "regular",
     lineHeight: normalize(20),
     color: colors.placeholder_grey,
   },

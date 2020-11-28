@@ -1,25 +1,48 @@
-import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import React, { useState, useEffect, useContext } from "react";
+import { View, Text, StyleSheet, ScrollView } from "react-native";
+import { renderForOrganization } from "../../helpers";
+import { products } from "../../helpersDataBase";
+import { Context as AuthContext } from "../../context/AuthContext";
+//STYLES
 import colors from "../../constant/colors";
 import normalize from "react-native-normalize";
-import { products } from "../../helpersDataBase";
-import { OrganizationIcon } from "../../assets/icon/Icon";
 import fontStyles from "../../constant/fonts";
-
+import { loadFont } from "../../assets/Autre";
+//COMPONENT
 import HeaderOrganization from "../../component/header/HeaderOrganization";
 import BtnHomeToggle from "../../component/button/BtnHomeToggle";
-
-import { renderForOrganization } from "../../helpers";
-import { ScrollView } from "react-native-gesture-handler";
+import HeaderFilterComponent from "../../component/header/HeaderFilterComponent";
+//PICTURE
+import { OrganizationIcon } from "../../assets/icon/Icon";
 
 export default function OrganizationScreen({ navigation }) {
   // STATE
   const [goodTab, setGoodTab] = useState(true);
   const [productFromApi, setProductFromApi] = useState();
 
+  // CONTEXT
+  const { state } = useContext(AuthContext);
+
+  //CONTEXT STATE
+  const category = state?.search?.category;
+  const distance = state?.search?.distance;
+  const condition = state?.search?.condition;
+
   useEffect(() => {
     setProductFromApi(products);
   }, []);
+
+  useEffect(() => {
+    loadFont();
+  });
+
+  const isProductFilter = () => {
+    if (category?.length > 0 || distance?.length > 0 || condition?.length > 0) {
+      return true;
+    } else {
+      return false;
+    }
+  };
 
   // STYLES
   const {
@@ -51,6 +74,13 @@ export default function OrganizationScreen({ navigation }) {
           changeFocus={() => setGoodTab(false)}
         />
       </View>
+      {isProductFilter() && (
+        <HeaderFilterComponent
+          category={category}
+          condition={condition}
+          distance={distance}
+        />
+      )}
       <ScrollView showsVerticalScrollIndicator={false}>
         {renderForOrganization(goodTab, productFromApi, navigation)}
       </ScrollView>
@@ -80,6 +110,6 @@ const styles = StyleSheet.create({
     fontSize: normalize(17, "fontSize"),
     lineHeight: normalize(20),
     color: colors.background_white,
-    ...fontStyles.regular,
+    fontFamily: "regular",
   },
 });

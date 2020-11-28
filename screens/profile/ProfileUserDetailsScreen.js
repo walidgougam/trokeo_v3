@@ -1,13 +1,16 @@
 import React, { useState, useEffect, useContext } from "react";
 import { View, Text, StyleSheet, Image, AsyncStorage } from "react-native";
 import { useRoute, useIsFocused } from "@react-navigation/native";
-import normalize from "react-native-normalize";
-import { ProfilePictureIcon } from "../../assets/icon/Icon";
+import { Context as AuthContext } from "../../context/AuthContext";
+import moment from "moment";
+//STYLE
 import fontStyles from "../../constant/fonts";
 import colors from "../../constant/colors";
-import moment from "moment";
-import { Context as AuthContext } from "../../context/AuthContext";
-
+import normalize from "react-native-normalize";
+import { loadFont } from "../../assets/Autre";
+//PICTURE
+import { ProfilePictureIcon } from "../../assets/icon/Icon";
+//COMPONENT
 import HeaderComponent from "../../component/header/HeaderComponent";
 import ProductFeedComponent from "../../component/ProductFeedComponent";
 import NoProductComponent from "../../component/NoProductComponent";
@@ -23,7 +26,7 @@ export default function ProfileUserDetailsScreen({ navigation }) {
 
   // ROUTE
   const route = useRoute();
-  const { userData } = route.params;
+  const { user } = route.params;
 
   // CONTEXT
   const { state, getAllProductContext } = useContext(AuthContext);
@@ -36,6 +39,10 @@ export default function ProfileUserDetailsScreen({ navigation }) {
       setUserId(await AsyncStorage.getItem("userId"));
     })();
   }, [isFocuser]);
+
+  useEffect(() => {
+    loadFont();
+  });
 
   const renderScreen = () => {
     const serviceProduct = state?.allProduct?.filter(
@@ -88,12 +95,12 @@ export default function ProfileUserDetailsScreen({ navigation }) {
   } = styles;
   return (
     <View style={container}>
-      <HeaderComponent navigation={navigation} title={userData?.firstName} />
+      <HeaderComponent navigation={navigation} title={user?.firstName} />
       <View style={wrapper_profile_info}>
-        {userData?.userPicture ? (
+        {user?.userPicture ? (
           <Image
             // source={{ uri: userData?.userPicture }}
-            source={userData?.userPicture}
+            source={user?.userPicture}
             style={{
               width: normalize(89),
               height: normalize(86),
@@ -105,7 +112,7 @@ export default function ProfileUserDetailsScreen({ navigation }) {
         )}
         <View style={{ marginLeft: 14 }}>
           <Text style={text_profile}>
-            {`Membre depuis le ${moment(userData?.createdAt)
+            {`Membre depuis le ${moment(user?.createdAt)
               .add(10, "days")
               .calendar()}`}
           </Text>
@@ -119,8 +126,8 @@ export default function ProfileUserDetailsScreen({ navigation }) {
             </View>
             <BtnRightIcon
               title="Voir les avis"
-              disabled={!userData?.review?.length > 0}
-              profileId={userData?._id}
+              disabled={!user?.review?.length > 0}
+              profileId={user?._id}
               navigation={navigation}
               target={"ProfileUserReview"}
             />
@@ -128,10 +135,10 @@ export default function ProfileUserDetailsScreen({ navigation }) {
         </View>
       </View>
       <View style={break_line}></View>
-      {userData?.about && (
+      {user?.about && (
         <View style={wrapper_text}>
           <Text style={text_about}>A propos</Text>
-          <Text style={text_description}>{userData?.about}</Text>
+          <Text style={text_description}>{user?.about}</Text>
         </View>
       )}
 
@@ -168,7 +175,7 @@ const styles = StyleSheet.create({
   },
   text_profile: {
     fontSize: 11,
-    // ...fontStyles.regular,
+    fontFamily: "regular",
     lineHeight: 20,
     color: colors.text_description_black,
   },
@@ -191,7 +198,7 @@ const styles = StyleSheet.create({
     marginTop: 19,
   },
   text_about: {
-    // ...fontStyles.bold,
+    fontFamily: "bold",
     fontSize: 16,
     lineHeight: 20,
     color: colors.text_description_black,
@@ -199,7 +206,7 @@ const styles = StyleSheet.create({
   },
   text_description: {
     fontSize: 14,
-    // ...fontStyles.regular,
+    fontFamily: "regular",
     lineHeight: 20,
     color: colors.text_description_black,
   },

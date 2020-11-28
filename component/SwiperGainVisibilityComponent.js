@@ -1,14 +1,17 @@
-import React, { Component } from "react";
+import React, { Component, useEffect } from "react";
 import { Text, View, StyleSheet, Image, Platform } from "react-native";
 import Swiper from "react-native-swiper";
-import normalize from "react-native-normalize";
+//PICTURE
+import imageNoAdvertising from "../assets/noAdvertising.png";
 import {
   PhoneNotificationImage,
   AddPictureImage,
 } from "../assets/image/images";
+//STYLE
+import { loadFont } from "../assets/Autre";
 import colors from "../constant/colors";
 import fontStyles from "../constant/fonts";
-import imageNoAdvertising from "../assets/noAdvertising.png";
+import normalize from "react-native-normalize";
 
 const ImagePhone = () => {
   return (
@@ -127,6 +130,9 @@ const ImageNoAdvertising = () => {
 };
 
 const SwiperGainVisibilityComponent = () => {
+  useEffect(() => {
+    loadFont();
+  });
   return (
     <View style={styles.container}>
       <Swiper
@@ -178,14 +184,14 @@ var styles = StyleSheet.create({
   },
   title: {
     fontSize: normalize(20, "fontSize"),
+    fontFamily: "semiBold",
     // lineHeight: normalize(20),
-    // ...fontStyles.semiBold,
     // marginHorizontal: 50,
   },
   text: {
     fontSize: normalize(14, "fontSize"),
     color: colors.text_description_black,
-    // ...fontStyles.regular,
+    fontFamily: "regular",
   },
   image: {
     width: "100%",

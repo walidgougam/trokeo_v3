@@ -1,13 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
-import { MapGeolocation } from "../assets/image/images";
+//STYLES
 import colors from "../constant/colors";
 import normalize from "react-native-normalize";
 import css from "../constant/css";
-
+import fontStyles from "../constant/fonts";
+import { loadFont } from "../assets/Autre";
+//COMPONENT
 import BtnBlueAction from "./button/BtnBlueAction";
+//PICTURE
+import { MapGeolocation } from "../assets/image/images";
 
 export default function NoGeolocationComponent({ getLocation }) {
+  useEffect(() => {
+    loadFont();
+  });
   //STYLES
   const {
     container,
@@ -31,7 +38,10 @@ export default function NoGeolocationComponent({ getLocation }) {
           title="Activer la géolocalisation"
         />
       </View>
-      <TouchableOpacity style={wrapper_city} activeOpacity={0.7}>
+      <TouchableOpacity
+        style={wrapper_city}
+        activeOpacity={fontStyles.activeOpacity}
+      >
         <Text style={text_city}>Saisir une ville</Text>
       </TouchableOpacity>
     </View>
@@ -46,6 +56,7 @@ const styles = StyleSheet.create({
   },
   _text: {
     ...css.text_title,
+    fontFamily: "regular",
     marginBottom: normalize(32),
   },
   _map: {
@@ -59,6 +70,7 @@ const styles = StyleSheet.create({
   },
   text_city: {
     ...css.text_title,
+    fontFamily: "regular",
     textDecorationLine: "underline",
     color: colors.btn_action,
   },

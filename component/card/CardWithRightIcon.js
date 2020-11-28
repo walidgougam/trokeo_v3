@@ -13,7 +13,7 @@ export default function CardWithRightIcon({
   const { container, _title } = styles;
   return (
     <TouchableOpacity
-      activeOpacity={0.6}
+      activeOpacity={fontStyles.activeOpacity}
       style={[
         container,
         Platform.OS === "android" && {
@@ -39,6 +39,6 @@ const styles = StyleSheet.create({
   },
   _title: {
     fontSize: normalize(14, "fontSize"),
-    // ...fontStyles.semiBold,
+    fontFamily: "semiBold",
   },
 });

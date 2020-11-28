@@ -1,20 +1,27 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, Image, Alert, Platform } from "react-native";
-import normalize from "react-native-normalize";
+import * as ImagePicker from "expo-image-picker";
 import { useRoute } from "@react-navigation/native";
+//STYLE
+import normalize from "react-native-normalize";
+import css from "../../constant/css";
 import colors from "../../constant/colors";
 import fontStyles from "../../constant/fonts";
-import css from "../../constant/css";
-import * as ImagePicker from "expo-image-picker";
+import { loadFont } from "../../assets/Autre";
+//PICTURE
 import { ProfilePictureIcon } from "../../assets/icon/Icon";
-
+//COMPONENT
 import BtnBlueAction from "../../component/button/BtnBlueAction";
 import BackgroundComponent from "../../component/BackgroundComponent";
 
 export default function PictureScreen({ navigation }) {
   // ROUTE
   const route = useRoute();
-  const { email, password, firstName, lastName } = route.params;
+  const { fromRegisterName } = route.params;
+  const email = fromRegisterName.email;
+  const password = fromRegisterName.password;
+  const firstName = fromRegisterName.firstName;
+  const lastName = fromRegisterName.lastName;
 
   // STATE
   const [profilePicture, setProfilePicture] = useState(null);
@@ -32,6 +39,10 @@ export default function PictureScreen({ navigation }) {
     })();
   }, []);
 
+  useEffect(() => {
+    loadFont();
+  });
+
   const handleChoosePicture = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -43,7 +54,6 @@ export default function PictureScreen({ navigation }) {
     console.log(result, "result picture screen");
 
     if (!result.cancelled) {
-      console.log(result, "-------result-------");
       setProfilePicture(result);
     }
   };
@@ -52,11 +62,13 @@ export default function PictureScreen({ navigation }) {
     console.log(profilePicture, "userPicture");
     if (profilePicture) {
       return navigation.navigate("Gender", {
-        email,
-        password,
-        firstName,
-        lastName,
-        userPicture: profilePicture,
+        fromRegisterPicture: {
+          email,
+          password,
+          firstName,
+          lastName,
+          userPicture: profilePicture,
+        },
       });
     } else {
       Alert.alert("vous devez avoir une photo de profil");
@@ -136,9 +148,11 @@ const styles = StyleSheet.create({
   },
   _title: {
     ...css.title,
+    fontFamily: "heavy",
   },
   text_description: {
     ...css.text_description,
+    fontFamily: "roman",
     marginBottom: normalize(62),
   },
   pseudo: {
@@ -147,6 +161,6 @@ const styles = StyleSheet.create({
     fontSize: normalize(14, "fontSize"),
     lineHeight: normalize(20),
     textAlign: "center",
-    // ...fontStyles.medium,
+    fontFamily: "medium",
   },
 });

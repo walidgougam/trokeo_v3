@@ -2,8 +2,9 @@ import React from "react";
 import { View, Text } from "react-native";
 import { SvgXml } from "react-native-svg";
 
-export function AnimauxIcon() {
-  const smile = `<svg width="43px" height="41px" viewBox="0 0 43 41" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+export function AnimauxIcon({ width, height }) {
+  //w43 h41
+  const smile = `<svg width=${width} height=${height} viewBox="0 0 43 41" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
   <title>ABB3CB00-DF64-4E07-A0B9-0BD583EF3894</title>
   <g id="Android-" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
       <g id="UI-KIT" transform="translate(-980.000000, -504.000000)">
@@ -22,7 +23,8 @@ export function AnimauxIcon() {
 }
 
 export function BeauteBienetreIcon() {
-  const smile = `<svg width="44px" height="44px" viewBox="0 0 44 44" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  //w44 h44
+  const smile = `<svg width=${width} height=${height} viewBox="0 0 44 44" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
   <title>E0594E6A-57D3-4FAE-B692-778C2AE2847B</title>
   <g id="Android-" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
       <g id="UI-KIT" transform="translate(-979.000000, -585.000000)">
@@ -41,8 +43,9 @@ export function BeauteBienetreIcon() {
   return <SmileSvg />;
 }
 
-export function DecorationIcon() {
-  const smile = `<svg width="39px" height="44px" viewBox="0 0 39 44" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+export function DecorationIcon({ width, height }) {
+  //w39 h44
+  const smile = `<svg width=${width} height=${height} viewBox="0 0 39 44" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
   <title>8DAFC09A-4354-421E-8223-6AFDCDD89EE7</title>
   <g id="Android-" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
       <g id="UI-KIT" transform="translate(-984.000000, -677.000000)" stroke="#FFFFFF">
@@ -56,8 +59,9 @@ export function DecorationIcon() {
   return <SmileSvg />;
 }
 
-export function EntretientIcon() {
-  const smile = `<svg width="43px" height="42px" viewBox="0 0 43 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+export function EntretientIcon({ width, height }) {
+  //w43 h42
+  const smile = `<svg width=${width} height=${height} viewBox="0 0 43 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
   <title>FE7E3B28-483B-4BB4-8A97-6D727B5F740F</title>
   <g id="Android-" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
       <g id="UI-KIT" transform="translate(-982.000000, -779.000000)">
@@ -79,8 +83,9 @@ export function EntretientIcon() {
   return <SmileSvg />;
 }
 
-export function FeteEvenementIcon() {
-  const smile = `<svg width="44px" height="42px" viewBox="0 0 44 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+export function FeteEvenementIcon({ width, height }) {
+  //w44 h42
+  const smile = `<svg width=${width} height=${height} viewBox="0 0 44 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
   <title>47738B97-7BB5-4069-90E1-73965DABB5DC</title>
   <g id="Android-" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
       <g id="UI-KIT" transform="translate(-1163.000000, -501.000000)">
@@ -101,8 +106,9 @@ export function FeteEvenementIcon() {
   return <SmileSvg />;
 }
 
-export function HightechIcon() {
-  const smile = `<svg width="42px" height="30px" viewBox="0 0 42 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+export function HightechIcon({ width, height }) {
+  // w42 h30
+  const smile = `<svg width=${width} height=${height} viewBox="0 0 42 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
   <title>D5B2CC72-9C28-44B4-8C0A-0D4042CC5A34</title>
   <g id="Android-" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
       <g id="UI-KIT" transform="translate(-1164.000000, -594.000000)">
@@ -119,8 +125,9 @@ export function HightechIcon() {
   return <SmileSvg />;
 }
 
-export function LoisirIcon() {
-  const smile = `<svg width="36px" height="46px" viewBox="0 0 36 46" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+export function LoisirIcon({ width, height }) {
+  //w36 h46
+  const smile = `<svg width=${width} height=${height} viewBox="0 0 36 46" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <title>EB7935C7-7AB5-4F68-A723-6E83759BBF2E</title>
     <g id="Android-" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linejoin="round">
         <g id="UI-KIT" transform="translate(-1167.000000, -675.000000)" stroke="#FFFFFF">
@@ -136,8 +143,9 @@ export function LoisirIcon() {
   return <SmileSvg />;
 }
 
-export function MaterielJardinIcon() {
-  const smile = `<svg width="44px" height="43px" viewBox="0 0 44 43" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+export function MaterielJardinIcon({ width, height }) {
+  //w44 h43
+  const smile = `<svg width=${width} height=${height} viewBox="0 0 44 43" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
   <title>959FF442-4FBF-4A4D-9E80-42B9350373ED</title>
   <g id="Android-" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
       <g id="UI-KIT" transform="translate(-1163.000000, -761.000000)">
@@ -155,8 +163,9 @@ export function MaterielJardinIcon() {
   return <SmileSvg />;
 }
 
-export function MaterielSportIcon() {
-  const smile = `<svg width="42px" height="42px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+export function MaterielSportIcon({ width, height }) {
+  //w42 h42
+  const smile = `<svg width=${width} height=${height} viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
   <title>4AA4E5B1-3BE1-401E-B202-06B48C74383C</title>
   <g id="Android-" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
       <g id="UI-KIT" transform="translate(-1414.000000, -502.000000)">
@@ -186,8 +195,9 @@ export function MaterielSportIcon() {
   return <SmileSvg />;
 }
 
-export function MeubleIcon() {
-  const smile = `<svg width="39px" height="42px" viewBox="0 0 39 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+export function MeubleIcon({ width, height }) {
+  //w39 h42
+  const smile = `<svg width=${width} height=${height} viewBox="0 0 39 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
   <title>6DDF0B0B-022E-4241-9DAF-062112959AD1</title>
   <g id="Android-" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
       <g id="UI-KIT" transform="translate(-1416.000000, -586.000000)" stroke="#FFFFFF">
@@ -201,8 +211,9 @@ export function MeubleIcon() {
   return <SmileSvg />;
 }
 
-export function ModeAccessoireIcon() {
-  const smile = `<svg width="39px" height="42px" viewBox="0 0 39 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+export function ModeAccessoireIcon({ width, height }) {
+  //w39 h 42
+  const smile = `<svg width=${width} height=${height} viewBox="0 0 39 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <title>431515C8-B365-4513-A21B-B2D76E005218</title>
     <g id="Android-" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
         <g id="UI-KIT" transform="translate(-1415.000000, -677.000000)" stroke="#FFFFFF">

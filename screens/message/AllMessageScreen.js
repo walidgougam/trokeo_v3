@@ -9,13 +9,17 @@ import {
   FlatList,
   ActivityIndicator,
 } from "react-native";
-import colors from "../../constant/colors";
-import normalize from "react-native-normalize";
-import { Button, Snackbar } from "react-native-paper";
-import axios from "axios";
 import { useIsFocused } from "@react-navigation/native";
-import { IOS_URL, ANDROID_URL } from "../../API";
-
+import { Button, Snackbar } from "react-native-paper";
+//API
+import { IOS_URL, ANDROID_URL } from "../../API/API";
+import axios from "axios";
+//STYLES
+import colors from "../../constant/colors";
+import fontStyles from "../../constant/fonts";
+import normalize from "react-native-normalize";
+import { loadFont } from "../../assets/Autre";
+//COMPONENT
 import CardMessageComponent from "../../component/card/CardMessageComponent";
 
 export default function AllMessageScreen({ navigation }) {
@@ -27,11 +31,13 @@ export default function AllMessageScreen({ navigation }) {
   // FOCUS ON SCREEN
   const isFocuser = useIsFocused();
 
-  const goToChat = (productPicture, recieverId, titleProduct) => {
+  useEffect(() => {
+    loadFont();
+  });
+
+  const goToChat = (recieverId, senderId, product) => {
     return navigation.navigate("Chat", {
-      productPicture,
-      recieverId,
-      titleProduct,
+      fromAllMessage: { recieverId, senderId, product },
     });
   };
   const onDismissSnackBar = () => setDeletedMessage(false);
@@ -83,14 +89,11 @@ export default function AllMessageScreen({ navigation }) {
           // contentContainerStyle={}
           renderItem={({ item }) => (
             <TouchableOpacity
-              activeOpacity={0.6}
-              onPress={() =>
-                goToChat(
-                  item?.pictureProduct,
-                  item?.reciever?._id,
-                  item?.titleProduct
-                )
-              }
+              activeOpacity={fontStyles.activeOpacity}
+              onPress={() => {
+                console.log(item, "item");
+                goToChat(item?.reciever?._id, item?.sender, item?.product);
+              }}
             >
               <CardMessageComponent
                 deleteMessage={() => {
@@ -99,10 +102,11 @@ export default function AllMessageScreen({ navigation }) {
                 }}
                 sender={item?.reciever?.firstName}
                 message={item?.messages[item.messages.length - 1]?.text}
-                picture={item?.reciever?.userPicture?.uri}
+                pictureProduct={item?.product?.productPicture[0]}
                 createdAt={item?.messages[item.messages.length - 1]?.createdAt}
-                titleProduct={item?.titleProduct}
+                titleProduct={item?.product?.title}
                 recieverId={item?.reciever?._id}
+                category={item?.product?.category}
               />
             </TouchableOpacity>
           )}
@@ -145,7 +149,7 @@ const styles = StyleSheet.create({
   text_title: {
     marginBottom: normalize(13),
     fontSize: normalize(18, "fontSize"),
-    // ...fontStyles.bold,
+    fontFamily: "bold",
     lineHeight: 20,
     color: colors.text_white,
     marginLeft: normalize(11),

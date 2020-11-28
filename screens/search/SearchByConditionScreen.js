@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { View, Text, FlatList, StyleSheet } from "react-native";
 import { goodsCondition2 } from "../../helpers";
 import { useRoute } from "@react-navigation/native";
+import { Context as AuthContext } from "../../context/AuthContext";
+//STYLES
 import colors from "../../constant/colors";
-
+//COMPONENT
 import HeaderComponent from "../../component/header/HeaderComponent";
 import CardSelectCategory from "../../component/card/CardSelectCategory";
 
@@ -15,17 +17,35 @@ export default function SearchByConditionScreen({ navigation }) {
   // STATE
   const [conditionSelected, setConditionSelected] = useState();
 
+  // CONTEXT
+  const { state, searchFilterProductContext } = useContext(AuthContext);
+
   useEffect(() => {
     setConditionSelected(goodsCondition2);
   }, []);
 
   const handleCondition = (titleCondition, isSelected) => {
-    const changeConditon = conditionSelected.map((el) => {
+    const changeCondition = conditionSelected.map((el) => {
       return el?.titleCondition === titleCondition
         ? Object.assign({}, el, { isSelected })
         : el;
     });
-    setConditionSelected(changeConditon);
+    setConditionSelected(changeCondition);
+    registerConditionOnContext(changeCondition);
+  };
+
+  const registerConditionOnContext = (changeCondition) => {
+    let conditionFilter = [];
+    for (let i = 0; i < changeCondition?.length; i++) {
+      if (changeCondition[i]?.isSelected === true) {
+        conditionFilter.push(changeCondition[i]?.titleCondition);
+      }
+      searchFilterProductContext({
+        category: state?.search?.category,
+        condition: conditionFilter,
+        distance: state?.search?.distance,
+      });
+    }
   };
 
   return (

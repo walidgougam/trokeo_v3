@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useeffect } from "react";
 import {
   View,
   Text,
@@ -8,24 +8,36 @@ import {
   AsyncStorage,
   Platform,
 } from "react-native";
+import axios from "axios";
+import { IOS_URL, ANDROID_URL } from "../../API/API";
+//PICTURE
 import { GreyDotIcon } from "../../assets/icon/Icon.js";
+import { noImage } from "../../assets/image/noImage.png";
+//STYLES
 import normalize from "react-native-normalize";
 import colors from "../../constant/colors";
+import fontStyles from "../../constant/fonts";
+import { loadFont } from "../../assets/Autre";
+//COMPONENT
 import ModalDeleteMessage from "../modal/ModalDeleteMessage";
-import axios from "axios";
-import { IOS_URL, ANDROID_URL } from "../../API";
+import NoImageByCategory from "../picture/NoImageByCategory";
 
 export default function CardMessageComponent({
-  picture,
+  pictureProduct,
   createdAt,
   message,
   sender,
   titleProduct,
   recieverId,
   deleteMessage,
+  category,
 }) {
   //STATE
   const [showModalDelete, setShowModalDelete] = useState(false);
+
+  useEffect(() => {
+    loadFont();
+  });
 
   const displayHour = () => {
     const hour = createdAt.slice(11, 16);
@@ -64,7 +76,15 @@ export default function CardMessageComponent({
   return (
     <View style={container}>
       <View style={{ flexDirection: "row" }}>
-        <Image style={image} source={{ uri: picture }} />
+        {pictureProduct ? (
+          <Image style={image} source={{ uri: pictureProduct?.uri }} />
+        ) : (
+          <NoImageByCategory
+            icon={category}
+            width={normalize(24)}
+            height={normalize(18)}
+          />
+        )}
         <View style={{ marginLeft: 10 }}>
           <Text style={name_sender}>{sender}</Text>
           <Text style={title_product}>{titleProduct}</Text>
@@ -74,7 +94,7 @@ export default function CardMessageComponent({
         </View>
       </View>
       <TouchableOpacity
-        activeOpacity={0.6}
+        activeOpacity={fontStyles.activeOpacity}
         hitSlop={expand_clickable_area}
         onPress={() => setShowModalDelete(!showModalDelete)}
       >
@@ -87,7 +107,6 @@ export default function CardMessageComponent({
         show={showModalDelete}
         handleShow={() => setShowModalDelete(!showModalDelete)}
         handleModal={(recieverId, type) => {
-          console.log(recieverId, "morray");
           handleModalMessage(recieverId, type);
         }}
       />
@@ -108,20 +127,20 @@ const styles = StyleSheet.create({
   },
   name_sender: {
     fontSize: normalize(12, "fontSize"),
-    // ...fontStyles.bold,
+    fontFamily: "bold",
     lineHeight: normalize(20),
     color: colors.text_description_black,
   },
   title_product: {
     fontSize: normalize(11, "fontSize"),
-    // ...fontStyles.regular,
+    fontFamily: "regular",
     lineHeight: normalize(20),
     color: colors.text_description_black,
   },
   _message: {
     fontSize: 11,
     lineHeight: 20,
-    // ...fontStyles.regular,
+    fontFamily: "regular",
     width: normalize(216, "width"),
     marginTop: normalize(6),
   },

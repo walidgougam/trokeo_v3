@@ -1,0 +1,38 @@
+.wrapper_picture_editprofile {
+  display: flex;
+  align-items: center;
+  margin-top: 37px;
+  p {
+    font-size: 13px;
+    /* font-family: Open Sans Regular; */
+    text-decoration: underline;
+    color: #0091ff;
+    margin-left: 22px;
+  }
+}
+
+.label_input_editprofile {
+  font-size: 14px;
+  /* font-family: Open Sans Regular; */
+  color: #979797;
+  margin: 0px 0px 12px 0px;
+}
+.line_between_section_editprofile {
+  border-bottom: solid 1px #bfbdbd;
+  margin-top: 40px;
+  margin-bottom: 0px;
+}
+
+.wrapper_localisation_editprofile {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0px;
+  margin-top: 28px;
+  p {
+    font-size: 14px;
+    /* font-family: Open Sans Regular; */
+    color: #979797;
+    margin: 0px;
+  }
+}

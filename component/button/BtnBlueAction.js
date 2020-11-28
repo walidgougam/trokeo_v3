@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+//STYLE
 import normalize from "react-native-normalize";
 import css from "../../constant/css";
+import fontStyles from "../../constant/fonts";
+import { loadFont } from "../../assets/Autre";
 
 export default function BtnBlueAction({
   onPress,
@@ -11,10 +14,14 @@ export default function BtnBlueAction({
   marginBottom,
   width,
 }) {
+  useEffect(() => {
+    loadFont();
+  });
+  //STYLES
   const { _btn, _title } = styles;
   return (
     <TouchableOpacity
-      activeOpacity={0.6}
+      activeOpacity={fontStyles.activeOpacity}
       style={[
         _btn,
         {
@@ -37,6 +44,7 @@ const styles = StyleSheet.create({
   },
   _title: {
     ...css.btn_login, ////// "open sans semi bold " if from  gainvisibilityscreen
+    fontFamily: "regular",
     textAlign: "center",
   },
 });

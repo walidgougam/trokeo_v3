@@ -8,25 +8,29 @@ import {
   AsyncStorage,
   ActionSheetIOS,
   Platform,
+  ScrollView,
 } from "react-native";
+import { Button, Snackbar } from "react-native-paper";
+import * as ImagePicker from "expo-image-picker";
+import { BottomSheet, ListItem } from "react-native-elements";
+import { Context as AuthContext } from "../../context/AuthContext";
+import SelectPicker from "react-native-form-select-picker";
+//API
+import { goodsCondition } from "../../helpers";
+import { createProductApi } from "../../API/API";
+//STYLES
 import colors from "../../constant/colors";
 import fontStyles from "../../constant/fonts";
-import { RightIcon, ArrowBottomIcon } from "../../assets/icon/Icon";
-import { goodsCondition } from "../../helpers";
-import { createProductApi } from "../../API";
-import { Context as AuthContext } from "../../context/AuthContext";
 import css from "../../constant/css";
-import SelectPicker from "react-native-form-select-picker";
-import * as ImagePicker from "expo-image-picker";
 import normalize from "react-native-normalize";
-import { BottomSheet, ListItem } from "react-native-elements";
-import { Button, Snackbar } from "react-native-paper";
-
+import { loadFont } from "../../assets/Autre";
+//COMPONENT
+import AddPicture from "../../component/picture/AddPicture";
 import BtnHomeToggle from "../../component/button/BtnHomeToggle";
-import CardPictureIcon from "../../component/picture/CardPictureIcon";
 import CardAddPictureIcon from "../../component/picture/CardAddPictureIcon";
 import BtnBlueAction from "../../component/button/BtnBlueAction";
-import { ScrollView } from "react-native-gesture-handler";
+//PICTURE
+import { RightIcon, ArrowBottomIcon } from "../../assets/icon/Icon";
 
 export default function CreateProduct({ navigation }) {
   // STATE
@@ -35,18 +39,20 @@ export default function CreateProduct({ navigation }) {
   const [description, setDescription] = useState("");
   const [picture, setPicture] = useState("hello");
   const [conditionProduct, setConditionProduct] = useState("");
-  const [categoryProduct, setCategoryProduct] = useState();
   const [avatarSource, setAvatarSource] = useState([]);
   const [errorOnCreateProduct, setErrorOnCreateProduct] = useState();
   const [isBottomSheetVisible, setIsBottomSheetVisible] = useState(false);
 
   // CONTEXT
-  const { state, createProductContext } = useContext(AuthContext);
+  const { state, createProductContext, categoryProductContext } = useContext(
+    AuthContext
+  );
+
+  useEffect(() => {}, [avatarSource]);
 
   useEffect(() => {
-    console.log("avatar source");
-  }, [avatarSource]);
-
+    loadFont();
+  });
   const list = [
     {
       title: "Supprimer",
@@ -78,8 +84,6 @@ export default function CreateProduct({ navigation }) {
       quality: 1,
     });
 
-    console.log(result, "result picture screen");
-
     if (!result.cancelled) {
       let source = { uri: result.uri };
       setAvatarSource((prevState) => {
@@ -90,7 +94,6 @@ export default function CreateProduct({ navigation }) {
 
   const handleSelect = (e) => {
     setConditionProduct(e);
-    console.log(e, "handle select from create");
   };
 
   const createProduct = async () => {
@@ -116,7 +119,7 @@ export default function CreateProduct({ navigation }) {
       setConditionProduct("");
       setAvatarSource([]);
       setErrorOnCreateProduct("false");
-      // setCategoryProduct("");
+      categoryProductContext("");
     }
   };
 
@@ -159,9 +162,9 @@ export default function CreateProduct({ navigation }) {
     _header,
     text_title,
     wrapper_toggle_btn,
-    wrapper_camera_picture,
     wrapper_input,
-    wrapper_select_goods_condition,
+    container_select_goods_condition,
+    wrapper_select,
     _label,
     _input,
     wrapper_category,
@@ -185,94 +188,77 @@ export default function CreateProduct({ navigation }) {
           changeFocus={() => setGoods(false)}
         />
       </View>
-      <ScrollView>
-        <View style={wrapper_camera_picture}>
-          <TouchableOpacity
-            activeOpacity={0.6}
-            onPress={() => handleDeleteProductPicture(avatarSource[0])}
-          >
-            <CardPictureIcon image={avatarSource[0]} />
-          </TouchableOpacity>
-          <TouchableOpacity
-            activeOpacity={0.6}
-            onPress={() => handleDeleteProductPicture(avatarSource[1])}
-          >
-            <CardPictureIcon image={avatarSource[1]} />
-          </TouchableOpacity>
-          <TouchableOpacity
-            activeOpacity={0.6}
-            onPress={() => handleDeleteProductPicture(avatarSource[2])}
-          >
-            <CardPictureIcon image={avatarSource[2]} />
-          </TouchableOpacity>
-          <TouchableOpacity
-            activeOpacity={0.6}
-            onPress={() => handleChoosePicture()}
-          >
-            <CardAddPictureIcon />
-          </TouchableOpacity>
-        </View>
-        <View style={wrapper_input}>
-          <Text style={_label}>Titre</Text>
-          <TextInput
-            placeholder="Titre: lampe, échelle, cadre…"
-            style={_input}
-            onChangeText={(e) => setTitle(e)}
-            value={title}
+      <ScrollView
+        contentContainerStyle={{
+          justifyContent: "space-between",
+          // flexGrow: 1,
+        }}
+      >
+        {/* <View style={{ flex: 1 }}> */}
+        <>
+          <AddPicture
+            avatar={avatarSource}
+            onPress={(index) => handleDeleteProductPicture(avatarSource[index])}
+            onChoosePicture={() => handleChoosePicture()}
           />
-          <Text style={_label}>Description</Text>
-          <TextInput
-            onChangeText={(e) => setDescription(e)}
-            multiline
-            placeholder="Donner les caractéristiques du bien proposé (taille, couleur, dimensions …)"
-            style={_input}
-            maxLength={200}
-            value={description}
-          />
-          <Text style={styles.text_max_length}>200 caractères maximum.</Text>
-        </View>
-        <View style={wrapper_select_goods_condition}>
-          <Text style={_label}>Etat du bien</Text>
-          <View
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "center",
-              borderWidth: 1,
-              borderColor: "#BFBDBD",
-              justifyContent: "space-between",
-              alignContent: "center",
-              paddingLeft: 10,
-              paddingRight: 17,
-            }}
-          >
-            <SelectPicker
-              placeholder="Sélectionner"
-              onValueChange={(value) => {
-                // Do anything you want with the value.
-                // For example, save in state.
-                setConditionProduct(value);
-              }}
-              selected={conditionProduct}
-            >
-              {Object.values(goodsCondition).map((val, index) => (
-                <SelectPicker.Item label={val} value={val} key={index} />
-              ))}
-            </SelectPicker>
-            <ArrowBottomIcon />
+          <View style={wrapper_input}>
+            <Text style={_label}>Titre</Text>
+            <TextInput
+              placeholder="Titre: lampe, échelle, cadre…"
+              style={_input}
+              onChangeText={(e) => setTitle(e)}
+              value={title}
+            />
+            <Text style={_label}>Description</Text>
+            <TextInput
+              blurOnSubmit={true}
+              onChangeText={(e) => setDescription(e)}
+              multiline
+              placeholder="Donner les caractéristiques du bien proposé (taille, couleur, dimensions …)"
+              style={[_input, { marginBottom: 0 }]}
+              maxLength={200}
+              value={description}
+            />
+            <Text style={styles.text_max_length}>200 caractères maximum.</Text>
           </View>
-        </View>
-        <TouchableOpacity
-          activeOpacity={0.6}
-          style={wrapper_category}
-          onPress={() => goToCategoryList()}
+          {goods && (
+            <View style={container_select_goods_condition}>
+              <Text style={_label}>Etat du bien</Text>
+              <View style={wrapper_select}>
+                <SelectPicker
+                  style={{ width: "95%" }}
+                  placeholder="Sélectionner"
+                  onValueChange={(value) => {
+                    setConditionProduct(value);
+                  }}
+                  selected={conditionProduct}
+                >
+                  {Object.values(goodsCondition).map((val, index) => (
+                    <SelectPicker.Item label={val} value={val} key={index} />
+                  ))}
+                </SelectPicker>
+                <ArrowBottomIcon />
+              </View>
+            </View>
+          )}
+          <TouchableOpacity
+            activeOpacity={fontStyles.activeOpacity}
+            style={wrapper_category}
+            onPress={() => goToCategoryList()}
+          >
+            <Text style={text_category}>
+              {state?.category ? state?.category : "Catégorie"}
+            </Text>
+            <RightIcon />
+          </TouchableOpacity>
+        </>
+        <View
+          style={{
+            marginHorizontal: normalize(70),
+            paddingTop: normalize(23),
+            paddingBottom: normalize(23),
+          }}
         >
-          <Text style={text_category}>
-            {state?.category ? state?.category : "Catégorie"}
-          </Text>
-          <RightIcon />
-        </TouchableOpacity>
-        <View style={{ marginHorizontal: 70, marginTop: 50 }}>
           <BtnBlueAction
             backgroundColor={colors.btn_action}
             color="white"
@@ -280,6 +266,7 @@ export default function CreateProduct({ navigation }) {
             onPress={() => createProduct()}
           />
         </View>
+        {/* </View> */}
       </ScrollView>
       <>
         <Snackbar
@@ -353,7 +340,7 @@ const styles = StyleSheet.create({
   text_title: {
     marginBottom: normalize(13),
     fontSize: normalize(18, "fontSize"),
-    // ...fontStyles.bold,
+    fontFamily: "bold",
     lineHeight: 20,
     color: colors.text_white,
     marginLeft: normalize(62),
@@ -361,14 +348,6 @@ const styles = StyleSheet.create({
   wrapper_toggle_btn: {
     flexDirection: "row",
     height: normalize(47, "height"),
-  },
-  wrapper_camera_picture: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    paddingHorizontal: normalize(50),
-    ...css.border_bottom,
-    paddingVertical: normalize(17),
   },
   wrapper_input: {
     paddingHorizontal: normalize(20),
@@ -380,12 +359,12 @@ const styles = StyleSheet.create({
     fontSize: normalize(12, " fontSize"),
     lineHeight: normalize(20),
     marginBottom: normalize(13),
-    // ...fontStyles.regular,
+    fontFamily: "regular",
   },
   _input: {
     fontSize: normalize(12, "fontSize"),
     color: "black",
-    // ...fontStyles.regular,
+    fontFamily: "regular",
     // lineHeight: normalize(20),
     borderColor: colors.icon_profile_grey,
     borderWidth: 1,
@@ -399,13 +378,24 @@ const styles = StyleSheet.create({
     color: colors.text_description_black,
     fontSize: normalize(10, " fontSize"),
     lineHeight: normalize(20),
-    // ...fontStyles.regular,
+    fontFamily: "regular",
   },
-  wrapper_select_goods_condition: {
+  container_select_goods_condition: {
     paddingHorizontal: normalize(20),
     paddingTop: normalize(8),
     paddingBottom: normalize(19),
     ...css.border_bottom,
+  },
+  wrapper_select: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    borderWidth: 1,
+    borderColor: "#BFBDBD",
+    justifyContent: "space-between",
+    alignContent: "center",
+    paddingLeft: 10,
+    paddingRight: 17,
   },
   wrapper_category: {
     flexDirection: "row",
@@ -416,5 +406,6 @@ const styles = StyleSheet.create({
   },
   text_category: {
     ...css.text_input,
+    fontFamily: "regular",
   },
 });

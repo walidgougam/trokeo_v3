@@ -13,7 +13,7 @@ exports.getChat = async (req, res) => {
         $and: [{ sender }, { reciever }],
       },
     ],
-  });
+  }).populate("product");
 
   if (chat === false) {
     res.status(200).json({
@@ -25,7 +25,7 @@ exports.getChat = async (req, res) => {
 };
 
 exports.postChat = (req, res) => {
-  const { reciever, sender, titleProduct, pictureProduct, messages } = req.body;
+  const { reciever, sender, product, messages } = req.body;
 
   const query = Chat.findOne({
     $or: [
@@ -40,8 +40,7 @@ exports.postChat = (req, res) => {
         const chat = new Chat({
           sender,
           reciever,
-          titleProduct,
-          pictureProduct,
+          product,
           messages,
         });
 
@@ -90,7 +89,7 @@ exports.getSpecificChat = (req, res) => {
       { sender, reciever },
       { sender: reciever, reciever: sender },
     ],
-  });
+  }).populate("product");
 
   chat.exec().then((data) => {
     if (data === null) {
@@ -104,8 +103,8 @@ exports.getSpecificChat = (req, res) => {
 exports.getAllRecieverChat = async (req, res) => {
   const { id } = req.params;
   const chat = await Chat.find({
-    sender: id,
-  }).populate("reciever");
+    $or: [{ sender: id }, { reciever: id }],
+  }).populate("reciever product");
   if (chat) {
     res.status(200).json({
       chat,
@@ -115,7 +114,6 @@ exports.getAllRecieverChat = async (req, res) => {
 
 exports.deleteChat = async (req, res) => {
   const { sender, reciever } = req.params;
-  console.log(sender, reciever, "---id server ----");
   Chat.findOneAndDelete({ sender, reciever }).exec((err, result) => {
     if (err) {
       res.status(400).json({

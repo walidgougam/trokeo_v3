@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="21px" height="18px" viewBox="0 0 21 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>F94932CF-9E99-460B-A632-26C489245CDB</title>
+    <defs>
+        <filter id="filter-1">
+            <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0.925490 0 0 0 0 0.925490 0 0 0 0 0.925490 0 0 0 1.000000 0"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="PC-(responsive-format)-V2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="icons8-star" transform="translate(-159.000000, -499.000000)" filter="url(#filter-1)">
+            <g transform="translate(159.000000, 499.000000)">
+                <path d="M11.098787,0.386446256 L13.3476602,6.36858793 L20.3743137,6.44167801 C20.9789673,6.44800311 21.2292766,7.14025047 20.7443022,7.46423629 L15.1068658,11.2339976 L17.2008602,17.2611177 C17.38077,17.7797762 16.7260546,18.207072 16.2324758,17.8929252 L10.5003911,14.2405298 L4.76752423,17.8922224 C4.27472765,18.2063692 3.61922998,17.7783706 3.79913984,17.260415 L5.8931342,11.2332948 L0.25569777,7.4635335 C-0.229276642,7.13954768 0.021032732,6.44730032 0.625686313,6.44097522 L7.65233976,6.36788514 L9.90121304,0.385743467 C10.0952028,-0.128698227 10.9055794,-0.128698227 11.098787,0.386446256 Z" id="Path" fill="#FFE13D" fill-rule="nonzero"></path>
+            </g>
+        </g>
+    </g>
+</svg>

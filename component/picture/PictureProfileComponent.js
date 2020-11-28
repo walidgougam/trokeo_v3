@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
     fontSize: normalize(14, "fontSize"),
     lineHeight: normalize(20),
     textAlign: "center",
-    // ...fontStyles.medium,
+    fontFamily: "medium",
   },
   text_change_profile_picture: {
     textDecorationLine: "underline",

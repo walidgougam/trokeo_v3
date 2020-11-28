@@ -5,20 +5,20 @@ import fontStyles from "../constant/fonts";
 export default {
   text_input: {
     fontSize: normalize(12, "fontSize"),
-    // ...fontStyles.regular,
-    lineHeight: normalize(20),
+    // fontFamily: "regular",
+    // lineHeight: normalize(20),
     color: colors.text_description_black,
   },
   text_description: {
     fontSize: normalize(12, "fontSize"),
-    // ...fontStyles.roman,
+    fontFamily: "roman",
     color: colors.text_description_black,
     lineHeight: normalize(20),
     marginBottom: normalize(11),
   },
   text_title: {
     fontSize: normalize(14, "fontSize"),
-    // ...fontStyles.regular,
+    // fontFamily: "regular",
     lineHeight: 20,
   },
   title: {
@@ -26,12 +26,12 @@ export default {
     fontSize: normalize(16, "fontSize"),
     marginBottom: normalize(11),
     lineHeight: normalize(20),
-    // ...fontStyles.heavy,
+    // fontFamily: "heavy",
   },
   btn_login: {
     fontSize: normalize(16, "fontSize"),
     lineHeight: normalize(20),
-    // ...fontStyles.regular,
+    // fontFamily: "regular",
   },
   border_bottom: {
     borderBottomColor: colors.placeholder_grey,

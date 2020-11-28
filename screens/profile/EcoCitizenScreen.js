@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   View,
   Text,
@@ -6,6 +6,7 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from "react-native";
+//PICTURE
 import {
   GroupWithHeart,
   ManPainting,
@@ -13,11 +14,16 @@ import {
   LogoTrokeo,
 } from "../../assets/image/images";
 import { ArrowLeftIcon } from "../../assets/icon/Icon";
+//STYLE
 import normalize from "react-native-normalize";
 import colors from "../../constant/colors";
 import fontStyles from "../../constant/fonts";
+import { loadFont } from "../../assets/Autre";
 
 export default function EcoCitizenScreen({ navigation }) {
+  useEffect(() => {
+    loadFont();
+  });
   // STYLES
   const {
     wrapper_header,
@@ -32,7 +38,7 @@ export default function EcoCitizenScreen({ navigation }) {
     <ScrollView style={{ backgroundColor: colors.background_white }}>
       <View style={wrapper_header}>
         <TouchableOpacity
-          activeOpacity={0.6}
+          activeOpacity={fontStyles.activeOpacity}
           hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
           style={arrow_left}
           onPress={() => navigation.goBack()}
@@ -106,13 +112,13 @@ const styles = StyleSheet.create({
     lineHeight: normalize(20),
     marginBottom: normalize(18),
     color: colors.title_eco_citizen,
-    // ...fontStyles.semiBold,
+    fontFamily: "semiBold",
   },
   _description: {
     fontSize: normalize(15, "fontSize"),
     color: colors.title_eco_citizen,
     lineHeight: normalize(20),
     marginBottom: normalize(20),
-    // ...fontStyles.regular,
+    fontFamily: "regular",
   },
 });

@@ -1,13 +1,16 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+//PICTURE
 import {
   ArrowLeftIcon,
   LogoGreenIcon,
   SearchGreyIcon,
   NotificationGreyIcon,
 } from "../../assets/icon/Icon";
+//STYLES
 import normalize from "react-native-normalize";
 import colors from "../../constant/colors";
+import fontStyles from "../../constant/fonts";
 
 export default function HeaderOrganization({ navigation, isLogo }) {
   const goSearchProduct = () => {
@@ -32,7 +35,7 @@ export default function HeaderOrganization({ navigation, isLogo }) {
           />
         ) : (
           <TouchableOpacity
-            activeOpacity={0.6}
+            activeOpacity={fontStyles.activeOpacity}
             hitSlop={expand_clickable_area}
             onPress={() => navigation.goBack()}
           >
@@ -41,14 +44,14 @@ export default function HeaderOrganization({ navigation, isLogo }) {
         )}
         <View style={wrapper_icon_notification}>
           <TouchableOpacity
-            activeOpacity={0.6}
+            activeOpacity={fontStyles.activeOpacity}
             hitSlop={expand_clickable_area}
             onPress={() => goSearchProduct()}
           >
             <SearchGreyIcon />
           </TouchableOpacity>
           <TouchableOpacity
-            activeOpacity={0.6}
+            activeOpacity={fontStyles.activeOpacity}
             hitSlop={expand_clickable_area}
             style={{ marginLeft: normalize(20) }}
           >

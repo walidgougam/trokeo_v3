@@ -1,0 +1,52 @@
+.container_footerhome {
+  height: 237px;
+  background-image: url("../../asset/allSvg/background_download_app.png");
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+.wrapper_download_app_footerhome {
+  width: 279px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-top: 25px;
+  padding-left: 107px;
+  padding-bottom: 52px;
+}
+
+.download_app_footerhome {
+  font-size: 23px;
+  /* font-family: "Open Sans SemiBold"; */
+  line-height: 23px;
+  margin-top: 0px;
+}
+.text_footerhome {
+  font-size: 13px;
+  /* font-family: "Open Sans Regular"; */
+  line-height: 16px;
+}
+
+.wrapper_phone_screen_footerhome {
+  display: flex;
+  flex-direction: row;
+  padding-right: 101px;
+}
+
+.phone1_footerhome {
+  height: 203px;
+  width: 102px;
+  margin-left: 11px;
+  position: relative;
+  top: 30px;
+}
+
+.phone2_footerhome {
+  height: 203px;
+  width: 102px;
+  margin-left: 11px;
+  position: relative;
+  top: 20px;
+}

@@ -12,36 +12,13 @@ const SwiperPictureComponent = ({ imageProduct }) => {
         dotColor="grey"
         activeDotColor="white"
       >
-        <View style={styles.slide}>
-          <Image
-            source={
-              imageProduct[0]
-                ? imageProduct[0]
-                : require("../../assets/image/noImage.png")
-            }
-            style={styles.image}
-          />
-        </View>
-        <View style={styles.slide}>
-          <Image
-            source={
-              imageProduct[1]
-                ? imageProduct[1]
-                : require("../../assets/image/noImage.png")
-            }
-            style={styles.image}
-          />
-        </View>
-        <View style={styles.slide}>
-          <Image
-            source={
-              imageProduct[2]
-                ? imageProduct[2]
-                : require("../../assets/image/noImage.png")
-            }
-            style={styles.image}
-          />
-        </View>
+        {imageProduct.map((image, index) => {
+          return (
+            <View style={styles.slide} key={index}>
+              <Image source={image} style={styles.image} />
+            </View>
+          );
+        })}
       </Swiper>
     </View>
   );

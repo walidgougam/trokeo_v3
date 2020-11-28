@@ -1,0 +1,50 @@
+.container_register {
+  display: flex;
+  justify-content: center;
+  margin-top: 53px;
+}
+
+.wrapper_register {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding-bottom: 28px;
+  align-items: center;
+  width: 579px;
+  height: 737px;
+  width: 579px;
+  box-shadow: 1px 3px 3px 3px rgba(216, 216, 216, 0.5);
+  box-sizing: border-box;
+}
+
+.text_create_account_register {
+  font-size: 22px;
+  /* font-family: Montserrat SemiBold; */
+}
+
+.text_add_picture_register {
+  color: #0091ff;
+  font-size: 14px;
+  /* font-family: Open Sans Regular; */
+  line-height: 19px;
+  margin-bottom: 40px;
+}
+.forms_register {
+  display: flex;
+}
+
+.text_atleast8_register {
+  font-size: 10px;
+  /* font-family: "open sans regular"; */
+  align-self: self-start;
+  color: #3a3a3a;
+  line-height: 14px;
+  margin: 0px 0px 16px 110px;
+}
+.text_you_are_register {
+  font-size: 12px;
+  color: #3a3a3a;
+  margin: 0px 0px 6px 110px;
+  align-self: flex-start;
+  /* font-family: "open sans regular"; */
+}

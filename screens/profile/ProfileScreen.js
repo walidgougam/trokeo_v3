@@ -10,29 +10,39 @@ import {
   Platform,
 } from "react-native";
 import { useIsFocused } from "@react-navigation/native";
-import colors from "../../constant/colors";
-import normalize from "react-native-normalize";
-import { profileOptions } from "../../helpers";
-import axios from "axios";
 import { Context as AuthContext } from "../../context/AuthContext";
-import { ProfilePictureIcon } from "../../assets/icon/Icon";
-import fontStyles from "../../constant/fonts";
-import { IOS_URL, ANDROID_URL } from "../../API";
-
+//API
+import axios from "axios";
+import { IOS_URL, ANDROID_URL } from "../../API/API";
+import { profileOptions } from "../../helpers";
+//COMPONENT
 import HeaderNotification from "../../component/header/HeaderNotification";
 import StarsComponent from "../../component/StarsComponent";
 import CardWithRightIcon from "../../component/card/CardWithRightIcon";
+//PICTURE
+import { ProfilePictureIcon } from "../../assets/icon/Icon";
+//STYLE
+import colors from "../../constant/colors";
+import normalize from "react-native-normalize";
+import fontStyles from "../../constant/fonts";
+import { loadFont } from "../../assets/Autre";
 
 export default function ProfileScreen({ navigation }) {
   // STATE
   const [data, setData] = useState();
-  const [userData, setUserData] = useState();
 
   // CONTEXT
-  const { state, editProfileContext, getUserContext } = useContext(AuthContext);
+  const { state, getSpecificUserContext } = useContext(AuthContext);
+
+  //CONTEXT STATE
+  let specificUser = state?.specificUser;
 
   // FOCUS ON SCREEN
   const isFocuser = useIsFocused();
+
+  useEffect(() => {
+    loadFont();
+  });
 
   const getUserOnDB = async () => {
     let id = await AsyncStorage.getItem("userId");
@@ -44,7 +54,7 @@ export default function ProfileScreen({ navigation }) {
           : `${ANDROID_URL}/user/${id}`,
     })
       .then((res) => {
-        setUserData(res.data.user);
+        getSpecificUserContext(res?.data?.user);
       })
       .catch((err) => {
         console.log(err, "error on get user api");
@@ -56,12 +66,15 @@ export default function ProfileScreen({ navigation }) {
   }, [isFocuser]);
 
   const renderName = () => {
-    if (userData?.firstName && userData?.lastName) {
-      return `${userData?.firstName}.${userData?.lastName.substring(0, 1)}`;
-    } else if (!userData?.firstName && !userData?.lastName) {
+    if (specificUser?.firstName && specificUser?.lastName) {
+      return `${specificUser?.firstName}.${specificUser?.lastName.substring(
+        0,
+        1
+      )}`;
+    } else if (!specificUser?.firstName && !specificUser?.lastName) {
       return "firstname.lastname";
-    } else if (userData?.firstName && !userData?.lastName) {
-      return userData?.firstName;
+    } else if (specificUser?.firstName && !specificUser?.lastName) {
+      return specificUser?.firstName;
     }
   };
 
@@ -78,13 +91,12 @@ export default function ProfileScreen({ navigation }) {
       <HeaderNotification navigation={navigation} nothingOnHeader />
       <ScrollView>
         <View style={wrapper_profile_info}>
-          {console.log(userData, "------useruseruser-----")}
-          {userData?.userPicture ? (
+          {specificUser?.userPicture ? (
             <Image
               source={
                 Platform.OS === "ios"
-                  ? { uri: userData?.userPicture }
-                  : userData?.userPicture
+                  ? { uri: specificUser?.userPicture?.uri }
+                  : specificUser?.userPicture
               }
               style={{
                 width: normalize(86),
@@ -117,7 +129,7 @@ export default function ProfileScreen({ navigation }) {
                 onPress={() =>
                   navigation.navigate(item?.onClick, {
                     data,
-                    userData: userData,
+                    userData: specificUser,
                   })
                 }
                 fromSeeProfileCard={index === 0 ? true : false}
@@ -155,6 +167,6 @@ const styles = StyleSheet.create({
     fontSize: normalize(14, "fontSize"),
     lineHeight: normalize(20),
     textAlign: "center",
-    // ...fontStyles.medium,
+    fontFamily: "medium",
   },
 });

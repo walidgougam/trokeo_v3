@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet } from "react-native";
-import normalize from "react-native-normalize";
 import { useRoute } from "@react-navigation/native";
+//API
+import { registerApi } from "../../API/API";
+//STYLE
 import colors from "../../constant/colors";
 import css from "../../constant/css";
-import { registerApi } from "../../API";
-
+import { loadFont } from "../../assets/Autre";
+import normalize from "react-native-normalize";
+//COMPONENT
 import BtnBlueAction from "../../component/button/BtnBlueAction";
 import RadioButton from "../../component/input/RadioBtnComponent";
 import BackgroundComponent from "../../component/BackgroundComponent";
@@ -13,13 +16,18 @@ import BackgroundComponent from "../../component/BackgroundComponent";
 export default function GenderScreen({ navigation }) {
   //ROUTE
   const route = useRoute();
-  const { email, password, firstName, lastName, userPicture } = route.params;
+  const { fromRegisterPicture } = route.params;
+  const email = fromRegisterPicture.email;
+  const password = fromRegisterPicture.password;
+  const firstName = fromRegisterPicture.firstName;
+  const lastName = fromRegisterPicture.lastName;
+  const userPicture = fromRegisterPicture.userPicture;
 
   // STATE
   const [female, setFemale] = useState(false);
 
   useEffect(() => {
-    // console.log({ email, password, firstName, lastName, picture, female });
+    loadFont();
   });
 
   const goNextScreen = () => {
@@ -86,8 +94,10 @@ const styles = StyleSheet.create({
   },
   _title: {
     ...css.title,
+    fontFamily: "heavy",
   },
   text_description: {
     ...css.text_description,
+    fontFamily: "roman",
   },
 });

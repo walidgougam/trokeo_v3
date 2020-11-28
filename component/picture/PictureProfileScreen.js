@@ -38,11 +38,9 @@ export default function PictureProfileScreen({
       quality: 1,
     });
 
-    console.log(result, "result");
-
     if (!result.cancelled) {
-      setAvatarSource(result.uri);
-      changePictureContext(result.uri);
+      setAvatarSource(result?.uri);
+      changePictureContext(result?.uri);
     }
   };
 
@@ -62,7 +60,11 @@ export default function PictureProfileScreen({
     <View>
       {userPicture || avatarSource ? (
         <Image
-          source={Platform.OS === "ios" ? { uri: avatarSource } : avatarSource}
+          source={
+            Platform.OS === "ios"
+              ? { uri: userPicture.uri || avatarSource.uri }
+              : userPicture.uri || avatarSource.uri
+          }
           style={{
             width: normalize(86),
             height: normalize(86),
@@ -95,7 +97,7 @@ const styles = StyleSheet.create({
     fontSize: normalize(14, "fontSize"),
     lineHeight: normalize(20),
     textAlign: "center",
-    // ...fontStyles.medium,
+    fontFamily: "medium",
   },
   text_change_profile_picture: {
     textDecorationLine: "underline",

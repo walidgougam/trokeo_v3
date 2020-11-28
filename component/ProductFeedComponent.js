@@ -1,22 +1,32 @@
-import React from "react";
+import React, { useContext } from "react";
 import { View, Text, FlatList, StyleSheet, Dimensions } from "react-native";
+import { Context as AuthContext } from "../context/AuthContext";
+//STYLE
 import normalize from "react-native-normalize";
-
+//COMPONENT
 import CardProductComponent from "./card/CardProductComponent";
 
 export default function ProductFeedComponent({
-  data,
+  allProduct,
   navigation,
   clickFromChild,
 }) {
+  // CONTEXT
+  const { state } = useContext(AuthContext);
+
+  //CONTEXT STATE
+  const category = state?.search?.category;
+  const distance = state?.search?.distance;
+  const condition = state?.search?.condition;
+
   const numColumns = 2;
   const WIDTH = Dimensions.get("window").width;
   const formatData = (dataList, numColumns) => {
-    const totalRows = Math.floor(dataList.length / numColumns);
-    let totalLastRow = dataList.length - totalRows * numColumns;
+    const totalRows = Math.floor(dataList?.length / numColumns);
+    let totalLastRow = dataList?.length - totalRows * numColumns;
 
     while (totalLastRow !== 0 && totalLastRow !== numColumns) {
-      dataList.push({ name: "blank", empty: true });
+      dataList?.push({ name: "blank", empty: true });
       totalLastRow++;
     }
     return dataList;
@@ -46,6 +56,23 @@ export default function ProductFeedComponent({
       </>
     );
   };
+
+  // const optionFilter = (e) => {
+  //   return () => {
+  //     if (category !== undefined || condition !== undefined) {
+  //       console.log("category 1", category);
+  //       console.log(
+  //         category.find((e) => e === category[0]),
+  //         "blablabla"
+  //       );
+  //       return (e) => e === category[0];
+  //     } else {
+  //       console.log("category 2", category);
+  //       return e;
+  //     }
+  //   };
+  // };
+
   //STYLES
   const { _container, wrapper_list } = styles;
   return (
@@ -53,9 +80,9 @@ export default function ProductFeedComponent({
       <FlatList
         showsVerticalScrollIndicator={false}
         contentContainerStyle={wrapper_list}
-        data={formatData(data, numColumns)}
+        data={formatData(allProduct, numColumns)}
         renderItem={renderItem}
-        keyExtractor={(item) => item}
+        keyExtractor={(item) => item._id}
         numColumns={numColumns}
       />
     </View>

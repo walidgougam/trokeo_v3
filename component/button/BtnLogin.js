@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Text, TouchableOpacity, StyleSheet } from "react-native";
+//STYLES
 import normalize from "react-native-normalize";
 import colors from "../../constant/colors";
 import css from "../../constant/css";
+import fontStyles from "../../constant/fonts";
+import { loadFont } from "../../assets/Autre";
 
 export default function BtnLogin({
   backgroundColor,
@@ -11,11 +14,15 @@ export default function BtnLogin({
   icon,
   press,
 }) {
+  useEffect(() => {
+    loadFont();
+  });
+  //STYLES
   const { btn, text_btn } = styles;
   return (
     <TouchableOpacity
       onPress={press}
-      activeOpacity={0.6}
+      activeOpacity={fontStyles.activeOpacity}
       style={[btn, { backgroundColor: backgroundColor }]}
     >
       {icon}
@@ -36,6 +43,7 @@ const styles = StyleSheet.create({
   },
   text_btn: {
     ...css.Btn_login,
+    fontFamily: "regular",
     marginLeft: normalize(13),
     color: colors.text_google_grey,
   },

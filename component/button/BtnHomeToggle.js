@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Text, StyleSheet, TouchableOpacity } from "react-native";
 import colors from "../../constant/colors";
 import normalize from "react-native-normalize";
 import fontStyles from "../../constant/fonts";
+import { loadFont } from "../../assets/Autre";
 
 export default function BtnHomeToggle({
   changeFocus,
@@ -12,11 +13,15 @@ export default function BtnHomeToggle({
   lengthServices,
   fromScreenWithProduct,
 }) {
-  const { btn, text_btn } = styles;
+  useEffect(() => {
+    loadFont();
+  });
 
+  //STYLES
+  const { btn, text_btn } = styles;
   return (
     <TouchableOpacity
-      activeOpacity={0.6}
+      activeOpacity={fontStyles.activeOpacity}
       onPress={changeFocus}
       style={[
         btn,
@@ -59,6 +64,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: normalize(16, "fontSize"),
     lineHeight: normalize(20),
-    // ...fontStyles.bold,
+    fontFamily: "bold",
   },
 });

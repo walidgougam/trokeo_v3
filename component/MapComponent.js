@@ -28,7 +28,6 @@ export default function MapComponent({ height }) {
         latitudeDelta: 0.1,
         longitudeDelta: 0.1,
       });
-      console.log(location, "alors location --------");
     })();
   }, []);
 

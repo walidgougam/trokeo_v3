@@ -1,16 +1,22 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { RadioButton } from "react-native-paper";
+//STYLES
 import colors from "../../constant/colors";
 import css from "../../constant/css";
 import fontStyles from "../../constant/fonts";
 import normalize from "react-native-normalize";
 
 export default function CardSelectCategory({ title, value, onPress }) {
+  //STYLES
+  const { wrapper_card, text_category } = styles;
   return (
-    <TouchableOpacity activeOpacity={0.6} onPress={onPress}>
-      <View style={styles.wrapper_card}>
-        <Text style={styles.text_category}>{title}</Text>
+    <TouchableOpacity
+      activeOpacity={fontStyles.activeOpacity}
+      onPress={onPress}
+    >
+      <View style={wrapper_card}>
+        <Text style={text_category}>{title}</Text>
         <RadioButton value={title} status={value ? "checked" : "unchecked"} />
       </View>
     </TouchableOpacity>
@@ -27,7 +33,7 @@ const styles = StyleSheet.create({
   },
   text_category: {
     fontSize: normalize(14, "fontSize"),
-    // ...fontStyles.semiBold,
+    fontFamily: "semiBold",
     lineHeight: normalize(20),
     color: colors.text_description_black,
   },

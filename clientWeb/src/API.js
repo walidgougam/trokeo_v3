@@ -1,41 +1,27 @@
 import axios from "axios";
-import { AsyncStorage, Alert, Platform } from "react-native";
 // import RNFetchBlob from "rn-fetch-blob";
-
-export const IOS_URL = "http://localhost:5000";
-export const ANDROID_URL = "http://192.168.1.9:5000";
 
 export const registerApi = async (
   email,
   password,
   firstName,
   lastName,
-  userPicture,
   female,
   callback
 ) => {
   await axios({
     method: "POST",
-    url:
-      Platform.OS === "ios"
-        ? `${IOS_URL}/user/register`
-        : `${ANDROID_URL}/user/register`,
-    data: {
-      email,
-      password,
-      firstName,
-      lastName,
-      userPicture: { uri: userPicture.uri },
-      female,
-    },
+    url: "http://localhost:5000/user/register",
+    data: { email, password, firstName, lastName, female },
   })
     .then((res) => {
       console.log(res, "result register api ");
-      AsyncStorage.setItem("userId", res?.data?.userData?._id);
+      localStorage.setItem("userId", res.data.userData._id);
+      localStorage.setItem("userName", res.data.userData.firstName);
       callback();
     })
     .catch((err) => {
-      console.log(err, "error on register api");
+      console.log(err, "error on register");
     });
 };
 
@@ -48,16 +34,13 @@ export const registerGoogleApi = async (
 ) => {
   await axios({
     method: "POST",
-    url:
-      Platform.OS === "ios"
-        ? `${IOS_URL}/user/login`
-        : `${ANDROID_URL}/user/login`,
+    url: "http://localhost:5000/user/registergoogle",
     data: { email, firstName, lastName, userPicture },
   })
     .then((res) => {
       console.log(res, "result register api google ");
-      AsyncStorage.setItem("userId", res.data.userData._id);
-      AsyncStorage.setItem("userName", res.data.userData.firstName);
+      localStorage.setItem("userId", res.data.userData._id);
+      localStorage.setItem("userName", res.data.userData.firstName);
       callback();
     })
     .catch((err) => {
@@ -68,16 +51,14 @@ export const registerGoogleApi = async (
 export const loginApi = (email, password, callback) => {
   axios({
     method: "POST",
-    url:
-      Platform.OS === "ios"
-        ? `${IOS_URL}/user/login`
-        : `${ANDROID_URL}/user/login`,
+    url: "http://localhost:5000/user/login",
     data: { email, password },
   })
     .then((res) => {
-      console.log(res, "res login");
-      AsyncStorage.setItem("token", res.data.data.token);
-      AsyncStorage.setItem("userId", res.data.data._id);
+      console.log(res, "---res login api----");
+      localStorage.setItem("token", res.data.token);
+      localStorage.setItem("userId", res.data._id);
+      localStorage.setItem("userName", res.data.firstName);
       callback();
     })
     .catch((err) => {
@@ -90,7 +71,7 @@ export const loginGoogleApi = () => {};
 export const addImageApi = (picture, fileName) => {
   // RNFetchBlob.fetch(
   //   "POST",
-  //   "http://192.168.1.95000/register/uploadPicture",
+  //   "http://localhost:5000/register/uploadPicture",
   //   {
   //     Authorization: "Bearer access-token",
   //     otherHeader: "foo",
@@ -117,13 +98,10 @@ export const createProductApi = async (
   isFromOrganization,
   callback
 ) => {
-  let userId = await AsyncStorage.getItem("userId");
+  let userId = await localStorage.getItem("userId");
   axios({
     method: "POST",
-    url:
-      Platform.OS === "ios"
-        ? `${IOS_URL}/product/createproduct`
-        : `${ANDROID_URL}/product/createproduct`,
+    url: "http://localhost:5000/product/createproduct",
     data: {
       title,
       description,
@@ -148,13 +126,10 @@ export const createProductApi = async (
 };
 
 export const getUserApi = async (dispatch) => {
-  let id = await AsyncStorage.getItem("userId");
+  let id = await localStorage.getItem("userId");
   axios({
     method: "GET",
-    url:
-      Platform.OS === "ios"
-        ? `${IOS_URL}/user/${id}`
-        : `${ANDROID_URL}/user/${id}`,
+    url: `http://localhost:5000/user/${id}`,
   })
     .then((res) => {
       dispatch({ type: "GET_USER", payload: res.data.user });
@@ -175,13 +150,10 @@ export const editProfileUserApi = async (
   userPicture,
   callback
 ) => {
-  let userId = await AsyncStorage.getItem("userId");
+  let userId = await localStorage.getItem("userId");
   axios({
     method: "POST",
-    url:
-      Platform.OS === "ios"
-        ? `${IOS_URL}/user/edit`
-        : `${ANDROID_URL}/user/edit`,
+    url: "http://localhost:5000/user/edit",
     data: {
       userId,
       firstName,
@@ -199,46 +171,5 @@ export const editProfileUserApi = async (
     })
     .catch((err) => {
       console.log(err, "error on loginAPi");
-    });
-};
-
-export const handleLikeApi = async (userId, productId) => {
-  await axios({
-    method: "POST",
-    url:
-      Platform.OS === "ios"
-        ? `${IOS_URL}/product/handlelike`
-        : `${ANDROID_URL}/product/handlelike`,
-    data: { userId, productId },
-  })
-    .then((res) => {
-      console.log(res.data, "res handlelike api");
-    })
-    .catch((err) => {
-      console.log(err, "error on handle like api");
-    });
-};
-
-export const createReviewApi = async (
-  userId,
-  recieverId,
-  stars,
-  review,
-  callback
-) => {
-  await axios({
-    method: "POST",
-    url:
-      Platform.OS === "ios"
-        ? `${IOS_URL}/user/createreview`
-        : `${ANDROID_URL}/user/createreview`,
-    data: { userId, recieverId, stars, review },
-  })
-    .then((res) => {
-      console.log(res.data, "res create review api");
-      callback();
-    })
-    .catch((err) => {
-      console.log(err, "error on create review api");
     });
 };

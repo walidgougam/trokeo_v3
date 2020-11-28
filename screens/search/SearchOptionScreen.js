@@ -1,24 +1,39 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { View, StyleSheet } from "react-native";
+import { useRoute } from "@react-navigation/native";
+import { Context as AuthContext } from "../../context/AuthContext";
+//STYLE
+import normalize from "react-native-normalize";
+import colors from "../../constant/colors";
+//COMPONENT
 import HeaderComponent from "../../component/header/HeaderComponent";
 import InputSearch from "../../component/input/InputSearch";
-import normalize from "react-native-normalize";
 import BtnHomeToggle from "../../component/button/BtnHomeToggle";
 import CardWithRightIcon from "../../component/card/CardWithRightIcon";
 import BtnBlueAction from "../../component/button/BtnBlueAction";
-import colors from "../../constant/colors";
-import { useRoute } from "@react-navigation/native";
 
 export default function SearchOptionScreen({ navigation }) {
+  //STATE
   const [goods, setGoods] = useState();
+
+  //ROUTE
   const route = useRoute();
   const { fromOrganizationScreen } = route.params;
+
+  // CONTEXT
+  const { state } = useContext(AuthContext);
 
   const goHomeResult = () => {
     fromOrganizationScreen
       ? navigation.navigate("OrganizationStack")
       : navigation.navigate("HomeStack");
   };
+
+  const arrayData = [
+    { title: "Catégorie", navigation: "CategoryList" },
+    { title: "Etat", navigation: "ConditionList" },
+    { title: "Distance Maximum", navigation: "SearchByDistance" },
+  ];
 
   const { container, _input, wrapper_toggle_btn } = styles;
   return (
@@ -46,18 +61,17 @@ export default function SearchOptionScreen({ navigation }) {
               changeFocus={() => setGoods(false)}
             />
           </View>
-          <CardWithRightIcon
-            title="Catégorie"
-            onPress={() => navigation.navigate("CategoryList", { goods })}
-          />
-          <CardWithRightIcon
-            title="Etat"
-            onPress={() => navigation.navigate("ConditionList", { goods })}
-          />
-          <CardWithRightIcon
-            title="Distance Maximum"
-            onPress={() => navigation.navigate("SearchByDistance")}
-          />
+          {arrayData.map((option, index) => {
+            return (
+              <CardWithRightIcon
+                key={index}
+                title={option?.title}
+                onPress={() =>
+                  navigation.navigate(option?.navigation, { goods })
+                }
+              />
+            );
+          })}
         </View>
         <View
           style={{

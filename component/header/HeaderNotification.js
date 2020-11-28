@@ -1,14 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+//PICTURE
 import {
   ArrowLeftIcon,
   LogoWhiteIcon,
   SearchWhiteIcon,
   NotificationWhiteIcon,
   HeartIcon,
+  HeartFullIcon,
 } from "../../assets/icon/Icon";
+//STYLES
 import normalize from "react-native-normalize";
 import colors from "../../constant/colors";
+import fontStyles from "../../constant/fonts";
 
 export default function HeaderNotification({
   navigation,
@@ -16,6 +20,9 @@ export default function HeaderNotification({
   nothingOnHeader,
   fromDetailsScreen,
 }) {
+  //STATE
+  const [heartFull, setHeartFull] = useState(true);
+  //STYLES
   const {
     _header,
     wrapper_header_title,
@@ -30,7 +37,7 @@ export default function HeaderNotification({
             <LogoWhiteIcon width={normalize(84)} height={normalize(31)} />
           ) : (
             <TouchableOpacity
-              activeOpacity={0.6}
+              activeOpacity={fontStyles.activeOpacity}
               onPress={() => navigation.goBack()}
               hitSlop={expand_clickable_area}
             >
@@ -38,21 +45,34 @@ export default function HeaderNotification({
             </TouchableOpacity>
           )}
           <View style={wrapper_icon_notification}>
+            {fromDetailsScreen ? (
+              <TouchableOpacity
+                activeOpacity={fontStyles.activeOpacity}
+                hitSlop={expand_clickable_area}
+                onPress={() => setHeartFull(!heartFull)}
+              >
+                {heartFull ? (
+                  <HeartFullIcon width={normalize(28)} height={normalize(25)} />
+                ) : (
+                  <HeartIcon />
+                )}
+              </TouchableOpacity>
+            ) : (
+              <TouchableOpacity
+                activeOpacity={fontStyles.activeOpacity}
+                hitSlop={expand_clickable_area}
+                onPress={() =>
+                  navigation.navigate("SearchOption", {
+                    fromOrganizationScreen: false,
+                  })
+                }
+              >
+                <SearchWhiteIcon />
+              </TouchableOpacity>
+            )}
+
             <TouchableOpacity
-              activeOpacity={0.6}
-              hitSlop={expand_clickable_area}
-              onPress={() =>
-                fromDetailsScreen
-                  ? console.log("coeur")
-                  : navigation.navigate("SearchOption", {
-                      fromOrganizationScreen: false,
-                    })
-              }
-            >
-              {fromDetailsScreen ? <HeartIcon /> : <SearchWhiteIcon />}
-            </TouchableOpacity>
-            <TouchableOpacity
-              activeOpacity={0.6}
+              activeOpacity={fontStyles.activeOpacity}
               hitSlop={expand_clickable_area}
               style={{ marginLeft: normalize(20) }}
             >

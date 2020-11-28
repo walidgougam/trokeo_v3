@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, FlatList, AsyncStorage } from "react-native";
 import colors from "../../constant/colors";
 import axios from "axios";
 import { useRoute } from "@react-navigation/native";
-import { IOS_URL, ANDROID_URL } from "../../API";
+import { IOS_URL, ANDROID_URL } from "../../API/API";
 
 import HeaderComponent from "../../component/header/HeaderComponent";
 import CardReview from "../../component/card/CardReview";

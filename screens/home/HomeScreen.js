@@ -5,16 +5,23 @@ import {
   ScrollView,
   Platform,
   AsyncStorage,
+  Text,
 } from "react-native";
+import { ActivityIndicator } from "react-native-paper";
 import { useIsFocused } from "@react-navigation/native";
+import * as Location from "expo-location";
+import { Context as AuthContext } from "../../context/AuthContext";
+//STYLE
 import colors from "../../constant/colors";
 import normalize from "react-native-normalize";
-import { Context as AuthContext } from "../../context/AuthContext";
+import { loadFont } from "../../assets/Autre";
+//API
 import axios from "axios";
-import * as Location from "expo-location";
-import { IOS_URL, ANDROID_URL } from "../../API";
-
+import { IOS_URL, ANDROID_URL } from "../../API/API";
+import { getProductApi } from "../../API/ProductApi";
+//COMPONENT
 import HeaderNotification from "../../component/header/HeaderNotification";
+import HeaderFilterComponent from "../../component/header/HeaderFilterComponent";
 import BtnHomeToggle from "../../component/button/BtnHomeToggle";
 import NoGeolocationComponent from "../../component/NoGeolocationComponent";
 import ProductFeedComponent from "../../component/ProductFeedComponent";
@@ -23,16 +30,37 @@ import NoProductComponent from "../../component/NoProductComponent";
 export default function HomeScreen({ navigation }) {
   //STATE
   const [goodTab, setGoodTab] = useState(true);
-  const [locationState, setLocationState] = useState();
-  const [allProduct, setAllProduct] = useState();
+  const [locationState, setLocationState] = useState(true);
+  const [loading, setLoading] = useState(true);
 
   // CONTEXT
-  const { state, getAllProductContext, getUserContext } = useContext(
-    AuthContext
-  );
+  const { state, getAllProductContext } = useContext(AuthContext);
+
+  //CONTEXT STATE
+  const category = state?.search?.category;
+  const distance = state?.search?.distance;
+  const condition = state?.search?.condition;
 
   // FOCUS ON SCREEN
   const isFocuser = useIsFocused();
+
+  const getAllProduct = async () => {
+    const product = await getProductApi();
+    getAllProductContext(product);
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    let mounted = true;
+
+    if (mounted) {
+      getAllProduct();
+      loadFont();
+    }
+    return () => {
+      mounted = false;
+    };
+  }, [category, distance, condition]);
 
   const getCurrentLocation = async () => {
     let { status } = await Location.requestPermissionsAsync();
@@ -46,32 +74,36 @@ export default function HomeScreen({ navigation }) {
     }
   };
 
-  const getAllProduct = async () => {
-    await axios({
-      method: "GET",
-      url:
-        Platform.OS === "ios"
-          ? `${IOS_URL}/product/getproduct`
-          : `${ANDROID_URL}/product/getproduct`,
-    })
-      .then((res) => {
-        setAllProduct(res?.data?.product);
-        getAllProductContext(res?.data?.product);
-      })
-      .catch((err) => {
-        console.log(err, "error on getallproductapi");
-      });
-  };
-
   const clickFromChildLike = () => {
     getAllProduct();
   };
 
+  const returnGoodProductSearch = (goodProduct) => {
+    if (
+      (condition !== undefined && condition.length > 0) ||
+      (category !== undefined && category.length > 0) ||
+      (distance !== undefined && distance.length > 0)
+    ) {
+      let allOptionSearch = [].concat(condition, category, distance);
+      let data = [];
+      for (let i = 0; i < allOptionSearch.length; i++) {
+        if (
+          allOptionSearch?.includes(goodProduct[i]?.category) ||
+          allOptionSearch?.includes(goodProduct[i]?.condition)
+        ) {
+          data.push(goodProduct[i]);
+        }
+      }
+      return data;
+    }
+    return goodProduct;
+  };
+
   const renderScreen = () => {
-    const serviceProduct = allProduct?.filter(
+    const serviceProduct = state?.getAllProduct?.filter(
       (e) => e.isServices === true && e.isFromOrganization === false
     );
-    const goodProduct = allProduct?.filter(
+    const goodProduct = state?.getAllProduct?.filter(
       (e) => e.isGoods === true && e.isFromOrganization === false
     );
     if (!goodTab && serviceProduct?.length === 0) {
@@ -86,7 +118,7 @@ export default function HomeScreen({ navigation }) {
       return (
         <ProductFeedComponent
           navigation={navigation}
-          data={serviceProduct}
+          allProduct={serviceProduct}
           clickFromChild={() => clickFromChildLike()}
         />
       );
@@ -96,21 +128,26 @@ export default function HomeScreen({ navigation }) {
       return (
         <ProductFeedComponent
           navigation={navigation}
-          data={goodProduct}
+          allProduct={returnGoodProductSearch(goodProduct)}
           clickFromChild={() => clickFromChildLike()}
         />
       );
     }
   };
 
-  useEffect(() => {
-    getAllProduct();
-    // getUserContext();
-  }, [isFocuser]);
+  const isProductFilter = () => {
+    if (category?.length > 0 || distance?.length > 0 || condition?.length > 0) {
+      return true;
+    } else {
+      return false;
+    }
+  };
 
   //STYLE
   const { _container, wrapper_toggle_btn } = styles;
-  return (
+  return loading ? (
+    <ActivityIndicator size="large" style={{ flex: 1 }} />
+  ) : (
     <View style={_container}>
       <HeaderNotification isLogo navigation={navigation} />
       <View style={wrapper_toggle_btn}>
@@ -119,7 +156,9 @@ export default function HomeScreen({ navigation }) {
           title="Biens"
           focus={goodTab}
           changeFocus={() => setGoodTab(true)}
-          lengthGoods={allProduct?.filter((e) => e?.isGoods === true).length}
+          lengthGoods={
+            state?.getAllProduct?.filter((e) => e?.isGoods === true).length
+          }
         />
         <BtnHomeToggle
           fromScreenWithProduct
@@ -127,10 +166,11 @@ export default function HomeScreen({ navigation }) {
           focus={!goodTab}
           changeFocus={() => setGoodTab(false)}
           lengthServices={
-            allProduct?.filter((e) => e.isServices === true).length
+            state?.getAllProduct?.filter((e) => e.isServices === true).length
           }
         />
       </View>
+      {isProductFilter() && <HeaderFilterComponent />}
       <ScrollView>
         {!locationState ? (
           <NoGeolocationComponent getLocation={() => getCurrentLocation()} />

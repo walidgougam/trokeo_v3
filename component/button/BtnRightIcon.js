@@ -1,6 +1,9 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+//STYLES
 import normalize from "react-native-normalize";
+import fontStyles from "../../constant/fonts";
+//PICTURE
 import { RightIcon } from "../../assets/icon/Icon";
 
 export default function BtnRightIcon({
@@ -14,6 +17,7 @@ export default function BtnRightIcon({
   const goProfileDetails = (target, data) => {
     return navigation.navigate(target, { userData: data, profileId });
   };
+  //STYLES
   const { wrapper_product_inline, text_product_inline } = styles;
   return disabled ? (
     <View opacity={0.3} style={[wrapper_product_inline]}>
@@ -24,7 +28,7 @@ export default function BtnRightIcon({
     </View>
   ) : (
     <TouchableOpacity
-      activeOpacity={0.6}
+      activeOpacity={fontStyles.activeOpacity}
       style={[wrapper_product_inline]}
       onPress={() => goProfileDetails(target, userData)}
     >

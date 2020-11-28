@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { RadioButton } from "react-native-paper";
 import css from "../../constant/css";
+import { loadFont } from "../../assets/Autre";
 
 export default function RadioBtnComponent({ title, status, value, onPress }) {
+  useEffect(() => {
+    loadFont();
+  });
   //STYLES
   const { _btn, text_description } = styles;
   return (
@@ -23,6 +27,7 @@ const styles = StyleSheet.create({
   },
   text_description: {
     ...css.text_description,
+    fontFamily: "roman",
     marginBottom: 0,
   },
 });

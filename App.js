@@ -3,6 +3,7 @@ import { Text, View, StyleSheet, Icon, Dimensions } from "react-native";
 import { Provider as AuthProvider } from "./context/AuthContext";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import normalize from "react-native-normalize";
+import { LogBox } from "react-native";
 import {
   AddWhiteIcon,
   AddGreenIcon,
@@ -144,7 +145,7 @@ const createBottomTabs = () => {
 };
 
 function NavigationContainerComponent() {
-  // console.disableYellowBox = true;
+  LogBox.ignoreAllLogs();
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Splash">

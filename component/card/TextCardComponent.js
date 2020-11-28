@@ -17,7 +17,7 @@ export default function TextCardComponent({
       {btn ? (
         <TouchableOpacity
           onPress={onPress}
-          activeOpacity={0.6}
+          activeOpacity={fontStyles.activeOpacity}
           style={[
             _btn,
             {
@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
   _text: {
     color: colors.text_description_black,
     fontSize: normalize(14, "fontSize"),
-    // ...fontStyles.heavy,
+    fontFamily: "heavy",
     lineHeight: normalize(20),
   },
   _btn: {

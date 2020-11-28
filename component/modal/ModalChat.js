@@ -1,26 +1,29 @@
 import React from "react";
 import { View, Text, Modal, StyleSheet, TouchableOpacity } from "react-native";
-import { CrossGreyIcon } from "../../assets/icon/Icon";
+//STYLES
 import normalize from "react-native-normalize";
 import colors from "../../constant/colors";
-
+import fontStyles from "../../constant/fonts";
+//PICTURE
+import { CrossGreyIcon } from "../../assets/icon/Icon";
+//COMPONENT
 import BtnBlueAction from "../button/BtnBlueAction";
 
 export default function ModalChat({
   show,
   handleModalShow,
   navigation,
-  productPicture,
-  titleProduct,
+  product,
   userId,
   recieverId,
 }) {
   const goToReviewScreen = () => {
     navigation.navigate("Review", {
-      productPicture,
-      titleProduct,
-      recieverId,
-      userId,
+      fromModalChat: {
+        product,
+        recieverId,
+        userId,
+      },
     });
     handleModalShow();
   };
@@ -41,7 +44,7 @@ export default function ModalChat({
           <View style={wrapper_modal}>
             <TouchableOpacity
               hitSlop={expand_clickable_area}
-              activeOpacity={0.7}
+              activeOpacity={fontStyles.activeOpacity}
               onPress={handleModalShow}
               style={wrapper_cross_icon}
             >

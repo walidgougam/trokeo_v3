@@ -6,27 +6,33 @@ import {
   Image,
   Platform,
   TouchableOpacity,
+  AsyncStorage,
 } from "react-native";
+//API
+import { handleLikeApi } from "../../API/API";
+//PICTURE
+import NoImageByCategory from "../picture/NoImageByCategory";
 import {
   HeartMiniIcon,
   HeartFullIcon,
   PositionIcon,
 } from "../../assets/icon/Icon";
+//STYLES
 import normalize from "react-native-normalize";
 import colors from "../../constant/colors";
 import css from "../../constant/css";
 import fontStyles from "../../constant/fonts";
-import { handleLikeApi } from "../../API";
+import { loadFont } from "../../assets/Autre";
 
 export default function CardProductComponent({
   userData,
-  productId,
-  imageProduct,
-  titleProduct,
-  descriptionProduct,
-  likesProduct,
   distanceOwner,
   navigation,
+  productId,
+  titleProduct,
+  likesProduct,
+  imageProduct,
+  descriptionProduct,
   bookedProduct,
   categoriesProduct,
   conditionProduct,
@@ -36,7 +42,11 @@ export default function CardProductComponent({
   const [heartFull, setHeartFull] = useState(false);
 
   useEffect(() => {
-    for (let i = 0; i < likesProduct.length; i++) {
+    loadFont();
+  });
+
+  useEffect(() => {
+    for (let i = 0; i < likesProduct?.length; i++) {
       if (likesProduct[i] === userData._id) {
         setHeartFull(true);
       } else {
@@ -47,20 +57,24 @@ export default function CardProductComponent({
 
   const goProductDetailScreen = () => {
     navigation.navigate("ProductDetail", {
-      userData,
-      imageProduct,
-      titleProduct,
-      descriptionProduct,
-      likesProduct,
-      distanceOwner,
-      bookedProduct,
-      categoriesProduct,
-      conditionProduct,
+      fromCardProduct: {
+        userData,
+        imageProduct,
+        titleProduct,
+        descriptionProduct,
+        likesProduct,
+        distanceOwner,
+        bookedProduct,
+        categoriesProduct,
+        conditionProduct,
+        productId,
+      },
     });
   };
 
   const handleHeart = async () => {
-    await handleLikeApi(userData?._id, productId);
+    const userid = await AsyncStorage.getItem("userId");
+    await handleLikeApi(userid, productId);
     clickFromChild();
   };
 
@@ -79,7 +93,7 @@ export default function CardProductComponent({
   return (
     <View style={container}>
       <TouchableOpacity
-        activeOpacity={0.6}
+        activeOpacity={fontStyles.activeOpacity}
         onPress={() => goProductDetailScreen(imageProduct)}
         style={[
           container_image,
@@ -96,11 +110,23 @@ export default function CardProductComponent({
             : { elevation: 9 },
         ]}
       >
-        <Image
-          source={imageProduct}
-          style={[image_product]}
-          // resizeMode="cover"
-        />
+        {imageProduct?.length > 0 ? (
+          <Image
+            source={imageProduct}
+            // source={imageProduct}
+            style={[image_product]}
+            // resizeMode="cover"
+          />
+        ) : (
+          <NoImageByCategory
+            icon={categoriesProduct}
+            width={normalize(159)}
+            height={normalize(128, "height")}
+            widthIcon={20}
+            heightIcon={20}
+            fromCardProduct
+          />
+        )}
         {bookedProduct ? (
           <View style={wrapper_booked}>
             <Text style={text_booked}>Reservé</Text>
@@ -117,9 +143,12 @@ export default function CardProductComponent({
             <Text style={text_icon}>{distanceOwner} km</Text>
           </View>
           <View style={wrapper_icon}>
-            <TouchableOpacity activeOpacity={0.6} onPress={() => handleHeart()}>
+            <TouchableOpacity
+              activeOpacity={fontStyles.activeOpacity}
+              onPress={() => handleHeart()}
+            >
               {likesProduct?.some((el) => userData?._id.includes(el)) ? (
-                <HeartFullIcon />
+                <HeartFullIcon width={normalize(14)} height={normalize(13)} />
               ) : (
                 <HeartMiniIcon />
               )}
@@ -164,7 +193,7 @@ const styles = StyleSheet.create({
     fontSize: normalize(11, "fontSize"),
     color: colors.background_reservation_grey,
     lineHeight: normalize(20),
-    // ...fontStyles.regular,
+    fontFamily: "regular",
   },
   container_icon: {
     ...css.row_space_between,
@@ -179,6 +208,6 @@ const styles = StyleSheet.create({
     lineHeight: normalize(20),
     alignSelf: "center",
     marginLeft: normalize(4),
-    // ...fontStyles.regular,
+    fontFamily: "regular",
   },
 });

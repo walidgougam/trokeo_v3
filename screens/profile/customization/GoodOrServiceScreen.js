@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import {
   View,
   StyleSheet,
@@ -6,67 +6,48 @@ import {
   Platform,
   ActivityIndicator,
 } from "react-native";
-import axios from "axios";
+import { Context as AuthContext } from "../../../context/AuthContext";
 import { useIsFocused } from "@react-navigation/native";
-import { IOS_URL, ANDROID_URL } from "../../../API";
-
+//API
+import axios from "axios";
+import { IOS_URL, ANDROID_URL } from "../../../API/API";
+//COMPONENT
 import CardWithRightIcon from "../../../component/card/CardWithRightIcon";
 import HeaderComponent from "../../../component/header/HeaderComponent";
 
 export default function GoodOrServiceScreen({ navigation }) {
+  //STATE
   const [userId, setUserId] = useState("");
-  const [goodCategoryState, setGoodCategoryState] = useState();
-  const [serviceCategoryState, setServiceCategoryState] = useState();
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
+
+  // CONTEXT
+  const { state, getSpecificUserContext } = useContext(AuthContext);
 
   // FOCUS ON SCREEN
   const isFocuser = useIsFocused();
 
-  const getUserCategory = async () => {
-    const userid = await AsyncStorage.getItem("userId");
-    axios({
-      method: "GET",
-      url:
-        Platform.OS === "ios"
-          ? `${IOS_URL}/user/${userid}`
-          : `${ANDROID_URL}/user/${userid}`,
-    })
-      .then((res) => {
-        console.log(res, "---res---");
-        setGoodCategoryState(res?.data?.user?.categoryGoodsFollow);
-        setServiceCategoryState(res?.data?.user?.categoryServicesFollow);
-
-        setLoading(false);
+  useEffect(() => {
+    (async () => {
+      const userid = await AsyncStorage.getItem("userId");
+      setUserId(userid);
+      await axios({
+        method: "GET",
+        url:
+          Platform.OS === "ios"
+            ? `${IOS_URL}/user/${userid}`
+            : `${ANDROID_URL}/user/${userid}`,
       })
-      .catch((err) => {
-        console.log(err, "error on  on get user category");
-      });
-  };
+        .then((res) => {
+          response = res?.data?.user;
+          getSpecificUserContext(res?.data?.user);
+          setLoading(false);
+        })
+        .catch((err) => {
+          console.log(err, "error on  on get user category");
+        });
+    })();
+  }, []);
 
-  useEffect(() => {
-    let mounted = true;
-
-    if (mounted) {
-      getUserCategory();
-    }
-
-    return () => {
-      mounted = false;
-    };
-  }, [isFocuser]);
-
-  useEffect(() => {
-    let mounted = true;
-    if (mounted) {
-      (async () => {
-        setUserId(await AsyncStorage.getItem("userId"));
-      })();
-    }
-
-    return () => {
-      mounted = false;
-    };
-  });
   //STYLES
   const { _container } = styles;
   return loading ? (
@@ -80,7 +61,6 @@ export default function GoodOrServiceScreen({ navigation }) {
           navigation.navigate("Follow", {
             from: "good",
             userId,
-            goodCategoryFromDb: goodCategoryState,
           })
         }
       />
@@ -90,7 +70,6 @@ export default function GoodOrServiceScreen({ navigation }) {
           navigation.navigate("Follow", {
             from: "service",
             userId,
-            serviceCategoryFromDb: serviceCategoryState,
           })
         }
       />

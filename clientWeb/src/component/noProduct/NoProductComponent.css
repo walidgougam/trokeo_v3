@@ -1,0 +1,14 @@
+.no_product_noproductcomponent {
+  display: flex;
+  margin-top: 180px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.no_product_noproductcomponent p {
+  text-align: center;
+  width: 356px;
+  font-size: 14px;
+  /* font-family: "Open Sans Regular"; */
+  color: #3a3a3a;
+}

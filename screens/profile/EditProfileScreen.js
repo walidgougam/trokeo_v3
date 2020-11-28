@@ -1,13 +1,16 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { View, Text, StyleSheet, ScrollView } from "react-native";
 import { useRoute } from "@react-navigation/native";
+import { Switch } from "react-native-paper";
+import { Context as AuthContext } from "../../context/AuthContext";
+//STYLE
 import colors from "../../constant/colors";
+import { loadFont } from "../../assets/Autre";
 import normalize from "react-native-normalize";
 import css from "../../constant/css";
-import { Switch } from "react-native-paper";
-import { editProfileUserApi } from "../../API";
-import { Context as AuthContext } from "../../context/AuthContext";
-
+//API
+import { editProfileUserApi } from "../../API/API";
+//COMPONENT
 import HeaderComponent from "../../component/header/HeaderComponent";
 import PictureProfileScreen from "../../component/picture/PictureProfileScreen";
 import InputEditProfileComponent from "../../component/input/InputEditProfileComponent";
@@ -30,8 +33,11 @@ export default function EditProfileScreen({ navigation }) {
   const [phoneNumber, setPhoneNumber] = useState(userData?.phoneNumber);
   const [female, setFemale] = useState(userData?.female);
   const [userPicture, setUserPicture] = useState(userData?.userPicture);
-
   const [isSwitchOn, setIsSwitchOn] = useState(true);
+
+  useEffect(() => {
+    loadFont();
+  });
 
   const onToggleSwitch = () => {
     setIsSwitchOn(!isSwitchOn);
@@ -64,7 +70,6 @@ export default function EditProfileScreen({ navigation }) {
       <HeaderComponent navigation={navigation} title="Mise à jour du profil" />
       <ScrollView>
         <View style={wrapper_profile_info}>
-          {console.log(userData?.userPicture, "----user picture profile----")}
           <PictureProfileScreen
             editProfile
             avatar={(e) => setUserPicture(e)}
@@ -139,6 +144,7 @@ const styles = StyleSheet.create({
   },
   geoloc_text: {
     ...css.text_title,
+    fontFamily: "regular",
     color: colors.placeholder_grey,
     marginLeft: normalize(15),
   },

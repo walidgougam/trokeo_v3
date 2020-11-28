@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="14px" viewBox="0 0 16 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>8B13E255-8994-4F5A-9CDE-F96CE6C1A309</title>
+    <defs>
+        <filter id="filter-1">
+            <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 1.000000 0 0 0 0 0.000000 0 0 0 0 0.000000 0 0 0 1.000000 0"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="PC-(responsive-format)-V2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="icons8-heart" transform="translate(-287.000000, -353.000000)" filter="url(#filter-1)">
+            <g transform="translate(288.000000, 353.000000)">
+                <path d="M13.8825,4.15111801 C13.6532143,2.33725466 12.0921429,0.928571429 10.1785714,0.928571429 C8.80607143,0.928571429 7.61785714,1.65915528 6.96428571,2.73718634 C6.31071429,1.65915528 5.1225,0.928571429 3.75,0.928571429 C1.83857143,0.928571429 0.278571429,2.33515528 0.0471428571,4.14586957 C0.0171428571,4.27918012 0,4.42928571 0,4.60248447 C0,8.83903106 6.96428571,13 6.96428571,13 C6.96428571,13 13.9285714,8.83903106 13.9285714,4.60248447 C13.9285714,4.43138509 13.9114286,4.28337888 13.8825,4.15111801 Z" id="Path" stroke="#00D65B" stroke-width="0.5" fill="#00D65B"></path>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,28 @@
+.title_notification_notificationsetting {
+  font-size: 14px;
+  /* font-family: open sans semi bold; */
+  color: #3a3a3a;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  line-height: 20px;
+}
+.description_notification_notificationsetting {
+  font-size: 11px;
+  /* font-family: open sans regular; */
+  margin-top: 0px;
+  margin-bottom: 26px;
+  line-height: 20px;
+}
+.wrapper_notification_line_notificationsetting {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.wrapper_notification_line_notificationsetting p {
+  color: #3a3a3a;
+  font-size: 13px;
+  /* font-family: Open Sans Regular; */
+  line-height: 20px;
+  margin-top: 0px;
+}

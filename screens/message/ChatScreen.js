@@ -19,26 +19,32 @@ import {
 import { useRoute, useIsFocused } from "@react-navigation/native";
 import io from "socket.io-client";
 import axios from "axios";
-import { UploadPictureIcon, SendMessageIcon } from "../../assets/icon/Icon";
-import { IOS_URL, ANDROID_URL } from "../../API";
+import { IOS_URL, ANDROID_URL } from "../../API/API";
 import { Button, Snackbar } from "react-native-paper";
+//PICTURE
+import { UploadPictureIcon, SendMessageIcon } from "../../assets/icon/Icon";
+//STYLES
 import colors from "../../constant/colors";
-
+import fontStyles from "../../constant/fonts";
+//COMPONENT
 import HeaderComponent from "../../component/header/HeaderComponent";
 import CardHeaderChat from "../../component/card/CardHeaderChat";
 
 export default function ChatScreen({ navigation }) {
   // ROUTE
   const route = useRoute();
-  const { productPicture, titleProduct } = route.params;
-  const [deletedMessage, setDeletedMessage] = useState(false);
+  const { fromAllMessage, fromProductDetail } = route?.params;
+  const product = fromAllMessage.product;
+  const senderId = fromAllMessage.senderId;
+  const recieverId = fromAllMessage.recieverId;
+  const recieverName = fromProductDetail.recieverName;
 
   // STATE
+  const [deletedMessage, setDeletedMessage] = useState(false);
   const [messages, setMessages] = useState([]);
   const [user, setUser] = useState();
   const [loading, setLoading] = useState(true);
-  const [recieverId, setRecieverId] = useState("");
-  const [recieverName, setRecieverName] = useState("");
+  const [recieverNameState, setRecieverNameState] = useState("");
 
   // SOCKET
   const socket = io(`${ANDROID_URL}`, {});
@@ -61,8 +67,7 @@ export default function ChatScreen({ navigation }) {
       })();
 
       // set params on state
-      setRecieverId(route?.params?.recieverId);
-      setRecieverName(route?.params?.recieverName);
+      setRecieverNameState(recieverName);
       setLoading(false);
     }
 
@@ -72,13 +77,13 @@ export default function ChatScreen({ navigation }) {
   }, [isFocuser]);
 
   const goToReviewScreen = () => {
-    return navigation.navigate("Review", { productPicture });
+    return navigation.navigate("Review", { product: product });
   };
 
   const renderUploadPictureIcon = () => {
     return (
       <TouchableOpacity
-        activeOpacity={0.6}
+        activeOpacity={fontStyles.activeOpacity}
         style={{
           alignSelf: "center",
           marginLeft: 18,
@@ -106,7 +111,7 @@ export default function ChatScreen({ navigation }) {
   const renderSendMessageIcon = () => {
     return (
       <TouchableOpacity
-        activeOpacity={0.6}
+        activeOpacity={fontStyles.activeOpacity}
         style={{
           alignSelf: "center",
           marginRight: 18,
@@ -121,6 +126,7 @@ export default function ChatScreen({ navigation }) {
     const userId = await AsyncStorage.getItem("userId");
     setMessages((prevState) => GiftedChat.append(prevState, msg));
     socket.emit("newMessage", "sent");
+    console.log(userId, senderId, "blabla");
 
     await axios({
       method: "POST",
@@ -130,9 +136,8 @@ export default function ChatScreen({ navigation }) {
           : `${ANDROID_URL}/chat/postchat`,
       data: {
         sender: userId,
-        reciever: recieverId,
-        titleProduct,
-        pictureProduct: productPicture,
+        reciever: senderId !== userId ? senderId : recieverId,
+        product: product?._id,
         messages: msg,
       },
     })
@@ -151,11 +156,12 @@ export default function ChatScreen({ navigation }) {
 
   const getMessage = async () => {
     const userId = await AsyncStorage.getItem("userId");
+    console.log(userId, "userIduserId");
     try {
       let response = await axios.get(
         Platform.OS === "ios"
-          ? `${IOS_URL}/chat/getChat/${userId}/${route?.params?.recieverId}`
-          : `${ANDROID_URL}/chat/getChat/${userId}/${route?.params?.recieverId}`
+          ? `${IOS_URL}/chat/getChat/${senderId}/${recieverId}`
+          : `${ANDROID_URL}/chat/getChat/${senderId}/${recieverId}`
       );
       if (response) {
         setMessages(() => GiftedChat.append([], response.data).reverse());
@@ -192,8 +198,9 @@ export default function ChatScreen({ navigation }) {
     <View style={container}>
       <HeaderComponent
         navigation={navigation}
-        title={recieverName}
+        title={recieverNameState}
         message
+        productId={product?._id}
         recieverId={recieverId}
         fromChatScreen={true}
         deleteMessage={() => {
@@ -203,11 +210,11 @@ export default function ChatScreen({ navigation }) {
       />
       <CardHeaderChat
         navigation={navigation}
-        productPicture={productPicture}
-        titleProduct={titleProduct}
+        product={product}
         userId={user?.id}
         recieverId={recieverId}
       />
+      {console.log(user, "useruser")}
       <GiftedChat
         messages={messages}
         user={{

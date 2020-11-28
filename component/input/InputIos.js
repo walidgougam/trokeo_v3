@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   View,
   StyleSheet,
@@ -6,10 +6,14 @@ import {
   TouchableOpacity,
   Keyboard,
 } from "react-native";
+//STYLES
 import colors from "../../constant/colors";
+import fontStyles from "../../constant/fonts";
 import normalize from "react-native-normalize";
-import { HidePasswordIcon } from "../../assets/icon/Icon";
 import css from "../../constant/css";
+import { loadFont } from "../../assets/Autre";
+//PICTURE
+import { HidePasswordIcon } from "../../assets/icon/Icon";
 
 export default function InputIos({
   onChangeText,
@@ -22,6 +26,9 @@ export default function InputIos({
   onBlur,
   iconValidation,
 }) {
+  useEffect(() => {
+    loadFont();
+  });
   //STYLES
   const { container_input, wrapper_input, _input } = styles;
   return (
@@ -45,7 +52,7 @@ export default function InputIos({
       <View style={{ flexDirection: "row" }}>
         {password && (
           <TouchableOpacity
-            activeOpacity={0.6}
+            activeOpacity={fontStyles.activeOpacity}
             style={{ marginRight: normalize(13) }}
             onPress={showPassword}
           >
@@ -73,6 +80,7 @@ const styles = StyleSheet.create({
   },
   _input: {
     ...css.text_input,
+    fontFamily: "regular",
     width: normalize(250),
     height: "100%",
     alignSelf: "center",
