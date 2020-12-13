@@ -2,10 +2,11 @@ import React, { useEffect } from "react";
 import { Text, TouchableOpacity, StyleSheet } from "react-native";
 //STYLES
 import normalize from "react-native-normalize";
-import colors from "../../constant/colors";
+import {Colors} from "../../constant/colors";
 import css from "../../constant/css";
 import fontStyles from "../../constant/fonts";
 import { loadFont } from "../../assets/Autre";
+import { Spacings } from "../../constant/layout";
 
 export default function BtnLogin({
   backgroundColor,
@@ -44,7 +45,7 @@ const styles = StyleSheet.create({
   text_btn: {
     ...css.Btn_login,
     fontFamily: "regular",
-    marginLeft: normalize(13),
-    color: colors.text_google_grey,
+    marginLeft: normalize(Spacings.S),
+    color: Colors.grey.text_google_grey,
   },
 });

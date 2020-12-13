@@ -4,7 +4,7 @@ import { useRoute } from "@react-navigation/native";
 //API
 import { registerApi } from "../../API/API";
 //STYLE
-import colors from "../../constant/colors";
+import {Colors} from "../../constant/colors";
 import css from "../../constant/css";
 import { loadFont } from "../../assets/Autre";
 import normalize from "react-native-normalize";
@@ -73,11 +73,11 @@ export default function GenderScreen({ navigation }) {
       <View style={{ marginHorizontal: normalize(70) }}>
         <BtnBlueAction
           title="Terminer"
-          backgroundColor={colors.btn_action}
+          backgroundColor={Colors.btn_action}
           onPress={() => {
             goNextScreen();
           }}
-          color={colors.text_white}
+          color={Colors.text_white}
         />
       </View>
     </BackgroundComponent>
@@ -87,7 +87,7 @@ export default function GenderScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "white",
+    backgroundColor: Colors.white.absolute,
   },
   container_white: {
     marginHorizontal: normalize(16),

@@ -6,13 +6,14 @@ import { Formik } from "formik";
 //STYLES
 import normalize from "react-native-normalize";
 import css from "../../constant/css";
-import colors from "../../constant/colors";
+import {Colors} from "../../constant/colors";
 import { loadFont } from "../../assets/Autre";
 //COMPONENT
 import InputIos from "../../component/input/InputIos";
 import InputAndroid from "../../component/input/InputAndroid";
 import BtnBlueAction from "../../component/button/BtnBlueAction";
 import BackgroundComponent from "../../component/BackgroundComponent";
+import { Spacings } from "../../constant/layout";
 
 const NameScreen = ({ navigation }) => {
   // ROUTE
@@ -98,7 +99,7 @@ const NameScreen = ({ navigation }) => {
             {Platform.OS === "ios" ? (
               <InputIos
                 placeholder="Prénom"
-                marginBottom={normalize(11)}
+                marginBottom={normalize(Spacings.XS)}
                 onChangeText={handleChange("firstName")}
                 onBlur={() => setFieldTouched("firstName")}
                 value={values.password}
@@ -106,7 +107,7 @@ const NameScreen = ({ navigation }) => {
             ) : (
               <InputAndroid
                 placeholder="Prénom"
-                marginBottom={normalize(11)}
+                marginBottom={normalize(Spacings.XS)}
                 onChangeText={handleChange("firstName")}
                 onBlur={() => setFieldTouched("firstName")}
                 value={values.password}
@@ -134,10 +135,10 @@ const NameScreen = ({ navigation }) => {
               onPress={() => goNextScreen(values, errors, touched)}
               backgroundColor={
                 inputValidation(errors, values)
-                  ? colors.btn_action
-                  : colors.btn_action_37
+                  ? Colors.btn_action
+                  : Colors.btn_action_37
               }
-              color={colors.text_white}
+              color={Colors.white.absolute}
             />
           </View>
         </BackgroundComponent>

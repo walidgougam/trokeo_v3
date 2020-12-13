@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
-import colors from "../../constant/colors";
+import {Colors} from "../../constant/colors";
 import normalize from "react-native-normalize";
 import fontStyles from "../../constant/fonts";
 import { Context as AuthContext } from "../../context/AuthContext";
@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
   },
   pseudo: {
     marginTop: normalize(12),
-    color: colors.text_description_black,
+    color: Colors.black.text_description_black,
     fontSize: normalize(14, "fontSize"),
     lineHeight: normalize(20),
     textAlign: "center",
@@ -87,8 +87,8 @@ const styles = StyleSheet.create({
   text_change_profile_picture: {
     textDecorationLine: "underline",
     textDecorationStyle: "solid",
-    textDecorationColor: colors.btn_action,
-    color: colors.btn_action,
+    textDecorationColor: Colors.btn_action,
+    color: Colors.btn_action,
     fontSize: normalize(13, "fontSize"),
   },
 });

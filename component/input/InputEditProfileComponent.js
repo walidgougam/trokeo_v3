@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { View, Text, FlatList, StyleSheet } from "react-native";
 import { Form, Item, Input, Label } from "native-base";
-import colors from "../../constant/colors";
+import {Colors} from "../../constant/colors";
 import normalize from "react-native-normalize";
 import fontStyles from "../../constant/fonts";
 import { ArrowBottomIcon } from "../../assets/icon/Icon";
@@ -76,7 +76,7 @@ export default function InputEditProfileComponent({
           }}
         />
       </Item>
-      <Item style={{ borderColor: colors.placeholder_grey }} floatingLabel last>
+      <Item style={{ borderColor: Colors.grey.placeholder_grey }} floatingLabel last>
         <Label style={label_input}>Email</Label>
         <Input
           style={_input}
@@ -86,7 +86,7 @@ export default function InputEditProfileComponent({
           }}
         />
       </Item>
-      <Item style={{ borderColor: colors.placeholder_grey }} floatingLabel last>
+      <Item style={{ borderColor: Colors.grey.placeholder_grey }} floatingLabel last>
         <Label style={label_input}>Téléphone</Label>
         <Input
           style={_input}
@@ -118,16 +118,16 @@ export default function InputEditProfileComponent({
 
 const styles = StyleSheet.create({
   wrapper_input: {
-    borderColor: colors.placeholder_grey,
+    borderColor: Colors.grey.placeholder_grey,
   },
   label_input: {
-    color: colors.placeholder_grey,
+    color: Colors.grey.placeholder_grey,
     fontSize: normalize(14, "fontSize"),
   },
   input: {
     fontSize: normalize(14, "fontSize"),
     fontFamily: "semiBold",
-    color: colors.black,
+    color: Colors.black.absolute,
     paddingBottom: normalize(25),
   },
 });

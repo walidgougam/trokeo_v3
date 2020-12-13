@@ -9,7 +9,7 @@ import {
 } from "../../assets/icon/Icon";
 //STYLES
 import normalize from "react-native-normalize";
-import colors from "../../constant/colors";
+import {Colors} from "../../constant/colors";
 import fontStyles from "../../constant/fonts";
 
 export default function HeaderOrganization({ navigation, isLogo }) {
@@ -65,7 +65,7 @@ export default function HeaderOrganization({ navigation, isLogo }) {
 
 const styles = StyleSheet.create({
   _header: {
-    backgroundColor: colors.background_white,
+    backgroundColor: Colors.white.absolute,
     height: normalize(70, "height"),
     justifyContent: "flex-end",
   },

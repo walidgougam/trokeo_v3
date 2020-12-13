@@ -7,8 +7,9 @@ import SwiperGainVisibilityComponent from "../../../component/SwiperGainVisibili
 //STYLE
 import normalize from "react-native-normalize";
 import fontStyles from "../../../constant/fonts";
-import colors from "../../../constant/colors";
+import {Colors} from "../../../constant/colors";
 import { loadFont } from "../../../assets/Autre";
+import { Spacings } from "../../../constant/layout";
 
 export default function GainVisibilityScreen({ navigation }) {
   useEffect(() => {
@@ -31,14 +32,14 @@ export default function GainVisibilityScreen({ navigation }) {
         <View style={{ marginBottom: normalize(47) }}>
           <BtnBluAction
             title="2,99€/mois"
-            color={colors.text_white}
-            backgroundColor={colors.btn_action}
+            color={Colors.white.absolute}
+            backgroundColor={Colors.btn_action}
           />
-          <View style={{ marginTop: normalize(9) }}>
+          <View style={{ marginTop: normalize(Spacings.XXS) }}>
             <BtnBluAction
               title="18,99€/an"
-              color={colors.text_white}
-              backgroundColor={colors.btn_action}
+              color={Colors.white.absolute}
+              backgroundColor={Colors.btn_action}
             />
           </View>
         </View>
@@ -50,7 +51,7 @@ export default function GainVisibilityScreen({ navigation }) {
 var styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "white",
+    backgroundColor:Colors.white.absolute,
   },
   wrapper_white_background: {
     marginHorizontal: normalize(15),
@@ -59,7 +60,7 @@ var styles = StyleSheet.create({
   },
   _title: {
     marginTop: normalize(13),
-    color: colors.title_green,
+    color: Colors.green.title_green,
     fontSize: normalize(16, "fontSize"),
     fontFamily: "bold",
   },

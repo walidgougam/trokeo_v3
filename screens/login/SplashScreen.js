@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { View, Text, StyleSheet } from "react-native";
-import colors from "../../constant/colors";
+import {Colors} from "../../constant/colors";
 import { LogoTrokeo } from "../../assets/image/images";
 import normalize from "react-native-normalize";
 import {
@@ -30,7 +30,7 @@ export default function SplashScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.main_green,
+    backgroundColor: Colors.green.main,
     alignItems: "center",
   },
   _logo: {
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
   _text: {
     fontSize: normalize(22, "fontSize"),
     lineHeight: normalize(28),
-    color: colors.text_white,
+    color: Colors.white.absolute,
     marginTop: normalize(41),
   },
 });

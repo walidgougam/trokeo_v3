@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 //STYLES
-import colors from "../constant/colors";
+import {Colors} from "../constant/colors";
 import normalize from "react-native-normalize";
 import css from "../constant/css";
 import fontStyles from "../constant/fonts";
@@ -33,8 +33,8 @@ export default function NoGeolocationComponent({ getLocation }) {
       <View style={wrapper_btn}>
         <BtnBlueAction
           onPress={getLocation}
-          backgroundColor={colors.btn_action}
-          color={colors.text_white}
+          backgroundColor={Colors.btn_action}
+          color={Colors.white.absolute}
           title="Activer la géolocalisation"
         />
       </View>
@@ -72,6 +72,6 @@ const styles = StyleSheet.create({
     ...css.text_title,
     fontFamily: "regular",
     textDecorationLine: "underline",
-    color: colors.btn_action,
+    color: Colors.btn_action,
   },
 });

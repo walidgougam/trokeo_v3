@@ -7,7 +7,7 @@ import {
   Keyboard,
 } from "react-native";
 //STYLES
-import colors from "../../constant/colors";
+import {Colors} from "../../constant/colors";
 import fontStyles from "../../constant/fonts";
 import normalize from "react-native-normalize";
 import css from "../../constant/css";
@@ -39,7 +39,7 @@ export default function InputIos({
           onSubmitEditing={() => Keyboard.dismiss()}
           maxLength={30}
           style={_input}
-          placeholderTextColor={colors.text_input}
+          placeholderTextColor={Colors.text_input}
           placeholder={placeholder}
           underlineColorAndroid="transparent"
           secureTextEntry={secureTextEntry}
@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
   container_input: {
     ...css.row_space_between,
     alignItems: "center",
-    borderColor: colors.icon_profile_grey,
+    borderColor: Colors.grey.icon_profile_grey,
     borderWidth: 1,
     borderRadius: normalize(1),
     paddingHorizontal: normalize(14),

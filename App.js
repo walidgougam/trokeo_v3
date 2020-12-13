@@ -16,7 +16,7 @@ import {
   ProfileWhiteIcon,
   ProfileGreenIcon,
 } from "./assets/icon/Icon";
-import colors from "./constant/colors";
+import {Colors }from "./constant/colors";
 
 // LOGIN
 import SplashScreen from "./screens/login/SplashScreen";
@@ -91,7 +91,7 @@ const createBottomTabs = () => {
   return (
     <MaterialBottomTabs.Navigator
       barStyle={{
-        backgroundColor: colors.background_white,
+        backgroundColor: Colors.white.absolute,
         height: normalize(56),
       }}
     >

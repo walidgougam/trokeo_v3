@@ -1,13 +1,14 @@
 import React, { useEffect } from "react";
 import { View, Text, StyleSheet } from "react-native";
 //STYLES
-import colors from "../../constant/colors";
+import {Colors} from "../../constant/colors";
 import fontStyles from "../../constant/fonts";
 import normalize from "react-native-normalize";
 import { loadFont } from "../../assets/Autre";
 //COMPONENT
 import StarsComponent from "../StarsComponent";
 import PictureProfileComponent from "../../component/picture/PictureProfileComponent";
+import { Spacings } from "../../constant/layout";
 
 export default function CardReview({
   review,
@@ -33,7 +34,7 @@ export default function CardReview({
         </View>
         <View style={wrapper_comment}>
           <Text style={text_name}>{profileName}</Text>
-          <StarsComponent width={21} height={18} starsNumber={stars} />
+          <StarsComponent width={21} height={Spacings.L} starsNumber={stars} />
           <Text style={text_review}>{review}</Text>
         </View>
       </View>
@@ -48,31 +49,31 @@ const styles = StyleSheet.create({
     marginLeft: normalize(16),
     marginRight: normalize(12),
     paddingVertical: normalize(20),
-    backgroundColor: colors.white,
+    backgroundColor: Colors.white.absolute,
     flexDirection: "row",
     justifyContent: "space-between",
-    borderBottomColor: colors.placeholder_grey,
+    borderBottomColor: Colors.grey.placeholder_grey,
     borderBottomWidth: 1,
   },
   wrapper_comment: {
-    marginLeft: normalize(18),
+    marginLeft: normalize(Spacings.L),
   },
   _date: {
     fontSize: normalize(9, "fontSize"),
     fontFamily: "regular",
     lineHeight: normalize(20),
-    color: colors.icon_profile_grey,
+    color: Colors.grey.icon_profile_grey,
   },
   text_name: {
     fontSize: normalize(11, "fontSize"),
     fontFamily: "semiBold",
     lineHeight: normalize(20),
-    color: colors.text_description_black,
+    color: Colors.black.text_description_black,
   },
   text_review: {
     fontSize: normalize(11, "fontSize"),
     fontFamily: "regular",
     lineHeight: normalize(20),
-    color: colors.placeholder_grey,
+    color: Colors.grey.placeholder_grey,
   },
 });

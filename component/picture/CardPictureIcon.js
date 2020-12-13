@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
 import { PictureIcon, WrongEmailIcon } from "../../assets/icon/Icon";
-import colors from "../../constant/colors";
+import {Colors} from "../../constant/colors";
 import normalize from "react-native-normalize";
 
 import DeleteProductIcon from "./DeleteProductIcon";
@@ -33,7 +33,7 @@ export default function CardPictureIcon({ image }) {
 
 const styles = StyleSheet.create({
   container_image: {
-    borderColor: colors.placeholder_grey,
+    borderColor: Colors.grey.placeholder_grey,
     borderStyle: "solid",
     borderWidth: 1,
     width: 96,
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     borderRadius: 4,
   },
   container_without_image: {
-    borderColor: colors.placeholder_grey,
+    borderColor: Colors.grey.placeholder_grey,
     borderStyle: "solid",
     borderWidth: 1,
     width: 56,

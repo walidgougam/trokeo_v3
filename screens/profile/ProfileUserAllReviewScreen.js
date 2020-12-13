@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, FlatList, AsyncStorage } from "react-native";
-import colors from "../../constant/colors";
+import {Colors} from "../../constant/colors";
 import axios from "axios";
 import { useRoute } from "@react-navigation/native";
 import { IOS_URL, ANDROID_URL } from "../../API/API";
@@ -67,6 +67,6 @@ export default function ProfileUserAllReviewScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.background_white,
+    backgroundColor: Colors.white.absolute,
   },
 });

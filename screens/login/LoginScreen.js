@@ -20,7 +20,7 @@ import images from "../../assets/image/images";
 import { IconGoogle, IconFacebook } from "../../assets/icon/Icon";
 //STYLES
 import fontStyles from "../../constant/fonts";
-import colors from "../../constant/colors";
+import {Colors} from "../../constant/colors";
 import normalize from "react-native-normalize";
 //COMPONENT
 import BtnLogin from "../../component/button/BtnLogin";
@@ -162,16 +162,16 @@ const LoginScreen = ({ navigation }) => {
           ) : (
             <BtnLogin
               title="Login avec Google"
-              backgroundColor={colors.background_white}
-              color={colors.text_google_grey}
+              backgroundColor={Colors.white.absolute}
+              color={Colors.grey.text_google_grey}
               press={() => handleLoginGoogle()}
               icon={<IconGoogle />}
             />
           )}
           <BtnLogin
             title="Login avec Facebook"
-            backgroundColor={colors.background_facebook_blue}
-            color={colors.text_white}
+            backgroundColor={Colors.blue.background_facebook_blue}
+            color={Colors.white.absolute}
             icon={<IconFacebook />}
           />
           <View>
@@ -182,12 +182,12 @@ const LoginScreen = ({ navigation }) => {
                 {
                   backgroundColor: "transparent",
                   borderWidth: 1,
-                  borderColor: colors.background_white,
+                  borderColor: Colors.white.absolute,
                 },
               ]}
               onPress={() => navigation.navigate("EmailLogin")}
             >
-              <Text style={[text_btn, { color: colors.text_white }]}>
+              <Text style={[text_btn, { color: Colors.white.absolute }]}>
                 Login avec mon mail
               </Text>
             </TouchableOpacity>
@@ -223,18 +223,18 @@ const styles = StyleSheet.create({
     bottom: 0,
   },
   title_image: {
-    color: colors.text_white,
+    color: Colors.white.absolute,
     fontSize: normalize(20, "fontSize"),
     marginBottom: normalize(17),
     fontFamily: "heavy",
   },
   text_image: {
-    color: colors.text_white,
+    color: Colors.white.absolute,
     fontSize: normalize(15, "fontSize"),
     fontFamily: "medium",
   },
   container_green: {
-    backgroundColor: colors.main_green,
+    backgroundColor: Colors.green.main,
     height: "51.3%",
   },
   wrapper_btn: {
@@ -262,7 +262,7 @@ const styles = StyleSheet.create({
   },
   text_connect: {
     fontSize: normalize(16, "fontSize"),
-    color: colors.text_white,
+    color: Colors.white.absolute,
     textDecorationLine: "underline",
   },
 });

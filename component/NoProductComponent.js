@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
 import { View, Text, StyleSheet } from "react-native";
 //STYLE
-import colors from "../constant/colors";
+import {Colors} from "../constant/colors";
 import normalize from "react-native-normalize";
 import css from "../constant/css";
 import { loadFont } from "../assets/Autre";
+import {Spacings} from "../constant/layout"
 //PICTURE
 import { NoProductImage } from "../assets/image/images";
 //COMPONENT
@@ -23,14 +24,14 @@ export default function NoProductComponent() {
         <NoProductImage />
       </View>
       <View
-        style={{ marginTop: 18, paddingHorizontal: 45, alignItems: "center" }}
+        style={{ marginTop: Spacings.L, paddingHorizontal: 45, alignItems: "center" }}
       >
         <Text>Désolé, pour le moment, aucune demande</Text>
         <Text>n’a été mise en ligne</Text>
         <View style={{ marginTop: normalize(25) }}>
           <BtnBlueAction
-            color={colors.text_white}
-            backgroundColor={colors.btn_action}
+            color={Colors.white.absolute}
+            backgroundColor={Colors.btn_action}
             title="Relancer"
             width={normalize(142, "width")}
           />
@@ -49,6 +50,6 @@ const styles = StyleSheet.create({
   text: {
     ...css.text_title,
     fontFamily: "regular",
-    color: colors.text_description_black,
+    color: Colors.black.text_description_black,
   },
 });

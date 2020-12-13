@@ -16,9 +16,10 @@ import {
 import { ArrowLeftIcon } from "../../assets/icon/Icon";
 //STYLE
 import normalize from "react-native-normalize";
-import colors from "../../constant/colors";
+import {Colors} from "../../constant/colors";
 import fontStyles from "../../constant/fonts";
 import { loadFont } from "../../assets/Autre";
+import { Spacings } from "../../constant/layout";
 
 export default function EcoCitizenScreen({ navigation }) {
   useEffect(() => {
@@ -35,7 +36,7 @@ export default function EcoCitizenScreen({ navigation }) {
     wrapper_description,
   } = styles;
   return (
-    <ScrollView style={{ backgroundColor: colors.background_white }}>
+    <ScrollView style={{ backgroundColor: Colors.white.absolute }}>
       <View style={wrapper_header}>
         <TouchableOpacity
           activeOpacity={fontStyles.activeOpacity}
@@ -88,7 +89,7 @@ export default function EcoCitizenScreen({ navigation }) {
 
 const styles = StyleSheet.create({
   wrapper_header: {
-    backgroundColor: colors.main_green,
+    backgroundColor: Colors.green.main,
     height: normalize(230),
     alignItems: "center",
   },
@@ -110,13 +111,13 @@ const styles = StyleSheet.create({
   _title: {
     fontSize: normalize(20, "fontSize"),
     lineHeight: normalize(20),
-    marginBottom: normalize(18),
-    color: colors.title_eco_citizen,
+    marginBottom: normalize(Spacings.L),
+    color: Colors.title_eco_citizen,
     fontFamily: "semiBold",
   },
   _description: {
     fontSize: normalize(15, "fontSize"),
-    color: colors.title_eco_citizen,
+    color: Colors.title_eco_citizen,
     lineHeight: normalize(20),
     marginBottom: normalize(20),
     fontFamily: "regular",

@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { RadioButton } from "react-native-paper";
 //STYLES
-import colors from "../../constant/colors";
+import {Colors} from "../../constant/colors";
 import css from "../../constant/css";
 import fontStyles from "../../constant/fonts";
 import normalize from "react-native-normalize";
@@ -35,6 +35,6 @@ const styles = StyleSheet.create({
     fontSize: normalize(14, "fontSize"),
     fontFamily: "semiBold",
     lineHeight: normalize(20),
-    color: colors.text_description_black,
+    color: Colors.black.text_description_black,
   },
 });

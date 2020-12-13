@@ -4,7 +4,7 @@ import { goodsCondition2 } from "../../helpers";
 import { useRoute } from "@react-navigation/native";
 import { Context as AuthContext } from "../../context/AuthContext";
 //STYLES
-import colors from "../../constant/colors";
+import {Colors} from "../../constant/colors";
 //COMPONENT
 import HeaderComponent from "../../component/header/HeaderComponent";
 import CardSelectCategory from "../../component/card/CardSelectCategory";
@@ -74,7 +74,7 @@ export default function SearchByConditionScreen({ navigation }) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: colors.text_white,
+    backgroundColor: Colors.white.absolute,
     flex: 1,
   },
 });

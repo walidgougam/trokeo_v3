@@ -15,7 +15,7 @@ import { GreyDotIcon } from "../../assets/icon/Icon.js";
 import { noImage } from "../../assets/image/noImage.png";
 //STYLES
 import normalize from "react-native-normalize";
-import colors from "../../constant/colors";
+import Colors from "../../constant/colors";
 import fontStyles from "../../constant/fonts";
 import { loadFont } from "../../assets/Autre";
 //COMPONENT
@@ -129,13 +129,13 @@ const styles = StyleSheet.create({
     fontSize: normalize(12, "fontSize"),
     fontFamily: "bold",
     lineHeight: normalize(20),
-    color: colors.text_description_black,
+    color: Colors.black.text_description_black,
   },
   title_product: {
     fontSize: normalize(11, "fontSize"),
     fontFamily: "regular",
     lineHeight: normalize(20),
-    color: colors.text_description_black,
+    color: Colors.black.text_description_black,
   },
   _message: {
     fontSize: 11,

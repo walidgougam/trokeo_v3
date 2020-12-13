@@ -10,7 +10,7 @@ import {
 import { useRoute } from "@react-navigation/native";
 //STYLES
 import normalize from "react-native-normalize";
-import colors from "../../constant/colors";
+import {Colors}from "../../constant/colors";
 import fontStyles from "../../constant/fonts";
 import { loadFont } from "../../assets/Autre";
 //PICTURE
@@ -168,8 +168,8 @@ export default function ProductDetailScreen({ navigation }) {
         <BtnBlueAction
           title="Contacter le trokeur"
           onPress={() => goToChat(userData)}
-          backgroundColor={colors.btn_action}
-          color={colors.text_white}
+          backgroundColor={Colors.btn_action}
+          color={Colors.white.absolute}
         />
       </View>
     </View>
@@ -179,20 +179,20 @@ export default function ProductDetailScreen({ navigation }) {
 const styles = StyleSheet.create({
   _container: {
     flex: 1,
-    backgroundColor: colors.background_white,
+    backgroundColor: Colors.white.absolute,
   },
   wrapper_img: {
     height: normalize(200, "height"),
     backgroundColor: "grey",
   },
   wrapper_booked: {
-    backgroundColor: colors.background_reservation_grey,
+    backgroundColor: Colors.grey.background_reservation_grey,
     height: normalize(40, "height"),
     justifyContent: "center",
   },
   text_booked: {
     textAlign: "center",
-    color: colors.text_white,
+    color: Colors.white.absolute,
     fontSize: normalize(14, "fontSize"),
     fontFamily: "medium",
     lineHeight: normalize(20),
@@ -202,7 +202,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: normalize(20, "fontSize"),
     lineHeight: normalize(20),
-    color: colors.text_description_black,
+    color: Colors.black.text_description_black,
     fontFamily: "heavy",
   },
   wrapper_characteristic: {
@@ -211,15 +211,15 @@ const styles = StyleSheet.create({
   text_title: {
     fontSize: normalize(16, "fontSize"),
     lineHeight: normalize(20),
-    color: colors.text_description_black,
-    marginBottom: normalize(11),
+    color: Colors.black.text_description_black,
+    marginBottom: normalize(Spacings.XS),
     fontFamily: "heavy",
   },
   text_description: {
     fontSize: normalize(14, "fontSize"),
     lineHeight: normalize(20),
-    color: colors.text_description_black,
-    marginBottom: normalize(11),
+    color: Colors.black.text_description_black,
+    marginBottom: normalize(Spacings.XS),
     fontFamily: "medium",
   },
   container_product_owner: {
@@ -238,7 +238,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   wrapper_stars: {
-    marginLeft: normalize(10),
+    marginLeft: normalize(Spacings.XS),
   },
   wrapper_btn: {
     position: "absolute",

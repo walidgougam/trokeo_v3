@@ -11,7 +11,7 @@ import {
 } from "../../assets/icon/Icon";
 //STYLES
 import normalize from "react-native-normalize";
-import colors from "../../constant/colors";
+import {Colors} from "../../constant/colors";
 import fontStyles from "../../constant/fonts";
 
 export default function HeaderNotification({
@@ -87,7 +87,7 @@ export default function HeaderNotification({
 
 const styles = StyleSheet.create({
   _header: {
-    backgroundColor: colors.main_green,
+    backgroundColor: Colors.green.main,
     height: normalize(70, "height"),
     justifyContent: "flex-end",
   },

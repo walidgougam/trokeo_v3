@@ -9,7 +9,7 @@ import {
   Platform,
 } from "react-native";
 //styles
-import colors from "../../constant/colors";
+import {Colors} from "../../constant/colors";
 import normalize from "react-native-normalize";
 import fontStyles from "../../constant/fonts";
 //PICTURE
@@ -31,7 +31,7 @@ export default function InputAndroid({
         style={styles.input_android}
         maxLength={30}
         autoCapitalize="none"
-        placeholderTextColor={colors.text_input}
+        placeholderTextColor={Colors.text_input}
         placeholder={placeholder}
         underlineColorAndroid="transparent"
         secureTextEntry={secureTextEntry}
@@ -57,7 +57,7 @@ export default function InputAndroid({
 
 const styles = StyleSheet.create({
   container_android: {
-    borderColor: colors.icon_profile_grey,
+    borderColor: Colors.grey.icon_profile_grey,
     borderWidth: 1,
     flexDirection: "row",
     borderColor: "#BFBDBD",

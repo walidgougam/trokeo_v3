@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { AddPictureIcon } from "../../assets/icon/Icon";
-import colors from "../../constant/colors";
+import {Colors} from "../../constant/colors";
 import normalize from "react-native-normalize";
 
 export default function CardAddPictureIcon() {
@@ -14,7 +14,7 @@ export default function CardAddPictureIcon() {
 
 const styles = StyleSheet.create({
   container: {
-    borderColor: colors.btn_action,
+    borderColor: Colors.btn_action,
     borderStyle: "solid",
     borderWidth: 1,
     width: normalize(56),

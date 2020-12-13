@@ -5,6 +5,7 @@ import normalize from "react-native-normalize";
 import fontStyles from "../../constant/fonts";
 //PICTURE
 import { RightIcon } from "../../assets/icon/Icon";
+import { Spacings } from "../../constant/layout";
 
 export default function BtnRightIcon({
   navigation,
@@ -22,7 +23,7 @@ export default function BtnRightIcon({
   return disabled ? (
     <View opacity={0.3} style={[wrapper_product_inline]}>
       <Text style={text_product_inline}>{title}</Text>
-      <View style={{ marginRight: 10 }}>
+      <View style={{ marginRight: Spacings.XS }}>
         <RightIcon />
       </View>
     </View>
@@ -33,7 +34,7 @@ export default function BtnRightIcon({
       onPress={() => goProfileDetails(target, userData)}
     >
       <Text style={text_product_inline}>{title}</Text>
-      <View style={{ marginRight: 10 }}>
+      <View style={{ marginRight: Spacings.XS }}>
         <RightIcon />
       </View>
     </TouchableOpacity>

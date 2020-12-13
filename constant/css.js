@@ -1,4 +1,4 @@
-import colors from "./colors";
+import {Colors} from "./colors";
 import normalize from "react-native-normalize";
 import fontStyles from "../constant/fonts";
 
@@ -7,12 +7,12 @@ export default {
     fontSize: normalize(12, "fontSize"),
     // fontFamily: "regular",
     // lineHeight: normalize(20),
-    color: colors.text_description_black,
+    color: Colors.black.text_description_black,
   },
   text_description: {
     fontSize: normalize(12, "fontSize"),
     fontFamily: "roman",
-    color: colors.text_description_black,
+    color: Colors.black.text_description_black,
     lineHeight: normalize(20),
     marginBottom: normalize(11),
   },
@@ -22,7 +22,7 @@ export default {
     lineHeight: 20,
   },
   title: {
-    color: colors.main_green,
+    color: Colors.green.main,
     fontSize: normalize(16, "fontSize"),
     marginBottom: normalize(11),
     lineHeight: normalize(20),
@@ -34,7 +34,7 @@ export default {
     // fontFamily: "regular",
   },
   border_bottom: {
-    borderBottomColor: colors.placeholder_grey,
+    borderBottomColor: Colors.grey.placeholder_grey,
     borderBottomWidth: 1,
   },
   row_space_between: {

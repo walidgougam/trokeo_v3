@@ -22,7 +22,7 @@ import CardWithRightIcon from "../../component/card/CardWithRightIcon";
 //PICTURE
 import { ProfilePictureIcon } from "../../assets/icon/Icon";
 //STYLE
-import colors from "../../constant/colors";
+import {Colors} from "../../constant/colors";
 import normalize from "react-native-normalize";
 import fontStyles from "../../constant/fonts";
 import { loadFont } from "../../assets/Autre";
@@ -146,7 +146,7 @@ export default function ProfileScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.background_white,
+    backgroundColor: Colors.white.absolute,
   },
   wrapper_profile_info: {
     alignItems: "center",
@@ -163,7 +163,7 @@ const styles = StyleSheet.create({
   },
   pseudo: {
     marginTop: normalize(12),
-    color: colors.text_description_black,
+    color: Colors.black.text_description_black,
     fontSize: normalize(14, "fontSize"),
     lineHeight: normalize(20),
     textAlign: "center",

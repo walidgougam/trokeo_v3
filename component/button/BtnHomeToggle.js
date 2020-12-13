@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Text, StyleSheet, TouchableOpacity } from "react-native";
-import colors from "../../constant/colors";
+import {Colors} from "../../constant/colors";
 import normalize from "react-native-normalize";
 import fontStyles from "../../constant/fonts";
 import { loadFont } from "../../assets/Autre";
@@ -27,7 +27,7 @@ export default function BtnHomeToggle({
         btn,
         {
           borderBottomWidth: focus ? 2 : null,
-          borderBottomColor: focus ? colors.main_green : null,
+          borderBottomColor: focus ? Colors.green.main : null,
         },
       ]}
     >
@@ -35,7 +35,7 @@ export default function BtnHomeToggle({
         style={[
           text_btn,
           {
-            color: focus ? colors.main_green : colors.icon_profile_grey,
+            color: focus ? Colors.green.main : Colors.grey.icon_profile_grey,
           },
         ]}
       >

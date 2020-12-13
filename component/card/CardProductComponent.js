@@ -19,7 +19,7 @@ import {
 } from "../../assets/icon/Icon";
 //STYLES
 import normalize from "react-native-normalize";
-import colors from "../../constant/colors";
+import {Colors }from "../../constant/colors";
 import css from "../../constant/css";
 import fontStyles from "../../constant/fonts";
 import { loadFont } from "../../assets/Autre";
@@ -177,7 +177,7 @@ const styles = StyleSheet.create({
   wrapper_booked: {
     height: normalize(26, "height"),
     width: normalize(159, "width"),
-    backgroundColor: colors.background_reservation_grey,
+    backgroundColor: Colors.grey.background_reservation_grey,
     justifyContent: "center",
     alignItems: "center",
     borderRadius: normalize(5),
@@ -185,13 +185,13 @@ const styles = StyleSheet.create({
     bottom: 0,
   },
   text_booked: {
-    color: colors.text_white,
+    color: Colors.white.absolute,
     fontSize: normalize(11, "fontSize"),
   },
   text_description: {
     marginLeft: normalize(2),
     fontSize: normalize(11, "fontSize"),
-    color: colors.background_reservation_grey,
+    color: Colors.grey.background_reservation_grey,
     lineHeight: normalize(20),
     fontFamily: "regular",
   },
@@ -204,7 +204,7 @@ const styles = StyleSheet.create({
   },
   text_icon: {
     fontSize: normalize(9, "fontSize"),
-    color: colors.likes_grey,
+    color: Colors.grey.likes_grey,
     lineHeight: normalize(20),
     alignSelf: "center",
     marginLeft: normalize(4),

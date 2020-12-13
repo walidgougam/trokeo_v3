@@ -12,11 +12,12 @@ import { Context as AuthContext } from "../../../context/AuthContext";
 //API
 import { goodCategories, serviceCategories } from "../../../helpers";
 //STYLE
-import colors from "../../../constant/colors";
+import {Colors}from "../../../constant/colors";
 //COMPONENT
 import InputSearch from "../../../component/input/InputSearch";
 import HeaderComponentForFollow from "../../../component/header/HeaderComponentForFollow";
 import TextCardComponent from "../../../component/card/TextCardComponent";
+import { Spacings } from "../../../constant/layout";
 
 export default function FollowProductsScreen({ navigation }) {
   //ROUTE
@@ -77,7 +78,7 @@ export default function FollowProductsScreen({ navigation }) {
         from={from}
         userId={userId}
       />
-      <View style={{ marginHorizontal: 18, marginVertical: 9 }}>
+      <View style={{ marginHorizontal: Spacings.L, marginVertical: Spacings.XXS }}>
         <InputSearch placeholder="Rechercher des catégories" />
       </View>
       <View>
@@ -92,8 +93,8 @@ export default function FollowProductsScreen({ navigation }) {
               btn
               title={item?.titleCategory}
               btnTitle="Suivre"
-              color={colors.text_white}
-              backgroundColor={colors.btn_action}
+              color={Colors.white.absolute}
+              backgroundColor={Colors.btn_action}
               followByUser={item?.followByUser}
             />
           )}
@@ -107,6 +108,6 @@ export default function FollowProductsScreen({ navigation }) {
 const styles = StyleSheet.create({
   _container: {
     flex: 1,
-    backgroundColor: colors.background_white,
+    backgroundColor: Colors.white.absolute,
   },
 });

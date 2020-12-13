@@ -5,7 +5,7 @@ import { useRoute } from "@react-navigation/native";
 //STYLE
 import normalize from "react-native-normalize";
 import css from "../../constant/css";
-import colors from "../../constant/colors";
+import {Colors}from "../../constant/colors";
 import fontStyles from "../../constant/fonts";
 import { loadFont } from "../../assets/Autre";
 //PICTURE
@@ -121,16 +121,16 @@ export default function PictureScreen({ navigation }) {
         <View style={{ marginBottom: normalize(18) }}>
           <BtnBlueAction
             title="Ajouter une photo"
-            backgroundColor={colors.btn_action}
-            color={colors.text_white}
+            backgroundColor={Colors.btn_action}
+            color={Colors.white.absolute}
             onPress={() => handleChoosePicture()}
           />
         </View>
 
         <BtnBlueAction
           title={profilePicture ? "Suivant" : "Passer"}
-          backgroundColor={colors.background_white}
-          color={colors.btn_action}
+          backgroundColor={Colors.white.absolute}
+          color={Colors.btn_action}
           onPress={() => goNextScreen()}
         />
       </View>
@@ -141,7 +141,7 @@ export default function PictureScreen({ navigation }) {
 const styles = StyleSheet.create({
   _container: {
     flex: 1,
-    backgroundColor: colors.background_white,
+    backgroundColor: Colors.white.absolute,
   },
   container_white: {
     marginHorizontal: normalize(16),
@@ -157,7 +157,7 @@ const styles = StyleSheet.create({
   },
   pseudo: {
     marginTop: normalize(12),
-    color: colors.text_description_black,
+    color: Colors.black.text_description_black,
     fontSize: normalize(14, "fontSize"),
     lineHeight: normalize(20),
     textAlign: "center",

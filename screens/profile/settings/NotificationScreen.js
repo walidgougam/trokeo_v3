@@ -14,11 +14,12 @@ import { IOS_URL, ANDROID_URL } from "../../../API/API";
 //COMPONENT
 import HeaderComponent from "../../../component/header/HeaderComponent";
 //STYLE
-import colors from "../../../constant/colors";
+import {Colors} from "../../../constant/colors";
 import normalize from "react-native-normalize";
 import fontStyles from "../../../constant/fonts";
 import css from "../../../constant/css";
 import { loadFont } from "../../../assets/Autre";
+import { Spacings } from "../../../constant/layout";
 
 export default function NotificationScreen({ navigation }) {
   const [updatePush, setUpdatePush] = useState(false);
@@ -191,7 +192,7 @@ export default function NotificationScreen({ navigation }) {
           style={{
             borderBottomColor: "#979797",
             borderBottomWidth: 1,
-            marginHorizontal: normalize(-18),
+            marginHorizontal: normalize(-Spacings.L),
           }}
         ></View>
         <View>
@@ -233,7 +234,7 @@ export default function NotificationScreen({ navigation }) {
 const styles = StyleSheet.create({
   _container: {
     flex: 1,
-    marginHorizontal: normalize(18),
+    marginHorizontal: normalize(Spacings.L),
   },
   wrapper_title: {
     marginBottom: normalize(26),
@@ -242,10 +243,10 @@ const styles = StyleSheet.create({
     fontSize: normalize(14, "fontSize"),
     fontFamily: "semiBold",
     lineHeight: normalize(20),
-    color: colors.text_description_black,
+    color: Colors.black.text_description_black,
   },
   _description: {
-    color: colors.text_description_black,
+    color: Colors.black.text_description_black,
     fontSize: normalize(11, "fontSize"),
     fontFamily: "regular",
     lineHeight: normalize(20),
@@ -259,6 +260,6 @@ const styles = StyleSheet.create({
     fontSize: normalize(13, "fontSize"),
     fontFamily: "regular",
     lineHeight: normalize(20),
-    color: colors.text_description_black,
+    color: Colors.black.text_description_black,
   },
 });

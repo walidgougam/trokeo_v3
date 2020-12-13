@@ -3,7 +3,7 @@ import { View, Text, TextInput, StyleSheet } from "react-native";
 import { useRoute } from "@react-navigation/native";
 //STYLE
 import { loadFont } from "../../assets/Autre";
-import colors from "../../constant/colors";
+import {Colors} from "../../constant/colors";
 import css from "../../constant/css";
 import normalize from "react-native-normalize";
 //API
@@ -75,8 +75,8 @@ export default function LeaveReviewScreen({ navigation }) {
         <View style={wrapper_btn}>
           <BtnBlueAction
             onPress={() => handleLeaveReview()}
-            color={colors.text_white}
-            backgroundColor={colors.btn_action}
+            color={Colors.white.absolute}
+            backgroundColor={Colors.btn_action}
             title="Continuer"
           />
         </View>
@@ -88,7 +88,7 @@ export default function LeaveReviewScreen({ navigation }) {
 const styles = StyleSheet.create({
   _container: {
     flex: 1,
-    backgroundColor: colors.background_white,
+    backgroundColor: Colors.white.absolute,
   },
   container_review: {
     flex: 1,
@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
     marginTop: normalize(42),
   },
   text_area: {
-    borderColor: colors.icon_profile_grey,
+    borderColor: Colors.grey.icon_profile_grey,
     borderWidth: 1,
     height: normalize(142, "height"),
     marginTop: normalize(20),

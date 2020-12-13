@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { ProfilePictureIcon } from "../../assets/icon/Icon";
 import normalize from "react-native-normalize";
-import colors from "../../constant/colors";
+import {Colors} from "../../constant/colors";
 import fontStyles from "../../constant/fonts";
 import * as ImagePicker from "expo-image-picker";
 import { Context as AuthContext } from "../../context/AuthContext";
@@ -93,7 +93,7 @@ export default function PictureProfileScreen({
 const styles = StyleSheet.create({
   pseudo: {
     marginTop: normalize(12),
-    color: colors.text_description_black,
+    color: Colors.black.text_description_black,
     fontSize: normalize(14, "fontSize"),
     lineHeight: normalize(20),
     textAlign: "center",
@@ -102,8 +102,8 @@ const styles = StyleSheet.create({
   text_change_profile_picture: {
     textDecorationLine: "underline",
     textDecorationStyle: "solid",
-    textDecorationColor: colors.btn_action,
-    color: colors.btn_action,
+    textDecorationColor: Colors.btn_action,
+    color: Colors.btn_action,
     fontSize: normalize(13, "fontSize"),
     marginTop: 11,
   },

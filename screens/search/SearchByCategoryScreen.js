@@ -9,7 +9,8 @@ import HeaderComponent from "../../component/header/HeaderComponent";
 import CardSelectCategory from "../../component/card/CardSelectCategory";
 import InputSearch from "../../component/input/InputSearch";
 //STYLE
-import colors from "../../constant/colors";
+import {Colors} from "../../constant/colors";
+import { Spacings } from "../../constant/layout";
 
 export default function SearchByCategoryScreen({ navigation }) {
   // Route
@@ -65,7 +66,7 @@ export default function SearchByCategoryScreen({ navigation }) {
         search
         action={() => registerCategorySelectedOnContext()}
       />
-      <View style={{ marginHorizontal: 18, marginVertical: 9 }}>
+      <View style={{ marginHorizontal: Spacings.L, marginVertical: Spacings.XXS }}>
         <InputSearch placeholder="Rechercher des catégories" />
       </View>
 
@@ -91,7 +92,7 @@ export default function SearchByCategoryScreen({ navigation }) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: colors.text_white,
+    backgroundColor: Colors.white.absolute,
     flex: 1,
   },
 });

@@ -19,7 +19,7 @@ import SelectPicker from "react-native-form-select-picker";
 import { goodsCondition } from "../../helpers";
 import { createProductApi } from "../../API/API";
 //STYLES
-import colors from "../../constant/colors";
+import {Colors }from "../../constant/colors";
 import fontStyles from "../../constant/fonts";
 import css from "../../constant/css";
 import normalize from "react-native-normalize";
@@ -260,8 +260,8 @@ export default function CreateProduct({ navigation }) {
           }}
         >
           <BtnBlueAction
-            backgroundColor={colors.btn_action}
-            color="white"
+            backgroundColor={Colors.btn_action}
+            color={Colors.white.absolute}
             title="Publier"
             onPress={() => createProduct()}
           />
@@ -271,10 +271,10 @@ export default function CreateProduct({ navigation }) {
       <>
         <Snackbar
           style={{
-            backgroundColor: colors.main_green,
-            color: colors.text_white,
+            backgroundColor: Colors.green.main,
+            color: Colors.white.absolute,
           }}
-          theme={{ colors: { accent: colors.text_white } }}
+          theme={{ colors: { accent: Colors.white.absolute } }}
           visible={errorOnCreateProduct === "false"}
           onDismiss={onDismissSnackBar}
           action={{
@@ -291,9 +291,9 @@ export default function CreateProduct({ navigation }) {
         <Snackbar
           style={{
             backgroundColor: "red",
-            color: colors.text_white,
+            color: Colors.white.absolute,
           }}
-          theme={{ colors: { accent: colors.text_white } }}
+          theme={{ colors: { accent: Colors.white.absolute } }}
           visible={errorOnCreateProduct === "true"}
           onDismiss={onDismissSnackBar}
           action={{
@@ -329,11 +329,11 @@ export default function CreateProduct({ navigation }) {
 
 const styles = StyleSheet.create({
   _container: {
-    backgroundColor: colors.background_white,
+    backgroundColor: Colors.white.absolute,
     flex: 1,
   },
   _header: {
-    backgroundColor: colors.main_green,
+    backgroundColor: Colors.green.main,
     height: normalize(70, "height"),
     justifyContent: "flex-end",
   },
@@ -342,7 +342,7 @@ const styles = StyleSheet.create({
     fontSize: normalize(18, "fontSize"),
     fontFamily: "bold",
     lineHeight: 20,
-    color: colors.text_white,
+    color: Colors.white.absolute,
     marginLeft: normalize(62),
   },
   wrapper_toggle_btn: {
@@ -355,7 +355,7 @@ const styles = StyleSheet.create({
     ...css.border_bottom,
   },
   _label: {
-    color: colors.text_description_black,
+    color: Colors.black.text_description_black,
     fontSize: normalize(12, " fontSize"),
     lineHeight: normalize(20),
     marginBottom: normalize(13),
@@ -366,7 +366,7 @@ const styles = StyleSheet.create({
     color: "black",
     fontFamily: "regular",
     // lineHeight: normalize(20),
-    borderColor: colors.icon_profile_grey,
+    borderColor: Colors.grey.icon_profile_grey,
     borderWidth: 1,
     padding: normalize(11),
     // display: "flex",
@@ -375,7 +375,7 @@ const styles = StyleSheet.create({
     borderRadius: normalize(1),
   },
   text_max_length: {
-    color: colors.text_description_black,
+    color: Colors.black.text_description_black,
     fontSize: normalize(10, " fontSize"),
     lineHeight: normalize(20),
     fontFamily: "regular",

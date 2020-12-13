@@ -9,9 +9,10 @@ import {
 } from "react-native";
 import { CrossGreyIcon } from "../../assets/icon/Icon";
 import normalize from "react-native-normalize";
-import colors from "../../constant/colors";
+import {Colors} from "../../constant/colors";
 
 import BtnBlueAction from "../button/BtnBlueAction";
+import { Spacings } from "../../constant/layout";
 
 export default function ModalDeleteMessage({
   show,
@@ -50,7 +51,7 @@ export default function ModalDeleteMessage({
               style={{
                 // display: "flex",
                 alignItems: "flex-end",
-                marginTop: 18,
+                marginTop: Spacings.L,
                 marginRight: 24,
               }}
               onPress={handleShow}
@@ -86,10 +87,10 @@ export default function ModalDeleteMessage({
 const styles = StyleSheet.create({
   background_modal: {
     flex: 1,
-    backgroundColor: colors.black_modal_59,
+    backgroundColor: Colors.black.black_modal_59,
   },
   container_modal: {
-    backgroundColor: "white",
+    backgroundColor:Colors.white.absolute,
     width: normalize(270),
     height: normalize(196),
     borderRadius: normalize(20),

@@ -13,7 +13,7 @@ import { loginApi } from "../../API/API";
 import { Button, Snackbar } from "react-native-paper";
 //STYLES
 import normalize from "react-native-normalize";
-import colors from "../../constant/colors";
+import {Colors} from "../../constant/colors";
 import css from "../../constant/css";
 import fontStyles from "../../constant/fonts";
 import { loadFont } from "../../assets/Autre";
@@ -199,10 +199,10 @@ const EmailLoginScreen = ({ navigation }) => {
                   }}
                   backgroundColor={
                     inputValidation(errors, values)
-                      ? colors.btn_action
-                      : colors.btn_action_37
+                      ? Colors.btn_action
+                      : Colors.btn_action_37
                   }
-                  color={colors.text_white}
+                  color={Colors.white.absolute}
                 />
               </View>
             </View>
@@ -212,9 +212,9 @@ const EmailLoginScreen = ({ navigation }) => {
       <Snackbar
         style={{
           backgroundColor: "red",
-          color: "white",
+          color:Colors.white.absolute,
         }}
-        theme={{ colors: { accent: "white" } }}
+        theme={{ colors: { accent: Colors.white.absolute } }}
         visible={errorOnLogin}
         // onDismiss={onDismissSnackBar}
         action={{
@@ -244,7 +244,7 @@ const styles = StyleSheet.create({
   },
   input_warning: {
     fontSize: normalize(10, "fontSize"),
-    color: colors.text_description_black,
+    color: Colors.black.text_description_black,
     fontFamily: "roman",
   },
   wrapper_forget_password: {
@@ -254,10 +254,10 @@ const styles = StyleSheet.create({
   forget_password: {
     ...css.text_title,
     fontFamily: "regular",
-    color: colors.forget_password_grey,
+    color: Colors.grey.forget_password_grey,
     textDecorationLine: "underline",
     textDecorationStyle: "solid",
-    textDecorationColor: colors.forget_password_grey,
+    textDecorationColor: Colors.grey.forget_password_grey,
   },
 });
 

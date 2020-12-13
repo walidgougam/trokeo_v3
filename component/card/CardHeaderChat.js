@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 //STYLES
 import normalize from "react-native-normalize";
-import colors from "../../constant/colors";
+import {Colors} from "../../constant/colors";
 import fontStyles from "../../constant/fonts";
 import { loadFont } from "../../assets/Autre";
 //PICTURE
@@ -10,6 +10,7 @@ import { PositionIcon } from "../../assets/icon/Icon";
 //COMPONENT
 import ModalChat from "../modal/ModalChat";
 import NoImageByCategory from "../picture/NoImageByCategory";
+import { Spacings } from "../../constant/layout";
 
 export default function CardHeaderChat({
   product,
@@ -97,7 +98,7 @@ export default function CardHeaderChat({
 }
 const styles = StyleSheet.create({
   container: {
-    borderBottomColor: colors.border_color,
+    borderBottomColor: Colors.border_color,
     borderBottomWidth: 1,
     height: normalize(60, "height"),
     flexDirection: "row",
@@ -110,21 +111,21 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   wrapper_finalize: {
-    borderColor: colors.green_btn,
+    borderColor: Colors.green.green_btn,
     borderWidth: 1,
     paddingHorizontal: normalize(17),
     paddingVertical: normalize(9),
     borderRadius: normalize(26),
   },
   text_finalize: {
-    color: colors.green_btn,
+    color: Colors.green.green_btn,
     fontSize: normalize(10, "fontSize"),
     lineHeight: 20,
     fontFamily: "semiBold",
   },
   shadow_wrapper: {
     shadowColor: "#000",
-    backgroundColor: colors.background_white,
+    backgroundColor: Colors.white.absolute,
     shadowOffset: {
       width: 0,
       height: normalize(1, "height"),
@@ -138,13 +139,13 @@ const styles = StyleSheet.create({
     borderRadius: normalize(4),
   },
   wrapper_title: {
-    marginLeft: normalize(9),
+    marginLeft: normalize(Spacings.XXS),
   },
   title_product: {
     fontSize: normalize(11, "fontSize"),
     fontFamily: "regular",
     lineHeight: normalize(20),
-    color: colors.background_reservation_grey,
+    color: Colors.grey.background_reservation_grey,
   },
   wrapper_localisation: {
     flexDirection: "row",
@@ -154,7 +155,7 @@ const styles = StyleSheet.create({
     fontSize: normalize(9, "fontSize"),
     fontFamily: "regular",
     lineHeight: normalize(20),
-    color: colors.likes_grey,
+    color: Colors.grey.likes_grey,
     marginLeft: normalize(4),
   },
 });

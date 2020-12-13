@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, TextInput, StyleSheet } from "react-native";
 import { SearchSmallIcon } from "../../assets/icon/Icon";
-import colors from "../../constant/colors";
+import {Colors} from "../../constant/colors";
 import normalize from "react-native-normalize";
 
 export default function InputSearch({ placeholder }) {
@@ -24,7 +24,7 @@ export default function InputSearch({ placeholder }) {
 }
 const styles = StyleSheet.create({
   _container: {
-    backgroundColor: colors.background_input_grey,
+    backgroundColor: Colors.grey.background_input_grey,
     width: "100%",
     flexDirection: "row",
     height: normalize(45),

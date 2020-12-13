@@ -15,12 +15,13 @@ import { Button, Snackbar } from "react-native-paper";
 import { IOS_URL, ANDROID_URL } from "../../API/API";
 import axios from "axios";
 //STYLES
-import colors from "../../constant/colors";
+import {Colors} from "../../constant/colors";
 import fontStyles from "../../constant/fonts";
 import normalize from "react-native-normalize";
 import { loadFont } from "../../assets/Autre";
 //COMPONENT
 import CardMessageComponent from "../../component/card/CardMessageComponent";
+import { Spacings } from "../../constant/layout";
 
 export default function AllMessageScreen({ navigation }) {
   //STATE
@@ -116,10 +117,10 @@ export default function AllMessageScreen({ navigation }) {
       <>
         <Snackbar
           style={{
-            backgroundColor: colors.main_green,
-            color: colors.text_white,
+            backgroundColor: Colors.green.main,
+            color: Colors.white.absolute,
           }}
-          theme={{ colors: { accent: colors.text_white } }}
+          theme={{ colors: { accent: Colors.white.absolute } }}
           visible={deletedMessage}
           onDismiss={onDismissSnackBar}
           action={{
@@ -138,11 +139,11 @@ export default function AllMessageScreen({ navigation }) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: colors.background_white,
+    backgroundColor: Colors.white.absolute,
     flex: 1,
   },
   _header: {
-    backgroundColor: colors.main_green,
+    backgroundColor: Colors.green.main,
     height: normalize(70, "height"),
     justifyContent: "flex-end",
   },
@@ -151,8 +152,8 @@ const styles = StyleSheet.create({
     fontSize: normalize(18, "fontSize"),
     fontFamily: "bold",
     lineHeight: 20,
-    color: colors.text_white,
-    marginLeft: normalize(11),
+    color: Colors.white.absolute,
+    marginLeft: normalize(Spacings.XS),
   },
   wrapper_allmessage: {
     marginHorizontal: normalize(12),

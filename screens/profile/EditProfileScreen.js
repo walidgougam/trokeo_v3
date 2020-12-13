@@ -4,7 +4,7 @@ import { useRoute } from "@react-navigation/native";
 import { Switch } from "react-native-paper";
 import { Context as AuthContext } from "../../context/AuthContext";
 //STYLE
-import colors from "../../constant/colors";
+import {Colors} from "../../constant/colors";
 import { loadFont } from "../../assets/Autre";
 import normalize from "react-native-normalize";
 import css from "../../constant/css";
@@ -97,7 +97,7 @@ export default function EditProfileScreen({ navigation }) {
             enabled
             value={isSwitchOn}
             onValueChange={onToggleSwitch}
-            color={colors.switch_btn_blue}
+            color={Colors.blue.switch_btn_blue}
             style={{ marginRight: normalize(33) }}
           />
         </View>
@@ -106,8 +106,8 @@ export default function EditProfileScreen({ navigation }) {
         >
           <BtnBlueAction
             title="Enrengistrez"
-            color={colors.text_white}
-            backgroundColor={colors.btn_action}
+            color={Colors.white.absolute}
+            backgroundColor={Colors.btn_action}
             onPress={() => goBackProfile()}
           />
         </View>
@@ -119,7 +119,7 @@ export default function EditProfileScreen({ navigation }) {
 const styles = StyleSheet.create({
   _container: {
     flex: 1,
-    backgroundColor: colors.background_white,
+    backgroundColor:Colors.white.absolute,
   },
   wrapper_profile_info: {
     alignSelf: "center",
@@ -131,10 +131,10 @@ const styles = StyleSheet.create({
     marginBottom: normalize(54),
   },
   wrapper_input: {
-    borderColor: colors.placeholder_grey,
+    borderColor: Colors.grey.placeholder_grey,
   },
   label_input: {
-    color: colors.placeholder_grey,
+    color: Colors.grey.placeholder_grey,
     fontSize: normalize(14, "fontSize"),
   },
   wrapper_geoloc: {
@@ -145,7 +145,7 @@ const styles = StyleSheet.create({
   geoloc_text: {
     ...css.text_title,
     fontFamily: "regular",
-    color: colors.placeholder_grey,
+    color: Colors.grey.placeholder_grey,
     marginLeft: normalize(15),
   },
 });

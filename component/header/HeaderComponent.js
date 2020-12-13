@@ -11,12 +11,13 @@ import axios from "axios";
 import { IOS_URL, ANDROID_URL } from "../../API/API";
 //STYLES
 import normalize from "react-native-normalize";
-import colors from "../../constant/colors";
+import {Colors} from "../../constant/colors";
 import fontStyles from "../../constant/fonts";
 //COMPONENENT
 import ModalDeleteMessage from "../modal/ModalDeleteMessage";
 //PICTURE
 import { ArrowLeftIcon, WhiteDotIcon } from "../../assets/icon/Icon";
+import { Spacings } from "../../constant/layout";
 
 export default function HeaderComponent({
   navigation,
@@ -119,7 +120,7 @@ export default function HeaderComponent({
 
 const styles = StyleSheet.create({
   _header: {
-    backgroundColor: colors.main_green,
+    backgroundColor: Colors.green.main,
     height: normalize(70, "height"),
     justifyContent: "flex-end",
   },
@@ -127,13 +128,13 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    marginBottom: normalize(13),
-    marginHorizontal: normalize(11),
+    marginBottom: normalize(Spacings.S),
+    marginHorizontal: normalize(Spacings.XS),
   },
   text_title: {
     fontSize: normalize(18, "fontSize"),
     fontFamily: "bold",
-    color: colors.text_white,
+    color: Colors.white.absolute,
     marginLeft: normalize(27),
   },
   expand_clickable_area: { top: 10, bottom: 10, left: 10, right: 10 },

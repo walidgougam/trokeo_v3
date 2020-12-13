@@ -11,7 +11,7 @@ import { Context as AuthContext } from "../../context/AuthContext";
 //PICTURE
 import { CrossGreyIcon } from "../../assets/icon/Icon";
 //STYLE
-import colors from "../../constant/colors";
+import {Colors} from "../../constant/colors";
 import normalize from "react-native-normalize";
 import fontStyles from "../../constant/fonts";
 
@@ -157,7 +157,7 @@ export default function HeaderFilterComponent() {
 
 const styles = StyleSheet.create({
   container: {
-    borderBottomColor: colors.placeholder_grey,
+    borderBottomColor: Colors.grey.placeholder_grey,
     borderBottomWidth: 1,
     height: 50,
     width: "100%",
@@ -165,7 +165,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   wrapper_text_filter: {
-    borderColor: colors.placeholder_grey,
+    borderColor: Colors.grey.placeholder_grey,
     borderWidth: 1,
     marginLeft: 10,
     flexDirection: "row",
@@ -179,7 +179,7 @@ const styles = StyleSheet.create({
     fontSize: normalize(14, "fontSize"),
     fontFamily: "semiBold",
     lineHeight: 20,
-    color: colors.text_description_black,
+    color: Colors.black.text_description_black,
   },
   expand_clickable_area: { top: 10, bottom: 10, left: 10, right: 10 },
 });

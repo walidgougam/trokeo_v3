@@ -5,7 +5,7 @@ import { Context as AuthContext } from "../../context/AuthContext";
 import moment from "moment";
 //STYLE
 import fontStyles from "../../constant/fonts";
-import colors from "../../constant/colors";
+import {Colors} from "../../constant/colors";
 import normalize from "react-native-normalize";
 import { loadFont } from "../../assets/Autre";
 //PICTURE
@@ -17,6 +17,7 @@ import NoProductComponent from "../../component/NoProductComponent";
 import StarsComponent from "../../component/StarsComponent";
 import BtnRightIcon from "../../component/button/BtnRightIcon";
 import BtnHomeToggle from "../../component/button/BtnHomeToggle";
+import { Spacings } from "../../constant/layout";
 
 export default function ProfileUserDetailsScreen({ navigation }) {
   // STATE
@@ -162,7 +163,7 @@ export default function ProfileUserDetailsScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.background_white,
+    backgroundColor: Colors.white.absolute,
   },
   wrapper_review: {
     flexDirection: "row",
@@ -177,20 +178,20 @@ const styles = StyleSheet.create({
     fontSize: 11,
     fontFamily: "regular",
     lineHeight: 20,
-    color: colors.text_description_black,
+    color: Colors.black.text_description_black,
   },
   wrapper_stars: {
     flexDirection: "row",
     alignItems: "center",
-    marginTop: 9,
+    marginTop: Spacings.XXS,
   },
   _stars: {
-    marginRight: 10,
+    marginRight: Spacings.XS,
   },
   break_line: {
-    borderBottomColor: colors.placeholder_grey,
+    borderBottomColor: Colors.grey.placeholder_grey,
     borderBottomWidth: 1,
-    marginHorizontal: 11,
+    marginHorizontal: Spacings.XS,
   },
   wrapper_text: {
     marginLeft: 23,
@@ -201,14 +202,14 @@ const styles = StyleSheet.create({
     fontFamily: "bold",
     fontSize: 16,
     lineHeight: 20,
-    color: colors.text_description_black,
+    color: Colors.black.text_description_black,
     marginBottom: 25,
   },
   text_description: {
     fontSize: 14,
     fontFamily: "regular",
     lineHeight: 20,
-    color: colors.text_description_black,
+    color: Colors.black.text_description_black,
   },
   wrapper_toggle_btn: {
     flexDirection: "row",

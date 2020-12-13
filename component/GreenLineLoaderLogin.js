@@ -1,8 +1,9 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
-import colors from "../constant/colors";
+import {Colors} from "../constant/colors";
 import normalize from "react-native-normalize";
 import css from "../constant/css";
+import { Spacings } from "../constant/layout";
 
 const GreenLineLoaderLogin = (props) => {
   const isFocus = () => {
@@ -55,9 +56,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   green_line: {
-    backgroundColor: colors.main_green,
+    backgroundColor: Colors.green.main,
     width: normalize(90, "width"),
-    marginTop: normalize(10),
+    marginTop: normalize(Spacings.XS),
   },
 });
 

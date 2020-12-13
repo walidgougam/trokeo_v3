@@ -4,13 +4,14 @@ import { useRoute } from "@react-navigation/native";
 import { Context as AuthContext } from "../../context/AuthContext";
 //STYLE
 import normalize from "react-native-normalize";
-import colors from "../../constant/colors";
+import {Colors} from "../../constant/colors";
 //COMPONENT
 import HeaderComponent from "../../component/header/HeaderComponent";
 import InputSearch from "../../component/input/InputSearch";
 import BtnHomeToggle from "../../component/button/BtnHomeToggle";
 import CardWithRightIcon from "../../component/card/CardWithRightIcon";
 import BtnBlueAction from "../../component/button/BtnBlueAction";
+import { Spacings } from "../../constant/layout";
 
 export default function SearchOptionScreen({ navigation }) {
   //STATE
@@ -81,8 +82,8 @@ export default function SearchOptionScreen({ navigation }) {
         >
           <BtnBlueAction
             title="Rechercher"
-            backgroundColor={colors.btn_action}
-            color={colors.text_white}
+            backgroundColor={Colors.btn_action}
+            color={Colors.white.absolute}
             onPress={() => goHomeResult()}
           />
         </View>
@@ -93,17 +94,17 @@ export default function SearchOptionScreen({ navigation }) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "white",
+    backgroundColor: Colors.white.absolute,
     flex: 1,
   },
   _input: {
     marginHorizontal: normalize(14),
-    marginTop: normalize(9),
+    marginTop: normalize(Spacings.XXS),
   },
   wrapper_toggle_btn: {
     flexDirection: "row",
     height: normalize(57, "height"),
-    marginTop: normalize(9),
+    marginTop: normalize(Spacings.XXS),
     marginBottom: normalize(21),
   },
 });

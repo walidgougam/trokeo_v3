@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import colors from "../../constant/colors";
+import {Colors} from "../../constant/colors";
 import normalize from "react-native-normalize";
 import fontStyles from "../../constant/fonts";
 
@@ -22,15 +22,15 @@ export default function TextCardComponent({
             _btn,
             {
               backgroundColor: followByUser
-                ? colors.btn_action
-                : colors.text_white,
+                ? Colors.btn_action
+                : Colors.white.absolute,
             },
           ]}
         >
           <Text
             style={[
               _title,
-              { color: followByUser ? colors.text_white : colors.btn_action },
+              { color: followByUser ? Colors.white.absolute : Colors.btn_action },
             ]}
           >
             Suivre
@@ -45,7 +45,7 @@ export default function TextCardComponent({
 
 const styles = StyleSheet.create({
   wrapper_text: {
-    borderBottomColor: colors.placeholder_grey,
+    borderBottomColor: Colors.grey.placeholder_grey,
     borderBottomWidth: 1,
     height: normalize(50),
     justifyContent: "space-between",
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   _text: {
-    color: colors.text_description_black,
+    color: Colors.black.text_description_black,
     fontSize: normalize(14, "fontSize"),
     fontFamily: "heavy",
     lineHeight: normalize(20),
@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
 
     borderRadius: normalize(5),
     borderWidth: 1,
-    borderColor: colors.btn_action,
+    borderColor: Colors.btn_action,
     justifyContent: "center",
   },
   _title: {

@@ -10,7 +10,7 @@ const SwiperPictureComponent = ({ imageProduct }) => {
         style={styles.wrapper}
         showsButtons={false}
         dotColor="grey"
-        activeDotColor="white"
+        activeDotColor={Colors.white.absolute}
       >
         {imageProduct.map((image, index) => {
           return (

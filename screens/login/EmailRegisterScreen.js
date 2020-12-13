@@ -8,7 +8,7 @@ import { Button, Snackbar } from "react-native-paper";
 import { WrongEmailIcon, GoodEmailIcon } from "../../assets/icon/Icon";
 //STYLES
 import fontStyles from "../../constant/fonts";
-import colors from "../../constant/colors";
+import {Colors}from "../../constant/colors";
 import css from "../../constant/css";
 import normalize from "react-native-normalize";
 import { loadFont } from "../../assets/Autre";
@@ -263,10 +263,10 @@ const EmailRegisterScreen = ({ navigation }) => {
                 }}
                 backgroundColor={
                   inputValidation(errors, values)
-                    ? colors.btn_action
-                    : colors.btn_action_37
+                    ? Colors.btn_action
+                    : Colors.btn_action_37
                 }
-                color={colors.text_white}
+                color={Colors.white.absolute}
               />
             </View>
           </View>
@@ -274,9 +274,9 @@ const EmailRegisterScreen = ({ navigation }) => {
             <Snackbar
               style={{
                 backgroundColor: "red",
-                color: "white",
+                color: Colors.white.absolute,
               }}
-              theme={{ colors: { accent: "white" } }}
+              theme={{ colors: { accent: Colors.white.absolute} }}
               visible={errorOnLogin}
               onDismiss={onDismissSnackBar}
               action={{
@@ -307,7 +307,7 @@ const styles = StyleSheet.create({
   },
   input_warning: {
     fontSize: normalize(10, "fontSize"),
-    color: colors.text_description_black,
+    color: Colors.black.text_description_black,
     fontFamily: "roman",
   },
 });

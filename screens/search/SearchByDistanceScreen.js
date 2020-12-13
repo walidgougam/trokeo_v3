@@ -6,7 +6,7 @@ import { Context as AuthContext } from "../../context/AuthContext";
 import HeaderComponent from "../../component/header/HeaderComponent";
 import CardSelectCategory from "../../component/card/CardSelectCategory";
 //STYLE
-import colors from "../../constant/colors";
+import {Colors} from "../../constant/colors";
 
 export default function SearchByDistanceScreen({ navigation }) {
   // STATE
@@ -65,7 +65,7 @@ export default function SearchByDistanceScreen({ navigation }) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: colors.text_white,
+    backgroundColor: Colors.white.absolute,
     flex: 1,
   },
 });

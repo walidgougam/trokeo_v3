@@ -1,27 +1,42 @@
-export default {
-  main_green: "#40CE6A",
-  green_btn: "#00D65B",
-  text_white: "#FFFFFF",
-  background_white: "#FFFFFF",
+export const Colors= {
+  green:{
+    main: "#40CE6A",
+    green_btn: "#00D65B",
+    title_green: "#2FD266",
+  }, 
+  white:{
+    absolute:"#FFFFFF",
+  },
+  grey:{
+    likes_grey: "#B5B5B5",
+    placeholder_grey: "#979797",
+    icon_profile_grey: "#BFBDBD",
+    background_reservation_grey: "#5F5F5F",
+    forget_password_grey: "#9E9E9E",
+    text_google_grey: "#6D7278",
+    background_product_grey: "#C1C1C1",
+    background_input_grey: "#F6F6F6",
+  },
+  black:{
+    absolute: "#000000",
+    black_modal_59: "#00000096",
+    text_description_black: "#3A3A3A",
+  },
+  blue:{
+    switch_btn_blue: "#008EFF",
+    background_facebook_blue: "#4B74FF",
+  },
   text_version: "#D8D8D8",
-  background_product_grey: "#C1C1C1",
-  background_input_grey: "#F6F6F6",
-  placeholder_grey: "#979797",
-  text_google_grey: "#6D7278",
-  forget_password_grey: "#9E9E9E",
   text_input: "#9A9999",
-  icon_profile_grey: "#BFBDBD",
-  background_reservation_grey: "#5F5F5F",
   border_color: "#D9D9D9",
-  background_facebook_blue: "#4B74FF",
-  switch_btn_blue: "#008EFF",
   btn_action_37: "rgba(0, 145, 255, 0.37)",
   btn_action: "#0091FF",
-  text_description_black: "#3A3A3A",
-  text_category_black: "#000000",
-  black: "black",
-  black_modal_59: "#00000096",
-  likes_grey: "#B5B5B5",
   title_eco_citizen: "#515151",
-  title_green: "#2FD266",
 };
+
+
+9
+13
+16
+18
+20

@@ -24,11 +24,12 @@ import { Button, Snackbar } from "react-native-paper";
 //PICTURE
 import { UploadPictureIcon, SendMessageIcon } from "../../assets/icon/Icon";
 //STYLES
-import colors from "../../constant/colors";
+import {Colors} from "../../constant/colors";
 import fontStyles from "../../constant/fonts";
 //COMPONENT
 import HeaderComponent from "../../component/header/HeaderComponent";
 import CardHeaderChat from "../../component/card/CardHeaderChat";
+import { Spacings } from "../../constant/layout";
 
 export default function ChatScreen({ navigation }) {
   // ROUTE
@@ -86,7 +87,7 @@ export default function ChatScreen({ navigation }) {
         activeOpacity={fontStyles.activeOpacity}
         style={{
           alignSelf: "center",
-          marginLeft: 18,
+          marginLeft: Spacings.L,
         }}
       >
         <UploadPictureIcon />
@@ -114,7 +115,7 @@ export default function ChatScreen({ navigation }) {
         activeOpacity={fontStyles.activeOpacity}
         style={{
           alignSelf: "center",
-          marginRight: 18,
+          marginRight: Spacings.L,
         }}
       >
         <SendMessageIcon />
@@ -231,10 +232,10 @@ export default function ChatScreen({ navigation }) {
       <>
         <Snackbar
           style={{
-            backgroundColor: colors.main_green,
-            color: colors.text_white,
+            backgroundColor: Colors.green.main,
+            color: Colors.white.absolute,
           }}
-          theme={{ colors: { accent: colors.text_white } }}
+          theme={{ colors: { accent: Colors.white.absolute} }}
           visible={deletedMessage}
           onDismiss={onDismissSnackBar}
           action={{
@@ -253,7 +254,7 @@ export default function ChatScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "white",
+    backgroundColor: Colors.white.absolute,
   },
   ChatMessageSytemMessageContainer: {
     backgroundColor: "pink",

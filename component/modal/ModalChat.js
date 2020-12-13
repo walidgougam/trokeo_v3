@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, Modal, StyleSheet, TouchableOpacity } from "react-native";
 //STYLES
 import normalize from "react-native-normalize";
-import colors from "../../constant/colors";
+import {Colors} from "../../constant/colors";
 import fontStyles from "../../constant/fonts";
 //PICTURE
 import { CrossGreyIcon } from "../../assets/icon/Icon";
@@ -56,10 +56,10 @@ export default function ModalChat({
             <View style={{ marginHorizontal: 43, marginBottom: normalize(25) }}>
               <BtnBlueAction
                 onPress={() => goToReviewScreen()}
-                backgroundColor={colors.btn_action}
+                backgroundColor={Colors.btn_action}
                 title="Confirmer"
                 width={normalize(236, "width")}
-                color={colors.text_white}
+                color={Colors.white.absolute}
               />
             </View>
           </View>
@@ -72,10 +72,10 @@ export default function ModalChat({
 const styles = StyleSheet.create({
   background_modal: {
     flex: 1,
-    backgroundColor: colors.black_modal_59,
+    backgroundColor: Colors.black.black_modal_59,
   },
   container_modal: {
-    backgroundColor: "white",
+    backgroundColor: Colors.white.absolute,
     width: normalize(321, "width"),
     height: normalize(166, "height"),
     borderRadius: 20,
