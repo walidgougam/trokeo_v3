@@ -9,7 +9,7 @@ import {
 } from "../assets/image/images";
 //STYLE
 import { loadFont } from "../assets/Autre";
-import {Colors} from "../constant/colors";
+import {Colors, BackgroundColors} from "../constant/colors";
 import fontStyles from "../constant/fonts";
 import normalize from "react-native-normalize";
 
@@ -165,7 +165,7 @@ var styles = StyleSheet.create({
   },
   shadow_wrapper: {
     shadowColor: "#000",
-    backgroundColor: Colors.white.absolute,
+    backgroundColor: BackgroundColors.white.absolute,
     shadowOffset: {
       width: 0,
       height: normalize(1, "height"),

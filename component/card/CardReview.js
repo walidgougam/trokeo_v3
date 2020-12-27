@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { View, Text, StyleSheet } from "react-native";
 //STYLES
-import {Colors} from "../../constant/colors";
+import {Colors, BackgroundColors} from "../../constant/colors";
 import fontStyles from "../../constant/fonts";
 import normalize from "react-native-normalize";
 import { loadFont } from "../../assets/Autre";
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     marginLeft: normalize(16),
     marginRight: normalize(12),
     paddingVertical: normalize(20),
-    backgroundColor: Colors.white.absolute,
+    backgroundColor: BackgroundColors.white.absolute,
     flexDirection: "row",
     justifyContent: "space-between",
     borderBottomColor: Colors.grey.placeholder_grey,

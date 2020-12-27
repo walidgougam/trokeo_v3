@@ -4,7 +4,7 @@ import { useRoute } from "@react-navigation/native";
 import { Switch } from "react-native-paper";
 import { Context as AuthContext } from "../../context/AuthContext";
 //STYLE
-import {Colors} from "../../constant/colors";
+import {Colors, BackgroundColors} from "../../constant/colors";
 import { loadFont } from "../../assets/Autre";
 import normalize from "react-native-normalize";
 import css from "../../constant/css";
@@ -107,7 +107,7 @@ export default function EditProfileScreen({ navigation }) {
           <BtnBlueAction
             title="Enrengistrez"
             color={Colors.white.absolute}
-            backgroundColor={Colors.btn_action}
+            backgroundColor={BackgroundColors.blue.btn_action}
             onPress={() => goBackProfile()}
           />
         </View>
@@ -119,7 +119,7 @@ export default function EditProfileScreen({ navigation }) {
 const styles = StyleSheet.create({
   _container: {
     flex: 1,
-    backgroundColor:Colors.white.absolute,
+    backgroundColor:BackgroundColors.white.absolute
   },
   wrapper_profile_info: {
     alignSelf: "center",

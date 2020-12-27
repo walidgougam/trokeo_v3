@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { View, Text, StyleSheet } from "react-native";
-import {Colors} from "../../constant/colors";
+import {Colors, BackgroundColors} from "../../constant/colors";
 import { LogoTrokeo } from "../../assets/image/images";
 import normalize from "react-native-normalize";
 import {
@@ -30,7 +30,7 @@ export default function SplashScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.green.main,
+    backgroundColor: BackgroundColors.green.main,
     alignItems: "center",
   },
   _logo: {

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 //STYLES
 import normalize from "react-native-normalize";
-import {Colors} from "../../constant/colors";
+import {Colors, BackgroundColors} from "../../constant/colors";
 import fontStyles from "../../constant/fonts";
 import { loadFont } from "../../assets/Autre";
 //PICTURE
@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
   },
   shadow_wrapper: {
     shadowColor: "#000",
-    backgroundColor: Colors.white.absolute,
+    backgroundColor: BackgroundColors.white.absolute,
     shadowOffset: {
       width: 0,
       height: normalize(1, "height"),

@@ -4,7 +4,7 @@ import { useRoute } from "@react-navigation/native";
 import { Context as AuthContext } from "../../context/AuthContext";
 //STYLE
 import normalize from "react-native-normalize";
-import {Colors} from "../../constant/colors";
+import {Colors, BackgroundColors} from "../../constant/colors";
 //COMPONENT
 import HeaderComponent from "../../component/header/HeaderComponent";
 import InputSearch from "../../component/input/InputSearch";
@@ -82,7 +82,7 @@ export default function SearchOptionScreen({ navigation }) {
         >
           <BtnBlueAction
             title="Rechercher"
-            backgroundColor={Colors.btn_action}
+            backgroundColor={BackgroundColors.blue.btn_action}
             color={Colors.white.absolute}
             onPress={() => goHomeResult()}
           />
@@ -94,7 +94,7 @@ export default function SearchOptionScreen({ navigation }) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: Colors.white.absolute,
+    backgroundColor: BackgroundColors.white.absolute,
     flex: 1,
   },
   _input: {

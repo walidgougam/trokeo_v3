@@ -12,7 +12,7 @@ import { useIsFocused } from "@react-navigation/native";
 import * as Location from "expo-location";
 import { Context as AuthContext } from "../../context/AuthContext";
 //STYLE
-import {Colors} from "../../constant/colors";
+import {Colors, BackgroundColors} from "../../constant/colors";
 import normalize from "react-native-normalize";
 import { loadFont } from "../../assets/Autre";
 //API
@@ -185,7 +185,7 @@ export default function HomeScreen({ navigation }) {
 const styles = StyleSheet.create({
   _container: {
     flex: 1,
-    backgroundColor: Colors.white.absolute,
+    backgroundColor: BackgroundColors.white.absolute
   },
   wrapper_toggle_btn: {
     flexDirection: "row",

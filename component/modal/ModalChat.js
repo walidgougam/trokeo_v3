@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, Modal, StyleSheet, TouchableOpacity } from "react-native";
 //STYLES
 import normalize from "react-native-normalize";
-import {Colors} from "../../constant/colors";
+import {Colors, BackgroundColors} from "../../constant/colors";
 import fontStyles from "../../constant/fonts";
 //PICTURE
 import { CrossGreyIcon } from "../../assets/icon/Icon";
@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.black.black_modal_59,
   },
   container_modal: {
-    backgroundColor: Colors.white.absolute,
+    backgroundColor: BackgroundColors.white.absolute,
     width: normalize(321, "width"),
     height: normalize(166, "height"),
     borderRadius: 20,

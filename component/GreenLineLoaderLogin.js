@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
-import {Colors} from "../constant/colors";
+import {Colors, BackgroundColors} from "../constant/colors";
 import normalize from "react-native-normalize";
 import css from "../constant/css";
 import { Spacings } from "../constant/layout";
@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   green_line: {
-    backgroundColor: Colors.green.main,
+    backgroundColor: BackgroundColors.green.main,
     width: normalize(90, "width"),
     marginTop: normalize(Spacings.XS),
   },

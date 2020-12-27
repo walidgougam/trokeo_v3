@@ -1,3 +1,30 @@
+
+export const BackgroundColors={
+  grey:{
+    reservation: "#5F5F5F",
+    product: "#C1C1C1",
+    input: "#F6F6F6",
+  }, 
+  white:{
+    absolute:"#FFFFFF",
+  }, 
+  blue:{
+    btn_action: "#0091FF",
+    background_facebook_blue: "#4B74FF",
+  }, 
+  green:{
+    main: "#40CE6A",
+  }, 
+  purple:{
+    absolute:'purple'
+  }, 
+  transparent:{
+    absolute:"transparent"
+  }
+  };
+  
+
+
 export const Colors= {
   green:{
     main: "#40CE6A",
@@ -11,11 +38,8 @@ export const Colors= {
     likes_grey: "#B5B5B5",
     placeholder_grey: "#979797",
     icon_profile_grey: "#BFBDBD",
-    background_reservation_grey: "#5F5F5F",
     forget_password_grey: "#9E9E9E",
     text_google_grey: "#6D7278",
-    background_product_grey: "#C1C1C1",
-    background_input_grey: "#F6F6F6",
   },
   black:{
     absolute: "#000000",
@@ -24,7 +48,6 @@ export const Colors= {
   },
   blue:{
     switch_btn_blue: "#008EFF",
-    background_facebook_blue: "#4B74FF",
   },
   text_version: "#D8D8D8",
   text_input: "#9A9999",
@@ -33,10 +56,3 @@ export const Colors= {
   btn_action: "#0091FF",
   title_eco_citizen: "#515151",
 };
-
-
-9
-13
-16
-18
-20

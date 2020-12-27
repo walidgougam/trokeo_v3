@@ -17,7 +17,7 @@ import {
 } from "../../API/ProductApi";
 //STYLE
 import normalize from "react-native-normalize";
-import {Colors} from "../../constant/colors";
+import {Colors, BackgroundColors} from "../../constant/colors";
 import fontStyles from "../../constant/fonts";
 import { loadFont } from "../../assets/Autre";
 //PICTURE
@@ -100,7 +100,7 @@ export default function HeaderComponentForFollow({
 
 const styles = StyleSheet.create({
   _header: {
-    backgroundColor: Colors.green.main,
+    backgroundColor: BackgroundColors.green.main,
     height: normalize(70, "height"),
     justifyContent: "flex-end",
   },

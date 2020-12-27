@@ -16,7 +16,7 @@ import {
   ProfileWhiteIcon,
   ProfileGreenIcon,
 } from "./assets/icon/Icon";
-import {Colors }from "./constant/colors";
+import {Colors, BackgroundColors }from "./constant/colors";
 
 // LOGIN
 import SplashScreen from "./screens/login/SplashScreen";
@@ -91,7 +91,7 @@ const createBottomTabs = () => {
   return (
     <MaterialBottomTabs.Navigator
       barStyle={{
-        backgroundColor: Colors.white.absolute,
+        backgroundColor: BackgroundColors.white.absolute,
         height: normalize(56),
       }}
     >
@@ -189,7 +189,7 @@ function NavigationContainerComponent() {
           component={createBottomTabs}
           options={{
             headerShown: false,
-            headerStyle: { backgroundColor: "purple" },
+            headerStyle: { backgroundColor: BackgroundColors.purple.absolute },
           }}
         />
         <Stack.Screen
@@ -355,7 +355,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: BackgroundColors.white.absolute,
     alignItems: "center",
     justifyContent: "center",
   },

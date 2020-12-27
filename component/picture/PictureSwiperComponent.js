@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { Text, View, StyleSheet, Image } from "react-native";
 import Swiper from "react-native-swiper";
+//STYLES
 import normalize from "react-native-normalize";
+import {Colors} from "../../constant/colors"
 
 const SwiperPictureComponent = ({ imageProduct }) => {
   return (

@@ -20,7 +20,7 @@ import images from "../../assets/image/images";
 import { IconGoogle, IconFacebook } from "../../assets/icon/Icon";
 //STYLES
 import fontStyles from "../../constant/fonts";
-import {Colors} from "../../constant/colors";
+import {Colors, BackgroundColors} from "../../constant/colors";
 import normalize from "react-native-normalize";
 //COMPONENT
 import BtnLogin from "../../component/button/BtnLogin";
@@ -170,7 +170,7 @@ const LoginScreen = ({ navigation }) => {
           )}
           <BtnLogin
             title="Login avec Facebook"
-            backgroundColor={Colors.blue.background_facebook_blue}
+            backgroundColor={BackgroundColors.blue.background_facebook_blue}
             color={Colors.white.absolute}
             icon={<IconFacebook />}
           />
@@ -180,7 +180,7 @@ const LoginScreen = ({ navigation }) => {
               style={[
                 btn,
                 {
-                  backgroundColor: "transparent",
+                  backgroundColor: BackgroundColors.transparent.absolute,
                   borderWidth: 1,
                   borderColor: Colors.white.absolute,
                 },
@@ -234,7 +234,7 @@ const styles = StyleSheet.create({
     fontFamily: "medium",
   },
   container_green: {
-    backgroundColor: Colors.green.main,
+    backgroundColor: BackgroundColors.green.main,
     height: "51.3%",
   },
   wrapper_btn: {

@@ -24,7 +24,7 @@ export default function BtnLogin({
     <TouchableOpacity
       onPress={press}
       activeOpacity={fontStyles.activeOpacity}
-      style={[btn, { backgroundColor: backgroundColor }]}
+      style={[btn, { backgroundColor}]}
     >
       {icon}
       <Text style={[text_btn, { color: color }]}>{title}</Text>
@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
   text_btn: {
     ...css.Btn_login,
     fontFamily: "regular",
-    marginLeft: normalize(Spacings.S),
+    marginLeft: Spacings.S,
     color: Colors.grey.text_google_grey,
   },
 });

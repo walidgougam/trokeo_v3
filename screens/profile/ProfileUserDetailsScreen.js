@@ -5,7 +5,7 @@ import { Context as AuthContext } from "../../context/AuthContext";
 import moment from "moment";
 //STYLE
 import fontStyles from "../../constant/fonts";
-import {Colors} from "../../constant/colors";
+import {Colors, BackgroundColors} from "../../constant/colors";
 import normalize from "react-native-normalize";
 import { loadFont } from "../../assets/Autre";
 //PICTURE
@@ -163,7 +163,7 @@ export default function ProfileUserDetailsScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.white.absolute,
+    backgroundColor: BackgroundColors.white.absolute
   },
   wrapper_review: {
     flexDirection: "row",

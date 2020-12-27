@@ -4,7 +4,7 @@ import { renderForOrganization } from "../../helpers";
 import { products } from "../../helpersDataBase";
 import { Context as AuthContext } from "../../context/AuthContext";
 //STYLES
-import {Colors} from "../../constant/colors";
+import {Colors, BackgroundColors} from "../../constant/colors";
 import normalize from "react-native-normalize";
 import fontStyles from "../../constant/fonts";
 import { loadFont } from "../../assets/Autre";
@@ -91,10 +91,10 @@ export default function OrganizationScreen({ navigation }) {
 const styles = StyleSheet.create({
   _container: {
     flex: 1,
-    backgroundColor: Colors.white.absolute,
+    backgroundColor: BackgroundColors.white.absolute
   },
   wrapper_organisation_flag: {
-    backgroundColor: Colors.green.main,
+    backgroundColor: BackgroundColors.green.main,
     height: normalize(70, "height"),
     width: "100%",
     justifyContent: "center",

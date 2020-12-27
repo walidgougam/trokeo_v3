@@ -3,7 +3,7 @@ import { View, Text, TextInput, StyleSheet } from "react-native";
 import { useRoute } from "@react-navigation/native";
 //STYLE
 import { loadFont } from "../../assets/Autre";
-import {Colors} from "../../constant/colors";
+import {Colors, BackgroundColors} from "../../constant/colors";
 import css from "../../constant/css";
 import normalize from "react-native-normalize";
 //API
@@ -88,7 +88,7 @@ export default function LeaveReviewScreen({ navigation }) {
 const styles = StyleSheet.create({
   _container: {
     flex: 1,
-    backgroundColor: Colors.white.absolute,
+    backgroundColor: BackgroundColors.white.absolute
   },
   container_review: {
     flex: 1,

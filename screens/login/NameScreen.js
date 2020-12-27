@@ -8,12 +8,12 @@ import normalize from "react-native-normalize";
 import css from "../../constant/css";
 import {Colors} from "../../constant/colors";
 import { loadFont } from "../../assets/Autre";
+import { Spacings } from "../../constant/layout";
 //COMPONENT
 import InputIos from "../../component/input/InputIos";
 import InputAndroid from "../../component/input/InputAndroid";
 import BtnBlueAction from "../../component/button/BtnBlueAction";
 import BackgroundComponent from "../../component/BackgroundComponent";
-import { Spacings } from "../../constant/layout";
 
 const NameScreen = ({ navigation }) => {
   // ROUTE

@@ -10,9 +10,10 @@ import {
 import { useRoute } from "@react-navigation/native";
 //STYLES
 import normalize from "react-native-normalize";
-import {Colors}from "../../constant/colors";
+import {Colors, BackgroundColors}from "../../constant/colors";
 import fontStyles from "../../constant/fonts";
 import { loadFont } from "../../assets/Autre";
+import {Spacings} from "../../constant/layout"
 //PICTURE
 import { PositionIcon } from "../../assets/icon/Icon";
 import { ProfilePictureIcon } from "../../assets/icon/Icon";
@@ -179,14 +180,14 @@ export default function ProductDetailScreen({ navigation }) {
 const styles = StyleSheet.create({
   _container: {
     flex: 1,
-    backgroundColor: Colors.white.absolute,
+    backgroundColor: BackgroundColors.white.absolute
   },
   wrapper_img: {
     height: normalize(200, "height"),
     backgroundColor: "grey",
   },
   wrapper_booked: {
-    backgroundColor: Colors.grey.background_reservation_grey,
+    backgroundColor: BackgroundColors.grey.reservation,
     height: normalize(40, "height"),
     justifyContent: "center",
   },

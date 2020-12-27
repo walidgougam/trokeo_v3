@@ -1,4 +1,4 @@
-import React, { useState, useeffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -15,7 +15,7 @@ import { GreyDotIcon } from "../../assets/icon/Icon.js";
 import { noImage } from "../../assets/image/noImage.png";
 //STYLES
 import normalize from "react-native-normalize";
-import Colors from "../../constant/colors";
+import {Colors} from "../../constant/colors";
 import fontStyles from "../../constant/fonts";
 import { loadFont } from "../../assets/Autre";
 //COMPONENT

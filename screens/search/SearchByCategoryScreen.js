@@ -9,7 +9,7 @@ import HeaderComponent from "../../component/header/HeaderComponent";
 import CardSelectCategory from "../../component/card/CardSelectCategory";
 import InputSearch from "../../component/input/InputSearch";
 //STYLE
-import {Colors} from "../../constant/colors";
+import {Colors, BackgroundColors} from "../../constant/colors";
 import { Spacings } from "../../constant/layout";
 
 export default function SearchByCategoryScreen({ navigation }) {
@@ -92,7 +92,7 @@ export default function SearchByCategoryScreen({ navigation }) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: Colors.white.absolute,
+    backgroundColor: BackgroundColors.white.absolute,
     flex: 1,
   },
 });

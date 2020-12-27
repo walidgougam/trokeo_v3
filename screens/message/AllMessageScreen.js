@@ -15,7 +15,7 @@ import { Button, Snackbar } from "react-native-paper";
 import { IOS_URL, ANDROID_URL } from "../../API/API";
 import axios from "axios";
 //STYLES
-import {Colors} from "../../constant/colors";
+import {Colors, BackgroundColors} from "../../constant/colors";
 import fontStyles from "../../constant/fonts";
 import normalize from "react-native-normalize";
 import { loadFont } from "../../assets/Autre";
@@ -117,7 +117,7 @@ export default function AllMessageScreen({ navigation }) {
       <>
         <Snackbar
           style={{
-            backgroundColor: Colors.green.main,
+            backgroundColor: BackgroundColors.green.main,
             color: Colors.white.absolute,
           }}
           theme={{ colors: { accent: Colors.white.absolute } }}
@@ -139,11 +139,11 @@ export default function AllMessageScreen({ navigation }) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: Colors.white.absolute,
+    backgroundColor: BackgroundColors.white.absolute,
     flex: 1,
   },
   _header: {
-    backgroundColor: Colors.green.main,
+    backgroundColor: BackgroundColors.green.main,
     height: normalize(70, "height"),
     justifyContent: "flex-end",
   },

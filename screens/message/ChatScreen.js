@@ -24,7 +24,7 @@ import { Button, Snackbar } from "react-native-paper";
 //PICTURE
 import { UploadPictureIcon, SendMessageIcon } from "../../assets/icon/Icon";
 //STYLES
-import {Colors} from "../../constant/colors";
+import {Colors, BackgroundColors} from "../../constant/colors";
 import fontStyles from "../../constant/fonts";
 //COMPONENT
 import HeaderComponent from "../../component/header/HeaderComponent";
@@ -38,7 +38,7 @@ export default function ChatScreen({ navigation }) {
   const product = fromAllMessage.product;
   const senderId = fromAllMessage.senderId;
   const recieverId = fromAllMessage.recieverId;
-  const recieverName = fromProductDetail.recieverName;
+  const recieverName = fromProductDetail?.recieverName;
 
   // STATE
   const [deletedMessage, setDeletedMessage] = useState(false);
@@ -157,7 +157,6 @@ export default function ChatScreen({ navigation }) {
 
   const getMessage = async () => {
     const userId = await AsyncStorage.getItem("userId");
-    console.log(userId, "userIduserId");
     try {
       let response = await axios.get(
         Platform.OS === "ios"
@@ -232,7 +231,7 @@ export default function ChatScreen({ navigation }) {
       <>
         <Snackbar
           style={{
-            backgroundColor: Colors.green.main,
+            backgroundColor: BackgroundColors.green.main,
             color: Colors.white.absolute,
           }}
           theme={{ colors: { accent: Colors.white.absolute} }}
@@ -254,7 +253,7 @@ export default function ChatScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.white.absolute,
+    backgroundColor: BackgroundColors.white.absolute,
   },
   ChatMessageSytemMessageContainer: {
     backgroundColor: "pink",

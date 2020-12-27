@@ -12,7 +12,6 @@ export default function HomeGeolocationComponent() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "pink",
     justifyContent: "space-between",
   },
 });

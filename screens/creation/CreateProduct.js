@@ -19,7 +19,7 @@ import SelectPicker from "react-native-form-select-picker";
 import { goodsCondition } from "../../helpers";
 import { createProductApi } from "../../API/API";
 //STYLES
-import {Colors }from "../../constant/colors";
+import {Colors, BackgroundColors }from "../../constant/colors";
 import fontStyles from "../../constant/fonts";
 import css from "../../constant/css";
 import normalize from "react-native-normalize";
@@ -271,7 +271,7 @@ export default function CreateProduct({ navigation }) {
       <>
         <Snackbar
           style={{
-            backgroundColor: Colors.green.main,
+            backgroundColor: BackgroundColors.green.main,
             color: Colors.white.absolute,
           }}
           theme={{ colors: { accent: Colors.white.absolute } }}
@@ -329,11 +329,11 @@ export default function CreateProduct({ navigation }) {
 
 const styles = StyleSheet.create({
   _container: {
-    backgroundColor: Colors.white.absolute,
+    backgroundColor:BackgroundColors.white.absolute,
     flex: 1,
   },
   _header: {
-    backgroundColor: Colors.green.main,
+    backgroundColor: BackgroundColors.green.main,
     height: normalize(70, "height"),
     justifyContent: "flex-end",
   },

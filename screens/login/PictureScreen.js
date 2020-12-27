@@ -5,7 +5,7 @@ import { useRoute } from "@react-navigation/native";
 //STYLE
 import normalize from "react-native-normalize";
 import css from "../../constant/css";
-import {Colors}from "../../constant/colors";
+import {Colors, BackgroundColors}from "../../constant/colors";
 import fontStyles from "../../constant/fonts";
 import { loadFont } from "../../assets/Autre";
 //PICTURE
@@ -141,7 +141,7 @@ export default function PictureScreen({ navigation }) {
 const styles = StyleSheet.create({
   _container: {
     flex: 1,
-    backgroundColor: Colors.white.absolute,
+    backgroundColor: BackgroundColors.white.absolute
   },
   container_white: {
     marginHorizontal: normalize(16),

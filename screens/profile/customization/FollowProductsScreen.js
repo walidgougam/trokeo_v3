@@ -12,7 +12,7 @@ import { Context as AuthContext } from "../../../context/AuthContext";
 //API
 import { goodCategories, serviceCategories } from "../../../helpers";
 //STYLE
-import {Colors}from "../../../constant/colors";
+import {Colors, BackgroundColors}from "../../../constant/colors";
 //COMPONENT
 import InputSearch from "../../../component/input/InputSearch";
 import HeaderComponentForFollow from "../../../component/header/HeaderComponentForFollow";
@@ -94,7 +94,7 @@ export default function FollowProductsScreen({ navigation }) {
               title={item?.titleCategory}
               btnTitle="Suivre"
               color={Colors.white.absolute}
-              backgroundColor={Colors.btn_action}
+              backgroundColor={BackgroundColors.blue.btn_action}
               followByUser={item?.followByUser}
             />
           )}
@@ -108,6 +108,6 @@ export default function FollowProductsScreen({ navigation }) {
 const styles = StyleSheet.create({
   _container: {
     flex: 1,
-    backgroundColor: Colors.white.absolute,
+    backgroundColor: BackgroundColors.white.absolute
   },
 });

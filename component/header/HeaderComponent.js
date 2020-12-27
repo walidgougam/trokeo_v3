@@ -11,7 +11,7 @@ import axios from "axios";
 import { IOS_URL, ANDROID_URL } from "../../API/API";
 //STYLES
 import normalize from "react-native-normalize";
-import {Colors} from "../../constant/colors";
+import {Colors, BackgroundColors} from "../../constant/colors";
 import fontStyles from "../../constant/fonts";
 //COMPONENENT
 import ModalDeleteMessage from "../modal/ModalDeleteMessage";
@@ -120,7 +120,7 @@ export default function HeaderComponent({
 
 const styles = StyleSheet.create({
   _header: {
-    backgroundColor: Colors.green.main,
+    backgroundColor: BackgroundColors.green.main,
     height: normalize(70, "height"),
     justifyContent: "flex-end",
   },

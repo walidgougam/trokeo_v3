@@ -2,7 +2,7 @@ import React from "react";
 import { View, StyleSheet, FlatList, Alert, AsyncStorage } from "react-native";
 import normalize from "react-native-normalize";
 import { settingOptions } from "../../../helpers";
-import {Colors} from "../../../constant/colors";
+import {Colors, BackgroundColors} from "../../../constant/colors";
 
 import CardWithRightIcon from "../../../component/card/CardWithRightIcon";
 import HeaderComponent from "../../../component/header/HeaderComponent";
@@ -55,7 +55,7 @@ export default function SettingDetailScreen({ navigation }) {
 const styles = StyleSheet.create({
   _container: {
     flex: 1,
-    backgroundColor: Colors.white.absolute,
+    backgroundColor: BackgroundColors.white.absolute
   },
   container_section: {
     height: "100%",

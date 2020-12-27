@@ -3,7 +3,7 @@ import { View, Text, StyleSheet } from "react-native";
 import GreenLineLoaderLogin from "./GreenLineLoaderLogin";
 import HeaderComponent from "./header/HeaderComponent";
 import normalize from "react-native-normalize";
-import {Colors} from "../constant/colors"
+import {Colors, BackgroundColors} from "../constant/colors"
 import {Spacings} from "../constant/layout"
 
 export default function BackgroundComponent({
@@ -25,7 +25,7 @@ export default function BackgroundComponent({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.white.absolute,
+    backgroundColor: BackgroundColors.white.absolute,
   },
   wrapper: {
     flex: 1,

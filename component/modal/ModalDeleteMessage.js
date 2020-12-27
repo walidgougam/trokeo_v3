@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { CrossGreyIcon } from "../../assets/icon/Icon";
 import normalize from "react-native-normalize";
-import {Colors} from "../../constant/colors";
+import {Colors, BackgroundColors} from "../../constant/colors";
 
 import BtnBlueAction from "../button/BtnBlueAction";
 import { Spacings } from "../../constant/layout";
@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.black.black_modal_59,
   },
   container_modal: {
-    backgroundColor:Colors.white.absolute,
+    backgroundColor:BackgroundColors.white.absolute,
     width: normalize(270),
     height: normalize(196),
     borderRadius: normalize(20),
