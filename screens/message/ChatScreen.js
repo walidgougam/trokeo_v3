@@ -17,6 +17,7 @@ import {
   Send,
 } from "react-native-gifted-chat";
 import { useRoute, useIsFocused } from "@react-navigation/native";
+// a supprumer
 import io from "socket.io-client";
 import axios from "axios";
 import { IOS_URL, ANDROID_URL } from "../../API/API";
