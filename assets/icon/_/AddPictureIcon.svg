@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="29px" height="23px" viewBox="0 0 29 23" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>icons8-add_camera 2</title>
+    <g id="Android-" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="UI-KIT" transform="translate(-1200.000000, -58.000000)">
+            <g id="icons8-add_camera-2" transform="translate(1201.000000, 59.000000)">
+                <polygon id="Path" stroke="#0091FF" points="24 10.4283447 24 9.60644531 24 8 24 2 17.5 2 16 0 8 0 6.5 2 0 2 0 18 24 18"></polygon>
+                <circle id="Oval" stroke="#0091FF" stroke-width="0.9" cx="12.5" cy="10.5" r="4.05"></circle>
+                <path d="M4,4 C3.44771525,4 3,4.44771525 3,5 C3,5.55228475 3.44771525,6 4,6 C4.55228475,6 5,5.55228475 5,5 C5,4.44771525 4.55228475,4 4,4 Z" id="Path" fill="#0091FF" fill-rule="nonzero"></path>
+                <path d="M13.9378222,10.5 C12.6873926,12.6658075 12.6873926,15.3341925 13.9378222,17.5 C15.1882517,19.6658076 17.4991409,21 20,21 C22.5008591,21 24.8117483,19.6658076 26.0621778,17.5 C27.3126074,15.3341925 27.3126074,12.6658075 26.0621778,10.5 C24.8117483,8.3341924 22.5008591,7 20,7 C17.4991409,7 15.1882517,8.3341924 13.9378222,10.5 Z" id="Path" stroke="#0091FF" fill="#FFFFFF"></path>
+                <polygon id="Path" fill="#0091FF" points="24 13.4425591 20.5541156 13.4425591 20.5541156 10 19.4155867 10 19.4155867 13.4425591 16 13.4425591 16 14.5819193 19.4155867 14.5819193 19.4155867 18 20.5541156 18 20.5541156 14.5819193 24 14.5819193"></polygon>
+            </g>
+        </g>
+    </g>
+</svg>
