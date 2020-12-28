@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, TextInput, StyleSheet } from "react-native";
 import { SearchSmallIcon } from "../../assets/icon/Icon";
 //STYLES
-import {Colors, BackgroundColor} from "../../constant/colors";
+import {Colors, BackgroundColors} from "../../constant/colors";
 import normalize from "react-native-normalize";
 
 export default function InputSearch({ placeholder }) {

@@ -19,7 +19,7 @@ import {
 } from "../../assets/icon/Icon";
 //STYLES
 import normalize from "react-native-normalize";
-import {Colors, BackgroundColor }from "../../constant/colors";
+import {Colors, BackgroundColors }from "../../constant/colors";
 import css from "../../constant/css";
 import fontStyles from "../../constant/fonts";
 import { loadFont } from "../../assets/Autre";
@@ -177,7 +177,7 @@ const styles = StyleSheet.create({
   wrapper_booked: {
     height: normalize(26, "height"),
     width: normalize(159, "width"),
-    backgroundColor: BackgroundColor,
+    // backgroundColor: BackgroundColors,
     justifyContent: "center",
     alignItems: "center",
     borderRadius: normalize(5),
