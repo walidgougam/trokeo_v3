@@ -88,6 +88,7 @@ export const profileOptions = [
   { title: "Paramètres", onClick: "SettingDetail" },
   { title: "A propos de Trokéo", onClick: "About" },
   { title: "Conditions d'utilisation", onClick: "Terms" },
+  { title: "Politique de confidentialité", onClick: "Policy" },
   { title: "Evaluer l'application", onClick: "SettingDetail" },
   { title: "Centre d'aide", onClick: "HelpCenter" },
 ];
