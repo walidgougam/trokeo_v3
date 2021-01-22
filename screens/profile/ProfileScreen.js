@@ -4,11 +4,11 @@ import {
   StyleSheet,
   FlatList,
   ScrollView,
-  AsyncStorage,
   Text,
   Image,
   Platform,
 } from "react-native";
+import AsyncStorage from '@react-native-community/async-storage'
 import { useIsFocused } from "@react-navigation/native";
 import { Context as AuthContext } from "../../context/AuthContext";
 //API

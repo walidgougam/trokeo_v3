@@ -5,8 +5,8 @@ import {
   FlatList,
   Switch,
   StyleSheet,
-  AsyncStorage,
 } from "react-native";
+import AsyncStorage from '@react-native-community/async-storage'
 import { ActivityIndicator } from "react-native-paper";
 //API
 import axios from "axios";

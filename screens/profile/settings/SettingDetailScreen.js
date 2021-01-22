@@ -1,5 +1,6 @@
 import React from "react";
-import { View, StyleSheet, FlatList, Alert, AsyncStorage } from "react-native";
+import { View, StyleSheet, FlatList, Alert } from "react-native";
+import AsyncStorage from '@react-native-community/async-storage'
 import normalize from "react-native-normalize";
 import { settingOptions } from "../../../helpers";
 import {Colors, BackgroundColors} from "../../../constant/colors";

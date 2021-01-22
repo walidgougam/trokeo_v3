@@ -7,12 +7,16 @@ import {
   TouchableOpacity,
   Platform,
 } from "react-native";
-import { ProfilePictureIcon } from "../../assets/icon/Icon";
+import * as ImagePicker from "expo-image-picker";
+import * as Permissions from "expo-permissions"
+import { Context as AuthContext } from "../../context/AuthContext";
+//STYLES
 import normalize from "react-native-normalize";
 import {Colors} from "../../constant/colors";
 import fontStyles from "../../constant/fonts";
-import * as ImagePicker from "expo-image-picker";
-import { Context as AuthContext } from "../../context/AuthContext";
+//COMPONENTS
+import { ProfilePictureIcon } from "../../assets/icon/Icon";
+
 
 export default function PictureProfileScreen({
   firstName,
@@ -30,19 +34,51 @@ export default function PictureProfileScreen({
   // CONTEXT
   const { state, changePictureContext } = useContext(AuthContext);
 
-  const handleChoosePicture = async () => {
-    let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
-      allowsEditing: true,
-      aspect: [4, 3],
-      quality: 1,
-    });
+  const askForPermission = async () => {
+		const permissionResult = await Permissions.askAsync(Permissions.CAMERA)
+		if (permissionResult.status !== 'granted') {
+			Alert.alert('no permissions to access camera!', [{ text: 'ok' }])
+			return false
+		}
+		return true
+	}
 
-    if (!result.cancelled) {
-      setAvatarSource(result?.uri);
-      changePictureContext(result?.uri);
-    }
-  };
+  const handleChoosePicture = async () => {
+    console.log("bla")
+    const hasPermission = await askForPermission()
+    console.log(hasPermission,"haspermissions")
+		if (!hasPermission) {
+			return
+		} else {
+			// launch the camera with the following settings
+			let image = await ImagePicker.launchImageLibraryAsync({
+				mediaTypes: ImagePicker.MediaTypeOptions.All,
+				allowsEditing: true,
+				aspect: [3, 3],
+				quality: 1,
+			})
+      // make sure a image was taken:
+      console.log(image,"imageimage")
+      if (!image.cancelled) {
+        setAvatarSource(image?.uri);
+        changePictureContext(image?.uri);
+      }
+		}
+  }
+
+  // const handleChoosePicture = async () => {
+  //   let result = await ImagePicker.launchImageLibraryAsync({
+  //     mediaTypes: ImagePicker.MediaTypeOptions.All,
+  //     allowsEditing: true,
+  //     aspect: [4, 3],
+  //     quality: 1,
+  //   });
+
+  //   if (!result.cancelled) {
+  //     setAvatarSource(result?.uri);
+  //     changePictureContext(result?.uri);
+  //   }
+  // };
 
   const renderName = () => {
     if (firstName && lastName) {

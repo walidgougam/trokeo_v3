@@ -1,5 +1,6 @@
 import axios from "axios";
-import { AsyncStorage, Alert, Platform } from "react-native";
+import { Alert, Platform } from "react-native";
+import AsyncStorage from '@react-native-community/async-storage'
 import { IOS_URL, ANDROID_URL } from "./API";
 
 export const getProductApi = async () => {

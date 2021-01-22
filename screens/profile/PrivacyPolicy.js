@@ -1,9 +1,9 @@
 import React from 'react';
-import {View, Text, SafeAreaView, Button, StyleSheet} from 'react-native';
+import {View, Text, SafeAreaView, Button, StyleSheet,Linking} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import HeaderComponent from '../../component/header/HeaderComponent';
 
-function PolicyOfConfidentiality({navigation}) {
+function PrivacyPolicy({navigation}) {
   const hello = (walid) => {
     return <View>console</View>;
   };
@@ -15,8 +15,9 @@ function PolicyOfConfidentiality({navigation}) {
           <Text style={styles.title}>Politique de confidentialité</Text>
           <Text style={styles.title}>
             Charte des données à caractère personnel à destination des
-            utilisateurs de Trokeo
+            utilisateurs de Trokeo présent ici 
           </Text>
+          <Button title="go" onPress={()=>Linking.openURL('https://blog.goodbarber.com/docs/Privacypolicy/PrivacyPolicy.pdf')}/>
           <Text style={styles.title}>Mise à jour au 29 aout 2020</Text>
           <Text style={styles.title}>
             TITRE I : LA PROTECTION DES DONNEES PERSONNELLES
@@ -355,4 +356,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default PolicyOfConfidentiality;
+export default PrivacyPolicy;

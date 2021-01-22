@@ -4,9 +4,9 @@ import {
   StyleSheet,
   ScrollView,
   Platform,
-  AsyncStorage,
   Text,
 } from "react-native";
+import AsyncStorage from '@react-native-community/async-storage'
 import { ActivityIndicator } from "react-native-paper";
 import { useIsFocused } from "@react-navigation/native";
 import * as Location from "expo-location";

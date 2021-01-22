@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, FlatList, AsyncStorage } from "react-native";
+import { View, Text, StyleSheet, FlatList } from "react-native";
+import AsyncStorage from '@react-native-community/async-storage'
 import {Colors, BackgroundColors} from "../../constant/colors";
 import axios from "axios";
 import { useRoute } from "@react-navigation/native";

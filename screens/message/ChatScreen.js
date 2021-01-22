@@ -3,11 +3,11 @@ import {
   View,
   StyleSheet,
   TouchableOpacity,
-  AsyncStorage,
   ActivityIndicator,
   Platform,
   Modal,
 } from "react-native";
+import AsyncStorage from '@react-native-community/async-storage'
 import {
   GiftedChat,
   InputToolbar,

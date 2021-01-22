@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, SafeAreaView, Button, StyleSheet} from 'react-native';
+import {View, Text, SafeAreaView, Button, StyleSheet,Linking} from 'react-native';
 import HeaderComponent from '../../component/header/HeaderComponent';
 
 function TermsOfService({navigation}) {
@@ -17,6 +17,7 @@ function TermsOfService({navigation}) {
       <Text style={styles.text}>
         Google Cloud Platform Gordon House, Barrow Street Dublin 4, Irlande
       </Text>
+       <Button title="go" onPress={()=>Linking.openURL('https://blog.goodbarber.com/docs/Privacypolicy/PrivacyPolicy.pdf')}/>
       <Text style={styles.title}>
         Traitement des données à caractère personnel
       </Text>

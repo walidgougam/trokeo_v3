@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, Image, Alert, Platform } from "react-native";
 import * as ImagePicker from "expo-image-picker";
+import * as Permissions from "expo-permissions"
 import { useRoute } from "@react-navigation/native";
 //STYLE
 import normalize from "react-native-normalize";
@@ -27,36 +28,54 @@ export default function PictureScreen({ navigation }) {
   const [profilePicture, setProfilePicture] = useState(null);
 
   useEffect(() => {
-    (async () => {
-      if (Platform.OS !== "web") {
-        const {
-          status,
-        } = await ImagePicker.requestCameraRollPermissionsAsync();
-        if (status !== "granted") {
-          alert("Sorry, we need camera roll permissions to make this work!");
-        }
-      }
-    })();
   }, []);
 
   useEffect(() => {
     loadFont();
   });
 
-  const handleChoosePicture = async () => {
-    let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
-      allowsEditing: true,
-      aspect: [4, 3],
-      quality: 1,
-    });
+  const askForPermission = async () => {
+		const permissionResult = await Permissions.askAsync(Permissions.CAMERA)
+		if (permissionResult.status !== 'granted') {
+			Alert.alert('no permissions to access camera!', [{ text: 'ok' }])
+			return false
+		}
+		return true
+	}
 
-    console.log(result, "result picture screen");
+  const handleChoosePicture = async() => {
+    const hasPermission = await askForPermission()
+		if (!hasPermission) {
+			return
+		} else {
+			// launch the camera with the following settings
+			let image = await ImagePicker.launchImageLibraryAsync({
+				mediaTypes: ImagePicker.MediaTypeOptions.Images,
+				allowsEditing: true,
+				aspect: [3, 3],
+				quality: 1,
+			})
+			// make sure a image was taken:
+      if (!image.cancelled) {
+        setProfilePicture(image);
+      }
+		}
+  }
 
-    if (!result.cancelled) {
-      setProfilePicture(result);
-    }
-  };
+  // const handleChoosePicture = async () => {
+  //   let result = await ImagePicker.launchImageLibraryAsync({
+  //     mediaTypes: ImagePicker.MediaTypeOptions.All,
+  //     allowsEditing: true,
+  //     aspect: [4, 3],
+  //     quality: 1,
+  //   });
+    
+  //   console.log(result, "result picture screen");
+
+  //   if (!result.cancelled) {
+  //     setProfilePicture(result);
+  //   }
+  // };
 
   const goNextScreen = () => {
     console.log(profilePicture, "userPicture");

@@ -58,7 +58,7 @@ import ProfileUserDetailsScreen from "./screens/profile/ProfileUserDetailsScreen
 import ProfileUserAllReviewScreen from "./screens/profile/ProfileUserAllReviewScreen";
 import SettingDetailScreen from "./screens/profile/settings/SettingDetailScreen";
 import TermsOfService from "./screens/profile/TermsOfService";
-import PolicyOfConfidentiality from "./screens/profile/PolicyOfConfidentiality";
+import PrivacyPolicy from "./screens/profile/PrivacyPolicy";
 
 // SEARCH
 import SearchOptionScreen from "./screens/search/SearchOptionScreen";
@@ -325,7 +325,7 @@ function NavigationContainerComponent() {
         />
         <Stack.Screen
           name="Policy"
-          component={PolicyOfConfidentiality}
+          component={PrivacyPolicy}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

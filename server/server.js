@@ -67,5 +67,5 @@ app.use("/user", userRoute);
 app.use("/product", productRoute);
 app.use("/chat", chatRoute);
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 8080;
 server.listen(PORT, () => console.log("server running on port" + PORT));

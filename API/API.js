@@ -1,5 +1,6 @@
 import axios from "axios";
-import { AsyncStorage, Alert, Platform } from "react-native";
+import { Alert, Platform } from "react-native";
+import AsyncStorage from '@react-native-community/async-storage'
 // import RNFetchBlob from "rn-fetch-blob";
 
 export const IOS_URL = "http://localhost:5000";
