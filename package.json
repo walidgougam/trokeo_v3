@@ -6,7 +6,7 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "eject": "expo eject",
-    "build": "babel"
+    "build": "expo start"
   },
   "dependencies": {
     "@expo/react-native-action-sheet": "^3.8.0",
