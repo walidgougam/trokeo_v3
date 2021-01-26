@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "trokeo_v3",
+    "name": "trokeo",
     "slug": "trokeo_v3",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -13,14 +13,25 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "android": {
+      "package": "com.trokeo.trokeo",
+      "permissions": [
+        "CAMERA",
+        "WRITE_EXTERNAL_STORAGE",
+        "CAMERA_ROLL",
+        "LOCATION",
+        "MEDIA_LIBRARY",
+        "MEDIA_LIBRARY_WRITE_ONLY",
+        "NOTIFICATIONS"
+      ],
+      "versionCode": 5
     }
   }
 }

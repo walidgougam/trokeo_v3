@@ -3,11 +3,11 @@ import {
   View,
   StyleSheet,
   TouchableOpacity,
-  AsyncStorage,
   ActivityIndicator,
   Platform,
   Modal,
 } from "react-native";
+import AsyncStorage from '@react-native-community/async-storage'
 import {
   GiftedChat,
   InputToolbar,
@@ -17,6 +17,7 @@ import {
   Send,
 } from "react-native-gifted-chat";
 import { useRoute, useIsFocused } from "@react-navigation/native";
+// a supprimer
 import io from "socket.io-client";
 import axios from "axios";
 import { IOS_URL, ANDROID_URL } from "../../API/API";

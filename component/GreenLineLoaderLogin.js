@@ -18,7 +18,6 @@ const GreenLineLoaderLogin = (props) => {
         return 4;
     }
   };
-
   return (
     <View style={styles.wrapper_green_line}>
       <View style={[styles.green_line, { height: 4 }]}></View>

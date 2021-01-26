@@ -6,10 +6,10 @@ import {
   Image,
   TouchableHighlight,
   TouchableOpacity,
-  AsyncStorage,
   ActivityIndicator,
   Platform,
 } from "react-native";
+import AsyncStorage from '@react-native-community/async-storage'
 import { useIsFocused } from "@react-navigation/native";
 import * as Google from "expo-google-app-auth";
 import * as AppleAuthentication from "expo-apple-authentication";

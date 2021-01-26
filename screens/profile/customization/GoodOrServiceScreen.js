@@ -2,10 +2,10 @@ import React, { useEffect, useState, useContext } from "react";
 import {
   View,
   StyleSheet,
-  AsyncStorage,
   Platform,
   ActivityIndicator,
 } from "react-native";
+import AsyncStorage from '@react-native-community/async-storage'
 import { Context as AuthContext } from "../../../context/AuthContext";
 import { useIsFocused } from "@react-navigation/native";
 //API

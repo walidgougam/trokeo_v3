@@ -4,11 +4,11 @@ import {
   Text,
   StyleSheet,
   TouchableOpacity,
-  AsyncStorage,
   Platform,
   FlatList,
   ActivityIndicator,
 } from "react-native";
+import AsyncStorage from '@react-native-community/async-storage'
 import { useIsFocused } from "@react-navigation/native";
 import { Button, Snackbar } from "react-native-paper";
 //API

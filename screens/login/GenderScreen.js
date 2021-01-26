@@ -77,7 +77,7 @@ export default function GenderScreen({ navigation }) {
           onPress={() => {
             goNextScreen();
           }}
-          color={Colors.text_white}
+          color={Colors.white.absolute}
         />
       </View>
     </BackgroundComponent>

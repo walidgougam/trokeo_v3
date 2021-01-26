@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
-import { View, Text, StyleSheet, Image, AsyncStorage } from "react-native";
+import { View, Text, StyleSheet, Image } from "react-native";
+import AsyncStorage from '@react-native-community/async-storage'
 import { useRoute, useIsFocused } from "@react-navigation/native";
 import { Context as AuthContext } from "../../context/AuthContext";
 import moment from "moment";

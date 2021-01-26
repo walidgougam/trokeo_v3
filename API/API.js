@@ -1,10 +1,12 @@
 import axios from "axios";
-import { AsyncStorage, Alert, Platform } from "react-native";
+import { Alert, Platform } from "react-native";
+import AsyncStorage from '@react-native-community/async-storage'
 // import RNFetchBlob from "rn-fetch-blob";
+import {config} from "./constant"
 
-export const IOS_URL = "http://localhost:5000";
-export const ANDROID_URL = "http://172.20.10.2:5000";
-
+export const IOS_URL = config.url.IOS_URL;
+export const ANDROID_URL = config.url.ANDROID_URL;
+  
 export const registerApi = async (
   email,
   password,

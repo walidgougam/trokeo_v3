@@ -5,13 +5,14 @@ import {
   StyleSheet,
   TouchableOpacity,
   TextInput,
-  AsyncStorage,
   ActionSheetIOS,
   Platform,
   ScrollView,
 } from "react-native";
+import AsyncStorage from '@react-native-community/async-storage'
 import { Button, Snackbar } from "react-native-paper";
 import * as ImagePicker from "expo-image-picker";
+import * as Permissions from "expo-permissions"
 import { BottomSheet, ListItem } from "react-native-elements";
 import { Context as AuthContext } from "../../context/AuthContext";
 import SelectPicker from "react-native-form-select-picker";
@@ -52,6 +53,14 @@ export default function CreateProduct({ navigation }) {
 
   useEffect(() => {
     loadFont();
+    (async () => {
+      if (Platform.OS !== 'web') {
+        const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+        if (status !== 'granted') {
+          alert('Sorry, we need camera roll permissions to make this work!');
+        }
+      }
+    })();
   });
   const list = [
     {
@@ -76,21 +85,53 @@ export default function CreateProduct({ navigation }) {
     return navigation.navigate("SelectCategory", { goods });
   };
 
-  const handleChoosePicture = async () => {
-    let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
-      allowsEditing: true,
-      aspect: [4, 3],
-      quality: 1,
-    });
+  const askForPermission = async () => {
+		const permissionResult = await Permissions.askAsync(Permissions.CAMERA)
+		if (permissionResult.status !== 'granted') {
+			Alert.alert('no permissions to access camera!', [{ text: 'ok' }])
+			return false
+		}
+		return true
+	}
 
-    if (!result.cancelled) {
-      let source = { uri: result.uri };
-      setAvatarSource((prevState) => {
-        return [...prevState, { uri: source.uri }];
-      });
-    }
-  };
+  const handleChoosePicture = async() => {
+    const hasPermission = await askForPermission()
+		if (!hasPermission) {
+			return
+		} else {
+			// launch the camera with the following settings
+			let image = await ImagePicker.launchImageLibraryAsync({
+				mediaTypes: ImagePicker.MediaTypeOptions.Images,
+				allowsEditing: true,
+				aspect: [3, 3],
+				quality: 1,
+			})
+			// make sure a image was taken:
+			if (!image.cancelled) {
+            let source = { uri: image.uri };
+            setAvatarSource((prevState) => {
+              return [...prevState, { uri: source.uri }];
+            });
+          }
+		}
+  }
+
+
+  // const handleChoosePicture = async () => {
+  //   let result = await ImagePicker.launchImageLibraryAsync({
+  //     mediaTypes: ImagePicker.MediaTypeOptions.All,
+  //     allowsEditing: true,
+  //     aspect: [4, 3],
+  //     quality: 1,
+  //   });
+
+  //   if (!result.cancelled) {
+  //     let source = { uri: result.uri };
+  //     setAvatarSource((prevState) => {
+  //       return [...prevState, { uri: source.uri }];
+  //     });
+  //   }
+  // };
 
   const handleSelect = (e) => {
     setConditionProduct(e);
