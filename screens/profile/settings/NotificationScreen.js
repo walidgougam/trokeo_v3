@@ -10,7 +10,7 @@ import AsyncStorage from '@react-native-community/async-storage'
 import { ActivityIndicator } from "react-native-paper";
 //API
 import axios from "axios";
-import { IOS_URL, ANDROID_URL } from "../../../API/API";
+import {IOS_URL,ANDROID_URL} from "../../../API/constant"
 //COMPONENT
 import HeaderComponent from "../../../component/header/HeaderComponent";
 //STYLE

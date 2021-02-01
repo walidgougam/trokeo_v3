@@ -10,7 +10,6 @@ import { Context as AuthContext } from "../../context/AuthContext";
 import { useIsFocused } from "@react-navigation/native";
 //API
 import axios from "axios";
-import { IOS_URL, ANDROID_URL } from "../../API/API";
 import {
   followGoodsCategoryApi,
   followServicesCategoryApi,
@@ -23,6 +22,7 @@ import { loadFont } from "../../assets/Autre";
 //PICTURE
 import { WhiteDotIcon, ArrowLeftIcon } from "../../assets/icon/Icon";
 import { Spacings } from "../../constant/layout";
+import {IOS_URL,ANDROID_URL} from "../../API/constant"
 
 export default function HeaderComponentForFollow({
   navigation,

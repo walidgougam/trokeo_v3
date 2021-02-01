@@ -17,7 +17,6 @@ import normalize from "react-native-normalize";
 import { loadFont } from "../../assets/Autre";
 //API
 import axios from "axios";
-import { IOS_URL, ANDROID_URL } from "../../API/API";
 import { getProductApi } from "../../API/ProductApi";
 //COMPONENT
 import HeaderNotification from "../../component/header/HeaderNotification";
@@ -114,7 +113,8 @@ export default function HomeScreen({ navigation }) {
       return <NoProductComponent />;
     }
     // service dans l'onglet service
-    else if (!goodTab && serviceProduct?.length > 0) {
+    else if (!goodTab && serviceProduct?.length > 0)
+    {
       return (
         <ProductFeedComponent
           navigation={navigation}
@@ -148,7 +148,7 @@ export default function HomeScreen({ navigation }) {
   return loading ? (
     <ActivityIndicator size="large" style={{ flex: 1 }} />
   ) : (
-    <View style={_container}>
+      <View style={_container}>
       <HeaderNotification isLogo navigation={navigation} />
       <View style={wrapper_toggle_btn}>
         <BtnHomeToggle

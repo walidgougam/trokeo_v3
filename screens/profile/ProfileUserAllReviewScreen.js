@@ -4,7 +4,7 @@ import AsyncStorage from '@react-native-community/async-storage'
 import {Colors, BackgroundColors} from "../../constant/colors";
 import axios from "axios";
 import { useRoute } from "@react-navigation/native";
-import { IOS_URL, ANDROID_URL } from "../../API/API";
+import {IOS_URL,ANDROID_URL} from "../../API/constant";
 
 import HeaderComponent from "../../component/header/HeaderComponent";
 import CardReview from "../../component/card/CardReview";

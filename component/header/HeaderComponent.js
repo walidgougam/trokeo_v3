@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import AsyncStorage from '@react-native-community/async-storage'
 import axios from "axios";
-import { IOS_URL, ANDROID_URL } from "../../API/API";
+import {IOS_URL,ANDROID_URL} from "../../API/constant"
 //STYLES
 import normalize from "react-native-normalize";
 import {Colors, BackgroundColors} from "../../constant/colors";

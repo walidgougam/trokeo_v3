@@ -12,7 +12,7 @@ import AsyncStorage from '@react-native-community/async-storage'
 import { useIsFocused } from "@react-navigation/native";
 import { Button, Snackbar } from "react-native-paper";
 //API
-import { IOS_URL, ANDROID_URL } from "../../API/API";
+import {IOS_URL,ANDROID_URL} from "../../API/constant"
 import axios from "axios";
 //STYLES
 import {Colors, BackgroundColors} from "../../constant/colors";

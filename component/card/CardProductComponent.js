@@ -6,7 +6,6 @@ import {
   Image,
   Platform,
   TouchableOpacity,
-  AsyncStorage,
 } from "react-native";
 import AsyncStorage from '@react-native-community/async-storage'
 //API
@@ -20,7 +19,7 @@ import {
 } from "../../assets/icon/Icon";
 //STYLES
 import normalize from "react-native-normalize";
-import {Colors, BackgroundColors }from "../../constant/colors";
+import {Colors, BackgroundColor }from "../../constant/colors";
 import css from "../../constant/css";
 import fontStyles from "../../constant/fonts";
 import { loadFont } from "../../assets/Autre";

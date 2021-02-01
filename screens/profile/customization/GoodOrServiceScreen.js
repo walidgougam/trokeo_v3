@@ -10,7 +10,7 @@ import { Context as AuthContext } from "../../../context/AuthContext";
 import { useIsFocused } from "@react-navigation/native";
 //API
 import axios from "axios";
-import { IOS_URL, ANDROID_URL } from "../../../API/API";
+import {IOS_URL,ANDROID_URL} from "../../../API/constant"
 //COMPONENT
 import CardWithRightIcon from "../../../component/card/CardWithRightIcon";
 import HeaderComponent from "../../../component/header/HeaderComponent";

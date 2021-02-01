@@ -20,7 +20,7 @@ import { useRoute, useIsFocused } from "@react-navigation/native";
 // a supprimer
 import io from "socket.io-client";
 import axios from "axios";
-import { IOS_URL, ANDROID_URL } from "../../API/API";
+import {IOS_URL,ANDROID_URL} from "../../API/constant"
 import { Button, Snackbar } from "react-native-paper";
 //PICTURE
 import { UploadPictureIcon, SendMessageIcon } from "../../assets/icon/Icon";

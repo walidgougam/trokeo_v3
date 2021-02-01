@@ -13,7 +13,7 @@ import { useIsFocused } from "@react-navigation/native";
 import { Context as AuthContext } from "../../context/AuthContext";
 //API
 import axios from "axios";
-import { IOS_URL, ANDROID_URL } from "../../API/API";
+import {IOS_URL,ANDROID_URL} from "../../API/constant"
 import { profileOptions } from "../../helpers";
 //COMPONENT
 import HeaderNotification from "../../component/header/HeaderNotification";
