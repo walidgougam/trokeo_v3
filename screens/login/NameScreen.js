@@ -1,49 +1,49 @@
-import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, Platform } from "react-native";
-import { useRoute } from "@react-navigation/native";
-import * as Yup from "yup";
-import { Formik } from "formik";
+import React, {useState, useEffect} from 'react';
+import {View, Text, StyleSheet, Platform} from 'react-native';
+import {useRoute} from '@react-navigation/native';
+import * as Yup from 'yup';
+import {Formik} from 'formik';
 //STYLES
-import normalize from "react-native-normalize";
-import css from "../../constant/css";
-import {Colors} from "../../constant/colors";
-import { loadFont } from "../../assets/Autre";
-import { Spacings } from "../../constant/layout";
+import normalize from 'react-native-normalize';
+import css from '../../constant/css';
+import {Colors} from '../../constant/colors';
+import {loadFont} from '../../assets/Autre';
+import {Spacings} from '../../constant/layout';
 //COMPONENT
-import InputIos from "../../component/input/InputIos";
-import InputAndroid from "../../component/input/InputAndroid";
-import BtnBlueAction from "../../component/button/BtnBlueAction";
-import BackgroundComponent from "../../component/BackgroundComponent";
+import InputIos from '../../component/input/InputIos';
+import InputAndroid from '../../component/input/InputAndroid';
+import BtnBlueAction from '../../component/button/BtnBlueAction';
+import BackgroundComponent from '../../component/BackgroundComponent';
 
-const NameScreen = ({ navigation }) => {
+const NameScreen = ({navigation}) => {
   // ROUTE
   const route = useRoute();
-  const { email, password } = route.params;
+  const {email, password} = route.params;
 
   useEffect(() => {
     loadFont();
   });
 
   const initialValues = {
-    firstName: "",
-    lastName: "",
+    firstName: '',
+    lastName: '',
   };
 
   const onSubmit = (values) => {
-    console.log(values, "alors");
+    console.log(values, 'alors');
   };
 
   const validationSchema = Yup.object().shape({
     firstName: Yup.string()
       .trim()
-      .min(2, "Too Short!")
-      .max(50, "Too Long!")
-      .required("Required"),
+      .min(2, 'Too Short!')
+      .max(50, 'Too Long!')
+      .required('Required'),
     lastName: Yup.string()
       .trim()
-      .min(2, "Too Short!")
-      .max(50, "Too Long!")
-      .required("Required"),
+      .min(2, 'Too Short!')
+      .max(50, 'Too Long!')
+      .required('Required'),
   });
 
   const goNextScreen = (values, errors, touched) => {
@@ -54,7 +54,7 @@ const NameScreen = ({ navigation }) => {
     ) {
       return null;
     } else {
-      return navigation.navigate("Picture", {
+      return navigation.navigate('Picture', {
         fromRegisterName: {
           email,
           password,
@@ -78,14 +78,13 @@ const NameScreen = ({ navigation }) => {
   };
 
   // STYLES
-  const { container_white, text_question, text_description } = styles;
+  const {container_white, text_question, text_description} = styles;
   return (
     <Formik
       initialValues={initialValues}
       validationSchema={validationSchema}
-      onSubmit={onSubmit}
-    >
-      {({ values, handleChange, setFieldTouched, touched, errors }) => (
+      onSubmit={onSubmit}>
+      {({values, handleChange, setFieldTouched, touched, errors}) => (
         <BackgroundComponent
           navigation={navigation}
           route={route}
@@ -96,40 +95,40 @@ const NameScreen = ({ navigation }) => {
             <Text style={text_description}>
               Vous apparaitrez sous la forme Prénom.N sur la plateforme.
             </Text>
-            {Platform.OS === "ios" ? (
+            {Platform.OS === 'ios' ? (
               <InputIos
                 placeholder="Prénom"
                 marginBottom={normalize(Spacings.XS)}
-                onChangeText={handleChange("firstName")}
-                onBlur={() => setFieldTouched("firstName")}
+                onChangeText={handleChange('firstName')}
+                onBlur={() => setFieldTouched('firstName')}
                 value={values.password}
               />
             ) : (
               <InputAndroid
                 placeholder="Prénom"
                 marginBottom={normalize(Spacings.XS)}
-                onChangeText={handleChange("firstName")}
-                onBlur={() => setFieldTouched("firstName")}
+                onChangeText={handleChange('firstName')}
+                onBlur={() => setFieldTouched('firstName')}
                 value={values.password}
               />
             )}
-            {Platform.OS === "ios" ? (
+            {Platform.OS === 'ios' ? (
               <InputIos
                 placeholder="Nom"
-                onChangeText={handleChange("lastName")}
-                onBlur={() => setFieldTouched("lastName")}
+                onChangeText={handleChange('lastName')}
+                onBlur={() => setFieldTouched('lastName')}
                 value={values.password}
               />
             ) : (
               <InputAndroid
                 placeholder="Nom"
-                onChangeText={handleChange("lasttName")}
-                onBlur={() => setFieldTouched("lastName")}
+                onChangeText={handleChange('lastName')}
+                onBlur={() => setFieldTouched('lastName')}
                 value={values.password}
               />
             )}
           </View>
-          <View style={{ marginHorizontal: normalize(70) }}>
+          <View style={{marginHorizontal: normalize(70)}}>
             <BtnBlueAction
               title="Continuer"
               onPress={() => goNextScreen(values, errors, touched)}
@@ -153,11 +152,11 @@ const styles = StyleSheet.create({
   },
   text_question: {
     ...css.title,
-    fontFamily: "heavy",
+    fontFamily: 'heavy',
   },
   text_description: {
     ...css.text_description,
-    fontFamily: "roman",
+    fontFamily: 'roman',
   },
 });
 

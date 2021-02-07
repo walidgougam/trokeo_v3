@@ -96,11 +96,16 @@ const EmailLoginScreen = ({navigation}) => {
       (!touched.email && !touched.password)
     ) {
       setErrorOnLogin(true);
+      setErrorMessage('Remplissez tous les champs');
+    } else if (errors.email || !touched.email) {
+      setErrorOnLogin(true);
+      setErrorMessage(errors.email || `password ${errors.password}`);
+    } else if (errors.password || !touched.password) {
+    } else {
+      loginApi(values.email, values.password, () => {
+        return navigation.navigate('HomeBottomTab');
+      });
     }
-
-    loginApi(values.email, values.password, () => {
-      return navigation.navigate('HomeBottomTab');
-    });
   };
 
   //STYLES
@@ -201,7 +206,6 @@ const EmailLoginScreen = ({navigation}) => {
                 <BtnBlueAction
                   title="Continuer"
                   onPress={() => {
-                    console.log('click');
                     goNextScreen(values, errors, touched);
                   }}
                   backgroundColor={
