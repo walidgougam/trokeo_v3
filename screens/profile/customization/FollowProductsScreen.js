@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, {useEffect, useState, useContext} from 'react';
 import {
   View,
   StyleSheet,
@@ -6,47 +6,47 @@ import {
   FlatList,
   ActivityIndicator,
   Text,
-} from "react-native";
-import { useRoute } from "@react-navigation/native";
-import { Context as AuthContext } from "../../../context/AuthContext";
+} from 'react-native';
+import {useRoute} from '@react-navigation/native';
+import {Context as AuthContext} from '../../../context/AuthContext';
 //API
-import { goodCategories, serviceCategories } from "../../../helpers";
+import {goodCategories, serviceCategories} from '../../../helpers';
 //STYLE
-import {Colors, BackgroundColors}from "../../../constant/colors";
+import {Colors, BackgroundColors} from '../../../constant/colors';
 //COMPONENT
-import InputSearch from "../../../component/input/InputSearch";
-import HeaderComponentForFollow from "../../../component/header/HeaderComponentForFollow";
-import TextCardComponent from "../../../component/card/TextCardComponent";
-import { Spacings } from "../../../constant/layout";
+import InputSearch from '../../../component/input/InputSearch';
+import HeaderComponentForFollow from '../../../component/header/HeaderComponentForFollow';
+import TextCardComponent from '../../../component/card/TextCardComponent';
+import {Spacings} from '../../../constant/layout';
 
-export default function FollowProductsScreen({ navigation }) {
+export default function FollowProductsScreen({navigation}) {
   //ROUTE
   const route = useRoute();
-  const { from, userId } = route?.params;
+  const {from, userId} = route?.params;
 
   // STATE
   const [goodCategoryState, setGoodCategoryState] = useState(goodCategories);
   const [serviceCategoryState, setServiceCategoryState] = useState(
-    serviceCategories
+    serviceCategories,
   );
   const [loading, setLoading] = useState(true);
 
   // CONTEXT
-  const { state } = useContext(AuthContext);
+  const {state} = useContext(AuthContext);
 
   const handleFollowProduct = (titleCategory, followByUser) => {
-    if (from === "good") {
+    if (from === 'good') {
       const changeFollowState = goodCategoryState.map((el) =>
         el?.titleCategory === titleCategory
-          ? Object.assign({}, el, { followByUser })
-          : el
+          ? Object.assign({}, el, {followByUser})
+          : el,
       );
       setGoodCategoryState(changeFollowState);
     } else {
       const changeFollowState = serviceCategoryState.map((el) =>
         el?.titleCategory === titleCategory
-          ? Object.assign({}, el, { followByUser })
-          : el
+          ? Object.assign({}, el, {followByUser})
+          : el,
       );
       setServiceCategoryState(changeFollowState);
     }
@@ -64,28 +64,27 @@ export default function FollowProductsScreen({ navigation }) {
   }, []);
 
   //STYLES
-  const { _container } = styles;
+  const {_container, wrapper_input_search} = styles;
   return loading ? (
-    <ActivityIndicator size="large" style={{ flex: 1 }} />
+    <ActivityIndicator size="large" style={{flex: 1}} />
   ) : (
     <View style={_container}>
       <HeaderComponentForFollow
-        title={from === "good" ? "Biens" : "Services"}
+        title={from === 'good' ? 'Biens' : 'Services'}
         navigation={navigation}
         allFollowRules={
-          from === "good" ? goodCategoryState : serviceCategoryState
+          from === 'good' ? goodCategoryState : serviceCategoryState
         }
         from={from}
         userId={userId}
       />
-      <View style={{ marginHorizontal: Spacings.L, marginVertical: Spacings.XXS }}>
+      <View style={wrapper_input_search}>
         <InputSearch placeholder="Rechercher des catégories" />
       </View>
       <View>
-        {console.log(from, "frooooom")}
         <FlatList
-          data={from === "good" ? goodCategoryState : serviceCategoryState}
-          renderItem={({ item }) => (
+          data={from === 'good' ? goodCategoryState : serviceCategoryState}
+          renderItem={({item}) => (
             <TextCardComponent
               onPress={() =>
                 handleFollowProduct(item?.titleCategory, !item?.followByUser)
@@ -108,6 +107,10 @@ export default function FollowProductsScreen({ navigation }) {
 const styles = StyleSheet.create({
   _container: {
     flex: 1,
-    backgroundColor: BackgroundColors.white.absolute
+    backgroundColor: BackgroundColors.white.absolute,
+  },
+  wrapper_input_search: {
+    marginHorizontal: Spacings.L,
+    marginVertical: Spacings.XXS,
   },
 });

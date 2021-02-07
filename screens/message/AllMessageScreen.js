@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -7,23 +7,23 @@ import {
   Platform,
   FlatList,
   ActivityIndicator,
-} from "react-native";
-import AsyncStorage from '@react-native-community/async-storage'
-import { useIsFocused } from "@react-navigation/native";
-import { Button, Snackbar } from "react-native-paper";
+} from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
+import {useIsFocused} from '@react-navigation/native';
 //API
-import {IOS_URL,ANDROID_URL} from "../../API/constant"
-import axios from "axios";
+import {IOS_URL, ANDROID_URL} from '../../API/constant';
+import axios from 'axios';
 //STYLES
-import {Colors, BackgroundColors} from "../../constant/colors";
-import fontStyles from "../../constant/fonts";
-import normalize from "react-native-normalize";
-import { loadFont } from "../../assets/Autre";
+import {Colors, BackgroundColors} from '../../constant/colors';
+import fontStyles from '../../constant/fonts';
+import normalize from 'react-native-normalize';
+import {loadFont} from '../../assets/Autre';
 //COMPONENT
-import CardMessageComponent from "../../component/card/CardMessageComponent";
-import { Spacings } from "../../constant/layout";
+import CardMessageComponent from '../../component/card/CardMessageComponent';
+import {Spacings} from '../../constant/layout';
+import MessageValidation from '../../component/MessageValidation';
 
-export default function AllMessageScreen({ navigation }) {
+export default function AllMessageScreen({navigation}) {
   //STATE
   const [isLoading, setIsLoading] = useState(true);
   const [allMessage, setAllMessage] = useState([]);
@@ -37,18 +37,18 @@ export default function AllMessageScreen({ navigation }) {
   });
 
   const goToChat = (recieverId, senderId, product) => {
-    return navigation.navigate("Chat", {
-      fromAllMessage: { recieverId, senderId, product },
+    return navigation.navigate('Chat', {
+      fromAllMessage: {recieverId, senderId, product},
     });
   };
   const onDismissSnackBar = () => setDeletedMessage(false);
 
   const getAllRecieverChat = async () => {
-    const userid = await AsyncStorage.getItem("userId");
+    const userid = await AsyncStorage.getItem('userId');
     await axios({
-      method: "GET",
+      method: 'GET',
       url:
-        Platform.OS === "ios"
+        Platform.OS === 'ios'
           ? `${IOS_URL}/chat/allrecieverchat/${userid}`
           : `${ANDROID_URL}/chat/allrecieverchat/${userid}`,
     })
@@ -56,7 +56,7 @@ export default function AllMessageScreen({ navigation }) {
         setAllMessage(res?.data?.chat);
       })
       .catch((err) => {
-        console.log(err, "err on getallrecieverchat");
+        console.log(err, 'err on getallrecieverchat');
       });
   };
 
@@ -74,10 +74,10 @@ export default function AllMessageScreen({ navigation }) {
   }, [isFocuser]);
 
   // STYLES
-  const { container, _header, text_title, wrapper_allmessage } = styles;
+  const {container, _header, text_title, wrapper_allmessage} = styles;
 
   return isLoading ? (
-    <ActivityIndicator size="large" style={{ flex: 1 }} />
+    <ActivityIndicator size="large" style={{flex: 1}} />
   ) : (
     <View style={container}>
       <View style={_header}>
@@ -88,14 +88,13 @@ export default function AllMessageScreen({ navigation }) {
           showsVerticalScrollIndicator={false}
           data={allMessage}
           // contentContainerStyle={}
-          renderItem={({ item }) => (
+          renderItem={({item}) => (
             <TouchableOpacity
               activeOpacity={fontStyles.activeOpacity}
               onPress={() => {
-                console.log(item, "item");
+                console.log(item, 'item');
                 goToChat(item?.reciever?._id, item?.sender, item?.product);
-              }}
-            >
+              }}>
               <CardMessageComponent
                 deleteMessage={() => {
                   getAllRecieverChat();
@@ -115,23 +114,15 @@ export default function AllMessageScreen({ navigation }) {
         />
       </View>
       <>
-        <Snackbar
-          style={{
-            backgroundColor: BackgroundColors.green.main,
-            color: Colors.white.absolute,
-          }}
-          theme={{ colors: { accent: Colors.white.absolute } }}
+        <MessageValidation
+          backgroundColor={BackgroundColors.green.main}
+          accent={Colors.white.absolute}
+          color={Colors.white.absolute}
           visible={deletedMessage}
           onDismiss={onDismissSnackBar}
-          action={{
-            label: "Ok",
-            onPress: () => {
-              // Do something
-            },
-          }}
-        >
-          Message supprimé
-        </Snackbar>
+          label={'Ok'}
+          message={'Message supprimé'}
+        />
       </>
     </View>
   );
@@ -144,13 +135,13 @@ const styles = StyleSheet.create({
   },
   _header: {
     backgroundColor: BackgroundColors.green.main,
-    height: normalize(70, "height"),
-    justifyContent: "flex-end",
+    height: normalize(70, 'height'),
+    justifyContent: 'flex-end',
   },
   text_title: {
     marginBottom: normalize(13),
-    fontSize: normalize(18, "fontSize"),
-    fontFamily: "bold",
+    fontSize: normalize(18, 'fontSize'),
+    fontFamily: 'bold',
     lineHeight: 20,
     color: Colors.white.absolute,
     marginLeft: normalize(Spacings.XS),

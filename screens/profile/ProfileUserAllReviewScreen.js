@@ -1,18 +1,18 @@
-import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, FlatList } from "react-native";
-import AsyncStorage from '@react-native-community/async-storage'
-import {Colors, BackgroundColors} from "../../constant/colors";
-import axios from "axios";
-import { useRoute } from "@react-navigation/native";
-import {IOS_URL,ANDROID_URL} from "../../API/constant";
+import React, {useEffect, useState} from 'react';
+import {View, Text, StyleSheet, FlatList} from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
+import {Colors, BackgroundColors} from '../../constant/colors';
+import axios from 'axios';
+import {useRoute} from '@react-navigation/native';
+import {IOS_URL, ANDROID_URL} from '../../API/constant';
 
-import HeaderComponent from "../../component/header/HeaderComponent";
-import CardReview from "../../component/card/CardReview";
+import HeaderComponent from '../../component/header/HeaderComponent';
+import CardReview from '../../component/card/CardReview';
 
-export default function ProfileUserAllReviewScreen({ navigation }) {
+export default function ProfileUserAllReviewScreen({navigation}) {
   // ROUTE
   const route = useRoute();
-  const { profileId } = route.params;
+  const {profileId} = route.params;
 
   //STATE
   const [review, setReview] = useState([]);
@@ -20,15 +20,15 @@ export default function ProfileUserAllReviewScreen({ navigation }) {
   const getUserReview = async () => {
     try {
       let response = await axios.get(
-        Platform.OS === "ios"
+        Platform.OS === 'ios'
           ? `${IOS_URL}/user/getreview/${profileId}`
-          : `${ANDROID_URL}/user/getreview`
+          : `${ANDROID_URL}/user/getreview`,
       );
       if (response) {
         setReview(response.data.review);
       }
     } catch (error) {
-      console.log(error, "error on get message client");
+      console.log(error, 'error on get message client');
     }
   };
 
@@ -37,7 +37,7 @@ export default function ProfileUserAllReviewScreen({ navigation }) {
   }, []);
 
   // STYLES
-  const { container } = styles;
+  const {container} = styles;
 
   return (
     <View style={container}>
@@ -46,7 +46,7 @@ export default function ProfileUserAllReviewScreen({ navigation }) {
         showsVerticalScrollIndicator={false}
         // contentContainerStyle={styles.wrapper_list}
         data={review}
-        renderItem={({ item, index }) => {
+        renderItem={({item, index}) => {
           return (
             <>
               <CardReview
@@ -60,7 +60,6 @@ export default function ProfileUserAllReviewScreen({ navigation }) {
         }}
         keyExtractor={(item) => item}
       />
-      )
     </View>
   );
 }

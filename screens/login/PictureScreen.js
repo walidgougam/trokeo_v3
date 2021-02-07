@@ -1,24 +1,23 @@
-import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, Image, Alert, Platform } from "react-native";
-import * as ImagePicker from "expo-image-picker";
-import * as Permissions from "expo-permissions"
-import { useRoute } from "@react-navigation/native";
+import React, {useState, useEffect} from 'react';
+import {View, Text, StyleSheet, Image, Alert, Platform} from 'react-native';
+import * as ImagePicker from 'expo-image-picker';
+import * as Permissions from 'expo-permissions';
+import {useRoute} from '@react-navigation/native';
 //STYLE
-import normalize from "react-native-normalize";
-import css from "../../constant/css";
-import {Colors, BackgroundColors}from "../../constant/colors";
-import fontStyles from "../../constant/fonts";
-import { loadFont } from "../../assets/Autre";
+import normalize from 'react-native-normalize';
+import css from '../../constant/css';
+import {Colors, BackgroundColors} from '../../constant/colors';
+import {loadFont} from '../../assets/Autre';
 //PICTURE
-import { ProfilePictureIcon } from "../../assets/icon/Icon";
+import {ProfilePictureIcon} from '../../assets/icon/Icon';
 //COMPONENT
-import BtnBlueAction from "../../component/button/BtnBlueAction";
-import BackgroundComponent from "../../component/BackgroundComponent";
+import BtnBlueAction from '../../component/button/BtnBlueAction';
+import BackgroundComponent from '../../component/BackgroundComponent';
 
-export default function PictureScreen({ navigation }) {
+export default function PictureScreen({navigation}) {
   // ROUTE
   const route = useRoute();
-  const { fromRegisterName } = route.params;
+  const {fromRegisterName} = route.params;
   const email = fromRegisterName.email;
   const password = fromRegisterName.password;
   const firstName = fromRegisterName.firstName;
@@ -27,60 +26,44 @@ export default function PictureScreen({ navigation }) {
   // STATE
   const [profilePicture, setProfilePicture] = useState(null);
 
-  useEffect(() => {
-  }, []);
+  useEffect(() => {}, []);
 
   useEffect(() => {
     loadFont();
   });
 
   const askForPermission = async () => {
-		const permissionResult = await Permissions.askAsync(Permissions.CAMERA)
-		if (permissionResult.status !== 'granted') {
-			Alert.alert('no permissions to access camera!', [{ text: 'ok' }])
-			return false
-		}
-		return true
-	}
+    const permissionResult = await Permissions.askAsync(Permissions.CAMERA);
+    if (permissionResult.status !== 'granted') {
+      Alert.alert('no permissions to access camera!', [{text: 'ok'}]);
+      return false;
+    }
+    return true;
+  };
 
-  const handleChoosePicture = async() => {
-    const hasPermission = await askForPermission()
-		if (!hasPermission) {
-			return
-		} else {
-			// launch the camera with the following settings
-			let image = await ImagePicker.launchImageLibraryAsync({
-				mediaTypes: ImagePicker.MediaTypeOptions.Images,
-				allowsEditing: true,
-				aspect: [3, 3],
-				quality: 1,
-			})
-			// make sure a image was taken:
+  const handleChoosePicture = async () => {
+    const hasPermission = await askForPermission();
+    if (!hasPermission) {
+      return;
+    } else {
+      // launch the camera with the following settings
+      let image = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        allowsEditing: true,
+        aspect: [3, 3],
+        quality: 1,
+      });
+      // make sure a image was taken:
       if (!image.cancelled) {
         setProfilePicture(image);
       }
-		}
-  }
-
-  // const handleChoosePicture = async () => {
-  //   let result = await ImagePicker.launchImageLibraryAsync({
-  //     mediaTypes: ImagePicker.MediaTypeOptions.All,
-  //     allowsEditing: true,
-  //     aspect: [4, 3],
-  //     quality: 1,
-  //   });
-    
-  //   console.log(result, "result picture screen");
-
-  //   if (!result.cancelled) {
-  //     setProfilePicture(result);
-  //   }
-  // };
+    }
+  };
 
   const goNextScreen = () => {
-    console.log(profilePicture, "userPicture");
+    console.log(profilePicture, 'userPicture');
     if (profilePicture) {
-      return navigation.navigate("Gender", {
+      return navigation.navigate('Gender', {
         fromRegisterPicture: {
           email,
           password,
@@ -90,7 +73,7 @@ export default function PictureScreen({ navigation }) {
         },
       });
     } else {
-      Alert.alert("vous devez avoir une photo de profil");
+      Alert.alert('vous devez avoir une photo de profil');
     }
   };
 
@@ -98,14 +81,22 @@ export default function PictureScreen({ navigation }) {
     if (firstName && lastName) {
       return `${firstName}.${lastName.substring(0, 1)}`;
     } else if (!firstName && !lastName) {
-      return "firstname.lastname";
+      return 'firstname.lastname';
     } else if (firstName && !lastName) {
       return firstName;
     }
   };
 
   // STYLES
-  const { container_white, _title, text_description, pseudo } = styles;
+  const {
+    container_white,
+    _title,
+    text_description,
+    profile_picture,
+    _pseudo,
+    _footer,
+    wrapper_btn,
+  } = styles;
 
   return (
     <BackgroundComponent navigation={navigation} route={route}>
@@ -115,29 +106,19 @@ export default function PictureScreen({ navigation }) {
           Vous aurez plus de chance d’échanger avec votre photo !
         </Text>
         {profilePicture ? ( // ancienement avatarSource
-          <Image
-            source={profilePicture}
-            style={{
-              width: 133,
-              height: 133,
-              borderRadius: normalize(100),
-              alignSelf: "center",
-            }}
-          />
+          <Image source={profilePicture} style={profile_picture} />
         ) : (
-          <View style={{ alignSelf: "center" }}>
+          <View style={{alignSelf: 'center'}}>
             <ProfilePictureIcon
-              width={normalize(133, "width")}
-              height={normalize(133, "height")}
+              width={normalize(133, 'width')}
+              height={normalize(133, 'height')}
             />
           </View>
         )}
-        <Text style={[pseudo, { fontSize: normalize(14) }]}>
-          {renderName()}
-        </Text>
+        <Text style={[_pseudo, {fontSize: normalize(14)}]}>{renderName()}</Text>
       </View>
-      <View style={{ marginHorizontal: normalize(70) }}>
-        <View style={{ marginBottom: normalize(18) }}>
+      <View style={_footer}>
+        <View style={wrapper_btn}>
           <BtnBlueAction
             title="Ajouter une photo"
             backgroundColor={Colors.btn_action}
@@ -145,9 +126,8 @@ export default function PictureScreen({ navigation }) {
             onPress={() => handleChoosePicture()}
           />
         </View>
-
         <BtnBlueAction
-          title={profilePicture ? "Suivant" : "Passer"}
+          title={profilePicture ? 'Suivant' : 'Passer'}
           backgroundColor={Colors.white.absolute}
           color={Colors.btn_action}
           onPress={() => goNextScreen()}
@@ -160,26 +140,38 @@ export default function PictureScreen({ navigation }) {
 const styles = StyleSheet.create({
   _container: {
     flex: 1,
-    backgroundColor: BackgroundColors.white.absolute
+    backgroundColor: BackgroundColors.white.absolute,
   },
   container_white: {
     marginHorizontal: normalize(16),
   },
   _title: {
     ...css.title,
-    fontFamily: "heavy",
+    fontFamily: 'heavy',
   },
   text_description: {
     ...css.text_description,
-    fontFamily: "roman",
+    fontFamily: 'roman',
     marginBottom: normalize(62),
   },
-  pseudo: {
+  profile_picture: {
+    width: 133,
+    height: 133,
+    borderRadius: normalize(100),
+    alignSelf: 'center',
+  },
+  _pseudo: {
     marginTop: normalize(12),
     color: Colors.black.text_description_black,
-    fontSize: normalize(14, "fontSize"),
+    fontSize: normalize(14, 'fontSize'),
     lineHeight: normalize(20),
-    textAlign: "center",
-    fontFamily: "medium",
+    textAlign: 'center',
+    fontFamily: 'medium',
+  },
+  _footer: {
+    marginHorizontal: normalize(70),
+  },
+  wrapper_btn: {
+    marginBottom: normalize(18),
   },
 });

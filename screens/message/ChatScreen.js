@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect} from 'react';
 import {
   View,
   StyleSheet,
@@ -6,8 +6,8 @@ import {
   ActivityIndicator,
   Platform,
   Modal,
-} from "react-native";
-import AsyncStorage from '@react-native-community/async-storage'
+} from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 import {
   GiftedChat,
   InputToolbar,
@@ -15,27 +15,28 @@ import {
   ActionsProps,
   Bubble,
   Send,
-} from "react-native-gifted-chat";
-import { useRoute, useIsFocused } from "@react-navigation/native";
+} from 'react-native-gifted-chat';
+import {useRoute, useIsFocused} from '@react-navigation/native';
 // a supprimer
-import io from "socket.io-client";
-import axios from "axios";
-import {IOS_URL,ANDROID_URL} from "../../API/constant"
-import { Button, Snackbar } from "react-native-paper";
+import io from 'socket.io-client';
+import axios from 'axios';
+import {IOS_URL, ANDROID_URL} from '../../API/constant';
+import {Button, Snackbar} from 'react-native-paper';
 //PICTURE
-import { UploadPictureIcon, SendMessageIcon } from "../../assets/icon/Icon";
+import {UploadPictureIcon, SendMessageIcon} from '../../assets/icon/Icon';
 //STYLES
-import {Colors, BackgroundColors} from "../../constant/colors";
-import fontStyles from "../../constant/fonts";
+import {Colors, BackgroundColors} from '../../constant/colors';
+import fontStyles from '../../constant/fonts';
 //COMPONENT
-import HeaderComponent from "../../component/header/HeaderComponent";
-import CardHeaderChat from "../../component/card/CardHeaderChat";
-import { Spacings } from "../../constant/layout";
+import HeaderComponent from '../../component/header/HeaderComponent';
+import CardHeaderChat from '../../component/card/CardHeaderChat';
+import {Spacings} from '../../constant/layout';
+import MessageValidation from '../../component/MessageValidation';
 
-export default function ChatScreen({ navigation }) {
+export default function ChatScreen({navigation}) {
   // ROUTE
   const route = useRoute();
-  const { fromAllMessage, fromProductDetail } = route?.params;
+  const {fromAllMessage, fromProductDetail} = route?.params;
   const product = fromAllMessage.product;
   const senderId = fromAllMessage.senderId;
   const recieverId = fromAllMessage.recieverId;
@@ -46,7 +47,7 @@ export default function ChatScreen({ navigation }) {
   const [messages, setMessages] = useState([]);
   const [user, setUser] = useState();
   const [loading, setLoading] = useState(true);
-  const [recieverNameState, setRecieverNameState] = useState("");
+  const [recieverNameState, setRecieverNameState] = useState('');
 
   // SOCKET
   const socket = io(`${ANDROID_URL}`, {});
@@ -60,8 +61,8 @@ export default function ChatScreen({ navigation }) {
 
     if (mounted) {
       (async () => {
-        const userid = await AsyncStorage.getItem("userId");
-        const username = await AsyncStorage.getItem("userName");
+        const userid = await AsyncStorage.getItem('userId');
+        const username = await AsyncStorage.getItem('userName');
         setUser({
           id: userid,
           name: username,
@@ -79,7 +80,7 @@ export default function ChatScreen({ navigation }) {
   }, [isFocuser]);
 
   const goToReviewScreen = () => {
-    return navigation.navigate("Review", { product: product });
+    return navigation.navigate('Review', {product: product});
   };
 
   const renderUploadPictureIcon = () => {
@@ -87,10 +88,9 @@ export default function ChatScreen({ navigation }) {
       <TouchableOpacity
         activeOpacity={fontStyles.activeOpacity}
         style={{
-          alignSelf: "center",
+          alignSelf: 'center',
           marginLeft: Spacings.L,
-        }}
-      >
+        }}>
         <UploadPictureIcon />
       </TouchableOpacity>
     );
@@ -101,8 +101,8 @@ export default function ChatScreen({ navigation }) {
       <InputToolbar
         {...props}
         containerStyle={{
-          borderColor: "black",
-          alignSelf: "center",
+          borderColor: 'black',
+          alignSelf: 'center',
           // justifyContent: "center",
         }}
         placeholder="Ecrire votre message"
@@ -115,25 +115,24 @@ export default function ChatScreen({ navigation }) {
       <TouchableOpacity
         activeOpacity={fontStyles.activeOpacity}
         style={{
-          alignSelf: "center",
+          alignSelf: 'center',
           marginRight: Spacings.L,
-        }}
-      >
+        }}>
         <SendMessageIcon />
       </TouchableOpacity>
     );
   };
 
   const onSend = async (msg) => {
-    const userId = await AsyncStorage.getItem("userId");
+    const userId = await AsyncStorage.getItem('userId');
     setMessages((prevState) => GiftedChat.append(prevState, msg));
-    socket.emit("newMessage", "sent");
-    console.log(userId, senderId, "blabla");
+    socket.emit('newMessage', 'sent');
+    console.log(userId, senderId, 'blabla');
 
     await axios({
-      method: "POST",
+      method: 'POST',
       url:
-        Platform.OS === "ios"
+        Platform.OS === 'ios'
           ? `${IOS_URL}/chat/postchat`
           : `${ANDROID_URL}/chat/postchat`,
       data: {
@@ -144,10 +143,10 @@ export default function ChatScreen({ navigation }) {
       },
     })
       .then((res) => {
-        console.log(res, "res on post chat");
+        console.log(res, 'res on post chat');
       })
       .catch((err) => {
-        console.log(err, "err on post chat");
+        console.log(err, 'err on post chat');
       });
 
     // if (response.status === 200) {
@@ -157,19 +156,19 @@ export default function ChatScreen({ navigation }) {
   };
 
   const getMessage = async () => {
-    const userId = await AsyncStorage.getItem("userId");
+    const userId = await AsyncStorage.getItem('userId');
     try {
       let response = await axios.get(
-        Platform.OS === "ios"
+        Platform.OS === 'ios'
           ? `${IOS_URL}/chat/getChat/${senderId}/${recieverId}`
-          : `${ANDROID_URL}/chat/getChat/${senderId}/${recieverId}`
+          : `${ANDROID_URL}/chat/getChat/${senderId}/${recieverId}`,
       );
       if (response) {
         setMessages(() => GiftedChat.append([], response.data).reverse());
         setLoading(false);
       }
     } catch (error) {
-      console.log(error, "error on get message");
+      console.log(error, 'error on get message');
     }
   };
 
@@ -187,14 +186,10 @@ export default function ChatScreen({ navigation }) {
   }, []);
 
   // STYLES
-  const { container } = styles;
+  const {container} = styles;
 
   return loading ? (
-    <ActivityIndicator
-      size="small"
-      color="#0000ff"
-      style={{ marginTop: 100 }}
-    />
+    <ActivityIndicator size="small" color="#0000ff" style={{marginTop: 100}} />
   ) : (
     <View style={container}>
       <HeaderComponent
@@ -215,7 +210,7 @@ export default function ChatScreen({ navigation }) {
         userId={user?.id}
         recieverId={recieverId}
       />
-      {console.log(user, "useruser")}
+      {console.log(user, 'useruser')}
       <GiftedChat
         messages={messages}
         user={{
@@ -227,26 +222,18 @@ export default function ChatScreen({ navigation }) {
         renderActions={() => renderUploadPictureIcon()}
         renderInputToolbar={(props) => customtInputToolbar(props)}
         // renderSend={() => renderSendMessageIcon()}
-        placeholderStyle={{ borderColor: "red" }}
+        placeholderStyle={{borderColor: 'red'}}
       />
       <>
-        <Snackbar
-          style={{
-            backgroundColor: BackgroundColors.green.main,
-            color: Colors.white.absolute,
-          }}
-          theme={{ colors: { accent: Colors.white.absolute} }}
+        <MessageValidation
+          backgroundColor={BackgroundColors.green.main}
+          accent={Colors.white.absolute}
+          color={Colors.white.absolute}
           visible={deletedMessage}
           onDismiss={onDismissSnackBar}
-          action={{
-            label: "Ok",
-            onPress: () => {
-              // Do something
-            },
-          }}
-        >
-          Message supprimé
-        </Snackbar>
+          label={'Ok'}
+          message={'Message supprimé'}
+        />
       </>
     </View>
   );
@@ -257,9 +244,9 @@ const styles = StyleSheet.create({
     backgroundColor: BackgroundColors.white.absolute,
   },
   ChatMessageSytemMessageContainer: {
-    backgroundColor: "pink",
+    backgroundColor: 'pink',
   },
   ChatMessageSystemMessageText: {
-    backgroundColor: "purple",
+    backgroundColor: 'purple',
   },
 });

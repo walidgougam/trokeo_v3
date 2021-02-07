@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from 'react';
 import {
   Text,
   View,
@@ -8,25 +8,25 @@ import {
   TouchableOpacity,
   ActivityIndicator,
   Platform,
-} from "react-native";
-import AsyncStorage from '@react-native-community/async-storage'
-import { useIsFocused } from "@react-navigation/native";
-import * as Google from "expo-google-app-auth";
-import * as AppleAuthentication from "expo-apple-authentication";
+} from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
+import {useIsFocused} from '@react-navigation/native';
+import * as Google from 'expo-google-app-auth';
+import * as AppleAuthentication from 'expo-apple-authentication';
 //API
-import { registerGoogleApi } from "../../API/API";
+import {registerGoogleApi} from '../../API/API';
 //PICTURE
-import images from "../../assets/image/images";
-import { IconGoogle, IconFacebook } from "../../assets/icon/Icon";
+import images from '../../assets/image/images';
+import {IconGoogle, IconFacebook} from '../../assets/icon/Icon';
 //STYLES
-import fontStyles from "../../constant/fonts";
-import {Colors, BackgroundColors} from "../../constant/colors";
-import normalize from "react-native-normalize";
+import fontStyles from '../../constant/fonts';
+import {Colors, BackgroundColors} from '../../constant/colors';
+import normalize from 'react-native-normalize';
 //COMPONENT
-import BtnLogin from "../../component/button/BtnLogin";
-import { loadFont } from "../../assets/Autre";
+import BtnLogin from '../../component/button/BtnLogin';
+import {loadFont} from '../../assets/Autre';
 
-const LoginScreen = ({ navigation }) => {
+const LoginScreen = ({navigation}) => {
   //STATE
   const [isLoading, setIsLoading] = useState(true);
 
@@ -50,9 +50,9 @@ const LoginScreen = ({ navigation }) => {
   };
 
   const userAlreadyConnected = async () => {
-    const userId = await AsyncStorage.getItem("userId");
+    const userId = await AsyncStorage.getItem('userId');
     if (userId) {
-      return navigation.navigate("HomeBottomTab");
+      return navigation.navigate('HomeBottomTab');
     } else {
       setIsLoading(false);
     }
@@ -70,19 +70,19 @@ const LoginScreen = ({ navigation }) => {
 
   const auth = async () => {
     try {
-      const { user, type } = await Google.logInAsync(
-        Platform.OS === "android" ? configAndroid : configIos
+      const {user, type} = await Google.logInAsync(
+        Platform.OS === 'android' ? configAndroid : configIos,
       );
 
       //STOCKER L'UTILISATEUR DANS LA BASE DE DONNEE
-      if (type === "success") {
-        const { email, familyName, givenName, id, photoUrl } = user;
+      if (type === 'success') {
+        const {email, familyName, givenName, id, photoUrl} = user;
         registerGoogleApi(email, givenName, familyName, photoUrl, () => {
-          navigation.navigate("HomeBottomTab");
+          navigation.navigate('HomeBottomTab');
         });
       }
     } catch (e) {
-      console.error("error", e);
+      console.error('error', e);
     }
   };
 
@@ -101,13 +101,14 @@ const LoginScreen = ({ navigation }) => {
     text_image,
     container_green,
     wrapper_btn,
+    apple_connect,
     btn,
     text_btn,
     btn_connect,
     text_connect,
   } = styles;
   return isLoading ? (
-    <ActivityIndicator size="large" style={{ flex: 1 }} />
+    <ActivityIndicator size="large" style={{flex: 1}} />
   ) : (
     <View style={container}>
       <View style={container_image}>
@@ -122,7 +123,7 @@ const LoginScreen = ({ navigation }) => {
       </View>
       <View style={container_green}>
         <View style={wrapper_btn}>
-          {Platform.OS === "ios" ? (
+          {Platform.OS === 'ios' ? (
             <View>
               <AppleAuthentication.AppleAuthenticationButton
                 buttonType={
@@ -132,14 +133,7 @@ const LoginScreen = ({ navigation }) => {
                   AppleAuthentication.AppleAuthenticationButtonStyle.BLACK
                 }
                 cornerRadius={25}
-                style={{
-                  height: normalize(52, "height"),
-                  flexDirection: "row",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  marginHorizontal: normalize(68),
-                  marginBottom: normalize(25),
-                }}
+                style={apple_connect}
                 onPress={async () => {
                   try {
                     const credential = await AppleAuthentication.signInAsync({
@@ -148,9 +142,9 @@ const LoginScreen = ({ navigation }) => {
                         AppleAuthentication.AppleAuthenticationScope.EMAIL,
                       ],
                     });
-                    console.log(credential, "credential");
+                    console.log(credential, 'credential');
                   } catch (e) {
-                    if (e.code === "ERR_CANCELED") {
+                    if (e.code === 'ERR_CANCELED') {
                       console.log(1, e);
                     } else {
                       console.log(2, e);
@@ -185,9 +179,8 @@ const LoginScreen = ({ navigation }) => {
                   borderColor: Colors.white.absolute,
                 },
               ]}
-              onPress={() => navigation.navigate("EmailLogin")}
-            >
-              <Text style={[text_btn, { color: Colors.white.absolute }]}>
+              onPress={() => navigation.navigate('EmailLogin')}>
+              <Text style={[text_btn, {color: Colors.white.absolute}]}>
                 Login avec mon mail
               </Text>
             </TouchableOpacity>
@@ -195,8 +188,7 @@ const LoginScreen = ({ navigation }) => {
         </View>
         <TouchableHighlight
           style={btn_connect}
-          onPress={() => navigation.navigate("EmailRegister")}
-        >
+          onPress={() => navigation.navigate('EmailRegister')}>
           <Text style={text_connect}>S'inscrire</Text>
         </TouchableHighlight>
       </View>
@@ -207,63 +199,71 @@ const LoginScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "blue",
+    backgroundColor: 'blue',
   },
   container_image: {
-    height: "48.7%",
+    height: '48.7%',
   },
   _image: {
-    width: "100%",
-    height: "100%",
+    width: '100%',
+    height: '100%',
   },
   wrapper_text_image: {
-    position: "absolute",
+    position: 'absolute',
     marginHorizontal: normalize(17),
     marginVertical: normalize(29),
     bottom: 0,
   },
   title_image: {
     color: Colors.white.absolute,
-    fontSize: normalize(20, "fontSize"),
+    fontSize: normalize(20, 'fontSize'),
     marginBottom: normalize(17),
-    fontFamily: "heavy",
+    fontFamily: 'heavy',
   },
   text_image: {
     color: Colors.white.absolute,
-    fontSize: normalize(15, "fontSize"),
-    fontFamily: "medium",
+    fontSize: normalize(15, 'fontSize'),
+    fontFamily: 'medium',
   },
   container_green: {
     backgroundColor: BackgroundColors.green.main,
-    height: "51.3%",
+    height: '51.3%',
   },
   wrapper_btn: {
-    marginVertical: "6%",
+    marginVertical: '6%',
+  },
+  apple_connect: {
+    height: normalize(52, 'height'),
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginHorizontal: normalize(68),
+    marginBottom: normalize(25),
   },
   btn: {
-    height: normalize(52, "height"),
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
+    height: normalize(52, 'height'),
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
     marginHorizontal: normalize(68),
     borderRadius: normalize(26),
   },
   text_btn: {
-    fontSize: normalize(16, "fontSize"),
+    fontSize: normalize(16, 'fontSize'),
     marginLeft: normalize(13),
     // ...fontStyles.book,
   },
   icon_google: {
-    width: normalize(10, "width"),
-    height: normalize(10, "height"),
+    width: normalize(10, 'width'),
+    height: normalize(10, 'height'),
   },
   btn_connect: {
-    alignSelf: "center",
+    alignSelf: 'center',
   },
   text_connect: {
-    fontSize: normalize(16, "fontSize"),
+    fontSize: normalize(16, 'fontSize'),
     color: Colors.white.absolute,
-    textDecorationLine: "underline",
+    textDecorationLine: 'underline',
   },
 });
 
