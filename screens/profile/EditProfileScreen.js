@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { View, Text, StyleSheet, ScrollView, KeyboardAvoidingView,TouchableWithoutFeedback,Keyboard} from "react-native";
+import { View, Text, StyleSheet, ScrollView, KeyboardAvoidingView} from "react-native";
 import { useRoute } from "@react-navigation/native";
 import { Switch } from "react-native-paper";
 import { Context as AuthContext } from "../../context/AuthContext";

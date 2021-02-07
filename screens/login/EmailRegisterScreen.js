@@ -105,7 +105,7 @@ const EmailRegisterScreen = ({ navigation }) => {
       errors.password ||
       (!touched.email && !touched.password)
     ) {
-      setMessageErrorRegister("Erreur dans l'email et/ou le password");
+      setMessageErrorRegister("Erreur dans l'email et/ou le mot de passe");
       setErrorOnLogin(true);
     } else if (values.password !== values.confirmationPassword) {
       setMessageErrorRegister("Password are not matching");

@@ -5,12 +5,12 @@ import {
   StyleSheet,
   Platform,
   TouchableHighlight,
+  ScrollView
 } from "react-native";
 import { useRoute } from "@react-navigation/native";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import { loginApi } from "../../API/API";
-import { Button, Snackbar } from "react-native-paper";
 //STYLES
 import normalize from "react-native-normalize";
 import {Colors} from "../../constant/colors";
@@ -24,6 +24,7 @@ import InputIos from "../../component/input/InputIos";
 import BackgroundComponent from "../../component/BackgroundComponent";
 //PICTURE
 import { WrongEmailIcon, GoodEmailIcon } from "../../assets/icon/Icon";
+import MessageValidation from "../../component/MessageValidation";
 
 const EmailLoginScreen = ({ navigation }) => {
   //ROUTE
@@ -83,6 +84,10 @@ const EmailLoginScreen = ({ navigation }) => {
       return <GoodEmailIcon />;
     }
   };
+
+  const onDismissSnackBar = () => {
+    setErrorOnLogin(false)
+  }
   const goNextScreen = (values, errors, touched) => {
     if (
       errors.email ||
@@ -117,6 +122,7 @@ const EmailLoginScreen = ({ navigation }) => {
             navigation={navigation}
             route={route}
           >
+            <ScrollView>
             <View style={container_white}>
               <Text style={_title}>Connectez-vous</Text>
               <View style={{ marginBottom: normalize(24) }}>
@@ -189,6 +195,8 @@ const EmailLoginScreen = ({ navigation }) => {
                 <Text style={forget_password}>Mot de passe oublié</Text>
               </TouchableHighlight>
             </View>
+            </ScrollView>
+            
             <View>
               <View style={{ marginHorizontal: normalize(70) }}>
                 <BtnBlueAction
@@ -209,23 +217,7 @@ const EmailLoginScreen = ({ navigation }) => {
           </BackgroundComponent>
         )}
       </Formik>
-      <Snackbar
-        style={{
-          backgroundColor: "red",
-          color:Colors.white.absolute,
-        }}
-        theme={{ colors: { accent: Colors.white.absolute } }}
-        visible={errorOnLogin}
-        // onDismiss={onDismissSnackBar}
-        action={{
-          label: "Ok",
-          onPress: () => {
-            // Do something
-          },
-        }}
-      >
-        Remplissez tous les champs
-      </Snackbar>
+      <MessageValidation backgroundColor={"red"} accent={Colors.white.absolute} color={Colors.white.absolute} visible={errorOnLogin} onDismiss={onDismissSnackBar} label={"Ok"} message={" Remplissez tous les champs"}/>
     </>
   );
 };

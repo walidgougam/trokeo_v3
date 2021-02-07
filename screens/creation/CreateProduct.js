@@ -310,23 +310,8 @@ export default function CreateProduct({ navigation }) {
         {/* </View> */}
       </ScrollView>
       <>
-        <Snackbar
-          style={{
-            backgroundColor: BackgroundColors.green.main,
-            color: Colors.white.absolute,
-          }}
-          theme={{ colors: { accent: Colors.white.absolute } }}
-          visible={errorOnCreateProduct === "false"}
-          onDismiss={onDismissSnackBar}
-          action={{
-            label: "Ok",
-            onPress: () => {
-              // Do something
-            },
-          }}
-        >
-          Produit crée
-        </Snackbar>
+      <MessageValidation backgroundColor={BackgroundColors.green.main} accent={Colors.white.absolute} color={Colors.white.absolute} visible={errorOnCreateProduct === "false"} onDismiss={onDismissSnackBar} label={"Ok"} message={"Produit crée"}/>
+
       </>
       <>
         <Snackbar
