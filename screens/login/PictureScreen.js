@@ -61,20 +61,21 @@ export default function PictureScreen({navigation}) {
   };
 
   const goNextScreen = () => {
-    console.log(profilePicture, 'userPicture');
-    if (profilePicture) {
-      return navigation.navigate('Gender', {
-        fromRegisterPicture: {
-          email,
-          password,
-          firstName,
-          lastName,
-          userPicture: profilePicture,
-        },
-      });
-    } else {
-      Alert.alert('vous devez avoir une photo de profil');
-    }
+    // console.log(profilePicture, 'userPicture');
+    // if (profilePicture) {
+    return navigation.navigate('Gender', {
+      fromRegisterPicture: {
+        email,
+        password,
+        firstName,
+        lastName,
+        userPicture: profilePicture,
+      },
+    });
+    // }
+    //    else {
+    //     Alert.alert('vous devez avoir une photo de profil');
+    //   }
   };
 
   const renderName = () => {

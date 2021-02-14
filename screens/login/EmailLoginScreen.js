@@ -11,6 +11,8 @@ import {useRoute} from '@react-navigation/native';
 import {Formik} from 'formik';
 import * as Yup from 'yup';
 import {loginApi} from '../../API/API';
+import {connect} from 'react-redux';
+import {tryLogin} from '../../redux/actions/AuthAction';
 //STYLES
 import normalize from 'react-native-normalize';
 import {Colors} from '../../constant/colors';
@@ -90,23 +92,32 @@ const EmailLoginScreen = ({navigation}) => {
     setErrorMessage('Remplissez tous les champs');
   };
   const goNextScreen = (values, errors, touched) => {
+    tryLogin('errors');
     if (
       errors.email ||
       errors.password ||
       (!touched.email && !touched.password)
     ) {
+      tryLogin('errors');
       setErrorOnLogin(true);
       setErrorMessage('Remplissez tous les champs');
     } else if (errors.email || !touched.email) {
+      tryLogin('errors');
       setErrorOnLogin(true);
       setErrorMessage(errors.email || `password ${errors.password}`);
     } else if (errors.password || !touched.password) {
+      tryLogin('errors');
     } else {
+      tryLogin('errors');
       loginApi(values.email, values.password, () => {
         return navigation.navigate('HomeBottomTab');
       });
     }
   };
+
+  // useEffect(() => {
+  //   tryLogin('pasmal');
+  // });
 
   //STYLES
   const {
@@ -264,4 +275,15 @@ const styles = StyleSheet.create({
   },
 });
 
-export default EmailLoginScreen;
+const mapStateToProps = (state) => {
+  console.log(state, 'statestatestate');
+  return {
+    tryLogin: state.tryLogin,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  tryLogin: () => dispatch(tryLogin()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(EmailLoginScreen);
