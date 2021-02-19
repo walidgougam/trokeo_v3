@@ -1,22 +1,24 @@
-import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet } from "react-native";
-import { useRoute } from "@react-navigation/native";
-//API
-import { registerApi } from "../../API/API";
+import React, {useState, useEffect} from 'react';
+import {View, Text, StyleSheet} from 'react-native';
+import {useRoute} from '@react-navigation/native';
 //STYLE
-import {Colors, BackgroundColors} from "../../constant/colors";
-import css from "../../constant/css";
-import { loadFont } from "../../assets/Autre";
-import normalize from "react-native-normalize";
+import {Colors, BackgroundColors} from '../../constant/colors';
+import css from '../../constant/css';
+import {loadFont} from '../../assets/Autre';
+import normalize from 'react-native-normalize';
 //COMPONENT
-import BtnBlueAction from "../../component/button/BtnBlueAction";
-import RadioButton from "../../component/input/RadioBtnComponent";
-import BackgroundComponent from "../../component/BackgroundComponent";
+import BtnBlueAction from '../../component/button/BtnBlueAction';
+import RadioButton from '../../component/input/RadioBtnComponent';
+import BackgroundComponent from '../../component/BackgroundComponent';
+import MessageValidation from '../../component/MessageValidation';
+//REDUX
+import {useDispatch, useSelector} from 'react-redux';
+import {REGISTER} from '../../redux/actions/AuthAction';
 
-export default function GenderScreen({ navigation }) {
+export default function GenderScreen({navigation}) {
   //ROUTE
   const route = useRoute();
-  const { fromRegisterPicture } = route.params;
+  const {fromRegisterPicture} = route.params;
   const email = fromRegisterPicture.email;
   const password = fromRegisterPicture.password;
   const firstName = fromRegisterPicture.firstName;
@@ -25,27 +27,49 @@ export default function GenderScreen({ navigation }) {
 
   // STATE
   const [female, setFemale] = useState(false);
+  const [errorOnRegister, setErrorOnRegister] = useState(false);
+
+  //REDUX
+  const dispatch = useDispatch();
+  const registerData = useSelector((state) => state.authReducer);
 
   useEffect(() => {
     loadFont();
   });
 
+  const onDismissSnackBar = () => setErrorOnRegister(false);
+
   const goNextScreen = () => {
-    registerApi(
+    console.log(
       email,
       password,
       firstName,
       lastName,
-      userPicture,
       female,
-      () => {
-        navigation.navigate("HomeBottomTab");
-      }
+      userPicture,
+      'reponse apui',
+    );
+    dispatch(
+      REGISTER(
+        email,
+        password,
+        firstName,
+        lastName,
+        female,
+        userPicture,
+        () => {
+          if (registerData.status === 'success') {
+            navigation.navigate('HomeBottomTab');
+          } else {
+            setErrorOnRegister(true);
+          }
+        },
+      ),
     );
   };
 
   //STYLES
-  const { container_white, _title, text_description } = styles;
+  const {container_white, _title, text_description} = styles;
   return (
     <BackgroundComponent
       navigation={navigation}
@@ -59,18 +83,18 @@ export default function GenderScreen({ navigation }) {
           <RadioButton
             title="un trokeur"
             value={!female}
-            status={!female ? "checked" : "unchecked"}
+            status={!female ? 'checked' : 'unchecked'}
             onPress={() => setFemale(false)}
           />
           <RadioButton
             title="une trokeuse"
             value={female}
-            status={female ? "checked" : "unchecked"}
+            status={female ? 'checked' : 'unchecked'}
             onPress={() => setFemale(true)}
           />
         </View>
       </View>
-      <View style={{ marginHorizontal: normalize(70) }}>
+      <View style={{marginHorizontal: normalize(70)}}>
         <BtnBlueAction
           title="Terminer"
           backgroundColor={Colors.btn_action}
@@ -80,6 +104,18 @@ export default function GenderScreen({ navigation }) {
           color={Colors.white.absolute}
         />
       </View>
+      <>
+        {console.log(errorOnRegister, 'erroronregister')}
+        <MessageValidation
+          backgroundColor={BackgroundColors.green.main}
+          accent={Colors.white.absolute}
+          color={Colors.white.absolute}
+          visible={errorOnRegister}
+          onDismiss={onDismissSnackBar}
+          label={'Ok'}
+          message={'erreur de connexion'}
+        />
+      </>
     </BackgroundComponent>
   );
 }
@@ -87,17 +123,17 @@ export default function GenderScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: BackgroundColors.white.absolute
+    backgroundColor: BackgroundColors.white.absolute,
   },
   container_white: {
     marginHorizontal: normalize(16),
   },
   _title: {
     ...css.title,
-    fontFamily: "heavy",
+    fontFamily: 'heavy',
   },
   text_description: {
     ...css.text_description,
-    fontFamily: "roman",
+    fontFamily: 'roman',
   },
 });

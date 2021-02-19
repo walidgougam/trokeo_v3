@@ -11,8 +11,6 @@ import {useRoute} from '@react-navigation/native';
 import {Formik} from 'formik';
 import * as Yup from 'yup';
 import {loginApi} from '../../API/API';
-import {connect} from 'react-redux';
-import {tryLogin} from '../../redux/actions/AuthAction';
 //STYLES
 import normalize from 'react-native-normalize';
 import {Colors} from '../../constant/colors';
@@ -26,6 +24,9 @@ import BackgroundComponent from '../../component/BackgroundComponent';
 //PICTURE
 import {WrongEmailIcon, GoodEmailIcon} from '../../assets/icon/Icon';
 import MessageValidation from '../../component/MessageValidation';
+//REDUX
+import {useDispatch, useSelector} from 'react-redux';
+import {LOGIN} from '../../redux/actions/AuthAction';
 
 const EmailLoginScreen = ({navigation}) => {
   //ROUTE
@@ -34,6 +35,9 @@ const EmailLoginScreen = ({navigation}) => {
   const [hidePassword, setHidePassword] = useState(true);
   const [errorOnLogin, setErrorOnLogin] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  //REDUX
+  const dispatch = useDispatch();
+  // const login = useSelector((state) => state.usersReducer);
 
   useEffect(() => {
     loadFont();
@@ -92,27 +96,29 @@ const EmailLoginScreen = ({navigation}) => {
     setErrorMessage('Remplissez tous les champs');
   };
   const goNextScreen = (values, errors, touched) => {
-    tryLogin('errors');
     if (
       errors.email ||
       errors.password ||
       (!touched.email && !touched.password)
     ) {
-      tryLogin('errors');
+      dispatch(LOGIN('errors'));
       setErrorOnLogin(true);
       setErrorMessage('Remplissez tous les champs');
     } else if (errors.email || !touched.email) {
-      tryLogin('errors');
+      dispatch(LOGIN('errors'));
       setErrorOnLogin(true);
       setErrorMessage(errors.email || `password ${errors.password}`);
     } else if (errors.password || !touched.password) {
-      tryLogin('errors');
+      dispatch(LOGIN('errors'));
     } else {
-      tryLogin('errors');
-      loginApi(values.email, values.password, () => {
-        return navigation.navigate('HomeBottomTab');
-      });
+      dispatch(
+        LOGIN(values.email, values.password, () => {
+          return navigation.navigate('HomeBottomTab');
+        }),
+      );
     }
+
+    console.log('je log ou pas je log ou pas');
   };
 
   // useEffect(() => {
@@ -275,15 +281,4 @@ const styles = StyleSheet.create({
   },
 });
 
-const mapStateToProps = (state) => {
-  console.log(state, 'statestatestate');
-  return {
-    tryLogin: state.tryLogin,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => ({
-  tryLogin: () => dispatch(tryLogin()),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(EmailLoginScreen);
+export default EmailLoginScreen;

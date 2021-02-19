@@ -86,8 +86,12 @@ import reducers from './redux/reducers/index';
 import {createStore, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
 import thunk from 'redux-thunk';
+import {composeWithDevTools} from 'redux-devtools-extension';
 
-const store = createStore(reducers, applyMiddleware(thunk));
+const store = createStore(
+  reducers,
+  composeWithDevTools(applyMiddleware(thunk)),
+);
 
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();

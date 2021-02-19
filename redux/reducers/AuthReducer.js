@@ -1,14 +1,16 @@
-import {TRY_LOGIN} from '../Constant';
+import {LOGIN_TYPE, REGISTER_TYPE} from '../actions/AuthAction';
 
-const AuthReducers = (state = [], action) => {
-  console.log(action, 'action');
-  console.log(action.payload, 'action.payload');
+const initialState = {};
+
+export default function authReducer(state = initialState, action) {
+  console.log(state, 'state from reducer');
+  console.log(action, 'action from reducer');
   switch (action.type) {
-    case TRY_LOGIN:
+    case LOGIN_TYPE:
+      return state;
+    case REGISTER_TYPE:
       return action.payload;
     default:
       return state;
   }
-};
-
-export {AuthReducers};
+}
