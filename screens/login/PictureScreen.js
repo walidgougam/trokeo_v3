@@ -148,11 +148,11 @@ const styles = StyleSheet.create({
   },
   _title: {
     ...css.title,
-    fontFamily: 'heavy',
+    // fontFamily: 'heavy',
   },
   text_description: {
     ...css.text_description,
-    fontFamily: 'roman',
+    // fontFamily: 'roman',
     marginBottom: normalize(62),
   },
   profile_picture: {
@@ -167,7 +167,7 @@ const styles = StyleSheet.create({
     fontSize: normalize(14, 'fontSize'),
     lineHeight: normalize(20),
     textAlign: 'center',
-    fontFamily: 'medium',
+    // fontFamily: 'medium',
   },
   _footer: {
     marginHorizontal: normalize(70),

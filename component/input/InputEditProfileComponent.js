@@ -1,13 +1,13 @@
-import React, { useState, useContext } from "react";
-import { View, Text, FlatList, StyleSheet } from "react-native";
-import { Form, Item, Input, Label } from "native-base";
-import {Colors} from "../../constant/colors";
-import normalize from "react-native-normalize";
-import fontStyles from "../../constant/fonts";
-import { ArrowBottomIcon } from "../../assets/icon/Icon";
-import { Context as AuthContext } from "../../context/AuthContext";
+import React, {useState, useContext} from 'react';
+import {View, Text, FlatList, StyleSheet} from 'react-native';
+import {Form, Item, Input, Label} from 'native-base';
+import {Colors} from '../../constant/colors';
+import normalize from 'react-native-normalize';
+import fontStyles from '../../constant/fonts';
+import {ArrowBottomIcon} from '../../assets/icon/Icon';
+import {Context as AuthContext} from '../../context/AuthContext';
 
-import SelectPicker from "react-native-form-select-picker";
+import SelectPicker from 'react-native-form-select-picker';
 
 export default function InputEditProfileComponent({
   phoneNumber,
@@ -23,14 +23,14 @@ export default function InputEditProfileComponent({
 }) {
   //STATE
   const [female, setFemale] = useState();
-  const [selectedLabel, setSelectedLabel] = useState("");
+  const [selectedLabel, setSelectedLabel] = useState('');
   const [gender, setGender] = useState();
 
   // USECONTEXT
-  const { state, editProfileContext } = useContext(AuthContext);
+  const {state, editProfileContext} = useContext(AuthContext);
 
   const selectGender = (value) => {
-    if (value === "male") {
+    if (value === 'male') {
       setFemale(false);
     } else {
       setFemale(true);
@@ -42,7 +42,7 @@ export default function InputEditProfileComponent({
   };
 
   //STYLES
-  const { label_input, _input, wrapper_input } = styles;
+  const {label_input, _input, wrapper_input} = styles;
   return (
     <Form>
       <Item style={wrapper_input} floatingLabel last>
@@ -76,7 +76,10 @@ export default function InputEditProfileComponent({
           }}
         />
       </Item>
-      <Item style={{ borderColor: Colors.grey.placeholder_grey }} floatingLabel last>
+      <Item
+        style={{borderColor: Colors.grey.placeholder_grey}}
+        floatingLabel
+        last>
         <Label style={label_input}>Email</Label>
         <Input
           style={_input}
@@ -86,7 +89,10 @@ export default function InputEditProfileComponent({
           }}
         />
       </Item>
-      <Item style={{ borderColor: Colors.grey.placeholder_grey }} floatingLabel last>
+      <Item
+        style={{borderColor: Colors.grey.placeholder_grey}}
+        floatingLabel
+        last>
         <Label style={label_input}>Téléphone</Label>
         <Input
           style={_input}
@@ -96,19 +102,18 @@ export default function InputEditProfileComponent({
           }}
         />
       </Item>
-      <Label style={[styles.label_input, { marginLeft: 14, marginTop: 10 }]}>
+      <Label style={[styles.label_input, {marginLeft: 14, marginTop: 10}]}>
         Genre
       </Label>
 
       <SelectPicker
-        style={{ marginLeft: 10 }}
+        style={{marginLeft: 10}}
         placeholder="select"
         onValueChange={(value) => {
           setGender(value);
         }}
-        selected={gender}
-      >
-        {Object.values(["homme", "femme"]).map((val, index) => (
+        selected={gender}>
+        {Object.values(['homme', 'femme']).map((val, index) => (
           <SelectPicker.Item label={val} value={val} key={index} />
         ))}
       </SelectPicker>
@@ -122,11 +127,11 @@ const styles = StyleSheet.create({
   },
   label_input: {
     color: Colors.grey.placeholder_grey,
-    fontSize: normalize(14, "fontSize"),
+    fontSize: normalize(14, 'fontSize'),
   },
   input: {
-    fontSize: normalize(14, "fontSize"),
-    fontFamily: "semiBold",
+    fontSize: normalize(14, 'fontSize'),
+    // fontFamily: "semiBold",
     color: Colors.black.absolute,
     paddingBottom: normalize(25),
   },

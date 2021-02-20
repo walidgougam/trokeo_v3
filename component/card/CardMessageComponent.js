@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -6,21 +6,21 @@ import {
   TouchableOpacity,
   StyleSheet,
   Platform,
-} from "react-native";
-import AsyncStorage from '@react-native-community/async-storage'
-import axios from "axios";
-import {IOS_URL,ANDROID_URL} from "../../API/constant"
+} from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
+import axios from 'axios';
+import {IOS_URL, ANDROID_URL} from '../../API/constant';
 //PICTURE
-import { GreyDotIcon } from "../../assets/icon/Icon.js";
-import { noImage } from "../../assets/image/noImage.png";
+import {GreyDotIcon} from '../../assets/icon/Icon.js';
+import {noImage} from '../../assets/image/noImage.png';
 //STYLES
-import normalize from "react-native-normalize";
-import {Colors} from "../../constant/colors";
-import fontStyles from "../../constant/fonts";
-import { loadFont } from "../../assets/Autre";
+import normalize from 'react-native-normalize';
+import {Colors} from '../../constant/colors';
+import fontStyles from '../../constant/fonts';
+import {loadFont} from '../../assets/Autre';
 //COMPONENT
-import ModalDeleteMessage from "../modal/ModalDeleteMessage";
-import NoImageByCategory from "../picture/NoImageByCategory";
+import ModalDeleteMessage from '../modal/ModalDeleteMessage';
+import NoImageByCategory from '../picture/NoImageByCategory';
 
 export default function CardMessageComponent({
   pictureProduct,
@@ -45,13 +45,13 @@ export default function CardMessageComponent({
   };
 
   const handleModalMessage = async (reciever, type) => {
-    const sender = await AsyncStorage.getItem("userId");
+    const sender = await AsyncStorage.getItem('userId');
     //deleteMessage
-    if (type === "delete") {
+    if (type === 'delete') {
       await axios({
-        method: "DELETE",
+        method: 'DELETE',
         url:
-          Platform.OS === "ios"
+          Platform.OS === 'ios'
             ? `${IOS_URL}/chat/deletechat/${sender}/${reciever}`
             : `${ANDROID_URL}/chat/deletechat/${sender}/${reciever}`,
       })
@@ -59,7 +59,7 @@ export default function CardMessageComponent({
           deleteMessage();
         })
         .catch((err) => {
-          console.log(err, "-----error delete message-----");
+          console.log(err, '-----error delete message-----');
         });
     }
   };
@@ -75,9 +75,9 @@ export default function CardMessageComponent({
   } = styles;
   return (
     <View style={container}>
-      <View style={{ flexDirection: "row" }}>
+      <View style={{flexDirection: 'row'}}>
         {pictureProduct ? (
-          <Image style={image} source={{ uri: pictureProduct?.uri }} />
+          <Image style={image} source={{uri: pictureProduct?.uri}} />
         ) : (
           <NoImageByCategory
             icon={category}
@@ -85,7 +85,7 @@ export default function CardMessageComponent({
             height={normalize(18)}
           />
         )}
-        <View style={{ marginLeft: 10 }}>
+        <View style={{marginLeft: 10}}>
           <Text style={name_sender}>{sender}</Text>
           <Text style={title_product}>{titleProduct}</Text>
           <Text style={_message} numberOfLines={1}>
@@ -96,8 +96,7 @@ export default function CardMessageComponent({
       <TouchableOpacity
         activeOpacity={fontStyles.activeOpacity}
         hitSlop={expand_clickable_area}
-        onPress={() => setShowModalDelete(!showModalDelete)}
-      >
+        onPress={() => setShowModalDelete(!showModalDelete)}>
         <GreyDotIcon />
         <GreyDotIcon />
         <GreyDotIcon />
@@ -116,33 +115,33 @@ export default function CardMessageComponent({
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: "row",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     marginTop: normalize(26),
   },
   image: {
-    width: normalize(84, "width"),
+    width: normalize(84, 'width'),
     height: 68, // rendre responsive avec autre que normalize
     borderRadius: normalize(4),
   },
   name_sender: {
-    fontSize: normalize(12, "fontSize"),
-    fontFamily: "bold",
+    fontSize: normalize(12, 'fontSize'),
+    // fontFamily: "bold",
     lineHeight: normalize(20),
     color: Colors.black.text_description_black,
   },
   title_product: {
-    fontSize: normalize(11, "fontSize"),
-    fontFamily: "regular",
+    fontSize: normalize(11, 'fontSize'),
+    // fontFamily: 'regular',
     lineHeight: normalize(20),
     color: Colors.black.text_description_black,
   },
   _message: {
     fontSize: 11,
     lineHeight: 20,
-    fontFamily: "regular",
-    width: normalize(216, "width"),
+    // fontFamily: 'regular',
+    width: normalize(216, 'width'),
     marginTop: normalize(6),
   },
-  expand_clickable_area: { top: 10, bottom: 10, left: 10, right: 10 },
+  expand_clickable_area: {top: 10, bottom: 10, left: 10, right: 10},
 });

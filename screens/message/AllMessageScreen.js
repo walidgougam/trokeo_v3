@@ -141,7 +141,7 @@ const styles = StyleSheet.create({
   text_title: {
     marginBottom: normalize(13),
     fontSize: normalize(18, 'fontSize'),
-    fontFamily: 'bold',
+    // fontFamily: 'bold',
     lineHeight: 20,
     color: Colors.white.absolute,
     marginLeft: normalize(Spacings.XS),

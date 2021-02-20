@@ -1,26 +1,26 @@
-import React, { useState, useEffect, useContext } from "react";
-import { View, Text, StyleSheet, Image } from "react-native";
-import AsyncStorage from '@react-native-community/async-storage'
-import { useRoute, useIsFocused } from "@react-navigation/native";
-import { Context as AuthContext } from "../../context/AuthContext";
-import moment from "moment";
+import React, {useState, useEffect, useContext} from 'react';
+import {View, Text, StyleSheet, Image} from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
+import {useRoute, useIsFocused} from '@react-navigation/native';
+import {Context as AuthContext} from '../../context/AuthContext';
+import moment from 'moment';
 //STYLE
-import fontStyles from "../../constant/fonts";
-import {Colors, BackgroundColors} from "../../constant/colors";
-import normalize from "react-native-normalize";
-import { loadFont } from "../../assets/Autre";
+import fontStyles from '../../constant/fonts';
+import {Colors, BackgroundColors} from '../../constant/colors';
+import normalize from 'react-native-normalize';
+import {loadFont} from '../../assets/Autre';
 //PICTURE
-import { ProfilePictureIcon } from "../../assets/icon/Icon";
+import {ProfilePictureIcon} from '../../assets/icon/Icon';
 //COMPONENT
-import HeaderComponent from "../../component/header/HeaderComponent";
-import ProductFeedComponent from "../../component/ProductFeedComponent";
-import NoProductComponent from "../../component/NoProductComponent";
-import StarsComponent from "../../component/StarsComponent";
-import BtnRightIcon from "../../component/button/BtnRightIcon";
-import BtnHomeToggle from "../../component/button/BtnHomeToggle";
-import { Spacings } from "../../constant/layout";
+import HeaderComponent from '../../component/header/HeaderComponent';
+import ProductFeedComponent from '../../component/ProductFeedComponent';
+import NoProductComponent from '../../component/NoProductComponent';
+import StarsComponent from '../../component/StarsComponent';
+import BtnRightIcon from '../../component/button/BtnRightIcon';
+import BtnHomeToggle from '../../component/button/BtnHomeToggle';
+import {Spacings} from '../../constant/layout';
 
-export default function ProfileUserDetailsScreen({ navigation }) {
+export default function ProfileUserDetailsScreen({navigation}) {
   // STATE
   const [goodTab, setGoodTab] = useState(true);
   const [productFromApi, setProductFromApi] = useState();
@@ -28,17 +28,17 @@ export default function ProfileUserDetailsScreen({ navigation }) {
 
   // ROUTE
   const route = useRoute();
-  const { user } = route.params;
+  const {user} = route.params;
 
   // CONTEXT
-  const { state, getAllProductContext } = useContext(AuthContext);
+  const {state, getAllProductContext} = useContext(AuthContext);
 
   // FOCUS ON SCREEN
   const isFocuser = useIsFocused();
 
   useEffect(() => {
     (async () => {
-      setUserId(await AsyncStorage.getItem("userId"));
+      setUserId(await AsyncStorage.getItem('userId'));
     })();
   }, [isFocuser]);
 
@@ -48,10 +48,10 @@ export default function ProfileUserDetailsScreen({ navigation }) {
 
   const renderScreen = () => {
     const serviceProduct = state?.allProduct?.filter(
-      (e) => e.isServices === true && e.isFromOrganization === false
+      (e) => e.isServices === true && e.isFromOrganization === false,
     );
     const goodProduct = state?.allProduct?.filter(
-      (e) => e.isGoods === true && e.isFromOrganization === false
+      (e) => e.isGoods === true && e.isFromOrganization === false,
     );
     if (!goodTab && serviceProduct?.length === 0) {
       return <NoProductComponent />;
@@ -112,18 +112,18 @@ export default function ProfileUserDetailsScreen({ navigation }) {
         ) : (
           <ProfilePictureIcon width={89} height={86} />
         )}
-        <View style={{ marginLeft: 14 }}>
+        <View style={{marginLeft: 14}}>
           <Text style={text_profile}>
             {`Membre depuis le ${moment(user?.createdAt)
-              .add(10, "days")
+              .add(10, 'days')
               .calendar()}`}
           </Text>
           <Text style={text_profile}>Haut de seine france</Text>
           <View style={wrapper_stars}>
             <View style={_stars}>
               <StarsComponent
-                width={normalize(21, "width")}
-                height={normalize(18, "height")}
+                width={normalize(21, 'width')}
+                height={normalize(18, 'height')}
               />
             </View>
             <BtnRightIcon
@@ -131,7 +131,7 @@ export default function ProfileUserDetailsScreen({ navigation }) {
               disabled={!user?.review?.length > 0}
               profileId={user?._id}
               navigation={navigation}
-              target={"ProfileUserReview"}
+              target={'ProfileUserReview'}
             />
           </View>
         </View>
@@ -164,26 +164,26 @@ export default function ProfileUserDetailsScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: BackgroundColors.white.absolute
+    backgroundColor: BackgroundColors.white.absolute,
   },
   wrapper_review: {
-    flexDirection: "row",
+    flexDirection: 'row',
   },
   wrapper_profile_info: {
-    flexDirection: "row",
+    flexDirection: 'row',
     marginTop: 17,
     marginBottom: 30,
     marginHorizontal: 23,
   },
   text_profile: {
     fontSize: 11,
-    fontFamily: "regular",
+    // fontFamily: 'regular',
     lineHeight: 20,
     color: Colors.black.text_description_black,
   },
   wrapper_stars: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     marginTop: Spacings.XXS,
   },
   _stars: {
@@ -200,7 +200,7 @@ const styles = StyleSheet.create({
     marginTop: 19,
   },
   text_about: {
-    fontFamily: "bold",
+    // fontFamily: 'bold',
     fontSize: 16,
     lineHeight: 20,
     color: Colors.black.text_description_black,
@@ -208,12 +208,12 @@ const styles = StyleSheet.create({
   },
   text_description: {
     fontSize: 14,
-    fontFamily: "regular",
+    // fontFamily: "regular",
     lineHeight: 20,
     color: Colors.black.text_description_black,
   },
   wrapper_toggle_btn: {
-    flexDirection: "row",
-    height: normalize(57, "height"),
+    flexDirection: 'row',
+    height: normalize(57, 'height'),
   },
 });

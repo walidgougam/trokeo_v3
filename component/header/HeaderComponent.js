@@ -1,23 +1,17 @@
-import React, { useState } from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  Platform,
-} from "react-native";
-import AsyncStorage from '@react-native-community/async-storage'
-import axios from "axios";
-import {IOS_URL,ANDROID_URL} from "../../API/constant"
+import React, {useState} from 'react';
+import {View, Text, StyleSheet, TouchableOpacity, Platform} from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
+import axios from 'axios';
+import {IOS_URL, ANDROID_URL} from '../../API/constant';
 //STYLES
-import normalize from "react-native-normalize";
-import {Colors, BackgroundColors} from "../../constant/colors";
-import fontStyles from "../../constant/fonts";
+import normalize from 'react-native-normalize';
+import {Colors, BackgroundColors} from '../../constant/colors';
+import fontStyles from '../../constant/fonts';
 //COMPONENENT
-import ModalDeleteMessage from "../modal/ModalDeleteMessage";
+import ModalDeleteMessage from '../modal/ModalDeleteMessage';
 //PICTURE
-import { ArrowLeftIcon, WhiteDotIcon } from "../../assets/icon/Icon";
-import { Spacings } from "../../constant/layout";
+import {ArrowLeftIcon, WhiteDotIcon} from '../../assets/icon/Icon';
+import {Spacings} from '../../constant/layout';
 
 export default function HeaderComponent({
   navigation,
@@ -33,13 +27,13 @@ export default function HeaderComponent({
   const [showModalDelete, setShowModalDelete] = useState(false);
 
   const handleModalMessage = async (reciever, type) => {
-    const sender = await AsyncStorage.getItem("userId");
+    const sender = await AsyncStorage.getItem('userId');
     //DELETE
-    if (type === "delete") {
+    if (type === 'delete') {
       await axios({
-        method: "DELETE",
+        method: 'DELETE',
         url:
-          Platform.OS === "ios"
+          Platform.OS === 'ios'
             ? `${IOS_URL}/chat/deletechat/${sender}/${reciever}`
             : `${ANDROID_URL}/chat/deletechat/${sender}/${reciever}`,
       })
@@ -48,24 +42,24 @@ export default function HeaderComponent({
           navigation.goBack();
         })
         .catch((err) => {
-          console.log(err, "-----error delete message-----");
+          console.log(err, '-----error delete message-----');
         });
     }
     //BOOKED
-    else if (type === "booked") {
+    else if (type === 'booked') {
       await axios({
-        method: "POST",
+        method: 'POST',
         url:
-          Platform.OS === "ios"
+          Platform.OS === 'ios'
             ? `${IOS_URL}/product/bookedproduct`
             : `${ANDROID_URL}/product/bookedproduct`,
-        data: { productId, bookedProduct: true },
+        data: {productId, bookedProduct: true},
       })
         .then((res) => {
-          console.log(res, " -----error booked product-----");
+          console.log(res, ' -----error booked product-----');
         })
         .catch((err) => {
-          console.log(err, "-----error booked product-----");
+          console.log(err, '-----error booked product-----');
         });
     }
   };
@@ -79,15 +73,14 @@ export default function HeaderComponent({
   return (
     <View style={_header}>
       <View style={wrapper_header_title}>
-        <View style={{ flexDirection: "row" }}>
+        <View style={{flexDirection: 'row'}}>
           <TouchableOpacity
             activeOpacity={fontStyles.activeOpacity}
             onPress={() => {
               navigation.goBack();
               editNotification && editNotification();
             }}
-            hitSlop={expand_clickable_area}
-          >
+            hitSlop={expand_clickable_area}>
             <ArrowLeftIcon />
           </TouchableOpacity>
           <Text style={text_title}>{title}</Text>
@@ -98,8 +91,7 @@ export default function HeaderComponent({
             onPress={() => {
               setShowModalDelete(!showModalDelete);
             }}
-            hitSlop={expand_clickable_area}
-          >
+            hitSlop={expand_clickable_area}>
             <WhiteDotIcon />
             <WhiteDotIcon />
             <WhiteDotIcon />
@@ -121,21 +113,21 @@ export default function HeaderComponent({
 const styles = StyleSheet.create({
   _header: {
     backgroundColor: BackgroundColors.green.main,
-    height: normalize(70, "height"),
-    justifyContent: "flex-end",
+    height: normalize(70, 'height'),
+    justifyContent: 'flex-end',
   },
   wrapper_header_title: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
     marginBottom: normalize(Spacings.S),
     marginHorizontal: normalize(Spacings.XS),
   },
   text_title: {
-    fontSize: normalize(18, "fontSize"),
-    fontFamily: "bold",
+    fontSize: normalize(18, 'fontSize'),
+    // fontFamily: "bold",
     color: Colors.white.absolute,
     marginLeft: normalize(27),
   },
-  expand_clickable_area: { top: 10, bottom: 10, left: 10, right: 10 },
+  expand_clickable_area: {top: 10, bottom: 10, left: 10, right: 10},
 });

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -6,23 +6,23 @@ import {
   Image,
   Platform,
   TouchableOpacity,
-} from "react-native";
-import AsyncStorage from '@react-native-community/async-storage'
+} from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 //API
-import { handleLikeApi } from "../../API/API";
+import {handleLikeApi} from '../../API/API';
 //PICTURE
-import NoImageByCategory from "../picture/NoImageByCategory";
+import NoImageByCategory from '../picture/NoImageByCategory';
 import {
   HeartMiniIcon,
   HeartFullIcon,
   PositionIcon,
-} from "../../assets/icon/Icon";
+} from '../../assets/icon/Icon';
 //STYLES
-import normalize from "react-native-normalize";
-import {Colors, BackgroundColor }from "../../constant/colors";
-import css from "../../constant/css";
-import fontStyles from "../../constant/fonts";
-import { loadFont } from "../../assets/Autre";
+import normalize from 'react-native-normalize';
+import {Colors, BackgroundColor} from '../../constant/colors';
+import css from '../../constant/css';
+import fontStyles from '../../constant/fonts';
+import {loadFont} from '../../assets/Autre';
 
 export default function CardProductComponent({
   userData,
@@ -56,7 +56,7 @@ export default function CardProductComponent({
   }, [heartFull]);
 
   const goProductDetailScreen = () => {
-    navigation.navigate("ProductDetail", {
+    navigation.navigate('ProductDetail', {
       fromCardProduct: {
         userData,
         imageProduct,
@@ -73,7 +73,7 @@ export default function CardProductComponent({
   };
 
   const handleHeart = async () => {
-    const userid = await AsyncStorage.getItem("userId");
+    const userid = await AsyncStorage.getItem('userId');
     await handleLikeApi(userid, productId);
     clickFromChild();
   };
@@ -97,9 +97,9 @@ export default function CardProductComponent({
         onPress={() => goProductDetailScreen(imageProduct)}
         style={[
           container_image,
-          Platform.OS === "ios"
+          Platform.OS === 'ios'
             ? {
-                shadowColor: "#000",
+                shadowColor: '#000',
                 shadowOffset: {
                   width: 2,
                   height: 2,
@@ -107,9 +107,8 @@ export default function CardProductComponent({
                 shadowOpacity: 0.4,
                 shadowRadius: 2,
               }
-            : { elevation: 9 },
-        ]}
-      >
+            : {elevation: 9},
+        ]}>
         {imageProduct?.length > 0 ? (
           <Image
             source={imageProduct}
@@ -121,7 +120,7 @@ export default function CardProductComponent({
           <NoImageByCategory
             icon={categoriesProduct}
             width={normalize(159)}
-            height={normalize(128, "height")}
+            height={normalize(128, 'height')}
             widthIcon={20}
             heightIcon={20}
             fromCardProduct
@@ -133,7 +132,7 @@ export default function CardProductComponent({
           </View>
         ) : null}
       </TouchableOpacity>
-      <View style={{ marginHorizontal: 4 }}>
+      <View style={{marginHorizontal: 4}}>
         <Text style={text_description} numberOfLines={1}>
           {titleProduct}
         </Text>
@@ -145,8 +144,7 @@ export default function CardProductComponent({
           <View style={wrapper_icon}>
             <TouchableOpacity
               activeOpacity={fontStyles.activeOpacity}
-              onPress={() => handleHeart()}
-            >
+              onPress={() => handleHeart()}>
               {likesProduct?.some((el) => userData?._id.includes(el)) ? (
                 <HeartFullIcon width={normalize(14)} height={normalize(13)} />
               ) : (
@@ -163,51 +161,51 @@ export default function CardProductComponent({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "flex-end",
+    justifyContent: 'flex-end',
     marginBottom: normalize(30),
   },
   container_image: {
-    alignSelf: "center",
+    alignSelf: 'center',
   },
   image_product: {
     width: normalize(159),
-    height: normalize(128, "height"),
+    height: normalize(128, 'height'),
     borderRadius: normalize(5),
   },
   wrapper_booked: {
-    height: normalize(26, "height"),
-    width: normalize(159, "width"),
+    height: normalize(26, 'height'),
+    width: normalize(159, 'width'),
     backgroundColor: BackgroundColor,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     borderRadius: normalize(5),
-    position: "absolute",
+    position: 'absolute',
     bottom: 0,
   },
   text_booked: {
     color: Colors.white.absolute,
-    fontSize: normalize(11, "fontSize"),
+    fontSize: normalize(11, 'fontSize'),
   },
   text_description: {
     marginLeft: normalize(2),
-    fontSize: normalize(11, "fontSize"),
+    fontSize: normalize(11, 'fontSize'),
     color: Colors.grey.background_reservation_grey,
     lineHeight: normalize(20),
-    fontFamily: "regular",
+    // fontFamily: "regular",
   },
   container_icon: {
     ...css.row_space_between,
   },
   wrapper_icon: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   text_icon: {
-    fontSize: normalize(9, "fontSize"),
+    fontSize: normalize(9, 'fontSize'),
     color: Colors.grey.likes_grey,
     lineHeight: normalize(20),
-    alignSelf: "center",
+    alignSelf: 'center',
     marginLeft: normalize(4),
-    fontFamily: "regular",
+    // fontFamily: 'regular',
   },
 });

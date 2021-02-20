@@ -1,28 +1,22 @@
-import React, { useContext, useEffect } from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  Platform,
-} from "react-native";
-import { Context as AuthContext } from "../../context/AuthContext";
-import { useIsFocused } from "@react-navigation/native";
+import React, {useContext, useEffect} from 'react';
+import {View, Text, StyleSheet, TouchableOpacity, Platform} from 'react-native';
+import {Context as AuthContext} from '../../context/AuthContext';
+import {useIsFocused} from '@react-navigation/native';
 //API
-import axios from "axios";
+import axios from 'axios';
 import {
   followGoodsCategoryApi,
   followServicesCategoryApi,
-} from "../../API/ProductApi";
+} from '../../API/ProductApi';
 //STYLE
-import normalize from "react-native-normalize";
-import {Colors, BackgroundColors} from "../../constant/colors";
-import fontStyles from "../../constant/fonts";
-import { loadFont } from "../../assets/Autre";
+import normalize from 'react-native-normalize';
+import {Colors, BackgroundColors} from '../../constant/colors';
+import fontStyles from '../../constant/fonts';
+import {loadFont} from '../../assets/Autre';
 //PICTURE
-import { WhiteDotIcon, ArrowLeftIcon } from "../../assets/icon/Icon";
-import { Spacings } from "../../constant/layout";
-import {IOS_URL,ANDROID_URL} from "../../API/constant"
+import {WhiteDotIcon, ArrowLeftIcon} from '../../assets/icon/Icon';
+import {Spacings} from '../../constant/layout';
+import {IOS_URL, ANDROID_URL} from '../../API/constant';
 
 export default function HeaderComponentForFollow({
   navigation,
@@ -34,7 +28,7 @@ export default function HeaderComponentForFollow({
   userId,
 }) {
   // CONTEXT
-  const { state, getSpecificUserContext } = useContext(AuthContext);
+  const {state, getSpecificUserContext} = useContext(AuthContext);
   // FOCUS ON SCREEN
   const isFocuser = useIsFocused();
 
@@ -46,22 +40,22 @@ export default function HeaderComponentForFollow({
     (async () => {
       let followGoodsCategory = await followGoodsCategoryApi();
       if (followGoodsCategory) {
-        console.log(followGoodsCategory, "bien sur que je follow");
+        console.log(followGoodsCategory, 'bien sur que je follow');
       }
     })();
   }, []);
 
   const goBackFunction = async () => {
     navigation.goBack();
-    if (from === "good") {
+    if (from === 'good') {
       return followGoodsCategoryApi(
         userId,
-        (categoryGoodsFollow = allFollowRules)
+        (categoryGoodsFollow = allFollowRules),
       );
     } else {
       return followServicesCategoryApi(
         userId,
-        (categoryServicesFollow = allFollowRules)
+        (categoryServicesFollow = allFollowRules),
       );
     }
   };
@@ -76,12 +70,11 @@ export default function HeaderComponentForFollow({
   return (
     <View style={_header}>
       <View style={wrapper_header_title}>
-        <View style={{ flexDirection: "row" }}>
+        <View style={{flexDirection: 'row'}}>
           <TouchableOpacity
             activeOpacity={fontStyles.activeOpacity}
             onPress={() => goBackFunction()}
-            hitSlop={expand_clickable_area}
-          >
+            hitSlop={expand_clickable_area}>
             <ArrowLeftIcon />
           </TouchableOpacity>
           <Text style={text_title}>{title}</Text>
@@ -101,21 +94,21 @@ export default function HeaderComponentForFollow({
 const styles = StyleSheet.create({
   _header: {
     backgroundColor: BackgroundColors.green.main,
-    height: normalize(70, "height"),
-    justifyContent: "flex-end",
+    height: normalize(70, 'height'),
+    justifyContent: 'flex-end',
   },
   wrapper_header_title: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
     marginBottom: normalize(Spacings.S),
     marginHorizontal: normalize(Spacings.XS),
   },
   text_title: {
-    fontSize: normalize(18, "fontSize"),
-    fontFamily: "bold",
+    fontSize: normalize(18, 'fontSize'),
+    // fontFamily: "bold",
     color: Colors.white.absolute,
     marginLeft: normalize(27),
   },
-  expand_clickable_area: { top: 10, bottom: 10, left: 10, right: 10 },
+  expand_clickable_area: {top: 10, bottom: 10, left: 10, right: 10},
 });

@@ -1,27 +1,27 @@
-import React, { useState, useEffect, useContext } from "react";
-import { View, Text, StyleSheet, ScrollView } from "react-native";
-import { renderForOrganization } from "../../helpers";
-import { products } from "../../helpersDataBase";
-import { Context as AuthContext } from "../../context/AuthContext";
+import React, {useState, useEffect, useContext} from 'react';
+import {View, Text, StyleSheet, ScrollView} from 'react-native';
+import {renderForOrganization} from '../../helpers';
+import {products} from '../../helpersDataBase';
+import {Context as AuthContext} from '../../context/AuthContext';
 //STYLES
-import {Colors, BackgroundColors} from "../../constant/colors";
-import normalize from "react-native-normalize";
-import fontStyles from "../../constant/fonts";
-import { loadFont } from "../../assets/Autre";
+import {Colors, BackgroundColors} from '../../constant/colors';
+import normalize from 'react-native-normalize';
+import fontStyles from '../../constant/fonts';
+import {loadFont} from '../../assets/Autre';
 //COMPONENT
-import HeaderOrganization from "../../component/header/HeaderOrganization";
-import BtnHomeToggle from "../../component/button/BtnHomeToggle";
-import HeaderFilterComponent from "../../component/header/HeaderFilterComponent";
+import HeaderOrganization from '../../component/header/HeaderOrganization';
+import BtnHomeToggle from '../../component/button/BtnHomeToggle';
+import HeaderFilterComponent from '../../component/header/HeaderFilterComponent';
 //PICTURE
-import { OrganizationIcon } from "../../assets/icon/Icon";
+import {OrganizationIcon} from '../../assets/icon/Icon';
 
-export default function OrganizationScreen({ navigation }) {
+export default function OrganizationScreen({navigation}) {
   // STATE
   const [goodTab, setGoodTab] = useState(true);
   const [productFromApi, setProductFromApi] = useState();
 
   // CONTEXT
-  const { state } = useContext(AuthContext);
+  const {state} = useContext(AuthContext);
 
   //CONTEXT STATE
   const category = state?.search?.category;
@@ -58,7 +58,7 @@ export default function OrganizationScreen({ navigation }) {
         <Text style={title_organization}>
           Dons demandés par les associations
         </Text>
-        <View style={{ zIndex: 10 }}>
+        <View style={{zIndex: 10}}>
           <OrganizationIcon />
         </View>
       </View>
@@ -91,25 +91,25 @@ export default function OrganizationScreen({ navigation }) {
 const styles = StyleSheet.create({
   _container: {
     flex: 1,
-    backgroundColor: BackgroundColors.white.absolute
+    backgroundColor: BackgroundColors.white.absolute,
   },
   wrapper_organisation_flag: {
     backgroundColor: BackgroundColors.green.main,
-    height: normalize(70, "height"),
-    width: "100%",
-    justifyContent: "center",
-    alignItems: "center",
+    height: normalize(70, 'height'),
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   wrapper_toggle_btn: {
-    flexDirection: "row",
-    height: normalize(57, "height"),
+    flexDirection: 'row',
+    height: normalize(57, 'height'),
   },
   title_organization: {
-    position: "absolute",
+    position: 'absolute',
     marginVertical: normalize(25),
-    fontSize: normalize(17, "fontSize"),
+    fontSize: normalize(17, 'fontSize'),
     lineHeight: normalize(20),
     color: Colors.white.absolute,
-    fontFamily: "regular",
+    // fontFamily: "regular",
   },
 });

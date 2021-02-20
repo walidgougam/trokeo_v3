@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, {useEffect, useState, useContext} from 'react';
 import {
   View,
   Text,
@@ -6,14 +6,14 @@ import {
   TouchableOpacity,
   ScrollView,
   Alert,
-} from "react-native";
-import { Context as AuthContext } from "../../context/AuthContext";
+} from 'react-native';
+import {Context as AuthContext} from '../../context/AuthContext';
 //PICTURE
-import { CrossGreyIcon } from "../../assets/icon/Icon";
+import {CrossGreyIcon} from '../../assets/icon/Icon';
 //STYLE
-import {Colors} from "../../constant/colors";
-import normalize from "react-native-normalize";
-import fontStyles from "../../constant/fonts";
+import {Colors} from '../../constant/colors';
+import normalize from 'react-native-normalize';
+import fontStyles from '../../constant/fonts';
 
 export default function HeaderFilterComponent() {
   //STATE
@@ -21,7 +21,7 @@ export default function HeaderFilterComponent() {
   const [loading, setLoading] = useState(true);
 
   // CONTEXT
-  const { state, searchFilterProductContext } = useContext(AuthContext);
+  const {state, searchFilterProductContext} = useContext(AuthContext);
 
   //CONTEXT STATE
   const category = state?.search?.category;
@@ -35,19 +35,19 @@ export default function HeaderFilterComponent() {
       if (distance !== undefined) {
         for (let i = 0; i < distance.length; i++) {
           if (allOptions.filter((e) => e.data !== distance[i]))
-            allOptions.push({ type: "distance", data: distance[i] });
+            allOptions.push({type: 'distance', data: distance[i]});
         }
       }
       if (category !== undefined) {
         for (let i = 0; i < category.length; i++) {
           if (allOptions.filter((e) => e.data !== category[i]))
-            allOptions.push({ type: "category", data: category[i] });
+            allOptions.push({type: 'category', data: category[i]});
         }
       }
       if (condition !== undefined) {
         for (let i = 0; i < condition.length; i++) {
           if (allOptions.filter((e) => e.data !== condition[i]))
-            allOptions.push({ type: "condition", data: condition[i] });
+            allOptions.push({type: 'condition', data: condition[i]});
         }
       }
       setAllOptionSearch(allOptions);
@@ -60,7 +60,7 @@ export default function HeaderFilterComponent() {
 
   const deleteOptionSearch = (filter, type) => {
     const deleteOption = allOptionSearch.filter(
-      (event) => event.data !== filter
+      (event) => event.data !== filter,
     );
     const newFilterSearch = [];
     for (let i = 0; i < deleteOption.length; i++) {
@@ -72,21 +72,21 @@ export default function HeaderFilterComponent() {
     let newDistance = [];
 
     for (let i = 0; i < newFilterSearch.length; i++) {
-      if (newFilterSearch[i].type === "category") {
+      if (newFilterSearch[i].type === 'category') {
         newCategory.push(newFilterSearch[i].data);
-      } else if (newFilterSearch[i].type === "condition") {
+      } else if (newFilterSearch[i].type === 'condition') {
         newCondition.push(newFilterSearch[i].data);
-      } else if (newFilterSearch[i].type === "distance") {
+      } else if (newFilterSearch[i].type === 'distance') {
         newDistance.push(newFilterSearch[i].data);
       }
     }
-    if (type === "condition") {
+    if (type === 'condition') {
       return searchFilterProductContext({
         category: category,
         condition: newCondition,
         distance: distance,
       });
-    } else if (type === "category") {
+    } else if (type === 'category') {
       return searchFilterProductContext({
         category: newCategory,
         condition: condition,
@@ -107,18 +107,18 @@ export default function HeaderFilterComponent() {
       ` ${filter}`,
       [
         {
-          text: "ok",
+          text: 'ok',
           onPress: () => {
             deleteOptionSearch(filter, type);
           },
         },
         {
-          text: "Cancel",
-          onPress: () => console.log("Cancel Pressed"),
-          style: "cancel",
+          text: 'Cancel',
+          onPress: () => console.log('Cancel Pressed'),
+          style: 'cancel',
         },
       ],
-      { cancelable: false }
+      {cancelable: false},
     );
   };
   //STYLES
@@ -141,10 +141,9 @@ export default function HeaderFilterComponent() {
                 key={index}
                 onPress={() => deleteOptionFilter(filter.data, filter.type)}
                 activeOpacity={fontStyles.activeOpacity}
-                style={[wrapper_text_filter]}
-              >
+                style={[wrapper_text_filter]}>
                 <Text style={text_filter}> {filter.data}</Text>
-                <View style={{ marginLeft: 7 }}>
+                <View style={{marginLeft: 7}}>
                   <CrossGreyIcon width={7} height={7} />
                 </View>
               </TouchableOpacity>
@@ -160,26 +159,26 @@ const styles = StyleSheet.create({
     borderBottomColor: Colors.grey.placeholder_grey,
     borderBottomWidth: 1,
     height: 50,
-    width: "100%",
-    flexDirection: "row",
-    alignItems: "center",
+    width: '100%',
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   wrapper_text_filter: {
     borderColor: Colors.grey.placeholder_grey,
     borderWidth: 1,
     marginLeft: 10,
-    flexDirection: "row",
-    justifyContent: "space-around",
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
     height: 27,
     borderRadius: 13,
     paddingHorizontal: 7,
   },
   text_filter: {
-    fontSize: normalize(14, "fontSize"),
-    fontFamily: "semiBold",
+    fontSize: normalize(14, 'fontSize'),
+    // fontFamily: "semiBold",
     lineHeight: 20,
     color: Colors.black.text_description_black,
   },
-  expand_clickable_area: { top: 10, bottom: 10, left: 10, right: 10 },
+  expand_clickable_area: {top: 10, bottom: 10, left: 10, right: 10},
 });

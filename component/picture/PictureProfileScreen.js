@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, {useState, useContext} from 'react';
 import {
   View,
   Text,
@@ -6,17 +6,16 @@ import {
   StyleSheet,
   TouchableOpacity,
   Platform,
-} from "react-native";
-import * as ImagePicker from "expo-image-picker";
-import * as Permissions from "expo-permissions"
-import { Context as AuthContext } from "../../context/AuthContext";
+} from 'react-native';
+import * as ImagePicker from 'expo-image-picker';
+import * as Permissions from 'expo-permissions';
+import {Context as AuthContext} from '../../context/AuthContext';
 //STYLES
-import normalize from "react-native-normalize";
-import {Colors} from "../../constant/colors";
-import fontStyles from "../../constant/fonts";
+import normalize from 'react-native-normalize';
+import {Colors} from '../../constant/colors';
+import fontStyles from '../../constant/fonts';
 //COMPONENTS
-import { ProfilePictureIcon } from "../../assets/icon/Icon";
-
+import {ProfilePictureIcon} from '../../assets/icon/Icon';
 
 export default function PictureProfileScreen({
   firstName,
@@ -32,39 +31,39 @@ export default function PictureProfileScreen({
   const [avatarSource, setAvatarSource] = useState(userPicture);
 
   // CONTEXT
-  const { state, changePictureContext } = useContext(AuthContext);
+  const {state, changePictureContext} = useContext(AuthContext);
 
   const askForPermission = async () => {
-		const permissionResult = await Permissions.askAsync(Permissions.CAMERA)
-		if (permissionResult.status !== 'granted') {
-			Alert.alert('no permissions to access camera!', [{ text: 'ok' }])
-			return false
-		}
-		return true
-	}
+    const permissionResult = await Permissions.askAsync(Permissions.CAMERA);
+    if (permissionResult.status !== 'granted') {
+      Alert.alert('no permissions to access camera!', [{text: 'ok'}]);
+      return false;
+    }
+    return true;
+  };
 
   const handleChoosePicture = async () => {
-    console.log("bla")
-    const hasPermission = await askForPermission()
-    console.log(hasPermission,"haspermissions")
-		if (!hasPermission) {
-			return
-		} else {
-			// launch the camera with the following settings
-			let image = await ImagePicker.launchImageLibraryAsync({
-				mediaTypes: ImagePicker.MediaTypeOptions.All,
-				allowsEditing: true,
-				aspect: [3, 3],
-				quality: 1,
-			})
+    console.log('bla');
+    const hasPermission = await askForPermission();
+    console.log(hasPermission, 'haspermissions');
+    if (!hasPermission) {
+      return;
+    } else {
+      // launch the camera with the following settings
+      let image = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.All,
+        allowsEditing: true,
+        aspect: [3, 3],
+        quality: 1,
+      });
       // make sure a image was taken:
-      console.log(image,"imageimage")
+      console.log(image, 'imageimage');
       if (!image.cancelled) {
         setAvatarSource(image?.uri);
         changePictureContext(image?.uri);
       }
-		}
-  }
+    }
+  };
 
   // const handleChoosePicture = async () => {
   //   let result = await ImagePicker.launchImageLibraryAsync({
@@ -84,32 +83,32 @@ export default function PictureProfileScreen({
     if (firstName && lastName) {
       return `${firstName}.${lastName.substring(0, 1)}`;
     } else if (!firstName && !lastName) {
-      return "firstname.lastname";
+      return 'firstname.lastname';
     } else if (firstName && !lastName) {
       return firstName;
     }
   };
 
   // STYLES
-  const { pseudo, text_change_profile_picture } = styles;
+  const {pseudo, text_change_profile_picture} = styles;
   return (
     <View>
       {userPicture || avatarSource ? (
         <Image
           source={
-            Platform.OS === "ios"
-              ? { uri: userPicture.uri || avatarSource.uri }
+            Platform.OS === 'ios'
+              ? {uri: userPicture.uri || avatarSource.uri}
               : userPicture.uri || avatarSource.uri
           }
           style={{
             width: normalize(86),
             height: normalize(86),
             borderRadius: normalize(100),
-            alignSelf: "center",
+            alignSelf: 'center',
           }}
         />
       ) : (
-        <View style={{ alignSelf: "center" }}>
+        <View style={{alignSelf: 'center'}}>
           <ProfilePictureIcon width={width} height={height} />
         </View>
       )}
@@ -120,7 +119,7 @@ export default function PictureProfileScreen({
           </Text>
         </TouchableOpacity>
       ) : (
-        <Text style={[pseudo, { fontSize }]}>{renderName()}</Text>
+        <Text style={[pseudo, {fontSize}]}>{renderName()}</Text>
       )}
     </View>
   );
@@ -130,17 +129,17 @@ const styles = StyleSheet.create({
   pseudo: {
     marginTop: normalize(12),
     color: Colors.black.text_description_black,
-    fontSize: normalize(14, "fontSize"),
+    fontSize: normalize(14, 'fontSize'),
     lineHeight: normalize(20),
-    textAlign: "center",
-    fontFamily: "medium",
+    textAlign: 'center',
+    // fontFamily: "medium",
   },
   text_change_profile_picture: {
-    textDecorationLine: "underline",
-    textDecorationStyle: "solid",
+    textDecorationLine: 'underline',
+    textDecorationStyle: 'solid',
     textDecorationColor: Colors.btn_action,
     color: Colors.btn_action,
-    fontSize: normalize(13, "fontSize"),
+    fontSize: normalize(13, 'fontSize'),
     marginTop: 11,
   },
 });

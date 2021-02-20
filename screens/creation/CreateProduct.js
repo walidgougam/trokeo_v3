@@ -356,7 +356,7 @@ const styles = StyleSheet.create({
   text_title: {
     marginBottom: normalize(13),
     fontSize: normalize(18, 'fontSize'),
-    fontFamily: 'bold',
+    // fontFamily: 'bold',
     lineHeight: 20,
     color: Colors.white.absolute,
     marginLeft: normalize(62),
@@ -375,12 +375,12 @@ const styles = StyleSheet.create({
     fontSize: normalize(12, ' fontSize'),
     lineHeight: normalize(20),
     marginBottom: normalize(13),
-    fontFamily: 'regular',
+    // fontFamily: 'regular',
   },
   _input: {
     fontSize: normalize(12, 'fontSize'),
     color: 'black',
-    fontFamily: 'regular',
+    // fontFamily: 'regular',
     // lineHeight: normalize(20),
     borderColor: Colors.grey.icon_profile_grey,
     borderWidth: 1,
@@ -394,7 +394,7 @@ const styles = StyleSheet.create({
     color: Colors.black.text_description_black,
     fontSize: normalize(10, ' fontSize'),
     lineHeight: normalize(20),
-    fontFamily: 'regular',
+    // fontFamily: 'regular',
   },
   container_select_goods_condition: {
     paddingHorizontal: normalize(20),
@@ -427,6 +427,6 @@ const styles = StyleSheet.create({
   },
   text_category: {
     ...css.text_input,
-    fontFamily: 'regular',
+    // fontFamily: 'regular',
   },
 });

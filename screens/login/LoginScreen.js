@@ -218,12 +218,12 @@ const styles = StyleSheet.create({
     color: Colors.white.absolute,
     fontSize: normalize(20, 'fontSize'),
     marginBottom: normalize(17),
-    fontFamily: 'heavy',
+    // fontFamily: 'heavy',
   },
   text_image: {
     color: Colors.white.absolute,
     fontSize: normalize(15, 'fontSize'),
-    fontFamily: 'medium',
+    // fontFamily: 'medium',
   },
   container_green: {
     backgroundColor: BackgroundColors.green.main,

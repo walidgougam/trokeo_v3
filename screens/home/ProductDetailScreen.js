@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, {useEffect} from 'react';
 import {
   View,
   Text,
@@ -6,29 +6,29 @@ import {
   ScrollView,
   TouchableOpacity,
   Image,
-} from "react-native";
-import { useRoute } from "@react-navigation/native";
+} from 'react-native';
+import {useRoute} from '@react-navigation/native';
 //STYLES
-import normalize from "react-native-normalize";
-import {Colors, BackgroundColors}from "../../constant/colors";
-import fontStyles from "../../constant/fonts";
-import { loadFont } from "../../assets/Autre";
-import {Spacings} from "../../constant/layout"
+import normalize from 'react-native-normalize';
+import {Colors, BackgroundColors} from '../../constant/colors';
+import fontStyles from '../../constant/fonts';
+import {loadFont} from '../../assets/Autre';
+import {Spacings} from '../../constant/layout';
 //PICTURE
-import { PositionIcon } from "../../assets/icon/Icon";
-import { ProfilePictureIcon } from "../../assets/icon/Icon";
+import {PositionIcon} from '../../assets/icon/Icon';
+import {ProfilePictureIcon} from '../../assets/icon/Icon';
 //COMPONENT
-import HeaderNotification from "../../component/header/HeaderNotification";
-import MapComponent from "../../component/MapComponent";
-import StarsComponent from "../../component/StarsComponent";
-import PictureSwiperComponent from "../../component/picture/PictureSwiperComponent";
-import BtnBlueAction from "../../component/button/BtnBlueAction";
-import BtnRightIcon from "../../component/button/BtnRightIcon";
+import HeaderNotification from '../../component/header/HeaderNotification';
+import MapComponent from '../../component/MapComponent';
+import StarsComponent from '../../component/StarsComponent';
+import PictureSwiperComponent from '../../component/picture/PictureSwiperComponent';
+import BtnBlueAction from '../../component/button/BtnBlueAction';
+import BtnRightIcon from '../../component/button/BtnRightIcon';
 
-export default function ProductDetailScreen({ navigation }) {
+export default function ProductDetailScreen({navigation}) {
   // ROUTE
   const route = useRoute();
-  const { fromCardProduct } = route.params;
+  const {fromCardProduct} = route.params;
   const userData = fromCardProduct.userData;
   const imageProduct = fromCardProduct.imageProduct;
   const titleProduct = fromCardProduct.titleProduct;
@@ -38,14 +38,14 @@ export default function ProductDetailScreen({ navigation }) {
   const conditionProduct = fromCardProduct.conditionProduct;
   const productId = fromCardProduct.productId;
 
-  navigation.setOptions({ tabBarVisible: () => false });
+  navigation.setOptions({tabBarVisible: () => false});
 
   useEffect(() => {
     loadFont();
   });
 
   const goToChat = (userData) => {
-    return navigation.navigate("Chat", {
+    return navigation.navigate('Chat', {
       fromProductDetail: {
         productPicture: imageProduct[0],
         titleProduct,
@@ -92,7 +92,7 @@ export default function ProductDetailScreen({ navigation }) {
           <Text style={text_booked}>Réservé</Text>
         </View>
         <Text style={_title}>{titleProduct}</Text>
-        <View style={{ marginHorizontal: normalize(18) }}>
+        <View style={{marginHorizontal: normalize(18)}}>
           <View style={wrapper_characteristic}>
             <Text style={text_title}>Etat</Text>
             <Text style={text_description}>{conditionProduct}</Text>
@@ -105,13 +105,12 @@ export default function ProductDetailScreen({ navigation }) {
             <Text style={text_title}>Description</Text>
             <Text style={text_description}>{descriptionProduct}</Text>
           </View>
-          <View style={{ marginBottom: normalize(20) }}>
+          <View style={{marginBottom: normalize(20)}}>
             <Text style={text_title}>Localisation</Text>
             <View
               style={{
-                flexDirection: "row",
-              }}
-            >
+                flexDirection: 'row',
+              }}>
               <PositionIcon />
               <Text
                 style={[
@@ -119,23 +118,21 @@ export default function ProductDetailScreen({ navigation }) {
                   {
                     marginLeft: normalize(8),
                   },
-                ]}
-              >
+                ]}>
                 {`${distanceOwner} km`}
               </Text>
             </View>
           </View>
         </View>
-        <MapComponent height={normalize(241, "height")} />
+        <MapComponent height={normalize(241, 'height')} />
         <View style={container_product_owner}>
           <View style={wrapper_product_owner}>
             <TouchableOpacity
               activeOpacity={fontStyles.activeOpacity}
               hitSlop={expand_clickable_area}
               onPress={() =>
-                navigation.navigate("ProfileUserDetails", { userData })
-              }
-            >
+                navigation.navigate('ProfileUserDetails', {userData})
+              }>
               {userData?.userPicture ? (
                 <Image
                   // source={{ uri: userData?.userPicture }}
@@ -180,72 +177,72 @@ export default function ProductDetailScreen({ navigation }) {
 const styles = StyleSheet.create({
   _container: {
     flex: 1,
-    backgroundColor: BackgroundColors.white.absolute
+    backgroundColor: BackgroundColors.white.absolute,
   },
   wrapper_img: {
-    height: normalize(200, "height"),
-    backgroundColor: "grey",
+    height: normalize(200, 'height'),
+    backgroundColor: 'grey',
   },
   wrapper_booked: {
     backgroundColor: BackgroundColors.grey.reservation,
-    height: normalize(40, "height"),
-    justifyContent: "center",
+    height: normalize(40, 'height'),
+    justifyContent: 'center',
   },
   text_booked: {
-    textAlign: "center",
+    textAlign: 'center',
     color: Colors.white.absolute,
-    fontSize: normalize(14, "fontSize"),
-    fontFamily: "medium",
+    fontSize: normalize(14, 'fontSize'),
+    // fontFamily: "medium",
     lineHeight: normalize(20),
   },
   _title: {
     paddingTop: normalize(20),
-    textAlign: "center",
-    fontSize: normalize(20, "fontSize"),
+    textAlign: 'center',
+    fontSize: normalize(20, 'fontSize'),
     lineHeight: normalize(20),
     color: Colors.black.text_description_black,
-    fontFamily: "heavy",
+    // fontFamily: 'heavy',
   },
   wrapper_characteristic: {
     marginBottom: normalize(27),
   },
   text_title: {
-    fontSize: normalize(16, "fontSize"),
+    fontSize: normalize(16, 'fontSize'),
     lineHeight: normalize(20),
     color: Colors.black.text_description_black,
     marginBottom: normalize(Spacings.XS),
-    fontFamily: "heavy",
+    // fontFamily: 'heavy',
   },
   text_description: {
-    fontSize: normalize(14, "fontSize"),
+    fontSize: normalize(14, 'fontSize'),
     lineHeight: normalize(20),
     color: Colors.black.text_description_black,
     marginBottom: normalize(Spacings.XS),
-    fontFamily: "medium",
+    // fontFamily: 'medium',
   },
   container_product_owner: {
-    flexDirection: "row",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     paddingTop: 17,
-    alignItems: "center",
+    alignItems: 'center',
     marginTop: normalize(17),
     marginBottom: normalize(117),
     marginLeft: normalize(28),
     marginRight: 36,
   },
-  expand_clickable_area: { top: 10, bottom: 10, left: 10, right: 10 },
+  expand_clickable_area: {top: 10, bottom: 10, left: 10, right: 10},
   wrapper_product_owner: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   wrapper_stars: {
     marginLeft: normalize(Spacings.XS),
   },
   wrapper_btn: {
-    position: "absolute",
+    position: 'absolute',
     bottom: normalize(50),
-    width: normalize(318, "width"),
-    backgroundColor: "transparent",
-    alignSelf: "center",
+    width: normalize(318, 'width'),
+    backgroundColor: 'transparent',
+    alignSelf: 'center',
   },
 });

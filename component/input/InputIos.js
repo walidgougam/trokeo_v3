@@ -1,19 +1,19 @@
-import React, { useEffect } from "react";
+import React, {useEffect} from 'react';
 import {
   View,
   StyleSheet,
   TextInput,
   TouchableOpacity,
   Keyboard,
-} from "react-native";
+} from 'react-native';
 //STYLES
-import {Colors} from "../../constant/colors";
-import fontStyles from "../../constant/fonts";
-import normalize from "react-native-normalize";
-import css from "../../constant/css";
-import { loadFont } from "../../assets/Autre";
+import {Colors} from '../../constant/colors';
+import fontStyles from '../../constant/fonts';
+import normalize from 'react-native-normalize';
+import css from '../../constant/css';
+import {loadFont} from '../../assets/Autre';
 //PICTURE
-import { HidePasswordIcon } from "../../assets/icon/Icon";
+import {HidePasswordIcon} from '../../assets/icon/Icon';
 
 export default function InputIos({
   onChangeText,
@@ -30,9 +30,9 @@ export default function InputIos({
     loadFont();
   });
   //STYLES
-  const { container_input, wrapper_input, _input } = styles;
+  const {container_input, wrapper_input, _input} = styles;
   return (
-    <View style={[container_input, { marginBottom: marginBottom }]}>
+    <View style={[container_input, {marginBottom: marginBottom}]}>
       <View style={wrapper_input}>
         <TextInput
           blurOnSubmit={false}
@@ -49,13 +49,12 @@ export default function InputIos({
           onBlur={onBlur}
         />
       </View>
-      <View style={{ flexDirection: "row" }}>
+      <View style={{flexDirection: 'row'}}>
         {password && (
           <TouchableOpacity
             activeOpacity={fontStyles.activeOpacity}
-            style={{ marginRight: normalize(13) }}
-            onPress={showPassword}
-          >
+            style={{marginRight: normalize(13)}}
+            onPress={showPassword}>
             <HidePasswordIcon />
           </TouchableOpacity>
         )}
@@ -67,22 +66,22 @@ export default function InputIos({
 const styles = StyleSheet.create({
   container_input: {
     ...css.row_space_between,
-    alignItems: "center",
+    alignItems: 'center',
     borderColor: Colors.grey.icon_profile_grey,
     borderWidth: 1,
     borderRadius: normalize(1),
     paddingHorizontal: normalize(14),
   },
   wrapper_input: {
-    height: normalize(42, "height"),
-    borderColor: "transparent",
-    justifyContent: "center",
+    height: normalize(42, 'height'),
+    borderColor: 'transparent',
+    justifyContent: 'center',
   },
   _input: {
     ...css.text_input,
-    fontFamily: "regular",
+    // fontFamily: "regular",
     width: normalize(250),
-    height: "100%",
-    alignSelf: "center",
+    height: '100%',
+    alignSelf: 'center',
   },
 });

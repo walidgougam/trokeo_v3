@@ -92,14 +92,14 @@ const styles = StyleSheet.create({
     lineHeight: normalize(20),
     marginBottom: normalize(Spacings.L),
     color: Colors.title_eco_citizen,
-    fontFamily: 'semiBold',
+    // fontFamily: 'semiBold',
   },
   _description: {
     fontSize: normalize(15, 'fontSize'),
     color: Colors.title_eco_citizen,
     lineHeight: normalize(20),
     marginBottom: normalize(20),
-    fontFamily: 'regular',
+    // fontFamily: 'regular',
   },
   expand_clickable_area: {
     top: 10,

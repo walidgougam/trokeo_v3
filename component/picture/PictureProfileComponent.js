@@ -1,11 +1,11 @@
-import React, { useState, useContext } from "react";
-import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
-import {Colors} from "../../constant/colors";
-import normalize from "react-native-normalize";
-import fontStyles from "../../constant/fonts";
-import { Context as AuthContext } from "../../context/AuthContext";
+import React, {useState, useContext} from 'react';
+import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
+import {Colors} from '../../constant/colors';
+import normalize from 'react-native-normalize';
+import fontStyles from '../../constant/fonts';
+import {Context as AuthContext} from '../../context/AuthContext';
 
-import { ProfilePictureIcon } from "../../assets/icon/Icon";
+import {ProfilePictureIcon} from '../../assets/icon/Icon';
 
 export default function PictureProfileComponent({
   width,
@@ -19,7 +19,7 @@ export default function PictureProfileComponent({
   onChange,
 }) {
   //CONTEXT
-  const { state, editProfileContext } = useContext(AuthContext);
+  const {state, editProfileContext} = useContext(AuthContext);
 
   const renderPictureCircle = () => {
     if (userPicture) {
@@ -27,7 +27,7 @@ export default function PictureProfileComponent({
         <Image
           // source={{ uri: userPicture }}
           source={userPicture}
-          style={{ width: 49, height: 49, borderRadius: normalize(100) }}
+          style={{width: 49, height: 49, borderRadius: normalize(100)}}
         />
       );
     } else {
@@ -39,7 +39,7 @@ export default function PictureProfileComponent({
     if (firstName && lastName) {
       return `${firstName}.${lastName.substring(0, 1)}`;
     } else if (!firstName && !lastName) {
-      return "firstname.lastname";
+      return 'firstname.lastname';
     } else if (firstName && !lastName) {
       return firstName;
     }
@@ -57,12 +57,12 @@ export default function PictureProfileComponent({
         </TouchableOpacity>
       );
     } else {
-      return <Text style={[pseudo, { fontSize }]}>{renderName()}</Text>;
+      return <Text style={[pseudo, {fontSize}]}>{renderName()}</Text>;
     }
   };
 
   // STYLES
-  const { text_change_profile_picture, pseudo, wrapper_profile_icon } = styles;
+  const {text_change_profile_picture, pseudo, wrapper_profile_icon} = styles;
 
   return (
     <View style={wrapper_profile_icon}>
@@ -74,21 +74,21 @@ export default function PictureProfileComponent({
 
 const styles = StyleSheet.create({
   wrapper_profile_icon: {
-    alignItems: "center",
+    alignItems: 'center',
   },
   pseudo: {
     marginTop: normalize(12),
     color: Colors.black.text_description_black,
-    fontSize: normalize(14, "fontSize"),
+    fontSize: normalize(14, 'fontSize'),
     lineHeight: normalize(20),
-    textAlign: "center",
-    fontFamily: "medium",
+    textAlign: 'center',
+    // fontFamily: "medium",
   },
   text_change_profile_picture: {
-    textDecorationLine: "underline",
-    textDecorationStyle: "solid",
+    textDecorationLine: 'underline',
+    textDecorationStyle: 'solid',
     textDecorationColor: Colors.btn_action,
     color: Colors.btn_action,
-    fontSize: normalize(13, "fontSize"),
+    fontSize: normalize(13, 'fontSize'),
   },
 });

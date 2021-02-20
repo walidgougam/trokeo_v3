@@ -12,8 +12,6 @@ export default function RadioBtnComponent({title, status, value, onPress}) {
   const {_btn, text_description} = styles;
   return (
     <View style={_btn}>
-      {console.log(value, 'value radio button')}
-      {console.log(status, 'status')}
       <RadioButton value={value} status={status} onPress={onPress} />
       <View>
         <Text style={text_description}>{title}</Text>
@@ -29,7 +27,7 @@ const styles = StyleSheet.create({
   },
   text_description: {
     ...css.text_description,
-    fontFamily: 'roman',
+    // fontFamily: 'roman',
     marginBottom: 0,
   },
 });

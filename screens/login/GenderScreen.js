@@ -130,10 +130,10 @@ const styles = StyleSheet.create({
   },
   _title: {
     ...css.title,
-    fontFamily: 'heavy',
+    // fontFamily: 'heavy',
   },
   text_description: {
     ...css.text_description,
-    fontFamily: 'roman',
+    // fontFamily: 'roman',
   },
 });
