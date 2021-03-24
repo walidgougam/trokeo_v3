@@ -4,6 +4,12 @@ import AsyncStorage from '@react-native-community/async-storage';
 // import RNFetchBlob from "rn-fetch-blob";
 import {IOS_URL, ANDROID_URL} from './constant';
 
+const HEADERS = {
+  headers: {
+    Accept: 'application/json',
+    'Content-Type': 'multipart/form-data',
+  },
+};
 export const registerGoogleApi = async (
   email,
   firstName,
@@ -50,40 +56,59 @@ export const addImageApi = (picture, fileName) => {
   // });
 };
 
+const prepareData = (image, body) => {
+  const data = new FormData();
+
+  data.append('file', {
+    name: image.fileName,
+    type: image.type,
+    uri:
+      Platform.OS === 'android' ? image.uri : image.uri.replace('file://', ''),
+  });
+
+  Object.keys(body).forEach((key) => {
+    console.log('key, rest[key]', key, body[key]);
+    data.append(key, body[key]);
+  });
+
+  return data;
+};
+
 export const createProductApi = async (
   title,
   description,
-  productPicture,
+  // productPicture,
   condition,
   category,
   user,
   isServices,
   isGoods,
   isFromOrganization,
-  callback,
+  image,
+  callback = () => {},
 ) => {
+  console.log('IMAGE RESPONSE!!!', image);
   let userId = await AsyncStorage.getItem('userId');
-  axios({
-    method: 'POST',
-    url:
+  const data = prepareData(image, {
+    title,
+    description,
+    condition,
+    category,
+    user,
+    isServices,
+    isGoods,
+    isFromOrganization,
+    userId,
+  });
+  axios
+    .post(
       Platform.OS === 'ios'
         ? `${IOS_URL}/product/createproduct`
         : `${ANDROID_URL}/product/createproduct`,
-    data: {
-      title,
-      description,
-      productPicture,
-      condition,
-      category,
-      user,
-      isServices,
-      isGoods,
-      isFromOrganization,
-      userId,
-    },
-  })
+      data,
+    )
     .then((res) => {
-      console.log('produit creer dans api.js');
+      console.log('produit creer dans api.js', res);
       callback();
     })
     .catch((err) => {

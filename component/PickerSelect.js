@@ -13,6 +13,7 @@ export default function PickerSelect({handleSelect, selectedLabel, data}) {
         {data.map((condition, index) => {
           return (
             <Picker.item
+              key={index}
               label={condition}
               value={condition}
               color="#3A3A3A"></Picker.item>

@@ -1,18 +1,14 @@
-import React, { useContext } from "react";
-import { View, Text, FlatList, StyleSheet, Dimensions } from "react-native";
-import { Context as AuthContext } from "../context/AuthContext";
+import React, {useContext} from 'react';
+import {View, Text, FlatList, StyleSheet, Dimensions} from 'react-native';
+import {Context as AuthContext} from '../context/AuthContext';
 //STYLE
-import normalize from "react-native-normalize";
+import normalize from 'react-native-normalize';
 //COMPONENT
-import CardProductComponent from "./card/CardProductComponent";
+import CardProductComponent from './card/CardProductComponent';
 
-export default function ProductFeedComponent({
-  allProduct,
-  navigation,
-  clickFromChild,
-}) {
+function ProductFeedComponent({allProduct, navigation, clickFromChild}) {
   // CONTEXT
-  const { state } = useContext(AuthContext);
+  const {state} = useContext(AuthContext);
 
   //CONTEXT STATE
   const category = state?.search?.category;
@@ -20,21 +16,21 @@ export default function ProductFeedComponent({
   const condition = state?.search?.condition;
 
   const numColumns = 2;
-  const WIDTH = Dimensions.get("window").width;
+  const WIDTH = Dimensions.get('window').width;
   const formatData = (dataList, numColumns) => {
     const totalRows = Math.floor(dataList?.length / numColumns);
     let totalLastRow = dataList?.length - totalRows * numColumns;
 
     while (totalLastRow !== 0 && totalLastRow !== numColumns) {
-      dataList?.push({ name: "blank", empty: true });
+      dataList?.push({name: 'blank', empty: true});
       totalLastRow++;
     }
     return dataList;
   };
 
-  const renderItem = ({ item, index }) => {
+  const renderItem = ({item, index}) => {
     if (item?.empty) {
-      return <View key={index} style={{ flex: 1 }}></View>;
+      return <View key={index} style={{flex: 1}}></View>;
     }
     return (
       <>
@@ -74,7 +70,7 @@ export default function ProductFeedComponent({
   // };
 
   //STYLES
-  const { _container, wrapper_list } = styles;
+  const {_container, wrapper_list} = styles;
   return (
     <View style={_container}>
       <FlatList
@@ -93,9 +89,11 @@ const styles = StyleSheet.create({
   _container: {
     flex: 1,
     marginHorizontal: normalize(21),
-    justifyContent: "space-between",
+    justifyContent: 'space-between',
   },
   wrapper_list: {
     marginTop: normalize(22),
   },
 });
+
+export default ProductFeedComponent;

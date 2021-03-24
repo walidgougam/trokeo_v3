@@ -1,27 +1,31 @@
-import React, { useState, useEffect, useContext } from "react";
-import { View, FlatList, StyleSheet } from "react-native";
-import { useRoute } from "@react-navigation/native";
-import { Context as AuthContext } from "../../context/AuthContext";
+import React, {useState, useEffect, useContext} from 'react';
+import {View, FlatList, StyleSheet} from 'react-native';
+import {useRoute} from '@react-navigation/native';
+import {Context as AuthContext} from '../../context/AuthContext';
 //API
-import { goodCategories, serviceCategories } from "../../helpers";
+import {goodCategories, serviceCategories} from '../../helpers';
 //COMPONENT
-import HeaderComponent from "../../component/header/HeaderComponent";
-import CardSelectCategory from "../../component/card/CardSelectCategory";
-import InputSearch from "../../component/input/InputSearch";
+import HeaderComponent from '../../component/header/HeaderComponent';
+import CardSelectCategory from '../../component/card/CardSelectCategory';
+import InputSearch from '../../component/input/InputSearch';
 //STYLE
-import {Colors, BackgroundColors} from "../../constant/colors";
-import { Spacings } from "../../constant/layout";
+import {Colors, BackgroundColors} from '../../constant/colors';
+import {Spacings} from '../../constant/layout';
+//REDUX
+import {useDispatch, useSelector} from 'react-redux';
+import {searchProductAction} from '../../redux/actions/ProductAction';
 
-export default function SearchByCategoryScreen({ navigation }) {
+export default function SearchByCategoryScreen({navigation}) {
   // Route
   const route = useRoute();
-  const { goods } = route.params;
+  const {goods} = route.params;
 
   // STATE
   const [categorySelected, setCategorySelected] = useState();
 
-  // CONTEXT
-  const { state, searchFilterProductContext } = useContext(AuthContext);
+  // REDUX
+  const searchProduct = useSelector((state) => state.productReducer);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     let mounted = true;
@@ -36,7 +40,7 @@ export default function SearchByCategoryScreen({ navigation }) {
   const handleCategory = (isValue, followByUser) => {
     const changeCategory = categorySelected.map((el) => {
       return el?.isValue === isValue
-        ? Object.assign({}, el, { followByUser })
+        ? Object.assign({}, el, {followByUser})
         : el;
     });
     setCategorySelected(changeCategory);
@@ -49,12 +53,13 @@ export default function SearchByCategoryScreen({ navigation }) {
       if (changeCategory[i]?.followByUser === true) {
         categoryFilter.push(changeCategory[i]?.titleCategory);
       }
-      console.log("catgeory filter", categoryFilter);
-      searchFilterProductContext({
-        category: categoryFilter,
-        condition: state?.search?.condition,
-        distance: state?.search?.distance,
-      });
+      dispatch(
+        searchProductAction({
+          category: categoryFilter,
+          condition: searchProduct[0]?.condition,
+          distance: searchProduct[0]?.distance,
+        }),
+      );
     }
   };
 
@@ -66,7 +71,8 @@ export default function SearchByCategoryScreen({ navigation }) {
         search
         action={() => registerCategorySelectedOnContext()}
       />
-      <View style={{ marginHorizontal: Spacings.L, marginVertical: Spacings.XXS }}>
+      <View
+        style={{marginHorizontal: Spacings.L, marginVertical: Spacings.XXS}}>
         <InputSearch placeholder="Rechercher des catégories" />
       </View>
 
@@ -75,7 +81,7 @@ export default function SearchByCategoryScreen({ navigation }) {
         // contentContainerStyle={styles.wrapper_list}
         // data={goods ? categorySelected : serviceCategories}
         data={categorySelected}
-        renderItem={({ item }) => {
+        renderItem={({item}) => {
           return (
             <CardSelectCategory
               title={item?.titleCategory}

@@ -14,14 +14,18 @@ import {CrossGreyIcon} from '../../assets/icon/Icon';
 import {Colors} from '../../constant/colors';
 import normalize from 'react-native-normalize';
 import fontStyles from '../../constant/fonts';
+//REDUX
+import {useDispatch, useSelector} from 'react-redux';
+import {searchProductAction} from '../../redux/actions/ProductAction';
 
 export default function HeaderFilterComponent() {
   //STATE
   const [allOptionSearch, setAllOptionSearch] = useState();
   const [loading, setLoading] = useState(true);
 
-  // CONTEXT
-  const {state, searchFilterProductContext} = useContext(AuthContext);
+  // REDUX
+  const searchProduct = useSelector((state) => state.productReducer);
+  const dispatch = useDispatch();
 
   //CONTEXT STATE
   const category = state?.search?.category;
@@ -81,23 +85,29 @@ export default function HeaderFilterComponent() {
       }
     }
     if (type === 'condition') {
-      return searchFilterProductContext({
-        category: category,
-        condition: newCondition,
-        distance: distance,
-      });
+      return dispatch(
+        searchProductAction({
+          category: searchProduct[0]?.category,
+          condition: searchProduct[0]?.condition,
+          distance: distanceFilter,
+        }),
+      );
     } else if (type === 'category') {
-      return searchFilterProductContext({
-        category: newCategory,
-        condition: condition,
-        distance: distance,
-      });
+      return dispatch(
+        searchProductAction({
+          category: newCategory,
+          condition: condition,
+          distance: distance,
+        }),
+      );
     } else {
-      return searchFilterProductContext({
-        category: category,
-        condition: condition,
-        distance: newDistance,
-      });
+      return dispatch(
+        searchProductAction({
+          category: category,
+          condition: condition,
+          distance: newDistance,
+        }),
+      );
     }
   };
 
@@ -153,32 +163,3 @@ export default function HeaderFilterComponent() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    borderBottomColor: Colors.grey.placeholder_grey,
-    borderBottomWidth: 1,
-    height: 50,
-    width: '100%',
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  wrapper_text_filter: {
-    borderColor: Colors.grey.placeholder_grey,
-    borderWidth: 1,
-    marginLeft: 10,
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    height: 27,
-    borderRadius: 13,
-    paddingHorizontal: 7,
-  },
-  text_filter: {
-    fontSize: normalize(14, 'fontSize'),
-    // fontFamily: "semiBold",
-    lineHeight: 20,
-    color: Colors.black.text_description_black,
-  },
-  expand_clickable_area: {top: 10, bottom: 10, left: 10, right: 10},
-});

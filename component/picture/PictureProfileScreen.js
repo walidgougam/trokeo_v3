@@ -16,6 +16,9 @@ import {Colors} from '../../constant/colors';
 import fontStyles from '../../constant/fonts';
 //COMPONENTS
 import {ProfilePictureIcon} from '../../assets/icon/Icon';
+//REDUX
+import {useDispatch, useSelector} from 'react-redux';
+import {uploadPictureAction} from '../../redux/actions/UploadFile';
 
 export default function PictureProfileScreen({
   firstName,
@@ -30,52 +33,30 @@ export default function PictureProfileScreen({
   //STATE
   const [avatarSource, setAvatarSource] = useState(userPicture);
 
-  // CONTEXT
-  const {state, changePictureContext} = useContext(AuthContext);
-
-  const askForPermission = async () => {
-    const permissionResult = await Permissions.askAsync(Permissions.CAMERA);
-    if (permissionResult.status !== 'granted') {
-      Alert.alert('no permissions to access camera!', [{text: 'ok'}]);
-      return false;
-    }
-    return true;
-  };
-
-  const handleChoosePicture = async () => {
-    console.log('bla');
-    const hasPermission = await askForPermission();
-    console.log(hasPermission, 'haspermissions');
-    if (!hasPermission) {
-      return;
-    } else {
-      // launch the camera with the following settings
-      let image = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.All,
-        allowsEditing: true,
-        aspect: [3, 3],
-        quality: 1,
-      });
-      // make sure a image was taken:
-      console.log(image, 'imageimage');
-      if (!image.cancelled) {
-        setAvatarSource(image?.uri);
-        changePictureContext(image?.uri);
-      }
-    }
-  };
+  //REDUX
+  const dispatch = useDispatch();
+  const createProductReducer = useSelector((state) => state.productReducer);
 
   // const handleChoosePicture = async () => {
-  //   let result = await ImagePicker.launchImageLibraryAsync({
-  //     mediaTypes: ImagePicker.MediaTypeOptions.All,
-  //     allowsEditing: true,
-  //     aspect: [4, 3],
-  //     quality: 1,
-  //   });
-
-  //   if (!result.cancelled) {
-  //     setAvatarSource(result?.uri);
-  //     changePictureContext(result?.uri);
+  //   console.log('bla');
+  //   const hasPermission = await askForPermission();
+  //   console.log(hasPermission, 'haspermissions');
+  //   if (!hasPermission) {
+  //     return;
+  //   } else {
+  //     // launch the camera with the following settings
+  //     let image = await ImagePicker.launchImageLibraryAsync({
+  //       mediaTypes: ImagePicker.MediaTypeOptions.All,
+  //       allowsEditing: true,
+  //       aspect: [3, 3],
+  //       quality: 1,
+  //     });
+  //     // make sure a image was taken:
+  //     console.log(image, 'imageimage');
+  //     if (!image.cancelled) {
+  //       setAvatarSource(image?.uri);
+  //       changePictureContext(image?.uri);
+  //     }
   //   }
   // };
 
@@ -113,7 +94,7 @@ export default function PictureProfileScreen({
         </View>
       )}
       {editProfile ? (
-        <TouchableOpacity onPress={() => handleChoosePicture()}>
+        <TouchableOpacity onPress={() => dispatch(uploadPictureAction())}>
           <Text style={text_change_profile_picture}>
             Changer ma photo de profil
           </Text>

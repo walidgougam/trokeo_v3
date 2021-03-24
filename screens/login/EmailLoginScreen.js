@@ -26,7 +26,7 @@ import {WrongEmailIcon, GoodEmailIcon} from '../../assets/icon/Icon';
 import MessageValidation from '../../component/MessageValidation';
 //REDUX
 import {useDispatch, useSelector} from 'react-redux';
-import {LOGIN} from '../../redux/actions/AuthAction';
+import {loginAction} from '../../redux/actions/AuthAction';
 
 const EmailLoginScreen = ({navigation}) => {
   //ROUTE
@@ -101,18 +101,18 @@ const EmailLoginScreen = ({navigation}) => {
       errors.password ||
       (!touched.email && !touched.password)
     ) {
-      dispatch(LOGIN('errors'));
+      dispatch(loginAction('errors'));
       setErrorOnLogin(true);
       setErrorMessage('Remplissez tous les champs');
     } else if (errors.email || !touched.email) {
-      dispatch(LOGIN('errors'));
+      dispatch(loginAction('errors'));
       setErrorOnLogin(true);
       setErrorMessage(errors.email || `password ${errors.password}`);
     } else if (errors.password || !touched.password) {
-      dispatch(LOGIN('errors'));
+      dispatch(loginAction('errors'));
     } else {
       dispatch(
-        LOGIN(values.email, values.password, () => {
+        loginAction(values.email, values.password, () => {
           return navigation.navigate('HomeBottomTab');
         }),
       );

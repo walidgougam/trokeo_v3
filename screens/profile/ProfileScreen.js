@@ -81,6 +81,7 @@ export default function ProfileScreen({navigation}) {
   // STYLES
   const {
     container,
+    _image,
     wrapper_profile_info,
     wrapper_star,
     container_section,
@@ -98,12 +99,7 @@ export default function ProfileScreen({navigation}) {
                   ? {uri: specificUser?.userPicture?.uri}
                   : specificUser?.userPicture
               }
-              style={{
-                width: normalize(86),
-                height: normalize(86),
-                borderRadius: normalize(100),
-                alignSelf: 'center',
-              }}
+              style={_image}
             />
           ) : (
             <View style={{alignSelf: 'center'}}>
@@ -147,6 +143,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: BackgroundColors.white.absolute,
+  },
+  _image: {
+    width: normalize(86),
+    height: normalize(86),
+    borderRadius: normalize(100),
+    alignSelf: 'center',
   },
   wrapper_profile_info: {
     alignItems: 'center',

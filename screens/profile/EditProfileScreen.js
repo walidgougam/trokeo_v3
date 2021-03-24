@@ -21,6 +21,9 @@ import HeaderComponent from '../../component/header/HeaderComponent';
 import PictureProfileScreen from '../../component/picture/PictureProfileScreen';
 import InputEditProfileComponent from '../../component/input/InputEditProfileComponent';
 import BtnBlueAction from '../../component/button/BtnBlueAction';
+//REDUX
+import {useDispatch, useSelector} from 'react-redux';
+import {editProfileAction} from '../../redux/actions/ProfileAction';
 
 export default function EditProfileScreen({navigation}) {
   // ROUTE
@@ -40,6 +43,8 @@ export default function EditProfileScreen({navigation}) {
   const [female, setFemale] = useState(userData?.female);
   const [userPicture, setUserPicture] = useState(userData?.userPicture);
   const [isSwitchOn, setIsSwitchOn] = useState(true);
+  //REDUX
+  const dispatch = useDispatch();
 
   useEffect(() => {
     loadFont();
@@ -50,7 +55,16 @@ export default function EditProfileScreen({navigation}) {
   };
 
   const goBackProfile = () => {
-    editProfileContext(picture, firstName, lastName, about, email, phoneNumber);
+    dispatch(
+      editProfileAction(
+        picture,
+        firstName,
+        lastName,
+        about,
+        email,
+        phoneNumber,
+      ),
+    );
     editProfileUserApi(
       firstName,
       lastName,

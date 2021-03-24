@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {View, Text, StyleSheet, Image, Alert, Platform} from 'react-native';
-import * as ImagePicker from 'expo-image-picker';
-import * as Permissions from 'expo-permissions';
+import ImagePicker from 'react-native-image-picker';
 import {useRoute} from '@react-navigation/native';
 //STYLE
 import normalize from 'react-native-normalize';
@@ -13,6 +12,9 @@ import {ProfilePictureIcon} from '../../assets/icon/Icon';
 //COMPONENT
 import BtnBlueAction from '../../component/button/BtnBlueAction';
 import BackgroundComponent from '../../component/BackgroundComponent';
+//REDUX
+import {useDispatch, useSelector} from 'react-redux';
+import {uploadPictureAction} from '../../redux/actions/UploadFile';
 
 export default function PictureScreen({navigation}) {
   // ROUTE
@@ -32,36 +34,7 @@ export default function PictureScreen({navigation}) {
     loadFont();
   });
 
-  const askForPermission = async () => {
-    const permissionResult = await Permissions.askAsync(Permissions.CAMERA);
-    if (permissionResult.status !== 'granted') {
-      Alert.alert('no permissions to access camera!', [{text: 'ok'}]);
-      return false;
-    }
-    return true;
-  };
-
-  const handleChoosePicture = async () => {
-    const hasPermission = await askForPermission();
-    if (!hasPermission) {
-      return;
-    } else {
-      // launch the camera with the following settings
-      let image = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.Images,
-        allowsEditing: true,
-        aspect: [3, 3],
-        quality: 1,
-      });
-      // make sure a image was taken:
-      if (!image.cancelled) {
-        setProfilePicture(image);
-      }
-    }
-  };
-
   const goNextScreen = () => {
-    // console.log(profilePicture, 'userPicture');
     // if (profilePicture) {
     return navigation.navigate('Gender', {
       fromRegisterPicture: {
@@ -106,7 +79,8 @@ export default function PictureScreen({navigation}) {
         <Text style={text_description}>
           Vous aurez plus de chance d’échanger avec votre photo !
         </Text>
-        {profilePicture ? ( // ancienement avatarSource
+        {console.log(profilePicture, 'profile picture')}
+        {profilePicture ? (
           <Image source={profilePicture} style={profile_picture} />
         ) : (
           <View style={{alignSelf: 'center'}}>
@@ -124,7 +98,7 @@ export default function PictureScreen({navigation}) {
             title="Ajouter une photo"
             backgroundColor={Colors.btn_action}
             color={Colors.white.absolute}
-            onPress={() => handleChoosePicture()}
+            onPress={() => dispatch(uploadPictureAction())}
           />
         </View>
         <BtnBlueAction

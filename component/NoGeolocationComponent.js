@@ -20,9 +20,7 @@ export default function NoGeolocationComponent({getLocation}) {
   return (
     <View style={container}>
       <Text style={_text}>Trouvez des annonces près de chez vous </Text>
-      <View style={_map}>
-        <MapGeolocation />
-      </View>
+      <View style={_map}>{/* <MapGeolocation /> */}</View>
       <View style={wrapper_btn}>
         <BtnBlueAction
           onPress={getLocation}

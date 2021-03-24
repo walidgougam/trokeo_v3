@@ -52,7 +52,9 @@ export default function EcoCitizenScreen({navigation}) {
       {data.map((info, index) => {
         return (
           <>
-            <View style={[_image, index === 0 && {marginTop: normalize(29)}]}>
+            <View
+              key={index}
+              style={[_image, index === 0 && {marginTop: normalize(29)}]}>
               {info.image}
             </View>
             <View style={wrapper_description}>

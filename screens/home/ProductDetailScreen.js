@@ -19,7 +19,7 @@ import {PositionIcon} from '../../assets/icon/Icon';
 import {ProfilePictureIcon} from '../../assets/icon/Icon';
 //COMPONENT
 import HeaderNotification from '../../component/header/HeaderNotification';
-import MapComponent from '../../component/MapComponent';
+// import MapComponent from '../../component/MapComponent';
 import StarsComponent from '../../component/StarsComponent';
 import PictureSwiperComponent from '../../component/picture/PictureSwiperComponent';
 import BtnBlueAction from '../../component/button/BtnBlueAction';
@@ -124,7 +124,7 @@ export default function ProductDetailScreen({navigation}) {
             </View>
           </View>
         </View>
-        <MapComponent height={normalize(241, 'height')} />
+        {/* <MapComponent height={normalize(241, 'height')} /> */}
         <View style={container_product_owner}>
           <View style={wrapper_product_owner}>
             <TouchableOpacity

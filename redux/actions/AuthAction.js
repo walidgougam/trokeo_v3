@@ -3,10 +3,12 @@ import {Platform} from 'react-native';
 import {IOS_URL, ANDROID_URL} from '../../API/constant';
 import AsyncStorage from '@react-native-community/async-storage';
 
-export const LOGIN_TYPE = 'LOGIN_TYPE';
-export const REGISTER_TYPE = 'REGISTER_TYPE';
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const LOGIN_ERROR = 'LOGIN_ERROR';
+export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
+export const REGISTER_ERROR = 'REGISTER_ERROR';
 
-export const LOGIN = (email, password, callback) => {
+export const loginAction = (email, password, callback) => {
   return (dispatch) => {
     return axios({
       method: 'POST',
@@ -20,50 +22,19 @@ export const LOGIN = (email, password, callback) => {
         console.log(res, 'res login');
         AsyncStorage.setItem('token', res.data.data.token);
         AsyncStorage.setItem('userId', res.data.data._id);
-        dispatch({type: LOGIN_TYPE, payload: res.data});
+        dispatch({type: LOGIN_SUCCESS, payload: res.data});
         callback();
       })
       .catch((err) => {
         console.log(err, 'err on login');
-        dispatch({type: LOGIN_TYPE, payload: err});
+        dispatch({type: LOGIN_ERROR, payload: err});
       });
   };
 };
 
-export const REGISTER = (
-  email,
-  password,
-  firstName,
-  lastName,
-  female,
-  userPicture,
-  callback,
-) => {
+export const REGISTER = (result) => {
+  console.log(result, 'result action register');
   return (dispatch) => {
-    return axios({
-      method: 'POST',
-      url:
-        Platform.OS === 'ios'
-          ? `${IOS_URL}/user/register`
-          : `${ANDROID_URL}/user/register`,
-      data: {
-        email,
-        password,
-        firstName,
-        lastName,
-        female,
-        userPicture: {uri: userPicture?.uri},
-      },
-    })
-      .then((res) => {
-        console.log(res, 'result register api ');
-        AsyncStorage.setItem('userId', res?.data?.userData?._id);
-        dispatch({type: REGISTER_TYPE, payload: res.data});
-        callback();
-      })
-      .catch((err) => {
-        console.log(err, 'error on register api');
-        dispatch({type: REGISTER_TYPE, payload: err});
-      });
+    dispatch({type: REGISTER_SUCCESS, payload: result});
   };
 };

@@ -12,7 +12,7 @@ import {NoProductImage} from '../assets/image/images';
 import BtnBlueAction from './button/BtnBlueAction';
 import HeaderFilterComponent from '../component/header/HeaderFilterComponent';
 
-export default function NoProductComponent() {
+export default function NoProductComponent({onPress}) {
   useEffect(() => {
     loadFont();
   });
@@ -37,6 +37,7 @@ export default function NoProductComponent() {
             backgroundColor={Colors.btn_action}
             title="Relancer"
             width={normalize(142, 'width')}
+            onPress={() => onPress}
           />
         </View>
       </View>

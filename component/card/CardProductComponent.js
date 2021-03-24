@@ -82,6 +82,7 @@ export default function CardProductComponent({
   const {
     container,
     container_image,
+    _shadow,
     image_product,
     wrapper_booked,
     text_booked,
@@ -97,25 +98,18 @@ export default function CardProductComponent({
         onPress={() => goProductDetailScreen(imageProduct)}
         style={[
           container_image,
-          Platform.OS === 'ios'
-            ? {
-                shadowColor: '#000',
-                shadowOffset: {
-                  width: 2,
-                  height: 2,
-                },
-                shadowOpacity: 0.4,
-                shadowRadius: 2,
-              }
-            : {elevation: 9},
+          Platform.OS === 'ios' ? _shadow : {elevation: 9},
         ]}>
-        {imageProduct?.length > 0 ? (
-          <Image
-            source={imageProduct}
-            // source={imageProduct}
-            style={[image_product]}
-            // resizeMode="cover"
-          />
+        {imageProduct?.length > 0 &&
+        !imageProduct[0].uri.startsWith('content') ? (
+          <>
+            {console.log(imageProduct, 'image product android and ios')}
+            <Image
+              source={Platform.OS === 'ios' ? imageProduct : null}
+              style={image_product}
+              // resizeMode="cover"
+            />
+          </>
         ) : (
           <NoImageByCategory
             icon={categoriesProduct}
@@ -166,6 +160,15 @@ const styles = StyleSheet.create({
   },
   container_image: {
     alignSelf: 'center',
+  },
+  _shadow: {
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 2,
+      height: 2,
+    },
+    shadowOpacity: 0.4,
+    shadowRadius: 2,
   },
   image_product: {
     width: normalize(159),

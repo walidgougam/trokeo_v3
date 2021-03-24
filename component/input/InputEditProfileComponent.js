@@ -1,10 +1,8 @@
 import React, {useState, useContext} from 'react';
-import {View, Text, FlatList, StyleSheet} from 'react-native';
+import {StyleSheet} from 'react-native';
 import {Form, Item, Input, Label} from 'native-base';
 import {Colors} from '../../constant/colors';
 import normalize from 'react-native-normalize';
-import fontStyles from '../../constant/fonts';
-import {ArrowBottomIcon} from '../../assets/icon/Icon';
 import {Context as AuthContext} from '../../context/AuthContext';
 
 import SelectPicker from 'react-native-form-select-picker';

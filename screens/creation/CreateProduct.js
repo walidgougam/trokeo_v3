@@ -10,8 +10,7 @@ import {
   ScrollView,
 } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
-import * as ImagePicker from 'expo-image-picker';
-import * as Permissions from 'expo-permissions';
+// import ImagePicker from 'react-native-image-picker';
 import {BottomSheet, ListItem} from 'react-native-elements';
 import {Context as AuthContext} from '../../context/AuthContext';
 import SelectPicker from 'react-native-form-select-picker';
@@ -31,6 +30,9 @@ import BtnBlueAction from '../../component/button/BtnBlueAction';
 import MessageValidation from '../../component/MessageValidation';
 //PICTURE
 import {RightIcon, ArrowBottomIcon} from '../../assets/icon/Icon';
+//REDUX
+import {useDispatch, useSelector} from 'react-redux';
+import {uploadPictureAction} from '../../redux/actions/UploadFile';
 
 export default function CreateProduct({navigation}) {
   // STATE
@@ -47,7 +49,14 @@ export default function CreateProduct({navigation}) {
   const {state, createProductContext, categoryProductContext} = useContext(
     AuthContext,
   );
+  //REDUX
+  const dispatch = useDispatch();
+  const createProductReducer = useSelector((state) => state.productReducer);
 
+  //REDUX
+  const uploadPictureReducer = useSelector(
+    (state) => state.uploadPictureReducer,
+  );
   useEffect(() => {}, [avatarSource]);
 
   useEffect(() => {
@@ -86,53 +95,6 @@ export default function CreateProduct({navigation}) {
     return navigation.navigate('SelectCategory', {goods});
   };
 
-  const askForPermission = async () => {
-    const permissionResult = await Permissions.askAsync(Permissions.CAMERA);
-    if (permissionResult.status !== 'granted') {
-      Alert.alert('no permissions to access camera!', [{text: 'ok'}]);
-      return false;
-    }
-    return true;
-  };
-
-  const handleChoosePicture = async () => {
-    const hasPermission = await askForPermission();
-    if (!hasPermission) {
-      return;
-    } else {
-      // launch the camera with the following settings
-      let image = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.Images,
-        allowsEditing: true,
-        aspect: [3, 3],
-        quality: 1,
-      });
-      // make sure a image was taken:
-      if (!image.cancelled) {
-        let source = {uri: image.uri};
-        setAvatarSource((prevState) => {
-          return [...prevState, {uri: source.uri}];
-        });
-      }
-    }
-  };
-
-  // const handleChoosePicture = async () => {
-  //   let result = await ImagePicker.launchImageLibraryAsync({
-  //     mediaTypes: ImagePicker.MediaTypeOptions.All,
-  //     allowsEditing: true,
-  //     aspect: [4, 3],
-  //     quality: 1,
-  //   });
-
-  //   if (!result.cancelled) {
-  //     let source = { uri: result.uri };
-  //     setAvatarSource((prevState) => {
-  //       return [...prevState, { uri: source.uri }];
-  //     });
-  //   }
-  // };
-
   const handleSelect = (e) => {
     setConditionProduct(e);
   };
@@ -146,13 +108,14 @@ export default function CreateProduct({navigation}) {
       createProductApi(
         title,
         description,
-        avatarSource,
+        // avatarSource,
         conditionProduct,
         state?.category,
         userId,
         !goods, // isServices
         goods, // isGoods
         false, // isFromOrganisation
+        uploadPictureReducer,
       );
       setTitle('');
       setDescription('');
@@ -238,9 +201,9 @@ export default function CreateProduct({navigation}) {
         {/* <View style={{ flex: 1 }}> */}
         <>
           <AddPicture
-            avatar={avatarSource}
+            // avatar={uploadPictureReducer}
             onPress={(index) => handleDeleteProductPicture(avatarSource[index])}
-            onChoosePicture={() => handleChoosePicture()}
+            onChoosePicture={() => dispatch(uploadPictureAction())}
           />
           <View style={wrapper_input}>
             <Text style={_label}>Titre</Text>
@@ -325,9 +288,9 @@ export default function CreateProduct({navigation}) {
       </>
       {Platform.OS === 'android' && (
         <BottomSheet isVisible={isBottomSheetVisible}>
-          {list.map((l, i) => (
+          {list.map((l, index) => (
             <ListItem
-              key={i}
+              key={index}
               containerStyle={l?.containerStyle}
               onPress={l?.onPress}>
               <ListItem.Content>

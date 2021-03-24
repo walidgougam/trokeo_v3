@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {useRoute} from '@react-navigation/native';
+import axios from 'axios';
+import {IOS_URL, ANDROID_URL} from '../../API/constant';
 //STYLE
 import {Colors, BackgroundColors} from '../../constant/colors';
 import css from '../../constant/css';
@@ -39,33 +41,32 @@ export default function GenderScreen({navigation}) {
 
   const onDismissSnackBar = () => setErrorOnRegister(false);
 
-  const goNextScreen = () => {
-    console.log(
-      email,
-      password,
-      firstName,
-      lastName,
-      female,
-      userPicture,
-      'reponse apui',
-    );
-    dispatch(
-      REGISTER(
+  const goNextScreen = async () => {
+    return axios({
+      method: 'POST',
+      url:
+        Platform.OS === 'ios'
+          ? `${IOS_URL}/user/register`
+          : `${ANDROID_URL}/user/register`,
+      data: {
         email,
         password,
         firstName,
         lastName,
         female,
-        userPicture,
-        () => {
-          if (registerData.status === 'success') {
-            navigation.navigate('HomeBottomTab');
-          } else {
-            setErrorOnRegister(true);
-          }
-        },
-      ),
-    );
+        userPicture: {uri: userPicture?.uri},
+      },
+    })
+      .then((res) => {
+        console.log(res, 'result register api ');
+        AsyncStorage.setItem('userId', res?.data?.userData?._id);
+        dispatch(REGISTER('success'));
+      })
+      .catch((err) => {
+        console.log(err, 'error on register api');
+        setErrorOnRegister(true);
+        dispatch(REGISTER('errors'));
+      });
   };
 
   //STYLES
@@ -107,7 +108,7 @@ export default function GenderScreen({navigation}) {
       <>
         {console.log(errorOnRegister, 'erroronregister')}
         <MessageValidation
-          backgroundColor={BackgroundColors.green.main}
+          backgroundColor={'red'}
           accent={Colors.white.absolute}
           color={Colors.white.absolute}
           visible={errorOnRegister}
@@ -119,21 +120,3 @@ export default function GenderScreen({navigation}) {
     </BackgroundComponent>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: BackgroundColors.white.absolute,
-  },
-  container_white: {
-    marginHorizontal: normalize(16),
-  },
-  _title: {
-    ...css.title,
-    // fontFamily: 'heavy',
-  },
-  text_description: {
-    ...css.text_description,
-    // fontFamily: 'roman',
-  },
-});
